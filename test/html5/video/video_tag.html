@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>video_tag</title>
+<style type="text/css">
+.video_top {
+	position:relative;
+	width:150px;
+	height:200px;
+	left:150px;
+	top:80px;
+	background:#0C0;
+	z-index:997;
+}
+</style>
+<script>
+function enterFullScreen() {
+	var otop = document.getElementById('id_top');
+	otop.requestFullscreen();
+}
+</script>
+</head>
+
+<body>
+<!--
+<button onclick="enterFullScreen()">div fullscreen</button>
+<br />
+<div style="height: 150px;">
+    <div style="z-index:1;position:absolute;background-color:#16a085;height:150px;width:150px;"></div>
+    <div style="z-index:-1;position:relative;color:#ff0000;">
+        <div style="z-index:998;position:relative;">该文本包含在div元素中。。。。。。。。。。。。。。。</div>
+    </div>
+</div>
+<br />
+<br />
+<div id="id_top" class="video_top"></div>
+-->
+
+<video id="video1" width="100%" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay">
+    Your browser does not support HTML5 video.
+</video>
+<br />
+<br />
+<br />
+<br />
+
+<video id="video1" width="100%" src="../../video/huajiao_deadlock.mp4" autoplay="autoplay" controls="controls">
+    Your browser does not support HTML5 video.
+</video>
+<!--
+ 
+
+
+
+
+
+<video id="video1" width="100%" src="../../video/1.mp4" autoplay="autoplay" controls="controls">
+    <source src="../../video/1.mp4" type="video/ogg">
+    Your browser does not support HTML5 video.
+</video>
+<br />
+<br />
+<br />
+
+<video id="video1" width="100%" src="../../video/mao_and_laoshu_3.flv" autoplay="autoplay" controls="controls">
+    <source src="../../video/1.mp4" type="video/ogg">
+    Your browser does not support HTML5 video.
+</video>
+
+
+<video class="video-stream html5-main-video" x-webkit-airplay="allow" data-youtube-id="W6DmHGYy_xk" src="blob:http%3A//www.youtube.com/c9a91374-1081-4c38-9fe0-e7c4b6665e83" style="width:100%; height: 360px; left: 0px; top: 0px; -webkit-transform: none;">
+</video>
+-->
+
+</body>
+</html>
+
