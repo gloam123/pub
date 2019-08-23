@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<!-- saved from url=(0175)http://chrome-devtools-frontend.appspot.com/serve_rev/@da1bda53b9c8f668d4c9936be781cd2649a1ffed/inspector.html?ws=127.0.0.1:5037/devtools/page/1B6AB074E83450ED9862278A31F71A58 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="Content-Security-Policy" content="object-src &#39;none&#39;; script-src &#39;self&#39; &#39;unsafe-eval&#39; &#39;unsafe-inline&#39; https://chrome-devtools-frontend.appspot.com">
+    <meta name="referrer" content="no-referrer">
+    <script type="text/javascript" src="./shell.js"></script>
+    <script type="text/javascript" src="./devtools_app.js"></script>
+    <script type="text/javascript" src="./inspector.js"></script>
+    <script>Runtime.startApplication('inspector');</script>
+</head>
+<body class="undocked platform-linux" id="-blink-dev-tools">
+
+<style type="text/css">/*
+ * Copyright (C) 2006, 2007, 2008 Apple Inc.  All rights reserved.
+ * Copyright (C) 2009 Anthony Ricaud <rik@webkit.org>
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+:root {
+    height: 100%;
+    overflow: hidden;
+}
+
+:root {
+    --accent-color: #1a73e8;
+    --accent-fg-color: #1a73e8;
+    --accent-color-hover: #3b86e8;
+    --focus-bg-color: hsl(214, 40%, 92%);
+    --toolbar-bg-color: #f3f3f3;
+    --toolbar-hover-bg-color: #eaeaea;
+    --selection-fg-color: white;
+    --selection-inactive-bg-color: #dadada;
+    --tab-selected-fg-color: #333;
+    --tab-selected-bg-color: var(--toolbar-bg-color);
+    --drop-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05),
+                   0 2px 4px rgba(0, 0, 0, 0.2),
+                   0 2px 6px rgba(0, 0, 0, 0.1);
+    --divider-color: #d0d0d0;
+    --focus-ring-inactive-shadow: 0 0 0 1px #e0e0e0;
+    --editor-selection-bg-color: #cfe8fc;
+    --editor-selection-inactive-bg-color: #e0e0e0;
+}
+
+.-theme-with-dark-background {
+    --accent-color: #0e639c;
+    --accent-fg-color: #cccccc;
+    --accent-color-hover: rgb(17, 119, 187);
+    --focus-bg-color: hsl(214, 19%, 27%);
+    --toolbar-bg-color: #333333;
+    --toolbar-hover-bg-color: #202020;
+    --selection-fg-color: #cdcdcd;
+    --selection-inactive-bg-color: hsl(0, 0%, 28%);
+    --tab-selected-fg-color: #eaeaea;
+    --tab-selected-bg-color: black;
+    --drop-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2),
+                   0 2px 4px 2px rgba(0, 0, 0, 0.2),
+                   0 2px 6px 2px rgba(0, 0, 0, 0.1);
+    --divider-color: #525252;
+    --focus-ring-inactive-shadow: 0 0 0 1px #5a5a5a;
+    --editor-selection-bg-color: hsl(207, 88%, 22%);
+    --editor-selection-inactive-bg-color: #454545;
+}
+
+:root {
+    --focus-ring-active-shadow: 0 0 0 1px var(--accent-color);
+    --selection-bg-color: var(--accent-color);
+    --divider-border: 1px solid var(--divider-color);
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    cursor: default;
+    font-family: '.SFNSDisplay-Regular', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+    font-size: 12px;
+    tab-size: 4;
+    -webkit-user-select: none;
+    color: #222;
+}
+
+.platform-linux {
+    color: rgb(48, 57, 66);
+    font-family: Roboto, Ubuntu, Arial, sans-serif;
+}
+
+.platform-mac {
+    color: rgb(48, 57, 66);
+    font-family: '.SFNSDisplay-Regular', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+}
+
+.platform-windows {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.panel {
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: white;
+}
+
+.panel-sidebar {
+    overflow-x: hidden;
+    background-color: var(--toolbar-bg-color);
+}
+
+iframe.extension {
+    flex: auto;
+    width: 100%;
+    height: 100%;
+}
+
+iframe.panel.extension {
+    display: block;
+    height: 100%;
+}
+
+/*# sourceURL=ui/inspectorStyle.css */</style><style type="text/css">/*
+ * Copyright 2015 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+* {
+    /* This is required for correct sizing of flex items because we rely
+     * on an old version of the flexbox spec.
+     * Longer-term we should remove this, see crbug.com/473625 */
+    min-width: 0;
+    min-height: 0;
+}
+
+:host-context(.platform-mac) .monospace,
+:host-context(.platform-mac) .source-code,
+.platform-mac .monospace,
+.platform-mac .source-code {
+    font-size: 11px !important;
+    font-family: Menlo, monospace;
+}
+
+:host-context(.platform-windows) .monospace,
+:host-context(.platform-windows) .source-code,
+.platform-windows .monospace,
+.platform-windows .source-code {
+    font-size: 12px !important;
+    font-family: Consolas, Lucida Console, Courier New, monospace;
+}
+
+:host-context(.platform-linux) .monospace,
+:host-context(.platform-linux) .source-code,
+.platform-linux .monospace,
+.platform-linux .source-code {
+    font-size: 11px !important;
+    font-family: dejavu sans mono, monospace;
+}
+
+.source-code {
+    font-family: monospace;
+    font-size: 11px !important;
+    white-space: pre-wrap;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:focus {
+    outline-width: 0;
+}
+
+input[type=radio]:focus {
+    outline: auto 5px -webkit-focus-ring-color;
+}
+
+img {
+    -webkit-user-drag: none;
+}
+
+iframe,
+a img {
+    border: none;
+}
+
+.fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+iframe.fill {
+    width: 100%;
+    height: 100%;
+}
+
+.widget {
+    position: relative;
+    flex: auto;
+    contain: style;
+}
+
+.hbox {
+    display: flex;
+    flex-direction: row !important;
+    position: relative;
+}
+
+.vbox {
+    display: flex;
+    flex-direction: column !important;
+    position: relative;
+}
+
+.view-container > .toolbar {
+    border-bottom: 1px solid #eee;
+}
+
+.flex-auto {
+    flex: auto;
+}
+
+.flex-auto-important {
+    flex: auto !important;
+}
+
+.flex-none {
+    flex: none;
+}
+
+.flex-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+iframe.widget {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.monospace {
+    font-size: 10px !important;
+    font-family: monospace;
+}
+
+.highlighted-search-result {
+    border-radius: 1px;
+    background-color: rgba(255, 255, 0, 0.8);
+    outline: 1px solid rgba(255, 255, 0, 0.8);
+}
+
+.-theme-with-dark-background .highlighted-search-result,
+:host-context(.-theme-with-dark-background) .highlighted-search-result {
+    background-color: hsl(133, 100%, 30%);
+    color: #333;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(17, 85, 204);
+}
+
+button,
+input,
+select {
+    /* Form elements do not automatically inherit font style from ancestors. */
+    font-family: inherit;
+    font-size: inherit;
+}
+
+input {
+    background-color: white;
+    color: inherit;
+}
+
+:host-context(.-theme-with-dark-background) input[type="checkbox"]::not(.-theme-preserve) {
+    -webkit-filter: invert(80%);
+}
+
+.harmony-input:not([type]),
+.harmony-input[type=number],
+.harmony-input[type=text] {
+    padding: 3px 6px;
+    height: 24px;
+    border: none;
+}
+
+.harmony-input:not([type]):not(.error-input):not(:invalid):hover,
+.harmony-input[type=number]:not(.error-input):not(:invalid):hover,
+.harmony-input[type=text]:not(.error-input):not(:invalid):hover {
+    box-shadow: var(--focus-ring-inactive-shadow);
+}
+
+.harmony-input:not([type]):not(.error-input):not(:invalid):focus,
+.harmony-input[type=number]:not(.error-input):not(:invalid):focus,
+.harmony-input[type=text]:not(.error-input):not(:invalid):focus {
+    box-shadow: var(--focus-ring-active-shadow);
+}
+
+.highlighted-search-result.current-search-result {
+    border-radius: 1px;
+    padding: 1px;
+    margin: -1px;
+    background-color: rgba(255, 127, 0, 0.8);
+}
+
+.dimmed {
+    opacity: 0.6;
+}
+
+.editing {
+    box-shadow: var(--drop-shadow);
+    background-color: white;
+    text-overflow: clip !important;
+    padding-left: 2px;
+    margin-left: -2px;
+    padding-right: 2px;
+    margin-right: -2px;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+    opacity: 1.0 !important;
+}
+
+.editing,
+.editing * {
+    color: #222 !important;
+    text-decoration: none !important;
+}
+
+.harmony-input:not([type]).error-input,
+.harmony-input[type=number].error-input,
+.harmony-input[type=text].error-input,
+.harmony-input:not([type]):invalid,
+.harmony-input[type=number]:invalid,
+.harmony-input[type=text]:invalid {
+    box-shadow: 0 0 0 1px #ff1a00;
+}
+
+.chrome-select {
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    color: #333;
+    font: inherit;
+    margin: 0;
+    outline: none;
+    padding-right: 20px;
+    padding-left: 6px;
+    background-image: -webkit-image-set(url(Images/chromeSelect.png) 1x, url(Images/chromeSelect_2x.png) 2x);
+    background-color: hsl(0, 0%, 98%);
+    background-position: right center;
+    background-repeat: no-repeat;
+    min-height: 24px;
+    min-width: 80px;
+    background-size: 15px;
+}
+
+.chrome-select:enabled:active,
+.chrome-select:enabled:focus,
+.chrome-select:enabled:hover {
+    background-color: hsl(0, 0%, 96%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.chrome-select:enabled:active {
+    background-color: #f2f2f2;
+}
+
+.chrome-select:enabled:focus {
+    border-color: transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(66, 133, 244, 0.4);
+}
+
+.chrome-select:disabled {
+    opacity: 0.38;
+}
+
+.chrome-select optgroup,
+.chrome-select option {
+    background-color: #EEEEEE;
+    color: #222;
+}
+
+:not(.platform-mac).-theme-with-dark-background ::-webkit-scrollbar,
+:host-context(:not(.platform-mac).-theme-with-dark-background) ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+:not(.platform-mac).-theme-with-dark-background ::-webkit-scrollbar-track,
+:host-context(:not(.platform-mac).-theme-with-dark-background) ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(255,255,255,0.3);
+}
+
+:not(.platform-mac).-theme-with-dark-background ::-webkit-scrollbar-thumb,
+:host-context(:not(.platform-mac).-theme-with-dark-background) ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #333;
+    -webkit-box-shadow: inset 0 0 1px rgba(255,255,255,0.5);
+}
+
+:not(.platform-mac).-theme-with-dark-background ::-webkit-scrollbar-corner,
+:host-context(:not(.platform-mac).-theme-with-dark-background) ::-webkit-scrollbar-corner {
+    background-color: #242424;
+}
+
+.gray-info-message {
+    text-align: center;
+    font-style: italic;
+    padding: 6px;
+    color: #888;
+    white-space: nowrap;
+}
+
+span[is=dt-icon-label] {
+    flex: none;
+}
+
+.full-widget-dimmed-banner a {
+    color: inherit;
+}
+
+.full-widget-dimmed-banner {
+    color: #777;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 13px;
+    overflow: auto;
+    z-index: 500;
+}
+
+[is=ui-icon] {
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.-theme-with-dark-background [is=ui-icon].icon-invert,
+:host-context(.-theme-with-dark-background) [is=ui-icon].icon-invert {
+    filter: invert(80%) hue-rotate(180deg);
+}
+
+[is=ui-icon].icon-mask {
+    background-color: rgb(110, 110, 110);
+    -webkit-mask-position: var(--spritesheet-position);
+}
+
+[is=ui-icon]:not(.icon-mask) {
+    background-position: var(--spritesheet-position);
+}
+
+.spritesheet-smallicons:not(.icon-mask) {
+    background-image: -webkit-image-set(url(Images/smallIcons.png) 1x, url(Images/smallIcons_2x.png) 2x);
+}
+
+.spritesheet-smallicons.icon-mask {
+    -webkit-mask-image: -webkit-image-set(url(Images/smallIcons.png) 1x, url(Images/smallIcons_2x.png) 2x);
+}
+
+.spritesheet-largeicons:not(.icon-mask) {
+    background-image: -webkit-image-set(url(Images/largeIcons.png) 1x, url(Images/largeIcons_2x.png) 2x);
+}
+
+.spritesheet-largeicons.icon-mask {
+    -webkit-mask-image: -webkit-image-set(url(Images/largeIcons.png) 1x, url(Images/largeIcons_2x.png) 2x);
+}
+
+.spritesheet-mediumicons:not(.icon-mask) {
+    background-image: -webkit-image-set(url(Images/mediumIcons.png) 1x, url(Images/mediumIcons_2x.png) 2x);
+}
+
+.spritesheet-mediumicons.icon-mask {
+    -webkit-mask-image: -webkit-image-set(url(Images/mediumIcons.png) 1x, url(Images/mediumIcons_2x.png) 2x);
+}
+
+.spritesheet-arrowicons {
+    background-image: url(Images/popoverArrows.png);
+}
+
+.force-white-icons [is=ui-icon].spritesheet-smallicons, [is=ui-icon].force-white-icons.spritesheet-smallicons, -theme-preserve {
+    -webkit-mask-image: -webkit-image-set(url(Images/smallIcons.png) 1x, url(Images/smallIcons_2x.png) 2x);
+    -webkit-mask-position: var(--spritesheet-position);
+    background: #fafafa !important;
+}
+
+.force-white-icons [is=ui-icon].spritesheet-largeicons, [is=ui-icon].force-white-icons.spritesheet-largeicons, -theme-preserve {
+    -webkit-mask-image: -webkit-image-set(url(Images/largeIcons.png) 1x, url(Images/largeIcons_2x.png) 2x);
+    -webkit-mask-position: var(--spritesheet-position);
+    background: #fafafa !important;
+}
+
+.force-white-icons [is=ui-icon].spritesheet-mediumicons, [is=ui-icon].force-white-icons.spritesheet-mediumicons, -theme-preserve {
+    -webkit-mask-image: -webkit-image-set(url(Images/mediumIcons.png) 1x, url(Images/mediumIcons_2x.png) 2x);
+    -webkit-mask-position: var(--spritesheet-position);
+    background: #fafafa !important;
+}
+
+.expandable-inline-button {
+    background-color: #dedede;
+    color: #333;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.undisplayable-text,
+.expandable-inline-button {
+    padding: 2px 4px;
+    margin: 0 2px;
+    font-size: 12px;
+    font-family: sans-serif;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.undisplayable-text::after,
+.expandable-inline-button::after {
+    content: attr(data-text);
+}
+
+.undisplayable-text {
+    color: rgb(128, 128, 128);
+    font-style: italic;
+}
+
+.expandable-inline-button:hover {
+    background-color: #d5d5d5;
+}
+
+::selection {
+    background-color: #bbdefb;
+}
+
+.-theme-with-dark-background *::selection,
+:host-context(.-theme-with-dark-background) *::selection {
+    background-color: #9e9e9e;
+}
+
+/*# sourceURL=ui/inspectorCommon.css */</style><style type="text/css">/*
+ * Copyright (c) 2014 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.text-button {
+    margin: 2px;
+    height: 24px;
+    font-size: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 0px 12px;
+    font-weight: 500;
+    color: var(--accent-fg-color);
+    background-color: #fff;
+    flex: none;
+    white-space: nowrap;
+}
+
+.text-button:not(:disabled):focus,
+.text-button:not(:disabled):hover,
+.text-button:not(:disabled):active {
+    background-color: var(--toolbar-bg-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.text-button:not(:disabled):active {
+    background-color: #f2f2f2;
+}
+
+.text-button:not(:disabled):focus {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(66, 133, 244, 0.4);
+}
+
+.text-button:disabled {
+    opacity: 0.38;
+}
+
+.text-button.primary-button, -theme-preserve {
+    background-color: var(--accent-color);
+    border: none;
+    color: #fff;
+}
+
+.text-button.primary-button:not(:disabled):focus,
+.text-button.primary-button:not(:disabled):hover,
+.text-button.primary-button:not(:disabled):active, -theme-preserve {
+    background-color: var(--accent-color-hover);
+}
+
+.-theme-with-dark-background .text-button:not(.primary-button):not(:disabled):focus,
+.-theme-with-dark-background .text-button:not(.primary-button):not(:disabled):hover,
+.-theme-with-dark-background .text-button:not(.primary-button):not(:disabled):active {
+    background-color: #313131;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.-theme-with-dark-background .text-button:not(.primary-button):not(:disabled):focus {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(94, 151, 246, 0.6);
+}
+
+.-theme-with-dark-background .text-button:not(.primary-button):not(:disabled):active {
+    background-color: #3e3e3e;
+}
+
+/*# sourceURL=ui/textButton.css */</style><style type="text/css">/*
+ * Copyright (C) 2009 Apple Inc.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+.cm-js-keyword {color: hsl(310, 86%, 36%);}
+.cm-js-number {color: hsl(248, 100%, 41%);}
+.cm-js-comment {color: hsl(120, 100%, 23%); font-style: italic;}
+.cm-js-string {color: hsl(1, 80%, 43%);}
+.cm-js-string-2 {color: hsl(1, 99%, 39%);}
+.cm-js-atom {color: hsl(310, 86%, 36%);}
+.cm-js-def {color: hsl(240, 73%, 38%);}
+.cm-js-operator {color: hsl(27, 100%, 30%);}
+.cm-js-meta {color: hsl(27, 100%, 30%);}
+.cm-js-variable-2 {color: hsl(240, 73%, 38%);}
+
+.cm-css-keyword { color: rgb(7, 144, 154);}
+.cm-css-number {color: rgb(50, 0, 255);}
+.cm-css-comment {color: rgb(0, 116, 0);}
+.cm-css-def {color: rgb(200, 0, 0);}
+.cm-css-meta {color: rgb(200, 0, 0);}
+.cm-css-atom {color: rgb(7, 144, 154);}
+.cm-css-string {color: rgb(7, 144, 154);}
+.cm-css-string-2 {color: rgb(7, 144, 154);}
+.cm-css-link {color: rgb(7, 144, 154);}
+.cm-css-variable {color: rgb(200, 0, 0);}
+.cm-css-variable-2 {color: rgb(0, 0, 128);}
+.cm-css-property, .webkit-css-property {color: rgb(200, 0, 0);}
+
+.cm-xml-meta {color: rgb(192, 192, 192);}
+.cm-xml-comment {color: rgb(35, 110, 37);}
+.cm-xml-string {color: rgb(26, 26, 166);}
+.cm-xml-tag {color: var(--dom-tag-name-color);}
+.cm-xml-attribute {color: rgb(153, 69, 0);}
+.cm-xml-link {color: #00e;}
+
+:root {
+    --dom-tag-name-color: rgb(136, 18, 128);
+    --dom-attribute-name-color: rgb(153, 69, 0);
+}
+
+.webkit-html-comment {
+    /* Keep this in sync with view-source.css (.webkit-html-comment) */
+    color: rgb(35, 110, 37);
+}
+
+.webkit-html-tag {
+    color: rgb(168, 148, 166);
+}
+
+.webkit-html-tag-name, .webkit-html-close-tag-name {
+    /* Keep this in sync with view-source.css (.webkit-html-tag) */
+    color: var(--dom-tag-name-color);
+}
+
+.webkit-html-pseudo-element {
+    /* This one is non-standard. */
+    color: brown;
+}
+
+.webkit-html-js-node,
+.webkit-html-css-node {
+    white-space: pre-wrap;
+}
+
+.webkit-html-text-node {
+    unicode-bidi: -webkit-isolate;
+}
+
+.webkit-html-entity-value {
+    /* This one is non-standard. */
+    background-color: rgba(0, 0, 0, 0.15);
+    unicode-bidi: -webkit-isolate;
+}
+
+.webkit-html-doctype {
+    /* Keep this in sync with view-source.css (.webkit-html-doctype) */
+    color: rgb(192, 192, 192);
+}
+
+.webkit-html-attribute-name {
+    /* Keep this in sync with view-source.css (.webkit-html-attribute-name) */
+    color: var(--dom-attribute-name-color);
+    unicode-bidi: -webkit-isolate;
+}
+
+.webkit-html-attribute-value {
+    /* Keep this in sync with view-source.css (.webkit-html-attribute-value) */
+    color: rgb(26, 26, 166);
+    unicode-bidi: -webkit-isolate;
+}
+
+.devtools-link {
+    color: rgb(17, 85, 204);
+    text-decoration: underline;
+}
+
+.devtools-link [is=ui-icon] {
+    vertical-align: middle;
+}
+
+.devtools-link[data-keyboard-focus="true"]:focus {
+    outline-width: unset;
+}
+
+.devtools-link:not(.devtools-link-prevent-click) {
+    cursor: pointer;
+}
+
+.-theme-with-dark-background .devtools-link,
+:host-context(.-theme-with-dark-background) .devtools-link {
+    color: hsl(0, 0%, 67%);
+}
+
+.webkit-html-end-of-file {
+    /* Keep this in sync with view-source.css (.webkit-html-end-of-file) */
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
+/* Default CodeMirror Theme */
+.cm-negative {color: #d44;}
+.cm-positive {color: #292;}
+.cm-header, .cm-strong {font-weight: bold;}
+.cm-em {font-style: italic;}
+.cm-link {text-decoration: underline;}
+.cm-strikethrough {text-decoration: line-through;}
+
+.cm-invalidchar {color: #f00;}
+
+.cm-header {color: blue;}
+.cm-quote {color: #090;}
+
+.cm-keyword {color: #708;}
+.cm-atom {color: #219;}
+.cm-number {color: #164;}
+.cm-def {color: #00f;}
+.cm-variable-2 {color: #05a;}
+.cm-variable-3, .cm-type {color: #085;}
+.cm-comment {color: #a50;}
+.cm-string {color: #a11;}
+.cm-string-2 {color: #f50;}
+.cm-meta {color: #555;}
+.cm-qualifier {color: #555;}
+.cm-builtin {color: #30a;}
+.cm-bracket {color: #997;}
+.cm-tag {color: #170;}
+.cm-attribute {color: #00c;}
+.cm-hr {color: #999;}
+.cm-link {color: #00c;}
+
+.cm-error {color: #f00;}
+
+/*# sourceURL=ui/inspectorSyntaxHighlight.css */</style><div></div><div class="widget vbox root-view" spellcheck="false" style="margin-right: 0px; margin-bottom: 0px;"><style type="text/css">/*
+ * Copyright 2016 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.root-view {
+    background-color: white;
+    overflow: hidden;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/*# sourceURL=ui/rootView.css */</style><div class="vbox flex-auto split-widget"><div class="widget vbox" slot="insertion-point-sidebar"><div class="vbox flex-auto split-widget"><div class="vbox flex-auto tabbed-pane" slot="insertion-point-main"><div class="widget vbox flex-auto view-container overflow-auto" tabindex="-1"><div class="widget vbox panel elements" aria-label="elements"><style type="text/css">/*
+ * Copyright (C) 2006, 2007, 2008 Apple Inc.  All rights reserved.
+ * Copyright (C) 2009 Anthony Ricaud <rik@webkit.org>
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 2.  Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ *     its contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE AND ITS CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL APPLE OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#elements-content {
+    flex: 1 1;
+    overflow: auto;
+    padding: 2px 0 0 0;
+}
+
+#elements-content:not(.elements-wrap) > div {
+    display: inline-block;
+    min-width: 100%;
+}
+
+#elements-content.elements-wrap {
+    overflow-x: hidden;
+}
+
+#elements-crumbs {
+    flex: 0 0 23px;
+    background-color: white;
+    border-top: 1px solid var(--divider-color);
+    overflow: hidden;
+    width: 100%;
+}
+
+.style-panes-wrapper {
+    overflow: hidden auto;
+}
+
+.style-panes-wrapper > div:not(:first-child) {
+    border-top: 1px solid var(--divider-color);
+}
+
+.elements-tree-header {
+    height: 24px;
+    border-top: 1px solid var(--divider-color);
+    border-bottom: 1px solid var(--divider-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.elements-tree-header-frame {
+    margin-left: 6px;
+    margin-right: 6px;
+    flex: none;
+}
+
+/*# sourceURL=elements/elementsPanel.css */</style><div class="vbox flex-auto split-widget"><div class="vbox flex-auto" slot="insertion-point-main"><div id="elements-content" class="elements-wrap"></div><div id="elements-crumbs"><div class="vbox flex-auto" aria-hidden="true"></div></div></div><div class="vbox flex-auto tabbed-pane" slot="insertion-point-sidebar"><div class="widget vbox flex-auto view-container overflow-auto" tabindex="-1"><div class="widget vbox flex-auto"><div class="widget vbox style-panes-wrapper"><div class="vbox flex-auto flex-none"></div><div class="vbox flex-auto flex-none"></div></div></div></div></div></div></div></div></div></div></div></div></div><div class="vbox flex-auto dimmed-pane" style="z-index: 3000;"></div></body></html>
