@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>blob download</title>
+<script>
+// dummy json data to save
+// see: https://codepen.io/vidhill/pen/bNPEmX
+//https://stackoverflow.com/questions/48892390/download-blob-file-from-website-inside-android-webviewclient/48954970#48954970
+
+var data = { x: 42, s: "hello, world", d: new Date() }
+
+var blob_url = "";
+function doDownload() {
+    var json = JSON.stringify(data),
+    blob = new Blob([json], {type: "octet/stream"}),
+    url = window.URL.createObjectURL(blob);
+	blob_url = url;
+	
+	var oA = document.getElementById('myButton');
+  
+  	oA.href = url;
+    oA.target = '_blank';
+  	
+  	// target filename
+    oA.download = 'my-download.json'; 
+}
+
+function testBlobUrl() {
+	alert(blob_url);
+	var xhr = new XMLHttpRequest;
+	xhr.responseType = 'blob';
+	xhr.onload = function() {
+	   var recoveredBlob = xhr.response;
+	   var reader = new FileReader;
+	   reader.onload = function() {
+		 var blobAsDataUrl = reader.result;
+		 window.location = blobAsDataUrl;
+	   };
+	   reader.readAsDataURL(recoveredBlob);
+	};
+	
+	xhr.open('GET', blob_url);
+	xhr.send();
+}
+
+</script>
+</head>
+
+<body>
+<br />
+<br />
+<a id="myButton" href="#" onclick="doDownload()" download="my_blob.json">Download Blob JSON</a>
+<br />
+<br />
+<button onclick="testBlobUrl()">
+Show Bloburl
+</button>
+
+</body>
+</html>

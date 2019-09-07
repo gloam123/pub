@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><br />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>jsPDF download</title>
+
+<script src="html2canvas.js"></script>
+<script src="jspdf.debug.js"></script>
+
+<script type="text/javascript">
+function makeMpdf () {
+   var pdf = new jsPDF('p','pt','a4');
+// 设置打印比例 越大打印越小
+   pdf.internal.scaleFactor = 2;
+   var options = {
+	   pagesplit: true, //设置是否自动分页
+	  "background": '#FFFFFF'   //如果导出的pdf为黑色背景，需要将导出的html模块内容背景 设置成白色。
+  };
+  var printHtml = document.getElementById('pdfDom');
+//       var printHtml = $('#pdfDom').get(0);   // 页面某一个div里面的内容，通过id获取div内容
+   pdf.addHTML(printHtml,15, 15, options,function() {
+	  pdf.save('dest.pdf');
+  });
+}
+
+function testBlobUrl(blobUrl) {
+	var xhr = new XMLHttpRequest;
+	xhr.responseType = 'blob';
+	xhr.onload = function() {
+	   var recoveredBlob = xhr.response;
+	   var reader = new FileReader;
+	   reader.onload = function() {
+		 var blobAsDataUrl = reader.result;
+		 window.location = blobAsDataUrl;
+	   };
+	   reader.readAsDataURL(recoveredBlob);
+	};
+	
+	xhr.open('GET', blobUrl);
+	xhr.send();
+}
+
+
+</script>
+</head>
+
+<body>
+<div class="right-aside" id="pdfDom" class="right-aside">
+        
+    <section class="content-header">
+        @yield('search')
+    </section>
+    <section class="content">
+        @yield('content')
+    </section>
+    <i-col span="8">
+        <i-button type="warning" @click="makeMpdf()">导出PDF文件</i-button>
+    </i-col>
+</div>
+
+<br />
+<br />
+<button onclick="makeMpdf()">Download by jsPDF2</button>
+
+</body>
+</html>
