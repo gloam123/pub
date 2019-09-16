@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://davidwalsh.name/demo/camera.php -->
+<html lang="en" dir="ltr" xmlns:fb="http://ogp.me/ns/fb#" class=" fonts-loaded">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Camera and Video Control with HTML5 Example</title>
+
+<style>
+.demo-wrapper {
+    min-height: 500px;
+}
+video {
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 0 20px 0;
+}
+#canvas {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    display: block;
+}
+</style>
+<script>
+	// Put event listeners into place
+	window.addEventListener("DOMContentLoaded", function() {
+		// Grab elements, create settings, etc.
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		var video = document.getElementById('video');
+		var mediaConfig = {
+			video: true
+		};
+		var errBack = function(e) {
+			console.log('An error has occurred!', e)
+		};
+		// Put video listeners into place
+		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+				//video.src = window.URL.createObjectURL(stream);
+				video.srcObject = stream;
+				video.play();
+			});
+		}
+		
+		// Trigger photo take
+		document.getElementById('snap').addEventListener('click', function() {
+			context.drawImage(video, 0, 0, 640, 480);
+		});
+	}, false);
+</script>
+
+
+</head>
+
+<body class=" demo-page">
+<header id="top"></header>
+<!-- content wrapper -->
+    <div class="main">
+        <div class="center clear">
+            <!-- main content column -->
+            <main id="main">
+                <!--CONTENT-->
+                <div class="demo-wrapper">
+                    <h1>Demo:  Camera and Video Control with HTML5</h1>
+
+                    <video id="video" width="90%" autoplay></video>
+                    <button id="snap">Snap Photo</button>
+                    <canvas id="canvas" width="640" height="480"></canvas>
+                </div>
+            </main>
+
+        </div>
+    </div>
+</body>
+
+</html>
