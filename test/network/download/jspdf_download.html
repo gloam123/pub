@@ -68,8 +68,17 @@ function testBlobUrl(blobUrl) {
 <br />
 <br />
 <a href="../../images/general_pdf.pdf">普通pdf文件下载</a>
-<br />
-<br />
+<br /><br /><br />
 
+<form action="./text_data.dat">
+    <input type="submit" value="普通Action pdf 下载">"
+</form>
+
+<br /><br /><br />
+<form method="POST" action="./text_data.dat">
+    <input type="text" value="filename">
+    <input type="submit" value="Post pdf 下载">"
+</form>
+<br /><br /><br />
 </body>
 </html>
