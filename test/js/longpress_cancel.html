@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>long press cancel</title>
+        <meta name="viewport" content="width=device-width" />
+
+        <style type="text/css">
+        *{
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            -khtml-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+         }
+        </style>
+        <script>
+            function disable_popup() {
+                window.ontouchstart = function(e) { 
+                    console.log("gqg3: ontouchstart preventDefault");
+                    e.preventDefault(); 
+                };
+
+                document.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                }, false);
+
+            }
+        </script>
+    </head>
+
+
+    <body oncontextmenu="return false">
+        <br><br>
+        <button onclick="disable_popup()">disable popup</button>
+        <br><br>
+        <a href="http://so.com">http://www.so.com</a>
+    </body>
+</html>
