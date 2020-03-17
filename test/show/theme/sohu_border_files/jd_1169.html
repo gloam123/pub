@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://images.sohu.com/bill/s2015/jd/jd_1169.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<title>1169</title>
+</head>
+<body marginwidth="0" marginheight="0">
+	<script>
+	var id = 1169;
+	var ratio = 6.4;
+
+	function jdAdOutsideShow(id) {
+		var frame = document.createElement('iframe');
+		document.write("<a id='jdAdplace" + id + "' style='display:block'></a>");
+		document.close();
+		var anchor = document.getElementById("jdAdplace" + id);
+		var width = anchor.scrollWidth;
+		var height = width / ratio;
+		frame.id = "jdAd" + id;
+		frame.frameborder = '0';
+		frame.style.border = '0';
+		frame.width = width;
+		frame.height = height;
+		// frame.style.pointerEvents = "none";
+		frame.scrolling = "no";
+		frame.src = "http://x.jd.com/exsites?spread_type=2&ad_ids=" + id + ":5&location_info=0&mobile_type=1&&callback=getjjsku_callback";
+		var div = document.createElement('div');
+		div.appendChild(frame);
+		anchor.insertBefore(frame, null);
+
+	};
+	function changesize(id) {
+		var anchor = document.getElementById("jdAdplace" + id);
+		var frame = document.getElementById("jdAd" + id);
+		frame.width = anchor.offsetWidth;
+		frame.height = frame.width / ratio;
+	}
+
+	jdAdOutsideShow(id);
+	window.addEventListener('resize', function() {
+		changesize(id);
+	}, false);
+	</script><a id="jdAdplace1169" style="display:block"><iframe id="jdAd1169" width="773" height="120.78125" scrolling="no" src="exsites.html" style="border: 0px;"></iframe></a>
+
+</body></html>

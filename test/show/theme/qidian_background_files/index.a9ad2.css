@@ -1,0 +1,32 @@
+@font-face {
+  font-family: FZZCYSK;
+  font-style: normal;
+  font-weight: 400;
+  src: url(/qdm/font/FZZCYSK/FZZCYSK.87c30.eot);
+  src: url(/qdm/font/FZZCYSK/FZZCYSK.87c30.eot?#iefix) format('embedded-opentype'),url(/qdm/font/FZZCYSK/FZZCYSK2.30646.woff2) format('woff2'),url(/qdm/font/FZZCYSK/FZZCYSK.be162.woff) format('woff'),url(/qdm/font/FZZCYSK/FZZCYSK.ttf) format('truetype'),url(/qdm/font/FZZCYSK/FZZCYSK.5ccc2.svg#iconfont) format('svg')
+}
+.FZZCYSK {
+  display: inline-block;
+  font: normal normal normal 14px/1 FZZCYSK;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke-width: .1px
+}
+@font-face {
+  font-family: KUHEI;
+  font-style: normal;
+  font-weight: 400;
+  src: url(/qdm/font/KUHEI/KUHEI.39a9a.eot);
+  src: url(/qdm/font/KUHEI/KUHEI.39a9a.eot?#iefix) format('embedded-opentype'),url(/qdm/font/KUHEI/KUHEI2.e949d.woff2) format('woff2'),url(/qdm/font/KUHEI/KUHEI.d3da9.woff) format('woff'),url(/qdm/font/KUHEI/KUHEI.7f2d8.ttf) format('truetype'),url(/qdm/font/KUHEI/KUHEI.9708f.svg#iconfont) format('svg')
+}
+.KUHEI {
+  display: inline-block;
+  font: normal normal normal 14px/1 KUHEI;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke-width: .1px
+}

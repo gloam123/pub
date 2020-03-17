@@ -1,0 +1,73 @@
+.icon-account {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: -63px 0;
+  width: 24px;
+  height: 24px
+}
+.icon-end {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: 0 -60px;
+  width: 20px;
+  height: 27px
+}
+.icon-free {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: 0 -30px;
+  width: 26px;
+  height: 26px
+}
+.icon-god {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: -30px -30px;
+  width: 26px;
+  height: 26px
+}
+.icon-home {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: -31px 0;
+  width: 28px;
+  height: 25px
+}
+.icon-rank {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: 0 0;
+  width: 27px;
+  height: 26px
+}
+.icon-sort {
+  background-image: url(/qdm/icon/common/sprite.b2b30.png);
+  background-position: -63px -28px;
+  width: 24px;
+  height: 24px
+}
+@media (-webkit-min-device-pixel-ratio:2),
+(min-resolution:192dpi) {
+  .icon-account {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-end {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-free {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-god {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-home {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-rank {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+  .icon-sort {
+    background-image: url(/qdm/icon/common/sprite@2x.f5569.png);
+    background-size: 87px 87px
+  }
+}
