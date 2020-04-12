@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <!--
 Copyright 2013 Eric Bidelman
@@ -93,21 +94,25 @@ section {
   display: flex;
 }
 </style>
+
+<script>
+  function test_media_source() {
+    window.MediaSource = window.MediaSource || window.WebKitMediaSource;
+    if (!!!window.MediaSource) {
+      alert('MediaSource API is not available');
+      console.log(mediaSource);
+    }
+
+    var mediaSource = new MediaSource();
+    console.log(mediaSource);
+    alert(mediaSource);
+  }
+</script>
 </head>
 <body>
-
-<details>
-  <summary>What is this?</summary>
-  <div>
-    <p>This demo splits a <a href="Chrome_ImF.webm">.webm video</a> into
-    <span data-num-chunks></span> chunks using the File APIs. The entire movie
-    is then 'streamed' to a <code>&lt;video&gt;</code> element by appending each 
-    chunk using the
-    <a href="http://dvcs.w3.org/hg/html-media/raw-file/tip/media-source/media-source.html" target="_blank">MediaSource API</a>.</p>
-    <p><b>Support:</b> Chrome Dev Channel 17+ and the <code>--enable-media-source</code> flag set. The feature is enabled
-      by default in Chrome 23, which also updated its implementation to the new version of the API.</p>
-  </div>
-</details>
+  <br/><br/>
+<button onclick="test_media_source()">test_media_source</button>
+<br/><br/>
 
 <h3>Appending .webm video chunks using the Media Source API</h3>
 
@@ -145,7 +150,7 @@ if (!!!window.MediaSource) {
 
 var mediaSource = new MediaSource();
 
-document.querySelector('[data-num-chunks]').textContent = NUM_CHUNKS;
+//document.querySelector('[data-num-chunks]').textContent = NUM_CHUNKS;
 
 video.src = window.URL.createObjectURL(mediaSource);
 

@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<!--
+Copyright 2013 Eric Bidelman
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Author: Eric Bidelman (ebidel@)
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MediaSource API Demo</title>
+<style>
+::selection {
+  color: #fff;
+  background: pink;
+}
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+body {
+  color: #222;
+  font-family: 'Open Sans', arial, sans-serif;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-direction: column;
+  -ms-align-items: center;
+  -ms-justify-content: center;
+  -ms-flex-direction: column;
+  display: -moz-flex;
+  -moz-align-items: center;
+  -moz-justify-content: center;
+  -moz-flex-direction: column;
+  -o-align-items: center;
+  -o-justify-content: center;
+  -o-flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+</style>
+
+<script>
+  function test_media_source() {
+    window.MediaSource = window.MediaSource || window.WebKitMediaSource;
+    if (!!!window.MediaSource) {
+      alert('MediaSource API is not available');
+      console.log("!!!window.MediaSource");
+    } else {
+      console.log("window.MediaSource ok");
+    }
+
+    //var mediaSource = new MediaSource();
+    //console.log(mediaSource);
+    //alert(mediaSource);
+  }
+</script>
+</head>
+<body>
+  <br/><br/>
+  test media source!!!
+<button onclick="test_media_source()">test_media_source</button>
+<br/><br/>
+
+</body>
+</html>
