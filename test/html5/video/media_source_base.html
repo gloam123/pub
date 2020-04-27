@@ -60,12 +60,28 @@ body {
 
 <script>
   function test_media_source() {
+	if (!!!window.TestObject2222) {
+		console.log("!!!window.TestObject2222");
+	}
+	
+    if (!!!window.TestObject) {
+      alert('TestObject API is not available');
+      console.log("!!!window.TestObject");
+    } else {
+	  alert('window.TestObject 22');
+      console.log("window.MediaSource ok");
+	  var to = new TestObject("hello testObject!!!");
+	  alert(to.name);
+    }
+	
     window.MediaSource = window.MediaSource || window.WebKitMediaSource;
     if (!!!window.MediaSource) {
       alert('MediaSource API is not available');
       console.log("!!!window.MediaSource");
     } else {
+	  alert('window.MediaSource 22');
       console.log("window.MediaSource ok");
+	  var mediaSource = new MediaSource();
     }
 
     //var mediaSource = new MediaSource();
