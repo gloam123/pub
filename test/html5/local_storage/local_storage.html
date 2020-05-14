@@ -5,18 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Local storage</title>
 <script>
+var ols, oc;
+window.onload = function() {
+	ols = document.getElementById('id_local_storage');
+	oc = document.getElementById('id_cookie');
+	//alert('onload');
+}
     function setLocalStorage() {
         var storage = window.localStorage;
-        storage.setItem('h5_t1', "v1");
+        storage.setItem('gqg_localstorage_name1', "v1");
     }
+	function showLocalStorage() {
+		if (window.localStorage) {
+			//alert(localStorage.getItem("gqg_localstorage_name1"));
+			ols.innerHTML = localStorage.getItem("gqg_localstorage_name1");
+		}
+		// #Meebo :AdElement .Root 
+	}
+	
+	function cleanLocalStorage() {
+        var storage = window.localStorage;
+        storage.setItem('gqg_localstorage_name1', "");
+	}
+	
+	function setCookie(c_name, value, expiredays) {                   
+		var exdate = new Date();                   
+		exdate.setDate(exdate.getDate() + expiredays);                   
+		document.cookie = c_name + "=" + escape(value) + "; expires=" + exdate.toGMTString() + "; path=/";
+	}
+	
+	function getCookie(name){
+		var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+		if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+		else
+		return null;
+	}
+
+	function setDefaultCookie() {
+		setCookie("gqg_default_cookie_name1", "cookie value 1", 1);
+	}
+	
+	function showCookie() {
+		oc.innerHTML = document.cookie;
+	}
+	function cleanDefaultCookie() {
+		setCookie("gqg_default_cookie_name1", "", -1);
+		setCookie("name1", "", -1);
+		//document.cookie = "";
+	}
+	
 </script>
 </head>
 
 <body>
 <br />
 <br />
-<br /><br /><br /><br />
-<button onclick="setLocalStorage()"> setLocalStorage</button>
-<br /><br /><br /><br />
+<br /><br /><br />
+<button onclick="setLocalStorage()"> setLocalStorage</button>=
+<button onclick="showLocalStorage()">showLocalStorage</button>=
+<button onclick="cleanLocalStorage()">cleanLocalStorage</button>
+<br /><br /><br />
+<button onclick="setDefaultCookie()"> setDefaultCookie</button>=
+<button onclick="showCookie()">showCookie</button>=
+<button onclick="cleanDefaultCookie()">cleanDefaultCookie</button>
+<br /><br /><br />
+LocalStorage:
+<div id="id_local_storage">
+</div>
+<br /><br />
+Cookies:
+<div id="id_cookie">
+</div>
+<br /><br />
 </body>
 </html>

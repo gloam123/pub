@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="bookmark" href="/favicon.ico"/>
+
+<script>
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        var value = unescape(r[2]);
+		var intValue = parseInt(value);
+		return intValue;
+    }
+    return 0;
+}
+
+var id = getQueryString("id");
+document.write("<title>Title " + id + "</title>");
+</script>
+</head>
+
+<body>
+<script type="text/javascript">
+
+var baseUrl = document.location.href;
+var pos = baseUrl.indexOf("?");
+if (pos >= 0) {
+	baseUrl = baseUrl.substring(0, pos);
+}
+baseUrl += "?"
+
+function onTimerNavigate() {
+	var query = "id=" + (getQueryString("id") + 1);
+	var url = baseUrl + query;
+//	alert(url);
+	window.location.href = url;
+}
+
+setTimeout(onTimerNavigate(), 60);
+</script>
+dfasdf
+favicon.ico
+</body>
+</html>

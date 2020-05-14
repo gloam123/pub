@@ -4,6 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>url blocked</title>
+<script>
+function doRequest() {
+	var head = document.getElementsByTagName('head')[0];
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = "http://60.2.209.238:7007/statics/js/index.js?" + new Date().getTime();
+	head.appendChild(script);
+}
+</script>
 </head>
 
 <body>
@@ -12,9 +21,10 @@
 <br />
 60.2.209.238:7007 block!!!
 <br/>
-<script type="text/javascript" src="http://60.2.209.238:7007/statics/js/index.js?_1587873129063"></script>
+<script id="idScript" type="text/javascript" src="http://60.2.209.238:7007/statics/js/index.js?_1587873129063"></script>
 22222
 
+<button onclick="doRequest()">request js</button>
 
 </body>
 </html>
