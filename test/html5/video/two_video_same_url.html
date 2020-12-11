@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+
+        <script>
+            window.onload = function() {
+                var delay = Math.ceil(Math.random()*700) + 300;
+                console.log("delay=" + delay);
+                setTimeout(function() {
+                    var ksplayer = document.getElementById('idksplayer');
+                    ksplayer.play();
+                    var sysplayer = document.getElementById('idsysplayer');
+                    //sysplayer.play();
+                }, delay);
+            }
+        </script>
+    </head>
+
+    <body>
+        <br>
+        <video id="idksplayer" useksplayer controls preload="metadata" style="width:100%">
+            <source src="https://gloam123.github.io/pub/test/video/beiwa_iqiyi_05.mp4" type="video/mp4"/>
+            Video not supported.
+        </video>
+
+        </br>
+        </br>
+        上面的视频启用了使用外置快手播放器或者系统播放器同层渲染，下面的使用webview的内置播放器渲染
+        </br>
+        </br>
+
+        <video id="idsysplayer" controls preload="metadata" style="width:100%">
+            <source src="https://gloam123.github.io/pub/test/video/beiwa_iqiyi_05.mp4" type="video/mp4"/>
+            Video not supported.
+        </video>
+
+
+    </body>
+</html>
+
+
