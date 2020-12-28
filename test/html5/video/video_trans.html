@@ -1,0 +1,75 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+  <style type="text/css">
+  body {
+    background-image: url("https://haojingfang.kproxy.corp.kuaishou.com/static/img/background-dark.55b3388a.png");
+  }
+  #container {
+    width: 100%;
+    height: 200px;
+  }
+  </style>
+  <script>
+    const load = () => {
+      console.log("load event detected!");
+    }
+    window.onload = load;
+  </script>
+</head>
+
+<body>
+
+  <div>yuv420:</div>
+  <div id='container'>
+    <video id="ovideo" autoplay="autoplay" useksplayer="transparent-video" loop="" accurateseek="" videotype="mp4" starttime="0" endtime="2.93" loopcount="-1" playsinline="" webkit-playsinline=""  style="width: 100%; height: 100%; object-fit: contain;" poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" >
+      <source src="http://static.yximgs.com/udata/pkg/fe/summary2020/636_1.2M_12_25.mp4">
+    </video>
+  </div>
+<br/><br/><br/>
+  <div>yuvj420:</div>
+  <div id='container'>
+    <video id="ovideo" autoplay="autoplay" useksplayer="transparent-video" loop="" accurateseek="" videotype="mp4" starttime="0" endtime="2.93" loopcount="-1" playsinline="" webkit-playsinline=""  style="width: 100%; height: 100%; object-fit: contain;" poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" >
+      <source src="../../video/heart_636_yuvj420.mp4">
+        <!--
+          <source src="http://static.yximgs.com/udata/pkg/fe/summary2020/636_1.2M_12_25.mp4">
+        -->
+    </video>
+  </div>
+
+  <script>
+    ovideo.onerror = function (e) {
+      console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
+      let s = "";
+      let err = ovideo.error;
+      console.log("gqg5: ovideo.onerror ovideo.error=" + ovideo.error);
+      console.log("gqg5: ovideo.onerror s=" + s);
+      //ovideo.src = "https://txmov2.a.yximgs.com/bs2/newWatermark/MzU4MTk4OTQ2NjA_zh_3.mp4?a=2222222";
+    }
+
+    ovideo.onplaying = function () {
+      console.log("gqg3: ovideo.onplaying ovideo.duration=" + ovideo.duration);
+    }
+
+    function playOrPause() {
+      if (ovideo.paused) {
+        ovideo.play();
+      } else {
+        ovideo.pause();
+      }
+      console.log("gqg3: abplay=true ================================================");
+    }
+
+  </script>
+  <br /><br />
+
+  <button onclick="playOrPause()">播放或暂停</button>
+  <br /><br />
+
+  <br /><br />
+  <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
+</body>
+
+</html>
