@@ -1,0 +1,25 @@
+{
+  "comment": "commont ",
+  "whitelist" : [
+    {
+      "host":".m.kukudm.com",
+      "config" : {
+        "pageLimit" : 6
+      }
+    },
+    {
+      "host" : ".m.555zw.com",
+      "config" : {
+        "xhrLoad" : true
+      }
+    }
+  ],
+  "blacklist" : [
+    {
+      "host" : ".sina.cn"
+    },
+    {
+      "host" : ".58.com"
+    }
+  ]
+}

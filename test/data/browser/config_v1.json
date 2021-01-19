@@ -1,0 +1,21 @@
+{
+	"preloader": {
+		"index": 1479,
+		"info": {
+			"preloaderConfigUrl": "http:\/\/yimingapp.cn\/test\/data\/browser\/config_v1\/priloader_config.json",
+			"preloaderConfigVersion": "20",
+			"preloaderJsUrl": "http:\/\/yimingapp.cn\/test\/data\/browser\/config_v1\/preloader.js",
+			"preloaderJsVersion": "20"
+		}
+	},
+	"readmode_v2": {
+		"index": 1524,
+		"info": {
+			"readerDomainUrl": "http:\/\/yimingapp.cn\/test\/data\/browser\/config_v1\/reader_domain.ini",
+			"readerDomainVersion": "4",
+			"readerJsUrl": "http:\/\/yimingapp.cn\/test\/data\/browser\/config_v1\/reader.js",
+			"readerJsVersion": "5"
+		}
+	}
+}
+
