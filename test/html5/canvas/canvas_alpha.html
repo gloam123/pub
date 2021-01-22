@@ -8,8 +8,8 @@
 
         <style>
             #idcanvas {
-                width: 300px;
-                height: 300px;
+                width: 1300px;
+                height: 3300px;
                 background-color:#FFFF0000;
             }
         </style>
@@ -18,8 +18,14 @@
             window.onload = function() {
                 var c=document.getElementById("idcanvas");
                 var cxt=c.getContext("2d");
-                cxt.fillStyle="#FF0000";
-                cxt.fillRect(0,0,150,75);
+                cxt.fillStyle="#0000FF";
+                cxt.fillRect(0,0,1200,3000);
+                cxt.fillStyle="#00FF00";
+                for (i=0; i<10; i++) {
+                    cxt.fillRect(i*50,i*200, 100,10);
+                }
+
+                cxt.fillRect(100, 800, 100,10);
             }
         </script>
     </head>

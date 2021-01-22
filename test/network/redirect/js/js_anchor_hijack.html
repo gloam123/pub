@@ -1,0 +1,27 @@
+<html>
+<body>
+    <script type="text/javascript">
+        var u = 'http://www.2345.com',
+            ua = navigator.userAgent.toLowerCase();
+        if (u.indexOf('hao123.com') > 0) {
+            var cc = document.cookie.split(';');
+            for (var i = 0; i < cc.length; i++) {
+                var name = cc[i].split("=")[0];
+                document.cookie = name + '=; domain=.hao123.com; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+            document.cookie = 'hz=0; domain=www.hao123.com; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        if (ua.indexOf('applewebkit') > 0) {
+            var h = document.createElement('a');
+            h.rel = 'noreferrer';
+            h.href = u;
+            document.body.appendChild(h);
+            var evt = document.createEvent("MouseEvents");
+            evt.initEvent("click", true, true);
+            h.dispatchEvent(evt);
+        } else {
+            document.write('<meta http-equiv="Refresh" Content="0; Url=' + u + '" >');
+        }
+    </script>
+</body>
+<html>

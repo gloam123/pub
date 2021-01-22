@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+<title>auto refresh</title>
+<script language="JavaScript">
+	var g_is_stop = false;
+	function myrefresh(){
+		if (g_is_stop) {
+			return;
+		}
+
+		var curr_url = "./auto_refresh.html";
+		curr_url += "?t=";
+		var myDate = new Date();
+		curr_url += myDate.toString();
+		window.location.href = curr_url;
+	}
+
+	setTimeout('myrefresh()', 500); //指定1秒刷新一次
+
+	function stop_refresh() {
+		g_is_stop = true;
+	}
+</script> 
+</head>
+
+<body>
+	<br/><br/><br/>
+	<button onclick="stop_refresh()">stop</button>
+	<br/><br/><br/>
+	<div id="id_content">
+		abcdd
+	</div>
+	<script>
+		var oc = document.getElementById('id_content')
+		oc.innerHTML = window.location.href;
+	</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+HTTP/1.1 200 Redirect
+FiddlerTemplate: True
+Date: Fri, 25 Jan 2013 16:49:29 GMT
+Refresh: 3000; url= http://www.hao123.com
+Content-Length: 0
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>video_js</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style type="text/css">
+.video_top {
+	position:relative;
+	width:150px;
+	height:300px;
+	left:150px;
+	top:80px;
+	background:#0C0;
+	z-index:997;
+}
+</style>
+
+<script>
+function getMedia() {
+	return document.getElementById("video1");
+}
+function media_create() {
+  var ocontainer = document.getElementById('id_video_container');
+  var ovideo = document.createElement('video');
+  ovideo.autoplay = 'autoplay';
+  ovideo.controls = "controls";
+  ovideo.id = 'video1';
+  ovideo.style='z-index:1999;  left:0px; top:100px; width:80%';
+  ovideo.src = '../../video/beiwa_iqiyi_05.mp4';
+  ovideo.onfirstframe = function() {
+    console.log("gqg3: onfristframe");
+  }
+  ovideo.setAttribute("useksplayer", "video");
+  ocontainer.appendChild(ovideo);
+  console.log("gqg3: appendChild ovideo");
+}
+function media_pause() {
+	getMedia().pause();
+}
+var video_url ="../../video/huajiao_deadlock.mp4";
+function media_switch_src() {
+	var tmp_url = getMedia().src;
+	getMedia().src = video_url;
+	video_url = tmp_url;
+}
+</script>
+</head>
+
+<body>
+<div id="id_video_container" style="background:#FC3; width:400px; height: 300px;">
+</div>
+<br />
+<br />
+<button onclick="media_create()">media create</button>
+<br />
+<br />
+<button onclick="media_pause()">media pause/play</button>
+<br />
+<br />
+<button onclick="media_switch_src()">media_switch_src</button>
+<br />
+<br />
+
+</body>
+</html>

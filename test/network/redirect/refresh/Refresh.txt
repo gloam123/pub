@@ -1,0 +1,6 @@
+HTTP/1.1 200 Redirect
+FiddlerTemplate: True
+Date: Fri, 25 Jan 2013 16:49:29 GMT
+Refresh: 0; url= http://www.2345.com
+Content-Length: 1
+

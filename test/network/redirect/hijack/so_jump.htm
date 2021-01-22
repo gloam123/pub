@@ -1,0 +1,36 @@
+<html>
+
+<head></head>
+
+<body>
+<script type="text/javascript">
+function func1( k) {
+    var r = eval("/" + k + "=(.+?)(&|$)/");
+    var n = r.exec(location.href);
+	alert("n=" +n);
+    return n
+}
+
+function ls() {
+    var n, s = "";
+    n = func1("id");
+    if (n) {
+        s += "pid=" + n[1];
+        n = g("key");
+        if (n) {
+            s += "&query=" + encodeURIComponent(n[1]);
+            s += "&searchRadio=on"
+        }
+    }
+	
+    if (s && s.length > 0)
+		return s;
+    else
+		return "bai=360"
+}
+document.cookie = "lurl=" + encodeURIComponent("http://www.sogou.com/sogou?" + ls()) + ";path=/";
+top.location.replace("http://" + document.domain);
+</script>
+</body>
+
+</html>
