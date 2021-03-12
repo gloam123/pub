@@ -17,6 +17,8 @@
         <script>
             window.onload = function() {
                 var c=document.getElementById("idcanvas");
+                c.width = 4000;
+                c.height = 4000;
                 var cxt=c.getContext("2d");
                 cxt.fillStyle="#0000FF";
                 cxt.fillRect(0,0,1200,3000);
@@ -26,11 +28,26 @@
                 }
 
                 cxt.fillRect(100, 800, 100,10);
+            
+            }
+            window.onpagehide = function() {
+                console.log("gqg3: window.onpagehide");
+            }
+
+            function dohidden() {
+                var c=document.getElementById("idcanvas");
+                c.hidden = true;
             }
         </script>
     </head>
 
     <body>
+        <br/><br/>
+        <button onclick="location.reload()">reload</button>
+        <br/><br/>
+        222
+        <button onclick="dohidden()">dohidden</button>
+        <br/><br/><br/>
         canvas:
         <canvas id="idcanvas">
 

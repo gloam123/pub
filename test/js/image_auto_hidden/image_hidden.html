@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="de" content="" />
+        <link
+            rel="shortcut icon"
+            href="//static.yximgs.com/udata/pkg/fe/favicon.70ff1fcc.ico"
+            type="image/x-icon"
+        />
+        <title>kwaishop-pub-demo</title>
+        <style>
+            .bg,
+            .lottery-background {
+                position: relative;
+                height: 8rem;
+            }
+
+            .bg {
+                background: url(https://ali-ec.static.yximgs.com/udata/pkg/ks-merchant/lottery/bgcolor.png)
+                    no-repeat;
+                background-size: contain;
+                width: 100%;
+            }
+
+            .shelf {
+                position: absolute;
+                left: 0;
+                top: 0;
+                background: url(https://ali-ec.static.yximgs.com/udata/pkg/ks-merchant/lottery/bgshelf.png)
+                    no-repeat;
+                background-size: contain;
+                width: 100%;
+                height: 5rem;
+            }
+
+            .text {
+                position: absolute;
+                left: 0;
+                top: 0;
+                background: url(https://ali-ec.static.yximgs.com/udata/pkg/ks-merchant/lottery/bgtext2.png)
+                    no-repeat;
+                background-size: contain;
+                width: 100%;
+                height: 3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bg">
+<!--
+            <div class="text"></div>
+            <div class="shelf"></div>
+-->
+        </div>
+        <button onclick="load()">OPEN</button>
+        ddd
+        <script>
+            function load() {
+                Kwai.loadUrlOnNewPage(
+                    JSON.stringify({
+                        url:
+                            'http://172.17.202.5:8080/js/p2.html',
+                    })
+                );
+            }
+        </script>
+    </body>
+</html>

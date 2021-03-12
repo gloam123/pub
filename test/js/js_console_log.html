@@ -10,6 +10,10 @@ function console_log() {
 	var outtext = oinput.value;
 	console.log(outtext);
 }
+document.addEventListener("visibilitychange", function() {
+  console.log( "gqg3: document.hidden=" + document.hidden );
+  // Modify behavior...
+});
 </script>
 </head>
 

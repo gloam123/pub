@@ -1,0 +1,95 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>无标题文档</title>
+<script type="text/javascript">
+//window.location = "http://www.baidu.com"
+//window.location = "http://127.0.0.1/base/authorTest.html?name=gloam"
+var d = new Date();
+//alert(d.getMonth() +  "月" + d.getDay() + "天："+ d.getHours() + "小时："+ d.getMinutes() + "分钟:"  + d.getSeconds() + "秒:" + d.getMilliseconds() + "毫秒:");
+
+function countDown(secs){
+  tiao.innerText=secs;
+  if(--secs>0){
+   setTimeout("countDown("+secs+")",1000);
+  }
+}
+countDown(3);
+
+function windowOpen() {
+	window.open("http://10.18.72.46/base", "_blank");
+}
+
+function windowOpenAndClose() {
+	var win = window.open("http://10.18.72.46/base", "_blank");
+	setTimeout(function() {
+		win.close();
+	}, 0);
+}
+
+function windowOpenIntent() {
+	var win = window.open("wtloginmqq://ptlogin/qlogin?a=2", "_blank");
+	setTimeout(function() {
+//		alert(3);
+                    win.close()
+                }, 0);
+	
+}
+
+</script>
+</head>
+
+<body>
+<?php
+echo "hello gloam"
+?>
+<br/><br/><br/>
+<a href="#bottom">
+锚点: Jump bottom contents
+</a>
+<br/>
+<a name="top">这里是top部分</a><br/>
+top contents....
+
+<br/><br/><br/>
+<a href="http://www.hao132.com">hao123.com</a>
+<br />
+<a href="http://www.so.com">so.com</a>
+http://www.hao123.com
+<br />
+www.w3school.com.cn
+<br />
+http://www.so.com
+<br />
+<br />
+dasdfasdfasdfasdf
+a
+sdf
+asd
+f
+asdf
+asdfasdf
+肯定啦是的发送到了领导啦
+阿萨德法师打发d爱上额
+<br />
+</br><br /><br /></br><br /><br /></br><br /><br />
+
+center  contents  ...
+
+</br><br /><br /></br><br /><br /></br><br /><br />
+
+<a name="bottom">这里是bottom部分</a>
+<br />
+bottom context
+<a href="#top">
+  锚点:Jump top contents
+</a>
+<br />
+<br />
+bottom context......
+<br /><br /><br /><br />
+</body>
+</html>
