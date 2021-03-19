@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>xhr</title>
+<script type="text/javascript">
+function onAjaxRequest(){
+	var xhr = new XMLHttpRequest();
+	if (xhr) {
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				//alert(xhr.responseXML);
+				document.getElementById("idDiv").innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("POST", "data.txt", true);
+		xhr.send("abc12345678abc");
+	}
+}
+
+
+function onAjaxRequest2(){
+	var xhr = new XMLHttpRequest();
+	if (xhr) {
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				//alert(xhr.responseXML);
+				document.getElementById("idDiv").innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("POST", "http://10.18.72.46/js/ajax/data.txt", true);
+		xhr.send("abc12345678abc");
+	}
+}
+
+function onAjaxRequestFacebook(){
+	var xhr = new XMLHttpRequest();
+	if (xhr) {
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				//alert(xhr.responseXML);
+				document.getElementById("idDiv").innerHTML = xhr.responseText;
+			}
+			alert("xhr.readyState="+xhr.readyState);
+		}
+		xhr.open("POST", "https://www.facebook.com/campaign/landing.php?&campaign_id=559840117697362", true);
+		xhr.send("abc12345678abc");
+	}
+}
+
+function onAjaxRequestPost(){
+	var xhr = new XMLHttpRequest();
+	if (xhr) {
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				alert(xhr.responseXML);
+				document.getElementById("idDiv").innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("POST", "https://tran.news.so.com/mediav", true);
+    	//xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send('{"bid":"2b8d98804e629495b784d1ad7d9dc3b0","app":{"app_name":"360浏览器","package_name":"com.qihoo.browser","app_version":"8.2.1.500"},"device":{"device_id":[{"device_id":"2604501bcad6d9e0ff065665eb6965f9","device_id_type":1,"hash_type":1}],"os_type":2,"os_version":"5.0.2","brand":"Letv","model":"X600","screen_width":1080,"screen_height":1920,"screen_density":2.75,"carrier_id":0},"adspaces":[{"adspace_id":"FFawlpEiWB","adspace_type":4,"adspace_position":1,"allowed_html":false,"keywords":"赵丽颖"}],"uid":"3ec3b2a7e8e24dc3eae0f93fb036d487","ip":"10.17.27.49","network_type":1,"user_agent":"Mozilla/5.0 (Linux; Android 5.0.2; X600 Build/ABXCNOP5000805252E; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.97 Mobile Safari/537.36 360 Aphone Browser (8.2.1.500) mso_sdk(1.0.0)","longitude":0,"latitude":0}');
+	}
+}
+</script>
+</head>
+
+<body">
+<div id="idDiv">
+</div>
+
+<button onclick="onAjaxRequestPost()">onAjaxRequestPost</button>
+<br />
+<br />
+<button onclick="onAjaxRequestFacebook()">onAjaxRequestGoogle</button>
+<br />
+<br />
+
+<button onclick="onAjaxRequest()">AjaxRequest</button>
+<br />
+<br />
+<button onclick="onAjaxRequest2()">AjaxRequest2</button>
+</body>
+</html>
+
