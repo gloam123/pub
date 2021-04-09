@@ -1,0 +1,56 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>click crash</title>
+<script type="text/javascript">
+
+
+function generateList(num){
+  var arr = [];
+  for(i=0;i<num;i++){
+    arr.push(generateTuple());
+  }
+  return arr;
+}
+
+function generateTuple(){
+  var tuple = [];
+
+  for(i=0;i<3;i++){
+    tuple.push(Math.floor(Math.random() * 300));
+  }
+  return '(' + tuple[0] + ',' + tuple[1] + ',' + tuple[2] + ')';
+}
+var gListArray = [];
+var gIndex = 0;
+function allocJavaScriptMemory() {
+  gListArray[gIndex++] = generateList(1024);
+  console.log("gListArray.length=" + gListArray.length);
+}
+
+</script>
+</head>
+
+<body>
+<br />
+<br />
+<button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
+<br />
+<br />
+<br />
+<br />
+<br /><br /><br />
+<div id="imgContainer">
+Image Container:
+
+</div>
+<br /><br /><br />
+<div id="mediaContainer">
+MediaContainer:
+</div>
+<br /><br /><br /><br /><br /><br />
+</body>
+</html>

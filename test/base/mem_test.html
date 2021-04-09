@@ -1,0 +1,96 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>memroy test</title>
+<script type="text/javascript">
+
+function appendNode(oNode) {
+  document.getElementById('imgContainer').appendChild(oNode);
+}
+
+function generateTuple(){
+  var tuple = [];
+
+  for(i=0;i<3;i++){
+    console.log("generateTuple 111 i=" + i);
+    tuple.push(Math.floor(Math.random() * 300));
+  }
+  return tuple;
+}
+function generateList(num){
+  var arr = [];
+  for(i=0;i<num;i++){
+    //console.log("generateList 111 i=" + i);
+    arr.push(Math.random());
+  }
+  return arr;
+}
+
+var gListArray = [];
+var gIndex = 0;
+function allocJavaScriptMemory() {
+  //gListArray[gIndex++] = generateList(1024*1024);
+  gListArray[gIndex++] = generateList(1024*10);
+  console.log("gListArray.length=" + gListArray.length);
+}
+
+function allocImageMemory() {
+  var img_url = "../images/w.png";
+
+  var oimg=document.createElement('img');
+  oimg.src = img_url + "?random=" + Math.random();
+  appendNode(oimg);
+}
+
+function allocMediaMemory() {
+  var video_url = "../video/beiwa_iqiyi_05.mp4";
+
+  var oVideo=document.createElement('video');
+  oVideo.src = video_url + "?random=" + Math.random();
+  oVideo.autoplay = "true";
+  appendNode(oVideo);
+  oVideo.play();
+}
+
+function removeElement() {
+  var oContainer = document.getElementById('imgContainer');
+  var oFirstChild = oContainer.children[0];
+  oFirstChild.src = "";
+  oContainer.removeChild(oFirstChild)
+}
+
+</script>
+</head>
+
+<body>
+  10
+<br />
+<br />
+<button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
+<br />
+<br />
+<br />
+<br />
+<button onclick="allocImageMemory()">allocImageMemory</button>
+<br />
+<br />
+<br />
+<br />
+<button onclick="allocMediaMemory()">allocMediaMemory</button>
+<br /><br /><br /><br /><br />
+<button onclick="removeElement()">removeElement</button>
+<br /><br /><br /><br /><br />
+
+<div id="imgContainer">
+Image Container:
+</div>
+<br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+ends.
+</body>
+</html>
