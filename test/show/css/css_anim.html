@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>css anim</title>
+<style type="text/css">
+#QIHOO360COMMENT .qh-cmt-b-aw .qh-loading {
+ background-color:#ccc;
+ border-radius:100%;
+ margin:.125em 7px .125em .125em;
+ animation-fill-mode:both;
+ border:.125em solid #333;
+ border-bottom-color:transparent;
+ width:26px;
+ height:26px;
+ background:transparent!important;
+ display:inline-block;
+ vertical-align:middle;
+ animation:qhlrotate .75s 0s linear infinite
+}
+
+@keyframes qhlrotate {
+ 0% {
+  transform:rotate(0deg)
+ }
+ 50% {
+  transform:rotate(180deg)
+ }
+ 100% {
+  transform:rotate(360deg)
+ }
+}
+</style>
+
+<script>
+
+function switchDisplay() {
+	var oLoading = document.getElementById('QIHOO360COMMENT');
+	var oBtn = document.getElementById('idBtn');
+	if (oLoading.style.display == 'none') {
+		oLoading.style.display = 'block';
+		oBtn.innerHTML = 'switchDisplay block';
+	} else {
+		oLoading.style.display = 'none';
+		oBtn.innerHTML = 'switchDisplay none';
+	}
+}
+
+</script>
+</head>
+<body style="display:block">
+<br />
+<br />
+<button id="idBtn" onclick="switchDisplay()">switchDisplay block</button>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+1111
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+2222
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+33333
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+44444
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+55555
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="QIHOO360COMMENT">
+    <div class="qh-cmt-b-aw qh-reset-font">
+        <div class="qh-loading">
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+</body>
+</html>

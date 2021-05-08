@@ -4,10 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>index</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+  </script>
 </head>
 
-<body>
+<body onload="onLoad()">
 <br />
+<div id="idJsUa"></div>
 Base:<br/>
 <a href="./base">base</a>
 <br /><br />
@@ -17,7 +23,8 @@ Base:<br/>
 <br /><br />
 <a href="./base/mem_test.html">base/mem_test.html</a>
 <br /><br />
-
+<a href="./base/frame/mainFrame.html">base/frame/mainFrame.html</a>
+<br /><br />
 Audio:
 <br />
 <a href="html5/audio/audio_base.html">audio_base.html</a>
@@ -85,6 +92,8 @@ Renderer:<br />
 <a href="html5/canvas/canvas_alpha.html?b">html5/canvas/canvas_alpha.html</a>
 <br /><br />
 <a href="show/layer.html">show/layer.html</a>
+<br /><br />
+<a href="show/css/css_anim.html">show/css/css_anim.html</a>
 <br /><br />
 Page:
 <br/>

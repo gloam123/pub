@@ -62,6 +62,37 @@ function removeElement() {
   oContainer.removeChild(oFirstChild)
 }
 
+function appendTextNode() {
+  var odiv = document.createElement('div');
+  odiv.innerHTML = "text" +Math.random();
+  appendNode(odiv);
+}
+
+function appendSomeNode() {
+  for (i=0; i<1024; i++) {
+    appendTextNode();
+  }
+}
+
+function appendBigCanvas() {
+  var ocanvas = document.createElement('canvas');
+  ocanvas.width = 4000;
+  ocanvas.height = 4000;
+  ocanvas.style.backgroundColor = "#0F0";
+  appendNode(ocanvas);
+
+  var cxt=ocanvas.getContext("2d");
+  cxt.fillStyle="#0000FF";
+  cxt.fillRect(0,0,1200,3000);
+  cxt.fillStyle="#00FF00";
+  for (i=0; i<10; i++) {
+      cxt.fillRect(i*50,i*200, 100,10);
+  }
+
+  cxt.fillRect(100, 800, 100,10);
+}
+
+
 </script>
 </head>
 
@@ -70,16 +101,14 @@ function removeElement() {
 <br />
 <br />
 <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
-<br />
-<br />
-<br />
-<br />
+<br /><br /><br /><br /><br />
 <button onclick="allocImageMemory()">allocImageMemory</button>
-<br />
-<br />
-<br />
-<br />
+<br /><br /><br /><br /><br />
 <button onclick="allocMediaMemory()">allocMediaMemory</button>
+<br /><br /><br /><br /><br />
+<button onclick="appendSomeNode()">appendSomeNode</button>
+<br /><br /><br /><br /><br />
+<button onclick="appendBigCanvas()">appendBigCanvas</button>
 <br /><br /><br /><br /><br />
 <button onclick="removeElement()">removeElement</button>
 <br /><br /><br /><br /><br />
