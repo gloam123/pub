@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://browserbench.org/Speedometer2.0/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+
+    <title>Test Timeout</title>
+
+    <script>
+      function appendIframe(params) {
+          var frame = document.createElement('iframe');
+          frame.style.width = '800px';
+          frame.style.height = '600px';
+          frame.style.border = '0px none';
+          frame.style.position = 'absolute';
+          frame.setAttribute('scrolling', 'no');
+
+          var marginLeft = parseInt(getComputedStyle(document.body).marginLeft);
+          var marginTop = parseInt(getComputedStyle(document.body).marginTop);
+          if (window.innerWidth > 800 + marginLeft && window.innerHeight > 600 + marginTop) {
+              frame.style.left = marginLeft + 'px';
+              frame.style.top = marginTop + 'px';
+          } else {
+              frame.style.left = '0px';
+              frame.style.top = '0px';
+          }
+
+          document.body.insertBefore(frame, document.body.firstChild);
+          this._frame = frame;
+          frame.onload = function () {
+          }
+          frame.src = 'resources/todomvc/vanilla-examples/es2015/index.html' + "?" + params;
+          return frame;
+      }
+
+      function test_timeout() {
+        var now = window.performance && window.performance.now ? function () { return window.performance.now(); } : Date.now;
+
+        for (var i=0; i<10; i++) {
+          appendIframe("frame" + i);
+        }
+        //document.getElementById('idinfo').innerHTML = '<h3>aaaaaaaaaaaaaaaaaaaa<iframe src="http://so.com"></iframe>aaaaaaaaaaakkkkkkkkkkkkkkkkkkkkk</h3>'
+        var startTime = now();
+        setTimeout(function() {
+          var endTime = now();
+          var delayTime = endTime - startTime;
+          console.log("gqg3: delayTime=" + delayTime);
+        }, 0);
+      }
+    </script>
+</head>
+
+<body>
+  <br/><br/><br/>
+  <button onclick="test_timeout()">
+    Test TimeOut
+  </button>
+  <br/><br/><br/><br/>
+  <div id='idinfo'>
+    info...
+  </div>
+
+
+</body>
+</html>
