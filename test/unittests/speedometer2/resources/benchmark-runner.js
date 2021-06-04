@@ -117,6 +117,10 @@ BenchmarkRunner.prototype._writeMark = function(name) {
         window.performance.mark(name);
 }
 
+var total_sync_time = 0;
+var total_async_time1 = 0;
+var total_async_time = 0;
+var totol_count = 0;
 // This function ought be as simple as possible. Don't even use SimplePromise.
 BenchmarkRunner.prototype._runTest = function(suite, test, prepareReturnValue, callback)
 {
@@ -133,16 +137,26 @@ BenchmarkRunner.prototype._runTest = function(suite, test, prepareReturnValue, c
     self._writeMark(suite.name + '.' + test.name + '-sync-end');
 
     var syncTime = endTime - startTime;
+    total_sync_time += syncTime;
+    totol_count ++;
 
     var startTime = now();
     setTimeout(function () {
+        var endTime1 = now();
+        total_async_time1 += (endTime1 - startTime);
+
         // Some browsers don't immediately update the layout for paint.
         // Force the layout here to ensure we're measuring the layout time.
         var height = self._frame.contentDocument.body.getBoundingClientRect().height;
         var endTime = now();
         self._frame.contentWindow._unusedHeightValue = height; // Prevent dead code elimination.
         self._writeMark(suite.name + '.' + test.name + '-async-end');
-        callback(syncTime, endTime - startTime, height);
+
+        var asyncTime = endTime - startTime;
+        //var asyncTime = 3;
+        total_async_time += asyncTime;
+        console.log("gqg3: _runTest() 5 ave_sync_time=" + (total_sync_time/totol_count) + "; ave_async_time=" + (total_async_time/totol_count) + "; ave_async_time1=" + (total_async_time1/totol_count))
+        callback(syncTime, asyncTime /*endTime - startTime*/, height);
     }, 0);
 }
 

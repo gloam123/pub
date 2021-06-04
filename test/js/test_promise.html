@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="de" content="" />
+        <link
+            rel="shortcut icon"
+            href="//static.yximgs.com/udata/pkg/fe/favicon.70ff1fcc.ico"
+            type="image/x-icon"
+        />
+        <title>test promise</title>
+
+        <script>
+            function test_promise() {
+                var promise1 = new Promise(function(resolve, reject) {
+                    console.log("000");
+                    for (var i=0; i<10000; i++) {
+                        console.log("aaaaa");
+                    }
+                    console.log("000-222");
+                    setTimeout(function() {
+                        console.log("call resolve");
+                        resolve();
+                    }, 1000 * 3);
+                });
+                console.log("111");
+
+                promise1.then(function(v1) {
+                    console.log("then succees");
+                }, function(v1) {
+                    console.log("then failed");
+                });
+                console.log("555");
+            }
+
+
+            function test_promise2() {
+                console.log("111");
+                var promise2 = new Promise((resolve, reject) => {
+                    console.log("222");
+                    setTimeout(() => {
+                        console.log("333");
+                        //resolve("ok");
+                        reject("no");
+                    }, 1000 * 2);
+                });
+
+                console.log("444");
+                promise2.then((v1) => {
+                    console.log("succees!");
+                }, (v2) =>  {
+                    console.log("failed!");
+                });
+
+                console.log("555");
+            }
+
+            function task1(cb) {
+                setTimeout(() => {
+                    cb('task1');
+                }, 1000);
+            }
+            function task2(cb) {
+                setTimeout(() => {
+                    cb('task2');
+                }, 1000);
+            }
+
+            function test_promise_task1() {
+                task1(v1 => {
+                    task2(v2 => {
+                        console.log("task out:v1=" + v1 + "; v2=" + v2);
+                    });
+                });
+            }
+
+            function test_promise_map() {
+                var names = ['name1', 'name2', 'name3'];
+                names.map(function(n) {
+                    console.log("n=" + n);
+                });
+                console.log("end.");
+                //Promise.
+                //var promise = new Promise()
+            }
+
+            function red() {
+                console.log('red');
+            }
+            function green() {
+                console.log('green');
+            }
+            function yellow() {
+                console.log('yellow');
+            }
+
+            function light(fn, delay) {
+                var promise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        fn();
+                        resolve();
+                    }, delay);
+                });
+            }
+
+            function start(count) {
+                if (count <= 0) {
+                    return;
+                }
+
+                count--;
+                Promise.resolve().then(() => {
+                    light(red, 1000);
+                }).then(() => light(green, 3000))
+                .then(() => light(yellow, 5000))
+                .then(() => start(count));
+            }
+
+            function test_light() {
+                start(3);
+            }
+
+        </script>
+    </head>
+    <body>
+        info:
+        <div id="idInfo"></div>
+        <br/><br/><br/>
+        <button onclick="test_promise()">test_promise()</button>
+        <br/><br/><br/>
+        <button onclick="test_promise2()">test_promise2()</button>
+        <br/><br/><br/>
+        <button onclick="test_promise_task()">test_promise2()</button>
+        <br/><br/><br/>
+        <button onclick="test_promise_map()">test_promise_map()</button>
+        <br/><br/><br/>
+        <button onclick="test_light()">test_light()</button>
+
+    </body>
+</html>
+
+
+

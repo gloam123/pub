@@ -1,4 +1,5 @@
 var numberOfItemsToAdd = 100;
+//var numberOfItemsToAdd = 10;
 var Suites = [];
 var ENTER_KEY_CODE = 13;
 
@@ -44,7 +45,6 @@ Suites.push({
 */
 
 
-
 Suites.push({
     name: 'Vanilla-ES2015-TodoMVC',
     url: 'todomvc/vanilla-examples/es2015/index.html',
@@ -67,14 +67,51 @@ Suites.push({
             for (var i = 0; i < checkboxes.length; i++)
                 checkboxes[i].click();
         }),
+
         new BenchmarkTestStep('DeletingItems', function (params, contentWindow, contentDocument) {
+            var deleteButtons = contentDocument.querySelectorAll('.destroy');
+            for (var i = 0; i < deleteButtons.length; i++)
+                deleteButtons[i].click();
+        }),
+
+    ]
+});
+
+
+/*
+Suites.push({
+    name: 'VueJS-TodoMVC',
+    url: 'todomvc/architecture-examples/vuejs-cli/dist/index.html',
+    prepare: function (runner, contentWindow, contentDocument) {
+        return runner.waitForElement('.new-todo').then(function (element) {
+            element.focus();
+            return element;
+        });
+    },
+    tests: [
+        new BenchmarkTestStep('Adding' + numberOfItemsToAdd + 'Items', function (newTodo, contentWindow, contentDocument) {
+            for (var i = 0; i < numberOfItemsToAdd; i++) {
+                newTodo.value = 'Something to do ' + i;
+                newTodo.dispatchEvent(new Event('input', {
+                  bubbles: true,
+                  cancelable: true
+                }));
+                triggerEnter(newTodo, 'keyup');
+            }
+        }),
+        new BenchmarkTestStep('CompletingAllItems', function (newTodo, contentWindow, contentDocument) {
+            var checkboxes = contentDocument.querySelectorAll('.toggle');
+            for (var i = 0; i < checkboxes.length; i++)
+                checkboxes[i].click();
+        }),
+        new BenchmarkTestStep('DeletingAllItems', function (newTodo, contentWindow, contentDocument) {
             var deleteButtons = contentDocument.querySelectorAll('.destroy');
             for (var i = 0; i < deleteButtons.length; i++)
                 deleteButtons[i].click();
         }),
     ]
 });
-
+*/
 
 
 
