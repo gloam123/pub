@@ -3,14 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=0.02, minimum-scale=0.02, maximum-scale=0.02,, user-scalable=no" id="viewport">
+
+<meta name="viewport" content="width=device-width" id="viewport">
+<!--
+-->
+
 <title>index</title>
 
 <style>
 
-  body {
-    background-image: url(../images/bgcolor.png);
-    font-size: 96px;
+  html {
+    width: 960px;
   }
 
   .anim {
@@ -20,10 +23,10 @@
   }
 
   .big_img {
-    width: 6000px;
+    width: 100%;
     opacity: 0.7;
     position:fixed;
-    top: 200px;
+    top: 60px;
     will-change: transform;
   }
 
@@ -33,20 +36,46 @@
   }
 
   video {
-    width: 6000px;
+    width: 100%;
+  }
+
+  .rect_div {
+   background-color: aquamarine; 
+   width: 300px;
+   height: 400px;
+   position: relative;
+   top: 300px;
+   z-index: 100;
   }
 </style>
+<script>
+  //alert(window.devicePixelRatio);
+  function init_viewport() {
+    let docEle = document.documentElement;
+    let contentWidth = window.innerWidth;
+    let scale = screen.width / contentWidth;
+    //alert("scale=" + scale);
+
+    var ometa = document.getElementById("viewport");
+    ometa.content = "width=device-width, initial-scale=" + scale +", minimum-scale=" + scale +", maximum-scale=" + scale +", user-scalable=no";
+
+    docEle.style.fontSize = 1 / scale * 16 + "px";
+  }
+
+  function onload() {
+    init_viewport();
+  }
+</script>
 
 </head>
 
-<body>
-<br /><br /><br /><br />
-aaaa
-
-<div style="background-color: burlywood; opacity: 0.5; width: 200px; height: 300px; left: 50px; top: 100px; position: absolute;transform: scale(0.9);">
-  opacity div
+<body onload="onload()">
+<br /><br /><br />
+aaaa中国人民共和国!1234546
+<br />
+<div class="rect_div">
+在rect_div内部的文本1234
 </div>
-
 <img class="big_img" src="../images/w.png">
 
 bbbbb
@@ -54,6 +83,8 @@ bbbbb
 <div class="round_radio">
 round radio
 </div>
+
+
 ccccc
 <br /><br /><br /><br />
 aa

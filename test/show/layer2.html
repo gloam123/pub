@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=0.02, minimum-scale=0.02, maximum-scale=0.02,, user-scalable=no" id="viewport">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" id="viewport">
 <title>index</title>
 
 <style>
 
   body {
     background-image: url(../images/bgcolor.png);
-    font-size: 96px;
+    font-size: 16px;
   }
 
   .anim {
@@ -20,20 +20,25 @@
   }
 
   .big_img {
-    width: 6000px;
+    width: 320px;
     opacity: 0.7;
     position:fixed;
     top: 200px;
-    will-change: transform;
   }
 
   .round_radio {
+    will-change: transform;
     border-radius: 16p;
     background-color: blue;
-  }
-
-  video {
-    width: 6000px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 164px;
+    height: 96px;
+    border-radius: 16px;
+    background: #fecdd4;
+    padding: 18px 26px 20px 12px;
+    text-align: left;
+    margin-right: 14px;
   }
 </style>
 
@@ -41,13 +46,9 @@
 
 <body>
 <br /><br /><br /><br />
-aaaa
+dddd
 
-<div style="background-color: burlywood; opacity: 0.5; width: 200px; height: 300px; left: 50px; top: 100px; position: absolute;transform: scale(0.9);">
-  opacity div
-</div>
-
-<img class="big_img" src="../images/w.png">
+<img class="big_img" src="../images/jing_width.jpg">
 
 bbbbb
 
@@ -88,9 +89,5 @@ ddsssss
 sssss
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 edd
-<!--
-<canvas width="300px" height="600px"></canvas>
--->
-<video src="../video/beiwa_iqiyi_05.mp4" autoplay></video>
 </body>
 </html>

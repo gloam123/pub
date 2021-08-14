@@ -4,13 +4,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>image base</title>
+<script>
+  function test_pushstate() {
+    const state = { 'page_id': 1, 'user_id': 5 }
+    history.pushState(state, "page1", "http://172.17.202.5:8081/base/image/aimage.html?a=1%2Cb");
+  }
+</script>
 </head>
 
 <body>
-  anim:
+  anim:2222
+  <br /><br />
+  <button onclick="test_pushstate()">test pushState</button>
+  <br />
+  <br />
 <br />
 <br />
-<img src="../../images/w.png" style="width: 100%;" />
+<img src="../../images/w.png"  referrerPolicy="no-referrer" style="width: 100%;" />
 <br/><br/><br/>
 
 </body>
