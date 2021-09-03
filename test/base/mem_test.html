@@ -54,6 +54,23 @@ function allocImageMemory() {
   appendNode(oimg);
 }
 
+function allocBigImageMemory() {
+  var img_url = "../big_file/big_w.png";
+
+  var oimg=document.createElement('img');
+  oimg.src = img_url + "?random=" + Math.random();
+  appendNode(oimg);
+}
+
+function allocBigJsFileMemory() {
+  var js_url = "../big_file/big_js.js";
+
+  var oscript=document.createElement('script');
+  oscript.src = js_url + "?random=" + Math.random();
+  appendNode(oscript);
+  oscript.innerHTML = "alert(3)";
+}
+
 //const video_url = "../video/beiwa_iqiyi_05.mp4";
 const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 function allocKsMediaMemory() {
@@ -66,13 +83,6 @@ function allocSysMediaMemory() {
   let url = video_url + "?random=" + Math.random();
   var html_str = '<video autoplay="true" autoplay="autoplay" controls="controls" src=' + url + '></video';
   appendInnerHtml(html_str);
-
-  // var oVideo=document.createElement('video');
-  // oVideo.src = video_url + "?random=" + Math.random();
-  // oVideo.autoplay = "true";
-  //document.getElementById('imgContainer').innerHTML = str;
-  //appendNode(oVideo);
-  //oVideo.play();
 }
 
 function removeElement() {
@@ -121,19 +131,23 @@ function appendBigCanvas() {
 <br />
 <br />
 <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
-<br /><br /><br />
+<br /><br />
 <button onclick="allocImageMemory()">allocImageMemory</button>
-<br /><br /><br />
+<br /><br />
+<button onclick="allocBigImageMemory()">allocBigImageMemory</button>
+<br /><br />
+<button onclick="allocBigJsFileMemory()">allocBigJsFileMemory</button>
+<br /><br />
 <button onclick="allocKsMediaMemory()">allocKsMediaMemory</button>
-<br /><br /><br />
+<br /><br />
 <button onclick="allocSysMediaMemory()">allocSysMediaMemory</button>
-<br /><br /><br />
+<br /><br />
 <button onclick="appendSomeNode()">appendSomeNode</button>
-<br /><br /><br />
+<br /><br />
 <button onclick="appendBigCanvas()">appendBigCanvas</button>
-<br /><br /><br />
+<br /><br />
 <button onclick="removeElement()">removeElement</button>
-<br /><br /><br />
+<br /><br />
 
 <div id="imgContainer">
 Image Container:
