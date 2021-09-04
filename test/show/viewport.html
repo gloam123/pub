@@ -13,7 +13,7 @@
 <style>
 
   html {
-    width: 960px;
+    width: 1960px;
   }
 
   .anim {
@@ -57,7 +57,8 @@
     //alert("scale=" + scale);
 
     var ometa = document.getElementById("viewport");
-    ometa.content = "width=device-width, initial-scale=" + scale +", minimum-scale=" + scale +", maximum-scale=" + scale +", user-scalable=no";
+    //ometa.content = "width=device-width, initial-scale=" + scale +", minimum-scale=" + scale +", maximum-scale=" + scale +", user-scalable=no";
+    //ometa.content = "width=device-width, initial-scale=" + scale +", minimum-scale=0.001, maximum-scale=1000, user-scalable=no";
 
     docEle.style.fontSize = 1 / scale * 16 + "px";
   }

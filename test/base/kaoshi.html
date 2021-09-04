@@ -1,0 +1,2491 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<title>css base</title>
+<style type="text/css">
+#ym_result_panel_test {
+    position: fixed;
+    left: 100px;
+    top: 50px;
+    background-color: wheat;
+    opacity: 0.85;
+    width: 150px;
+    height: 150px;
+    z-index: 57655;
+    display: none;
+}
+</style>
+<script>
+    const leftOffset = 30;
+    const totalLength = 200;
+    var allContents;
+    function test_contents() {
+        var panel = document.getElementById("ym_result_panel_test");
+        var start_pos = allContents.indexOf("has dried");
+        if (start_pos >0) {
+            if (start_pos < leftOffset) {
+                start_pos = 0;
+            } else {
+                start_pos -= leftOffset;
+            }
+            var text = allContents.substr(start_pos, totalLength);
+            text = text.replace(" ", "&nbsp")
+            panel.innerHTML = text;
+        }
+
+    }
+
+
+window.addEventListener('load', function() {
+    const panelId = "ym_result_panel_test2";
+    const leftOffset = 50;
+    const totalLength = 360;
+    var allContents;
+
+    function restore() {
+        var opanel = document.getElementById(panelId);
+        if (opanel) {
+            opanel.style="display: none;"
+        }
+    }
+
+    document.body.addEventListener('mousedown', function(e) {
+        restore();
+    });
+
+    function showPanel(selectText, e) {
+        var opanel = document.getElementById(panelId);
+        if (!opanel) {
+            opanel = document.createElement("div");
+            opanel.id=panelId;
+            document.body.appendChild(opanel);
+        }
+
+        var start_pos = allContents.indexOf(selectText);
+        if (start_pos >0) {
+            if (start_pos < leftOffset) {
+                start_pos = 0;
+            } else {
+                start_pos -= leftOffset;
+            }
+            var text = allContents.substr(start_pos, totalLength);
+            text = text.replace(" ", "&nbsp")
+            opanel.innerHTML = text;
+            opanel.innerHTML = text;
+            const posStyle = "left:" + e.clientX +"px;top:" + e.clientY +"px;";
+            opanel.style = "position: fixed;background-color: wheat;opacity: 0.85;width: 380px;height: 420px;z-index: 57655;" + posStyle;
+        }
+    }
+
+    document.body.addEventListener('mouseup', function(e) {
+        var selection = window.getSelection();
+        var selected = selection.toString().trim();
+
+        if (selected) {
+            //alert(333);
+            showPanel(selected, e);
+        }
+    });
+
+
+
+        allContents = " \
+        现代远程教育入学考试试题文史类（高中起点层次） <br/>\
+1、When did the book____？ <br/>\
+A、come off  <br/>\
+B、come out  <br/>\
+C、come round  <br/>\
+D、come true  <br/>\
+答案：B <br/>\
+2、You can go when the ground____. <br/>\
+A、is drying  <br/>\
+B、has dried  <br/>\
+C、dried  <br/>\
+E、dry  <br/>\
+答案：B <br/>\
+3、You may borrow the book, ____you do not lend it to anyone else. <br/>\
+A、in good condition  <br/>\
+B、on condition that  <br/>\
+C、in no condition to  <br/>\
+D、in condition  <br/>\
+答案：B <br/>\
+4、A university ____of teachers, administrators and students. <br/>\
+A、consists  <br/>\
+B、composes  <br/>\
+C、includes  <br/>\
+D.contains  <br/>\
+答案：A <br/>\
+5、I~m tired of this____ rain. <br/>\
+A、continuous  <br/>\
+B、continual  <br/>\
+C、constant  <br/>\
+D、eternal  <br/>\
+答案：B <br/>\
+6、We must arrive there____ before midnight. <br/>\
+A、at all costs  <br/>\
+B、at the cost  <br/>\
+C、at half cost  <br/>\
+D.to our cost  <br/>\
+答案：A <br/>\
+7、This is a ____war in terms of the number of men killed and wounded. <br/>\
+A、expensive  <br/>\
+B、costly  <br/>\
+C、dear  <br/>\
+D、high  <br/>\
+答案：B <br/>\
+8、If you ____only ____it once again! <br/>\
+A、can... do  <br/>\
+B、would ... do  <br/>\
+C、have ... done  <br/>\
+D.will ... do <br/>\
+ 答案：B <br/>\
+9、This is a ____suggestion. <br/>\
+A、crazy  <br/>\
+B、mad  <br/>\
+C、wild  <br/>\
+D.	fierce  <br/>\
+答案：A <br/>\
+10、The crowd stared at the giant and the dwarf as if they were____ monsters. <br/>\
+A、credulous  <br/>\
+B、incredible  <br/>\
+C、incredulous  <br/>\
+D、creditable 答案：B <br/>\
+11、I cut my finger and it became badly____. <br/>\
+A、infected  <br/>\
+B、affected  <br/>\
+C、effected  <br/>\
+D、diseased 答案：A <br/>\
+12、She is a pretty____. <br/>\
+A、animal  <br/>\
+B、beast  <br/>\
+C、creative  <br/>\
+D、creature 答案：D <br/>\
+13、Poets have____ sleep____ death. <br/>\
+A、compared ... with  <br/>\
+B、compared ... to  <br/>\
+C、compare ... to  <br/>\
+D、compare... with 答案：B <br/>\
+14、If I take this medicine twice a day, it should ____my cold. <br/>\
+A、recover  <br/>\
+B、heal  <br/>\
+C、restore  <br/>\
+D、cure 答案：D <br/>\
+15、 ____in England, Anne Bradstreet both admired and imitated several English poets. <br/>\
+A、Having born and educating  <br/>\
+B、To be born and educated  <br/>\
+C、Since born and educated  <br/>\
+D、Born and educated 答案：C <br/>\
+16、Finally she managed to get into ____with him. <br/>\
+A、contrast  <br/>\
+B、contract  <br/>\
+C、contact  <br/>\
+D、contest 答案：C <br/>\
+17、A new technique____ , the yields as a whole increased by 20 percent. <br/>\
+A、working out  <br/>\
+B、having been worked out  <br/>\
+C、having worked out  <br/>\
+D、to have been worked out 答案：B <br/>\
+18、The girl had to____ her journey because of her mother~s illness. <br/>\
+A、abandon  <br/>\
+B、desert  <br/>\
+C、leave  <br/>\
+D、quit 答案：A <br/>\
+19、____for many year, the writer suddenly became famous. <br/>\
+A、Having ignored  <br/>\
+B、To be ignored  <br/>\
+C、To have been ignored  <br/>\
+D、Having been ignored 答案：D <br/>\
+20、John has never been ____a plane. <br/>\
+A、abroad  <br/>\
+B、above  <br/>\
+C、aboard  <br/>\
+D、absorb  <br/>\
+答案：C <br/>\
+21、	下列各组词语中划线的字的读音都不相同的一项是 <br/>\
+A.     边陲    锤炼     捶打     唾手可得 <br/>\
+B.     彼此    坡地     波浪     疲惫不堪 <br/>\
+C.     颠沛    嗔怪     缜密     瞋目而视 <br/>\
+D     屹立    起讫     呓语     自古迄今 <br/>\
+答案：B <br/>\
+22、	下列词语中所标注的读音全部正确的一项是 <br/>\
+A.     攻讦（jié）  胭（yān）脂    气氛（fēn）    擢（zhuó）发难数 <br/>\
+B.     泥淖（nào）  角（jiǎo）色    福祉（zhǐ）  长歌当（dàng）哭 <br/>\
+C.     宽宥（yòu）  埋（mái）怨    水獭（lài）   不值一哂（xī） <br/>\
+D.     哽咽（yàn）  拙（zhuō）笨   癖（pì）好    毁家纾（shū）难 <br/>\
+答案：A <br/>\
+23、	下列各组词语中，没有错别字的一项是 <br/>\
+A. 睿智     丰功伟绩       湮没无闻    不费败灰之力 <br/>\
+B. 惊蛰     闻过饰非       按图索骥    事实胜于雄辩 <br/>\
+C. 涵养     挺而走险       兵荒马乱    急人自有天相 <br/>\
+D. 斡旋     喧宾夺主       强鸳之末     风马牛不相及 <br/>\
+答案：B <br/>\
+24、	下列句子中，没有错别字的一句是 <br/>\
+A.     要注意劳逸结合，有张有驰。 <br/>\
+B.     不徇私情、仗义执言的品质尤其可贵。 <br/>\
+C.     刻苦耐劳、顽强拼搏的学习精神确实可佳。 <br/>\
+D.     对于富商巨贾来说，这区区数百元简直是微忽其微，不足挂齿。 <br/>\
+答案：B <br/>\
+25、	对下列词语的解释，不正确的一项是 <br/>\
+A.     品评：品尝之后作出评价 <br/>\
+B.     鉴别：对某物的好坏真假作出评判 <br/>\
+C.     抚养：多指长辈对晚辈的养育 <br/>\
+D.     赡养：多指子女对父母在生活上物质上的帮助 <br/>\
+答案：A <br/>\
+26、	对下列词语意义的解释，正确的一组是 <br/>\
+A．信服（相信并佩服）　　　　　　信口雌黄（说大话） <br/>\
+B．本色（本来面貌）　　　　　　　舍本求末（重视细节）    <br/>\
+C．生僻（少见的，不熟悉的）    生吞活剥（凶残而贪婪） <br/>\
+D．闻名（有名） 　　　　     闻风而动（一听到消息就立刻行动） <br/>\
+答案：D <br/>\
+27、	下列句子中划线的虚词，使用不正确的一项是 <br/>\
+A．为了表示对陶渊明的崇敬，江西九江修建了陶渊明纪念馆。 <br/>\
+B．中国国家男子足球队战胜了阿曼队之后，全国各大报纸关于这场比赛都作了详细的报道。 <br/>\
+C．《纽约时报》于日前推出一组“眺望明日世界”专题文章，大胆预测了32项不出l0年就会面世的科技新产品。 <br/>\
+D．中国人民银行、财政部和教育部联合发出通知，要求四大国有银行发放教育贷款，以解决寒门学子入学难的问题。 <br/>\
+答案：B <br/>\
+28、	下列各句中成语使用不当的一句是 <br/>\
+A.素质教育的核心问题是“做人”教育，这必将对人类社会的发展起到不可磨灭的作用。 <br/>\
+B.她身着一袭绿色长裙，溶入音乐起舞，用形体语言，行云流水般勾勒出江南春光无限好的意境。 <br/>\
+ C.连续的暴雨，造成河道水位猛涨。昨天，省里来电，要求沿河各级部门严阵以待，防患于未然。 <br/>\
+ D.目前，语文教学的最大弊端是条分缕析，教师过分的讲解，不仅使学生失去了学习兴趣，而且影 <br/>\
+响了学生独立思考能力的形成。 <br/>\
+答案：D <br/>\
+29、	依次填入下列句子空缺处的成语，最恰当的一项是 <br/>\
+①这几幅画是他的早期作品，自是不能和他现在的创作          。 <br/>\
+②作者笔下宝钗和黛玉这两个人物，常常是被人          加以评比的。 <br/>\
+③文学批评中，不能把形式的模仿和内容的抄袭          。 <br/>\
+④后来列国纷纷称王，周室更不算回事，至多能和宋鲁等小国君主          罢了。 <br/>\
+ A.相提并论 等量齐观 同日而语 混为一谈 <br/>\
+ B.等量齐观 混为一谈 相提并论 同日而语 <br/>\
+ C.同日而语 相提并论 混为一谈 等量齐观 <br/>\
+ D.混为一谈 同日而语 等量齐观 相提并论 <br/>\
+	答案：C <br/>\
+30、下列各句中，没有语病的一项是 <br/>\
+A.     本次校运会共进行了65个项目的比赛，刷新了40个校纪录项目，再创历史新高。 <br/>\
+B.     汉武帝不仅在政治上采取了一系列卓有成效的改革，而且在经济上也采取了许多有利于发展生产的革新。 <br/>\
+C.     国际社会认为海洋资源的开发利用是人类走出当前人口剧增、资源枯竭、环境恶化的困境和未来发展的重要出路。 <br/>\
+D.     医疗保险改革，“既要让人看得起病，又要控制不必要医疗开支”，目的如此明确，为什么有关领导会感到方向不清呢？  <br/>\
+答案：D <br/>\
+31、下列句子中，有语病的一项是 <br/>\
+A.从外部条件上看，孩子们产生厌学情绪，是由于学校和家庭对他们施加了过大压力的因素造成的。 <br/>\
+B.校团委组织为社区服务的学生义工队，这是一种很好的培养服务意识、锻炼实践能力的教育手段。 <br/>\
+C. 在大量药品广告的影响下，一些家长期望通过使用补品来增长孩子智力，这种想法本身就是对子女教育认识的一个误区。 <br/>\
+D.古往今来，青青翠竹吸引了无数诗人和画家。竹子成为我国诗歌和绘画的传统题材，它象征了中华民族坚定顽强的精神。 <br/>\
+	答案：A <br/>\
+32、下列各句中标点符号使用正确的一项是 <br/>\
+A.     上课铃已经敲响了，可教室里还空着三、四个座位，讲台上的老师不禁皱起了眉头。 <br/>\
+B.     人言可畏吗？答：可畏，又不可畏。可畏者，舆论能形成压力；不可畏者，事实胜于雄辩。 <br/>\
+C.     北大方正的创始人王选把科技领域里的人才比喻为三类：指兔子的人，打兔子的人，捡兔子的人，他自认为是第二种人。 <br/>\
+D.     王老师经常利用节假日家访，了解孩子住在哪个房间？做作业的时候坐在什么地方？光线好不好？晚上什么时候睡觉？一日三餐吃些什么？ <br/>\
+答案：B <br/>\
+33、下列各组词语中，划线的字的读音完全相同的一组是 <br/>\
+A．觊觎    阿谀    文娱    尔虞我诈 <br/>\
+B．沉浸    尽管    荆棘    加官晋爵 <br/>\
+C．蝌蚪    瞌睡    窠臼    扭伤踝骨 <br/>\
+D．殷红    长缨    阴霾    绿草如茵 <br/>\
+答案：A <br/>\
+34、下列各组词语中，划线的字的读音都不相同的一组是 <br/>\
+A.威吓    唱和    干涸    荷枪实弹 <br/>\
+B.樊篱    斐然    莲藕    向隅而泣 <br/>\
+C.国殇    烙印    趔趄    举觞相庆 <br/>\
+D.骨骼    洽谈    悭吝    恰如其分 <br/>\
+答案：B <br/>\
+35、下列各组词语中，没有错别字的一组是 <br/>\
+A.     既使　连锁店　察颜观色　一年之计在于春 <br/>\
+B.     坐落　炒鱿鱼　青山绿水　一言既出，驷马难追 <br/>\
+C.     苍桑　下马威　渡过难关　防人之口，胜于防川 <br/>\
+D.     影碟　歌午厅　再接再励　桃李不言，下自成溪 <br/>\
+答案：B <br/>\
+36、下列各句中标点符号使用不当的一句是 <br/>\
+A.     “二拍”与“三言”不同，基本上都是个人创作。 <br/>\
+B.  “学习就怕‘认真’二字。”父亲说：“‘态度决定一切’，确实很有道理。” <br/>\
+C.  “激情“源于希腊语，原意是“上帝本色”，这里的上帝本色不是别的，是指一种持久不变的爱心。 <br/>\
+D.  “北京胡同”图片展深深吸引了观众，那小巷，那木门，那院墙，那古树，已经成了难以寻觅的影子——真可谓“梦忆深深深几许，一街一巷总关情”。 <br/>\
+答案：B <br/>\
+37、以下有关词语情感色彩的表述，不正确的一项是  <br/>\
+A. 粉墨登场：含贬义 <br/>\
+B. 美轮美奂：含褒义 <br/>\
+C. 附庸风雅：含贬义 <br/>\
+D. 耳提面命：中性，可褒可贬 <br/>\
+答案：D <br/>\
+38、下列各句中成语使用恰当的一句是 <br/>\
+A.看到他的滑稽表演，一名外国记者忍俊不禁扑哧一声笑起来。 <br/>\
+B.尽管这部影片的故事情节和演员的表演都很难让人满意，但瑕不掩瑜，它的音乐仍深得观众喜爱。 <br/>\
+C.大自然这一超级画家用出神入化的笔法，将深浅浓淡、隐显明暗搭配组合，使极光变成了五彩缤纷的万花筒。 <br/>\
+D.只见他奋笔疾书，一气呵成，不消片刻，一篇佳作便展现在大家面前。只是文不加点，难以断句，不能不说是白璧微瑕。 <br/>\
+	答案：C <br/>\
+39、以下有关词语适用对象的表述，不正确的一项是 <br/>\
+A． 抚养：用于长辈对晚辈 <br/>\
+B． 奉养：用于晚辈对长辈 <br/>\
+C． 爱护：用于上级对下级、长辈对晚辈 <br/>\
+D． 关怀：用于下对上、长对幼，也可以用于上对下、幼对长 <br/>\
+答案：D <br/>\
+40、填入下列句子横线处的词语，最恰当的一项是 <br/>\
+为学生减负，不只是学校单方面的事情，      整个社会的事情。因此必须有社会各方面力量的参与。 <br/>\
+A.     而是 <br/>\
+B.     而且是 <br/>\
+C.     所以是 <br/>\
+D.     从而是 <br/>\
+答案：B <br/>\
+1、___ , the next problem was how to make a good plan. <br/>\
+A、The decision having made  <br/>\
+B、The decision has been made  <br/>\
+C、The decision was made  <br/>\
+D、The decision having been made  <br/>\
+答案：D <br/>\
+2、A child has ____trust in its mother. <br/>\
+A、complete  <br/>\
+B、perfect  <br/>\
+C、absolute  <br/>\
+D、thorough  <br/>\
+答案：C <br/>\
+3、Social ____vary from country to country. <br/>\
+A、habits  <br/>\
+B、traditions  <br/>\
+C、customs  <br/>\
+D、manners  <br/>\
+答案：C <br/>\
+4、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. worthy                    <br/>\
+B. clothing               <br/>\
+C. clothes                   <br/>\
+D. cloth <br/>\
+答案：C <br/>\
+5、I have decided to____ my smoking. <br/>\
+A、cut in  <br/>\
+B、cut off  <br/>\
+C、cut down  <br/>\
+D、 cut across  <br/>\
+答案：C <br/>\
+6、There are____ supplies of firewood in the forest. <br/>\
+A、plentiful  <br/>\
+B、abundant  <br/>\
+C、plenty of  <br/>\
+D、many  <br/>\
+答案：B <br/>\
+7、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。   <br/>\
+A. coast        <br/>\
+ B. broadcast         <br/>\
+ C. throat          <br/>\
+ D. float <br/>\
+答案：B <br/>\
+8、He has been very ill, but he is now____. <br/>\
+A、in danger  <br/>\
+B、out of control  <br/>\
+C、out of place  <br/>\
+D、out of danger 答案：D <br/>\
+9、Mary____ what she set out to do. <br/>\
+A、finished  <br/>\
+B、achieved  <br/>\
+C、completed  <br/>\
+D、accomplished  <br/>\
+答案：D <br/>\
+10、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. ahead         <br/>\
+B. break          <br/>\
+C. pleasure        <br/>\
+ D. breath <br/>\
+答案：B <br/>\
+11、____with the size of the whole earth, the highest mountain doesn~t seem high at all. <br/>\
+A、When compared  <br/>\
+B、While comparing  <br/>\
+C、Compare  <br/>\
+D、Comparing  <br/>\
+答案：A <br/>\
+12、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. camel                        <br/>\
+ B. camera                   <br/>\
+C. advanced                     <br/>\
+ D. canal <br/>\
+答案：C <br/>\
+13、My head began to ____because of the wind. <br/>\
+A、pain  <br/>\
+B、harm  <br/>\
+C、be hurt  <br/>\
+D、ache 答案：D <br/>\
+14、The father bought him a large toy train____. <br/>\
+A、which to play with  <br/>\
+B、to play with it  <br/>\
+C、to play with  <br/>\
+D、at which to play 答案：C <br/>\
+15、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. towards                <br/>\
+B. forward               <br/>\
+C. warm                   <br/>\
+D. war答案：B <br/>\
+16、The rain will ____our plans for a picnic. <br/>\
+A、affection  <br/>\
+B、influence  <br/>\
+C、affect  <br/>\
+D、effect 答案：C <br/>\
+17、They don~t allow ____in the library, but they allow people____ in the restroom. <br/>\
+A、to smoke ... to smoke  <br/>\
+B、to smoke...smoking  <br/>\
+C、smoking ...smoking  <br/>\
+D、smoking...to smoke 答案：D <br/>\
+18、It is required that all the staff should be able to ____any emergency that might arise. <br/>\
+A、cope with  <br/>\
+B、make up  <br/>\
+C、see through  <br/>\
+D、take up 答案：A <br/>\
+19、My mother is deaf so she has to use a hearing____. <br/>\
+A、help  <br/>\
+B、machine  <br/>\
+C、aid  <br/>\
+D、assist 答案：C <br/>\
+20、Most people who travel in the course of their work are given traveling____. <br/>\
+A、income  <br/>\
+B、allowances  <br/>\
+C、wages  <br/>\
+D、pay  <br/>\
+答案：B <br/>\
+21、下列各句中，成语使用正确的一项是答案：B <br/>\
+A． 他购买彩票，连续两次中奖，真是左右逢源。 <br/>\
+B． 随着《百家讲坛》的“易中天品三国”系列节目的开播，“易中天”这个名字不胫而走。 <br/>\
+C． 高考提前到六月进行，使莘莘学子从七月流火的最炎热的日子里解脱出来，体现了党和政府对广大考生的关怀。 <br/>\
+D.  手机业近年来虽然酝酿着种种新技术的突破，但根本性的产品创新还指日可待，新产品创新的周期相对较长。  <br/>\
+22、下列各句中，成语使用不当的一项是 <br/>\
+A． 他们夫妻俩十多年来互敬互爱，真可谓举案齐眉。 <br/>\
+B． 这些伪劣药品造成的危害骇人听闻，药品市场非整顿不可。 <br/>\
+C． 古人写文章都是文不加点，所以，今天我们读起来特别吃力。 <br/>\
+D． 如果对中国人民的严正声明和强烈抗议置若罔闻，一意孤行，必将自食其果。 <br/>\
+	答案：C <br/>\
+23、下列各句中，熟语运用恰当的一项是 <br/>\
+A.     他为人不错，工作更是认真，丁是丁，卯是卯。 <br/>\
+B.    自从迷恋上网络游戏后，他便把功课抛在了脑后，掉书袋、抄作业的现象时有发生，学习明显退步。 <br/>\
+C.    本市大力推进科技成果的产业化，从而为郊区经济的发展注入了“兴奋剂”。 <br/>\
+D.    他三天两头到厂长的办公室磨洋工，希望厂里帮助他解决妻子的就业问题。 <br/>\
+	答案：A <br/>\
+24、依次填入下列句子中横线处的成语，恰当的一组是 <br/>\
+① 中国古代的心理研究          ，早在战国时期《内经》一书中，就有了心理因素在人体疾病的发生、诊断和预防中起着重要作用的系统论述。 <br/>\
+② 电视剧《孔子》虽然博得了有关专家和学者的一致好评，但终因          ，收视率不高。 <br/>\
+③ 开赛以来，他们稳扎稳打，英勇顽强，终于          ，夺取了金牌。 <br/>\
+④ 为了完成《史记》的写作，司马迁          ，倾注了毕生的精力。 <br/>\
+A． 年深月久　　曲高和寡　　一蹴而就　　皓首穷经 <br/>\
+B． 源远流长　　曲高和寡　　脱颖而出　　呕心沥血 <br/>\
+C． 源远流长　　寡不敌众　　脱颖而出　　呕心沥血 <br/>\
+D． 年深月久　　寡不敌众　　一蹴而就　　皓首穷经 <br/>\
+答案：B <br/>\
+25、下列各句中，没有语病的一句是 <br/>\
+A． 由于刻意追求苗条，滥用减肥药品，使得她的健康状况受到了极大的损害。 <br/>\
+B． 当今流行歌坛出现了一些低俗的作品，这反映了某些词作者随波逐流，媚俗竞利。 <br/>\
+C． 数码媒体艺术，大多数人还是比较陌生的；作为一种新的艺术形式，它正日益受到关注和发展。 <br/>\
+D． 我们不赞成应试教育，决不是主张取消考试，而是不赞成以应付升学考试为唯一目的来开展教育教学活动的做法。 <br/>\
+	答案：D <br/>\
+26、下列各句中，有语病的一句是 <br/>\
+A.      这个任务很艰巨，它要求承担者具有扎实的业务知识和丰富的实践经验才能胜任。 <br/>\
+B.      桥，它以巨人的步伐，飞跃江河，横渡深谷，变崎岖为平坦，化险阻为通途，用脊梁承担起人类赋予的重任。 <br/>\
+C.     “神舟六号”宇宙飞船发射成功，标志着我国航天事业又向前大大跨进了一步，炎黄子孙不能不为之骄傲自豪。 <br/>\
+D.     首届中国大学生电视节设有最受大学生欢迎的主持人、最受大学生欢迎的电视剧和最受大学生欢迎的栏目等奖项。 <br/>\
+	答案：A <br/>\
+27、依次填入下面这段话横线处的标点符号，最恰当的一项是 <br/>\
+“唉     ”作家叹道      “红尘之中，人海茫茫     要找出个不知姓名的陌生人来，这不是大海捞针吗      ” <br/>\
+ A.  ！　　：　　。　　？ <br/>\
+ B.  ！　   ：　　；          ！ <br/>\
+ C.  ！　　，　　， 　 ？ <br/>\
+ D.  ，     ，　　。　　！ <br/>\
+答案：C <br/>\
+28、下列各句中，标点符号使用正确的一句是 <br/>\
+A． 老师语重心长地对他说：“以后一定要记住这次教训，‘知之为知之，不知为不知’，不要强不知以为知”。 <br/>\
+B． “人生就是一个童话，我的人生也是一个童话”。安徒生在他创作的《真爱让我如此幸福》中，开篇就以这样一句话真实而生动地概括了自己的“童话人生”。 <br/>\
+C． 望着早已转卖他人大门紧锁的故居，我竟然有种“恐怕我将认不得房子，而房子也将认不得我了。”（梁实秋《疲鸟恋旧林，羁鸟思故栖》）的凄凉。 <br/>\
+D． 德国外长菲舍尔在纪念奥斯维辛解放60周年的联大特别会议上坦言，大屠杀给他的国家烙上了“永远无法去掉的记号”，“这种野蛮的犯罪永远成为了德国历史的一部分”。 <br/>\
+答案：D <br/>\
+29、下列句子没有歧义的一项是 <br/>\
+ A.金秋时节，这所百年名校迎来了自己的新生。 <br/>\
+ B.三个大学的主要负责人出席了这次工作动员会议。 <br/>\
+ C.今天他得去做手术，虽说不是什么大手术，也别不当回事儿。 <br/>\
+ D.营房传达室坐着的两个人，是来探亲的新兵王勇和李刚的家属。 <br/>\
+	答案：D <br/>\
+30、下列各句中表意明确、没有歧义的一项是 <br/>\
+A． 昨天我从你的车库里拿走的那件工具，没用，今天给你送回来了。 <br/>\
+B． 记得我们认识她的时候，还只是七八岁的小孩子，天真烂漫，无拘无束。 <br/>\
+C． 诚然，家庭在从小培养孩子健康心理和健全人格方面起着至关重要的作用，但社会在对青少年正确对待“自我”的宣传教育上也负有重大责任。 <br/>\
+D． 钱钟书先生的夫人杨绛在把稿酬版税捐赠给清华大学的仪式上说：“我以代表的身份在这里讲话，我一个人代表三个人：我、已去世的钱钟书先生和女儿钱瑗。” <br/>\
+	答案：C <br/>\
+31、卢梅坡的诗句“梅须逊雪三分白，雪却输梅一段香”常被人引用，借以说明 <br/>\
+A． 任何人和事物都各有缺憾 <br/>\
+B． 任何人和事物都各有长处 <br/>\
+C． 任何人和事物都各有千秋 <br/>\
+D． 对任何人、任何事物，人们都是各有所爱 <br/>\
+	答案：A <br/>\
+32、苏轼曾经说过：“书富如海，百货皆有。”既然“百货皆有”，那么 <br/>\
+A． 读书之初，必要先下一番选书的工夫。 <br/>\
+B． 读书之时，当广为涉猎以求兼容并蓄。 <br/>\
+C． 读书之后，定能有所收获甚而满载而归。 <br/>\
+D． 读书前后，应学会去粗取精、去伪存真。 <br/>\
+答案：A <br/>\
+33、依次填入下列各句横线处的词语，恰当的一组是 <br/>\
+① 仅靠道德上的自律或者单纯的宣传教育，并不一定_______，因此，加强管理并严格执法，是非常必要的。 <br/>\
+② 这支劲旅本次比赛意外失利、大爆冷门的原因至今_______不清楚，评论者大多认为与球队临时换帅、队员与教练难以沟通有关。 <br/>\
+③ 人们_______要对质量、花色进行挑选，还要追求品牌和时尚，体现个性与修养，服装业也由此成了一个色彩斑斓的时尚产业。 <br/>\
+A.     奏效　　尚　　　不但 <br/>\
+B.     奏效　　尚且　　不单 <br/>\
+C.     生效　　尚且　　不单 <br/>\
+D.     生效　　尚　　　不但 <br/>\
+	答案：A <br/>\
+34、依次填入下面这段话横线处的词语，最恰当的一项是 <br/>\
+        世上事物林林总总，天下文章万万千千，丰富_______芜杂,一口吞不下,一眼望不穿。            加以 选择_______使之简单化、条理化和本质化，_______能认识它，而与此同时，也就是对它的重新组合和再创造。_______，选择文章也是一种文化的再创造。 <br/>\
+A． 而且  只有   才能  从而才  因而 <br/>\
+B． 但是    只要   就能     因而就     所以 <br/>\
+C． 却又  只有  才能    从而才  因此 <br/>\
+D． 但是    只要     就能    因而就    因此 <br/>\
+答案：C <br/>\
+35、下面文段横线处应填的语句排列最恰当的是 <br/>\
+经过17年的研究和实验，中国新概念武器——超高速电炮将问世。据透露，            ，更有可能首先拥有这种高速动能武器。 <br/>\
+① 但进展较快  <br/>\
+② 都在研究这种武器  <br/>\
+③ 中国起步稍晚  <br/>\
+④ 美、俄加大投入  <br/>\
+⑤ 发射技术先进 <br/>\
+A． ④③②⑤①  <br/>\
+B． ④②③①⑤ <br/>\
+C． ③①④⑤②    <br/>\
+D． ③⑤④①② <br/>\
+	答案：B <br/>\
+36、下列各句中，标点符号使用不正确的一句是 <br/>\
+A． 每到放学，总有许多孩子围着老师，仰着脸，热切地邀请——“老师，今天去我家！” <br/>\
+B． 法国著名思想家伏尔泰说得好：上天赐给人两样东西──希望和梦──来减轻他的苦难。 <br/>\
+C． 两百年间，西方不同类型的文本中——其中包括游记、史志、书简、小说——都出现有关契丹、蛮子的记述。 <br/>\
+D． 思维速度大大超过言语表达的速度，因此思维时语言一般呈现为简约的、破碎的、零乱而跳跃的——它来不及形成完整的句子，也往往来不及处理语句间的逻辑联系。 <br/>\
+答案：A <br/>\
+37、分别填入下面这段话中的四组标点符号，最恰当的一组是 <br/>\
+毛主席有两句诗    “独有英雄驱虎豹，更无豪杰怕熊罴           从中我们可以感受到共产党人坚定的信念   乐观的精神。 <br/>\
+A.  :   ”     ，   ， <br/>\
+B.  ，   。   ”    、 <br/>\
+C.  ， ”    ，    ,  <br/>\
+D.  :    。   ”    、 <br/>\
+	答案：D <br/>\
+38、依次填入下面一段文字中横线处的关联词语，恰当的一组是 <br/>\
+小说家应尽可能把人物对话写得流利自然，生动活泼，    ，不能完全像实际说话，讲故事或作报告，    又决不能像日常说话那样支离破碎，    不写稿子，    应像一篇文章。 <br/>\
+A． 虽然　　却　　  即使　　也 <br/>\
+B． 尽管　　可是　　虽然　　但 <br/>\
+C． 尽管　　而且　　虽然　　但 <br/>\
+D． 虽然　　相反　　即使　　也 <br/>\
+答案：A <br/>\
+39、依次填入下面一段文字中横线处的词语，最恰当的一组是 <br/>\
+阅读优秀作品，         其语言，感受其思想，不仅可以         大自然和人生的多姿多彩，还可以激发         自然、热爱生活的感情。 <br/>\
+A.     品味    体味    珍爱 <br/>\
+B.     品味    体味    珍惜 <br/>\
+C.     品评    体验    珍爱 <br/>\
+D.     品评    体验    珍惜 <br/>\
+	答案：A <br/>\
+40、依次填入下列各句横线处的词语，最恰当的一组是 <br/>\
+① 由于书写潦草、文面混乱，老师要求他        誊写。 <br/>\
+② 这双鞋她穿着正        。 <br/>\
+③ 问题是如何产生的，        最后该如何解决，都需要调查研究。 <br/>\
+A．重新　　合适　　及 　       　 <br/>\
+B．从新　　合适　　以及 <br/>\
+C．重新　　适合　　以及          <br/>\
+D．从新　　适合　　及 <br/>\
+答案：B <br/>\
+1、____his house, we at once perceived him to be a man of taste.答案：C <br/>\
+A、As entering  <br/>\
+B、While entering  <br/>\
+C、On entering  <br/>\
+D、After entering  <br/>\
+答案：C <br/>\
+2、It snowed heavily for three days ____and we were isolated from the outside world. <br/>\
+A、in the end  <br/>\
+B、by the end  <br/>\
+C、on end  <br/>\
+D、at the end 答案：C <br/>\
+3、Go back to your home and leave me____. <br/>\
+A、lonely  <br/>\
+B、alone  <br/>\
+C、along  <br/>\
+D、almost 答案：B <br/>\
+4、The manager said that he did not want to ____any further responsibilities. <br/>\
+A、take on  <br/>\
+B、get on  <br/>\
+C、put up  <br/>\
+D、look up 答案：A <br/>\
+5、It covered a(an)____ of 147,000 square miles. <br/>\
+A、ground  <br/>\
+B、spot  <br/>\
+C、site  <br/>\
+D、area 答案：D <br/>\
+6、Do what you are told and don~t ____me. <br/>\
+A、argue with  <br/>\
+B、argue against  <br/>\
+C、argue about  <br/>\
+D、argue into 答案：A <br/>\
+7、Don~t use more words ____are needed to express an idea. <br/>\
+A、that  <br/>\
+B、than  <br/>\
+C、when  <br/>\
+D、which 答案：B <br/>\
+8、 Let me know if any difficulties____. <br/>\
+A、come  <br/>\
+B、arise  <br/>\
+C、rise  <br/>\
+D、happen 答案：B <br/>\
+9、It was several minutes before I was ____of what was happening. <br/>\
+A、know  <br/>\
+B、realize  <br/>\
+C、wear  <br/>\
+D、aware 答案：D <br/>\
+10、The animal with the biggest head____ its body is the ant. <br/>\
+A、in relation to  <br/>\
+B、in connection to  <br/>\
+C、in terms of  <br/>\
+D、in the course of 答案：A <br/>\
+11、He was walking____ along the corridor. <br/>\
+A、back up  <br/>\
+B、back down  <br/>\
+C、back and forth  <br/>\
+D、back of 答案：C <br/>\
+12、He didn~t want to go to the cinema but they begged so hard that he ____and went with them. <br/>\
+A、gave up  <br/>\
+B、gave in  <br/>\
+C、gave out  <br/>\
+D、 gave over 答案：B <br/>\
+13、He does not ____his workmates and there are often disagreements between them. <br/>\
+A、go on with  <br/>\
+B、put up with  <br/>\
+C、get along with  <br/>\
+D、keep up with 答案：C <br/>\
+14、A good ____makes a good ending. <br/>\
+A、origin  <br/>\
+B、source  <br/>\
+C、root  <br/>\
+D、beginning 答案：D <br/>\
+15、My father has lived a long life, and done enough to ____great respect in his town. <br/>\
+A、get  <br/>\
+B、achieve  <br/>\
+C、have  <br/>\
+D、win 答案：D <br/>\
+16、____the English examination, I would have gone to the concert last Sunday. <br/>\
+A、In spite of  <br/>\
+B、Because of  <br/>\
+C、But for  <br/>\
+D、As for 答案：C <br/>\
+17、You can not be ____careful with them. <br/>\
+A、too  <br/>\
+B、very  <br/>\
+C、very much  <br/>\
+D、much 答案：A <br/>\
+18、I~m writing on ____of my mother, to express her thanks for your gift. <br/>\
+A、behave  <br/>\
+B、behalf  <br/>\
+C、belief  <br/>\
+D、before 答案：B <br/>\
+19、It was hard to guess what her ____to the news would be. <br/>\
+A、impression  <br/>\
+B、reaction  <br/>\
+C、comment  <br/>\
+D、opinion 答案：B <br/>\
+20、When we had finished dinner, Mary asked the waiter for the____. <br/>\
+A、note  <br/>\
+B、cheque  <br/>\
+C、bill  <br/>\
+D、tip  <br/>\
+答案：C <br/>\
+21、依次填入下面各句横线处的词语，最恰当的一组是 <br/>\
+① 这一地区曾一度山洪       ，造成公路被毁、交通中断。 <br/>\
+② 校园流行语，各个时期都有，各类学校又各有不同，但却有一个共同的特点，那就是都不适用于正式       。 <br/>\
+③ 我国的法律明确规定，成年子女对父母有       的义务。 <br/>\
+④ 商业广告不同于公益广告，其主要目的就是为了       。 <br/>\
+A． 暴发    场所    抚养    盈利 <br/>\
+B． 爆发    场所    抚养    营利 <br/>\
+C． 爆发    场合    赡养    盈利 <br/>\
+D． 暴发    场合    赡养    营利 <br/>\
+	答案：D <br/>\
+22、依次填入下面横线处的句子，与上下文衔接得最恰当的一组是 <br/>\
+    我独坐在书斋中，忘记了尘世间一切不愉快的事情，怡然自得。以世界之广，宇宙之大，此时却仿佛只有我和我的书存在。        ，        ，        ，        。 <br/>\
+① 阳光照在玉兰肥大的绿叶子上 <br/>\
+② 连平时我喜欢听的鸟鸣声，也听而不闻了 <br/>\
+③ 窗外粼粼碧水，丝丝垂柳 <br/>\
+④ 这都是我平时最喜爱的东西，现在也都视而不见了 <br/>\
+A． ①②③④ <br/>\
+B． ①③②④ <br/>\
+C． ③①④② <br/>\
+D． ③④①② <br/>\
+	答案：C <br/>\
+23、为下面一段文字排序，使其组成一段通顺完整的语段。排序正确的一项是 <br/>\
+① 但无论是教师还是学生 <br/>\
+② 很多人都认为文言文教学最容易 <br/>\
+③ 这种对文言文教学的认识虽然有些偏颇 <br/>\
+④ 说来说去不过是一个“译”字，全文翻译完了教学也就基本结束 <br/>\
+⑤ 尽管文言文的文字深奥生涩，内容与现代生活相距很远 <br/>\
+⑥ 却也指出了教学中的关键——翻译 <br/>\
+A． ⑤①②④③⑥ <br/>\
+B． ②④①③⑥⑤ <br/>\
+C． ②③①④⑤⑥ <br/>\
+D． ⑤①⑥④②③ <br/>\
+答案：A <br/>\
+24、对下列句子的理解，不正确的一项是 <br/>\
+A． “指点江山，激扬文字，粪土当年万户侯。”“粪土”在此作动词使用，表现了诗人蔑视权贵的气度。 <br/>\
+B． “孔雀东南飞，五里一徘徊。”这两句诗用了托物起兴的手法，这种手法是《诗经》和乐府民歌常用的手法。 <br/>\
+C． “一个浑身黑色的人，站在老栓面前，眼光正像两把刀，刺得老栓缩小了一半。”这句话运用了比喻和夸张的修辞手法，表现了刽子手的凶恶和老栓的胆怯。 <br/>\
+D． “正像达尔文发现了有机界的发展规律一样，马克思发现了人类历史的发展规律。”这句话运用了类比的手法，重点在于揭示达尔文的发现具有划时代的意义。 <br/>\
+	答案：D <br/>\
+25、填入下面文字横线处的语句，与上下文衔接得最恰当的一项是 <br/>\
+   据史料介绍，唐武宗时期的名相李德裕，著有《柳次旧闻》《会昌一品集》等，他            ，但对他的一句颇富哲理的名言“正人如松柏，特立不倚；邪人如藤萝，非依附他物不能自起”却早有所闻。 <br/>\
+A． 不仅有文才，而且政声很好，我迄今未曾涉猎他的这些书 <br/>\
+B． 不仅政声很好，而且有文才，我迄今未曾涉猎他的这些书 <br/>\
+C． 不仅政声很好，而且有文才，对于他的这些书我迄今未曾涉猎 <br/>\
+D． 不仅有文才，而且政声很好，对于他的这些书我迄今未曾涉猎 <br/>\
+答案：C <br/>\
+26、以下句子在表述方面与其他三句明显不同的一项是 <br/>\
+A． 人生没有返程车票，一旦出发了，决不能返回 <br/>\
+B． 机遇不是重播节目，一旦错过了，绝不会重现 <br/>\
+C． 誓言没有反悔余地，一旦说出了，绝不能收回 <br/>\
+D． 爱心不是定期存折，一旦存入了，就不可索取本息 <br/>\
+	答案：C <br/>\
+27、以下对联中，明显存在不恰当之处的一幅是 <br/>\
+A． 爆竹声声脆 祖国日日新 <br/>\
+B． 满园春色好 处处花常开 <br/>\
+C． 祖国江山好 大地气象新 <br/>\
+D． 处处春光好 家家气象新 <br/>\
+	答案：B <br/>\
+28、依次填入下列横线上的语句，最恰当的一组是 <br/>\
+     这个时候，我喜欢登上老房子，          ，面对隐约的地平线，         ，我就会听到房子里有人走动的声音，我就会感受到幸福。幸福真的是一种难以言说的感受。 <br/>\
+① 面对温暖的炊烟，面对鳞次栉比的屋脊 <br/>\
+② 面对鳞次栉比的屋脊，面对温暖的炊烟 <br/>\
+③ 还有散布在空气里的恬淡的麦香 <br/>\
+④ 还有散布在空气里的麦香的恬淡 <br/>\
+A． ① ③ <br/>\
+B． ① ④ <br/>\
+C． ② ③ <br/>\
+D． ② ④ <br/>\
+答案：C <br/>\
+29、下列各句中，没有使用修辞方法的一项是 <br/>\
+A． 老师简洁而深刻的话语像一把钥匙，开启了他的心扉。 <br/>\
+B． 母亲一生操劳，一生付出，却从来没有任何懈怠，没有任何抱怨。 <br/>\
+C． 外语学习十分重要，它可以帮助我们打开更多的认识世界的窗口。 <br/>\
+D． 事业是人生的一座大厦，追求是支柱，奋斗是砖瓦，热情是事业成功的脚手架。 <br/>\
+	答案：B <br/>\
+30、可以接续在下面这段文字之后而且衔接得最为紧密的一项是 <br/>\
+    几百年的禁书、焚书、战乱、文字狱、封建迷信等等，使文化典籍丧失无数，惟独文学名著大多无恙，至今依然生气如故。 <br/>\
+A． 细心分析，似乎它们始终是在民间流传，已成为普通人民宝贵的精神食粮。 <br/>\
+B． 究其缘由，是因为它们始终是在民间流传，已经成为普通人民宝贵的精神食粮。 <br/>\
+C． 恐怕主要是因为它们早以成为普通人们宝贵的精神食粮，始终在民间流传。 <br/>\
+D.   推其原因，是它们已经成为普通人民的精神食粮，所以始终在民间流传。 <br/>\
+	答案：B <br/>\
+31、下列词语中注音完全正确的一组是 <br/>\
+ A.赡（zhàn）养       亲昵（nì）       拾（shè）级而上        含情脉脉（mò） <br/>\
+ B.秘（bì）鲁        古刹（chà）     鸭绿（lù）江岸        骁（xiāo）勇善战 <br/>\
+ C.颤（zhàn）栗       哄（hǒng）骗     心广体胖（pàng）     一撮（zuǒ）胡子 <br/>\
+ D.伺（cì）侯        联袂（mèi）      晕头转（zhuàn）向      果实累累（lěi） <br/>\
+	答案：B <br/>\
+32、下列划线字的读音全都不相同的一组是 <br/>\
+ A. 睥睨　裨益　纵横捭阖　俾有所悟 <br/>\
+ B. 泥淖　船棹　卓尔不群　绰绰有余 <br/>\
+ C. 逾越　觊觎　家喻户晓　瑕不掩瑜 <br/>\
+D. 儒雅　嗫嚅　耳濡目染　懦弱无能 <br/>\
+	答案：B <br/>\
+33、一副对联的上联是“荔枝龙眼木瓜 皆是岭南佳果”，以下是四个备选的下联，明显不恰当的一项是 <br/>\
+A． 丹霞南华梅关 皆为粤北名胜 <br/>\
+B． 豆汁焦圈麻团 皆为北京名吃 <br/>\
+C． 细雨水巷炊烟 皆为江南美景 <br/>\
+D．大饼馒头油条 皆是农家美味 <br/>\
+答案：D <br/>\
+34、填入以下文字中横线处的最恰当的一句是 <br/>\
+    颐和园有个匾额，题写着“山色湖光共一楼”，是说这个小小的楼阁把天地之间这个巨大空间的美好景致都吸收进来了。           说的也是这个意思。 <br/>\
+A． 杜甫《望岳》中的“会当凌绝顶，一览众山小” <br/>\
+B． 左思《三都赋》中的“八极可转于寸眸，万物可齐于一朝” <br/>\
+C． 苏轼《饮湖上初晴后雨》中的“水光潋滟晴方好，山色空蒙雨亦奇” <br/>\
+D． 王维《九月九日忆山东兄弟》中的“遥知兄弟登高处，遍插茱萸少一人” <br/>\
+	答案：B <br/>\
+35、下列各组词语中的划线字，读音全相同的一组是 <br/>\
+A.  肄业     疫情    苦心孤诣      因噎废食 <br/>\
+B.  信笺     缄默     亲密无间      草菅人命 <br/>\
+ C.  吞噬     谥号      舐犊情深     恃才傲物 <br/>\
+ D.  伎俩      觊觎      济济一堂      心有余悸 <br/>\
+答案：C <br/>\
+36、下面是协议书的一些条款。其中表达不准确、不严密的一条是 <br/>\
+A.     甲乙双方不得终止协议，否则，由终止方负责对方的全部经济损失。 <br/>\
+B.     甲方投资装修的房屋将作为不动产，在期限满时移交乙方，不包括室内设备。 <br/>\
+C.     此协议自2009年1月1日起至2012年12月31日止，有效期3年。 <br/>\
+D.  由甲方提供周转资金人民币4万元整。 <br/>\
+	答案：A <br/>\
+37、下列词语中没有错别字的一组是 <br/>\
+ A. 磊落    发祥地    熙来攘往    亡羊补牢 <br/>\
+ B. 露掐    生力军    疾言厉色    宁缺毋滥 <br/>\
+ C. 襟怀    费手脚    负芨从师    声嘶力竭 <br/>\
+ D.买帐    开场白    心心相印    理曲词穷 <br/>\
+答案：A <br/>\
+38、下面四句中，不得体的一句是 <br/>\
+A.您不按规定停车，罚款二十元。以后要注意！（交警处罚违章司机） <br/>\
+B.您老今年高寿？今年种粮的收入不错吧？（记者采访一位农村老人） <br/>\
+C.买这块表吧，华美、大气，您一戴上就像“大款”。（售货员接待顾客） <br/>\
+D.各位观众：我在福州向您现场直播八一男篮客场挑战福建男篮的比赛。（体育直播员转播比赛） <br/>\
+	答案：C <br/>\
+39、下列句子中没有错别字的是   <br/>\
+A. 季羡林考上清华大学后，最使他感到遗撼的是没能赶上清华国学研究院的开办时期。 <br/>\
+ B. 你知道吗？人体会对辘辘饥肠做出反应，先“拿”出蛋白质去燃烧热量，然后才会燃烧到脂肪。 <br/>\
+ C. 本届获奖学生在德、智、体、美等方面全面发展，尤其是在科技创新领域已展露头角。 <br/>\
+ D.加快发展的愿望不能脱离农村的实际。假如采取竭泽而鱼的政策，其结果往往适得其反。 <br/>\
+	答案：B <br/>\
+40、以下四句中，用语不够得体的一句是 <br/>\
+A． 今天是您的生日，妈妈，女儿祝您青春永驻，永远漂亮。 <br/>\
+B． 大家既然让我表演一个节目，我就献丑了，唱一首歌吧。 <br/>\
+C． 看到您老95岁高龄还这样硬朗，我们从心里高兴。祝您长命百岁！ <br/>\
+D． 一次考试失利算不了什么，胜败乃兵家常事，振作精神，胜利终归是你的。 <br/>\
+答案：C <br/>\
+1、The French pianist who had been praised very highly ____to be a great disappointment. <br/>\
+A、turned up  <br/>\
+B、turned in  <br/>\
+C、turned out  <br/>\
+D、turned down 答案：C <br/>\
+2、The river is the____ between the two countries. <br/>\
+A、boundary  <br/>\
+B、zone  <br/>\
+C、spot  <br/>\
+D、string 答案：A <br/>\
+3、The thieves planned to ____a bank. <br/>\
+A、break into  <br/>\
+B、break down  <br/>\
+C、break through  <br/>\
+D、break up 答案：A <br/>\
+4、John often attends public lectures at the University of Oxford, chiefly____ his English. <br/>\
+A、to improve  <br/>\
+B、improving  <br/>\
+C、to have improved  <br/>\
+D、improved 答案：A <br/>\
+5、At last she left her house and got to the airport, only ____the plane flying away. <br/>\
+A、having seeing  <br/>\
+B、saw  <br/>\
+C、to have seen  <br/>\
+D、to see 答案：D <br/>\
+6、The river is dangerous to____. <br/>\
+A、swim  <br/>\
+B、swim in  <br/>\
+C、swim on  <br/>\
+D、swim at 答案：B <br/>\
+7、The new power station is reported ____within 3 years. <br/>\
+A、to have completed  <br/>\
+B、to have been completed  <br/>\
+C、having been completed  <br/>\
+D、to complete 答案：B <br/>\
+8、The second book was ____by August 1952, but two years later, the end was still nowhere in sight. <br/>\
+A、completed  <br/>\
+B、to complete  <br/>\
+C、to have completed  <br/>\
+D、to have been completed  <br/>\
+答案：D <br/>\
+9、The teacher doesn~t know who is ____for the broken window. <br/>\
+A、will blame  <br/>\
+B、blame  <br/>\
+C、to blame  <br/>\
+D、to be blamed 答案：C <br/>\
+10、In fact, I~d rather leave for Shanghai____ in Xi~an. <br/>\
+A、to stay  <br/>\
+B、than staying  <br/>\
+C、than stay  <br/>\
+D、by staying 答案：C <br/>\
+11、It is wise ____that case that way. <br/>\
+A、of him to settle  <br/>\
+B、for him to settle  <br/>\
+C、of his settling  <br/>\
+D、that he settle 答案：A <br/>\
+12、“Your pictures are beautiful!“ “We ____more if we hadn~t run out of film.“ <br/>\
+A、would take  <br/>\
+B、had taken  <br/>\
+C、will have taken  <br/>\
+D、would have taken 答案：D <br/>\
+13、Had Alice been more hardworking, she____. <br/>\
+A、had not failed  <br/>\
+B、would not have failed  <br/>\
+C、would not fail  <br/>\
+D、did not fail 答案：B <br/>\
+14、I~m sorry Andy didn~t want to go to the conference. ____willing to go, we would have paid all his expenses. <br/>\
+A、Being  <br/>\
+B、He had been  <br/>\
+C、Was he  <br/>\
+D、Had he been 答案：D <br/>\
+15、If I had a bike, I ____it to you yesterday. <br/>\
+A、would have lent  <br/>\
+B、would lend  <br/>\
+C、lent  <br/>\
+D、had lent 答案：A <br/>\
+16、The traffic was very heavy; otherwise I____ here 50 minutes sooner. <br/>\
+A、would be  <br/>\
+B、should be  <br/>\
+C、had been  <br/>\
+D、would have been 答案：D <br/>\
+17、But for his courage, the battle____. <br/>\
+A、was lost  <br/>\
+B、would lose  <br/>\
+C、lose  <br/>\
+D、would have been lost 答案：D <br/>\
+18、You did tell me what to do. If only I____ your advice. <br/>\
+A、would take  <br/>\
+B、had taken  <br/>\
+C、took  <br/>\
+D、have taken 答案：B <br/>\
+19、I~d rather you ____those important documents with you. <br/>\
+A、not take  <br/>\
+B、won~t take  <br/>\
+C、don~t take  <br/>\
+D、didn~t take 答案：D <br/>\
+20、It~s time____ about the traffic problem downtown. <br/>\
+A、nothing to be done  <br/>\
+B、everything is done  <br/>\
+C、anything will be done  <br/>\
+D、something was done  <br/>\
+答案：D <br/>\
+21、以下四句中，“见”的读音与其他三处不同的一句是 <br/>\
+A． 曹刿请见（《曹刿论战》） <br/>\
+B． 昨夜见军帖，可汗大点兵（《木兰诗》） <br/>\
+C． 季路、冉有见孔子曰……（《季氏将伐颛臾》） <br/>\
+D． 天苍苍，野茫茫，风吹草低见牛羊（《敕勒歌》） <br/>\
+答案：D <br/>\
+22、下列各句中的成语，不能用句后括号中的短语替换的一句是 <br/>\
+A. 情况十分紧急，险情就是命令，排长当机立断，顾不上向连部请示，就率领战士们跳进了汹涌的江水里。（不管三七二十一） <br/>\
+B. 处长本以为问题不大，调解一下问题就解决了，谁知道这两位科长各执一词，怎么也谈不拢。（公说公有理，婆说婆有理） <br/>\
+C. 婆媳之间如果有了矛盾，可以坐下来心平气和地交换意见，总这么针锋相对、寸土不让的，对谁都没有好处。（针尖对麦芒） <br/>\
+D.本来这是件好事，但是他操之过急，只凭一厢情愿，结果事与愿违。（剃头挑子一头热） <br/>\
+答案：A <br/>\
+23、以下四句中，“之”的用法不同于其他各句的一句是 <br/>\
+A． 故兵法忌之 <br/>\
+B． 鼎足之形成矣 <br/>\
+C． 荆州之民附操者 <br/>\
+D． 且北方之人，不习水战 <br/>\
+	答案：A <br/>\
+24、以下四句中，不存在名词活用为动词这一现象的一句是 <br/>\
+A． 左右欲刃相如 <br/>\
+B． 安能屈豪杰之流 <br/>\
+C． 以故其后名之曰褒禅 <br/>\
+D． 假舟楫者，非能水也 <br/>\
+	答案：B <br/>\
+25、以下句子中，不是被动句是一句是 <br/>\
+A．羸兵为人马所蹈藉（《赤壁之战》） <br/>\
+B. 成归，闻妻言，如被冰雪（《促织》） <br/>\
+C．臣诚恐见欺于王而负赵（《廉颇蔺相如列传》） <br/>\
+D．吾不能举全吴之力、十万之众，受制于人（《赤壁之战》） <br/>\
+答案：B <br/>\
+26、以下对“小时了了，大未必佳”的翻译解说，比较准确的一句是 <br/>\
+A． 把小事情做完了就好，不必只想着做大事 <br/>\
+B． 小的东西往往是好的，大的东西往往不太好 <br/>\
+C． 小的时候聪明懂事，长大了以后却不一定出众 <br/>\
+D． 事情刚开始的时候是好事，最后的结果却未必是好事 <br/>\
+答案：C <br/>\
+27、以下文字有重复啰嗦、需要删除之处。所罗列出的四项中，不需要删除的一项是 <br/>\
+    2010-2011年度，我校将扩大招生人数。由于我校的教室本已严重不足，因此急需新建一批教室。目前，虽然我们已经多方进行筹措，但经费资金问题依然难以全额解决。用什么办法才能解决眼下的燃眉之急呢？ <br/>\
+A． 进行 <br/>\
+B． 资金 <br/>\
+C． 全额 <br/>\
+D． 眼下的 <br/>\
+	答案：C <br/>\
+28、周敦颐《爱莲说》中，用来说明君子志洁行廉、德声远播的一句是 <br/>\
+A． 出淤泥而不染，濯清涟而不妖 <br/>\
+B． 中通外直，不蔓不枝 <br/>\
+C． 香远益清，亭亭静植 <br/>\
+D.  可远观而不可亵玩焉 <br/>\
+答案：C <br/>\
+29、以下是某学生入团申请书中的文字，其中有多处表达不当，需要修改。在所罗列出的四项中，不需要修改的一项是 <br/>\
+    中国共产主义青年团是中国共产党领导下的先进组织，是党的得力助手和后备军。因此我必须争取加入共青团，请组织一定批准。入团之后，我一定遵守团章，执行团员的义务，参加团组织的工作，做一名合格的团员；如果一时未获批准，我绝不灰心，一定会继续努力，接受组织的考验。 <br/>\
+A． 我必须争取加入共青团 <br/>\
+B． 请组织一定批准 <br/>\
+C． 执行团员的义务 <br/>\
+D． 一时未获批准 <br/>\
+	答案：D <br/>\
+30、下列各句中，成语使用正确的一项是 <br/>\
+A.  这处旅游胜地的环境脏乱差到如此地步，简直令人叹为观止。 <br/>\
+B．既然目前开展这项工作的条件还不成熟，大家就不要勉为其难，以后有条件了再做也不迟。 <br/>\
+C．虽然这处悬崖比我们当初所预想的要陡峭得多，但是，大家依然摩肩接踵，奋力攀登。 <br/>\
+D．在这次打击赌博的行动中，该市几百名公安干警倾巢出动，一举端掉了十几个窝点，缴获了一大批赌具赌资。 <br/>\
+	答案：B <br/>\
+31、下列作家、作品及作品中人物对应正确的一项是 <br/>\
+A．曹禺——《雷雨》——陈白露 <br/>\
+B. 曹雪芹——《林黛玉进贾府》——王熙凤 <br/>\
+C．施耐庵——《林教头风雪山神庙》——武松 <br/>\
+D．巴尔扎克——《装在套子里的人》——别里科夫 <br/>\
+	答案：B <br/>\
+32、下列句子中，用语不得体的一项是 <br/>\
+A． 蒙您馈赠大作，本人深感荣幸，回去定当认真拜读。 <br/>\
+B． 非常感谢您的盛情邀请，我们明天上午九点一定会准时光临。 <br/>\
+C． 令尊和家父从学生时代就是好朋友，所以我们也算是世交了。 <br/>\
+D． 校长办公会提出了一系列改进服务的措施，责成后勤部门尽快落实。 <br/>\
+	答案：B <br/>\
+33、下面作家、作品等对应不正确的一项是 <br/>\
+　　A．柳宗元——唐代——永州八记 <br/>\
+  B. 罗贯中——清代——《三国演义》 <br/>\
+　　C．赵树理——《小二黑结婚》——小说 <br/>\
+　　D．惠特曼——《草叶集》——诗歌 <br/>\
+	答案：B <br/>\
+34、下文有几处用语不得体的地方需要改正，其中不需要改正的一项是 <br/>\
+    听说贵公司近日在产品研发方面陷入困境，我们非常愿意鼎力相助。如果你们需要指点，我们将不吝赐教。我们愿意与贵公司同舟共济、精诚合作。 <br/>\
+A． 鼎力相助 <br/>\
+B． 需要指点 <br/>\
+C． 不吝赐教 <br/>\
+D． 同舟共济 <br/>\
+答案：D <br/>\
+35、篇名、作者、朝代搭配错误的一项是 <br/>\
+A． 《赤壁赋》——苏轼——宋朝 <br/>\
+B． 《陋室铭》——刘禹锡——唐朝 <br/>\
+C． 《出师表》——诸葛亮——晋朝 <br/>\
+D． 《岳阳楼记》——范仲淹——宋朝 <br/>\
+答案：C <br/>\
+36、以下句子中，“若”表示“你”的一句是 <br/>\
+A． 望洋向若而叹曰……（《秋水》） <br/>\
+B． 山有小口，仿佛若有光（《桃花源记》） <br/>\
+C． 若舍郑以为东道主（《烛之武退秦师》） <br/>\
+D． 余悲之，且曰：若毒之乎？（《捕蛇者说》） <br/>\
+	答案：D <br/>\
+37、诗句、作者、朝代搭配错误的一项是 <br/>\
+A． 随风潜入夜，润物细无声——杜甫——唐朝 <br/>\
+B． 海内存知己，天涯若比邻——王勃——唐朝 <br/>\
+C． 南朝四百八十寺，多少楼台烟雨中——李白——唐朝 <br/>\
+D.   夜阑卧听风吹雨，铁马冰河入梦来——陆游——宋朝 <br/>\
+	答案：C <br/>\
+38、以下句子中，“与”用作连词、表示“和”的一句是 <br/>\
+A． 玉斗一双，欲与亚父（《鸿门宴》） <br/>\
+B． 求！无乃尔是过与（《季氏将伐颛臾》） <br/>\
+C． 陈涉少时，尝与人佣耕（《陈涉世家》） <br/>\
+D． 原庄宗之所以得天下，与其所以失之者，可以知之矣（《伶官传序》） <br/>\
+答案：D <br/>\
+39、请选择正确答案 <br/>\
+① 这伙歹徒竟敢在这样的闹市区公开作案，简直让人觉得          。 <br/>\
+② 培养一种风格、学习某种技能是需要时间的，不能          。 <br/>\
+③ 他在那样艰苦的条件下，依然          ，献身于教育事业。 <br/>\
+④ 别人都很难过，有的低着头，有的抹着泪，唯独她端坐在那里，          。 <br/>\
+     <br/>\
+ A．不可思议    操之过急    鞠躬尽瘁    神情自若 <br/>\
+ B．不可思议   一蹴而就    呕心沥血     神情自若 <br/>\
+ C．义愤填膺    操之过急    鞠躬尽瘁    无动于衷 <br/>\
+ D．义愤填膺    一蹴而就     呕心沥血    无动于衷 <br/>\
+	答案：A <br/>\
+40、词句、作者、朝代搭配错误的一项是 <br/>\
+A． 但愿人长久，千里共婵娟——苏轼——宋朝 <br/>\
+B． 稻花香里说丰年，听取蛙声一片——辛弃疾——宋朝 <br/>\
+C． 两情若是久长时，又岂在朝朝暮暮——秦观——宋朝 <br/>\
+D． 问君能有几多愁，恰似一江春水向东流——李煜——唐朝 <br/>\
+答案：D <br/>\
+1、He will soon____ his disappointment and be quite cheerful again by the afternoon. <br/>\
+A、get over  <br/>\
+B、get out of  <br/>\
+C、get away  <br/>\
+D、get through 答案：A <br/>\
+2、Robert surprised every one of us when he____ the job of office manager. <br/>\
+A、turned away  <br/>\
+B、turned back  <br/>\
+C、turned down  <br/>\
+D、turned over 答案：C <br/>\
+3、Everybody must have____ own choice. <br/>\
+A、your  <br/>\
+B、one~s  <br/>\
+C、their  <br/>\
+D、her 答案：C <br/>\
+4、If we really ____, we can get the whole house cleaned in two hours. <br/>\
+A、set out  <br/>\
+B、set off  <br/>\
+C、set down  <br/>\
+D、set to 答案：D <br/>\
+5、We criticize him____ he should make the same mistake again. <br/>\
+A、unless  <br/>\
+B、so that  <br/>\
+C、if  <br/>\
+D、lest 答案：D <br/>\
+6、____that the trade between the two countries reached its highest point. <br/>\
+A、During the 1980~s  <br/>\
+B、That it was in the 1980~s  <br/>\
+C、It was in the 1980~s  <br/>\
+D、It was the 1980~s  <br/>\
+答案：C <br/>\
+7、Do that again ____you~ll be in trouble. <br/>\
+A、and  <br/>\
+B、but  <br/>\
+C、so  <br/>\
+D、however 答案：A <br/>\
+8、___the impact of the ideas introduced to Europe by soldiers returning from the East, the West was greatly changed. <br/>\
+A、Because of  <br/>\
+B、By means of  <br/>\
+C、In addition to  <br/>\
+D、In spite of 答案：A <br/>\
+9、The new government  _____ the foreign-owned oil fields one after another. <br/>\
+A、took over  <br/>\
+B、took out  <br/>\
+C、took off  <br/>\
+D、took on  答案：A <br/>\
+10、He does nothing that____ the interests of the company. <br/>\
+A、runs for  <br/>\
+B、runs against  <br/>\
+C、runs over  <br/>\
+D、runs into  答案：B <br/>\
+11、To say that someone~s work is not good is to find fault ____it. <br/>\
+A、of  <br/>\
+B、with  <br/>\
+C、for  <br/>\
+D、on  答案：B <br/>\
+12、The airport is five miles____. <br/>\
+A、away from here  <br/>\
+B、from here away  <br/>\
+C、far from here  <br/>\
+D、far away from here  答案：A <br/>\
+13、He ____his post because he had been offered a better job. <br/>\
+A、resigned  <br/>\
+B、retired  <br/>\
+C、dismissed  <br/>\
+D、fired  答案：A <br/>\
+14、After crying so much, she had to ____before coming downstairs. <br/>\
+A、dress up  <br/>\
+B、make up  <br/>\
+C、wash up  <br/>\
+D、wind up  答案：C <br/>\
+15、He is ____in English but good at maths. <br/>\
+A、bad  <br/>\
+B、good  <br/>\
+C、weak  <br/>\
+D、strong  答案：C <br/>\
+16、I will get____ bicycle as I had before. <br/>\
+A、the same  <br/>\
+B、same  <br/>\
+C、similar  <br/>\
+D、alike  答案：A <br/>\
+17、It~s a good thing for a/an____ to explain this difficult subject <br/>\
+A、surgery  <br/>\
+B、sponsor  <br/>\
+C、specialist  <br/>\
+D、employer  答案：C <br/>\
+18、We~ll ____that difficulty before we carry out our new plan. <br/>\
+A、remove  <br/>\
+B、attack  <br/>\
+C、overcome  <br/>\
+D、finish  答案：C <br/>\
+19、I think talks are the best solution ____the trouble. <br/>\
+A、about  <br/>\
+B、in  <br/>\
+C、to  <br/>\
+D、with  答案：C <br/>\
+20、He thought he could talk Mr. Robinson____ buying some expensive items. <br/>\
+A、to  <br/>\
+B、about  <br/>\
+C、into  <br/>\
+D、on  答案：C <br/>\
+21、下列划线词语的意思与现代汉语基本相同的一项是 <br/>\
+  A． 师不必贤于弟子 <br/>\
+B． 断头置城上，颜色不少变 <br/>\
+C． 令五人保其首领以老于户牖之下 <br/>\
+D． 诸侯之所亡，与战败而亡者，其实亦百倍 <br/>\
+	 答案：A <br/>\
+22、下列有关中国古代文学常识的表述，有错误的一项是 <br/>\
+A.     我国先秦散文主要有两大类：历史散文和诸子散文。 <br/>\
+B.     《诗经》是我国最早的一部诗歌总集，以五言诗为主。 <br/>\
+C.     “骚体”又称“楚辞体”，得名于屈原的《离骚》，特点之一是多用“兮”字。 <br/>\
+D.     明代汤显祖的《牡丹亭》描写了杜丽娘和柳梦梅的爱情故事。 <br/>\
+	 答案：B <br/>\
+23、关于苏轼《赤壁赋》中哪些是通假字以及字义为何的说明，不正确的一项是 <br/>\
+A． 举酒属客：“属”是通假字，通“嘱”，在文中指劝人饮酒 <br/>\
+B． 冯虚御风：“冯”是通假字，通“凭”，乘 <br/>\
+C． 山川相缪：“缪”是通假字，通“缭”，盘绕 <br/>\
+D． 枕藉舟中：“藉”是通假字，通“籍”，上课铃 <br/>\
+	 答案：D <br/>\
+24、以下句子中，不是被动句的一句是 <br/>\
+A．君子博学而日参省乎己（《劝学》） <br/>\
+B．吾长见笑于大方之家（《秋水》） <br/>\
+C．予羁縻不得还（《〈指南录〉后序》） <br/>\
+D．不者，若属皆且为所虏（《鸿门宴》） <br/>\
+	 答案：A <br/>\
+25、下列有关中国现当代文学常识的表述，有错误的一项是 <br/>\
+A.     茅盾的代表作有长篇小说《子夜》、短篇小说《伤逝》等等。 <br/>\
+B.     钱钟书是著名的学者、作家，创作了学术著作《谈艺录》《管锥编》、长篇小说《围城》等。 <br/>\
+C.     巴金是我国现代著名的小说家、杂文家。小说《灭亡》《家》、散文集《随想录》等都是他的代表作。 <br/>\
+D.     冰心是“五四”新文学运动中涌现的著名女作家，她的《笑》《往事》《寄小读者》等作品被认为是当时具有典范意义的“美文”。 <br/>\
+	 答案：A <br/>\
+26、有关《诗经》的表述，错误的一项是 <br/>\
+A． 《诗经》是我国最早的一部诗歌总集。 <br/>\
+B． 《诗经》中所录的305篇诗歌以四言诗为主。 <br/>\
+C． 《诗经》和《大学》《中庸》《论语》《孟子》并称“五经”。 <br/>\
+D． 《诗经》中的诗歌分为风、雅、颂三个部分，其中“风”又叫“国风”。 <br/>\
+	 答案：C <br/>\
+27、下列有关外国文学常识的表述，有错误的一项是 <br/>\
+A． 于连是小说《红与黑》的主人公。 <br/>\
+B． 高尔基一生创作甚丰，小说《童年》《在人间》《我的大学》是他的自传三部曲。 <br/>\
+C． 诗集《新月集》《飞鸟集》《园丁集》是印度著名诗人泰戈尔的代表作品。他的诗歌格调清新，具有民族风格。 <br/>\
+D． 俄国作家契诃夫以擅长写短篇小说著称，也写过剧本。主要作品有短篇小说《套中人》《变色龙》等，剧本有《玩偶之家》等。 <br/>\
+	 答案：D <br/>\
+28、有关杜甫的表述，错误的一项是 <br/>\
+A． 杜甫被后人称为“诗圣”。 <br/>\
+B． 杜甫是唐代现实主义诗人的杰出代表。 <br/>\
+C． 杜甫曾经担任唐朝史官，所以被称为“诗史”。 <br/>\
+D． 杜甫诗歌以“沉郁顿挫”著称，与李白的“清新飘逸”明显不同。 <br/>\
+	 答案：C <br/>\
+29、“忧劳可以兴国，逸豫可以亡身”出自 <br/>\
+A． 荀子《劝学》 <br/>\
+B． 韩愈《师说》 <br/>\
+C． 苏洵《六国论》 <br/>\
+D． 欧阳修《伶官传序》 <br/>\
+	 答案：D <br/>\
+30、“锲而舍之，朽木不折；锲而不舍，金石可镂”出自 <br/>\
+A.     《论语》 <br/>\
+B.     《孟子》 <br/>\
+C.     《荀子?劝学》 <br/>\
+D.     　韩愈《师说》 <br/>\
+	 答案：C <br/>\
+31、“知之为知之，不知为不知，是知也”出自 <br/>\
+A． 《论语》 <br/>\
+B． 《孟子》 <br/>\
+C． 《荀子》 <br/>\
+D． 《韩非子》 <br/>\
+ 答案：A <br/>\
+32、“古来圣贤皆寂寞，惟有饮者留其名”出自 <br/>\
+A． 曹操《短歌行》 <br/>\
+B． 李白《将进酒》 <br/>\
+C． 陶潜《归园田居》 <br/>\
+D． 苏轼《水调歌头》 <br/>\
+	 答案：B <br/>\
+33、“故天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。”这段话出自 <br/>\
+A． 《论语》 <br/>\
+B． 《孟子》 <br/>\
+C． 《史记》 <br/>\
+D． 《战国策》 <br/>\
+	 答案：B <br/>\
+34、下列有关中国古代文学常识的表述，有误的一项是 <br/>\
+A.     《老子》又名《道德经》，《庄子》又名《南华经》。它们是道家思想的代表著作。 <br/>\
+B.     唐代古文运动的领导人物是韩愈、柳宗元和白居易，他们主张“文以明志”“文以明道”。 <br/>\
+C.     《兰亭集序》的作者是东晋的王羲之，他是中国古代著名的书法家。 <br/>\
+D.     元曲包括散曲和杂剧。 <br/>\
+	 答案：B <br/>\
+35、下列有关中国现代文学常识的表述，有误的一项是 <br/>\
+A． 郭沫若是我国新诗的奠基人之一，《女神》是他的浪漫主义诗歌的代表作。 <br/>\
+B． 鲁迅的《阿Q正传》向我们展现了辛亥革命时期病态的中国社会和畸形的国人面貌，希望以此“引起疗救的注意”。 <br/>\
+C． 长篇小说《青春之歌》和《围城》分别塑造了不同类型的知识分子形象，从不同侧面描写了知识分子在革命斗争中的成长过程。 <br/>\
+D． 老舍是著名的小说家、戏剧家，代表作有小说《骆驼祥子》《四世同堂》及剧本《茶馆》《龙须沟》等等。他的作品大多以北京为地域背景。 <br/>\
+	 答案：C <br/>\
+36、下列有关外国文学常识的表述，有误的一项是 <br/>\
+A． 欧洲文艺复兴时期涌现了一批成就卓著的作家，如但丁、卜伽丘和欧?亨利，等等。 <br/>\
+B． 世界名著《人间喜剧》和《战争与和平》的作者分别是巴尔扎克和托尔斯泰。 <br/>\
+C． 莫泊桑是法国作家，惠特曼是美国诗人，奥斯特洛夫斯基是前苏联作家。 <br/>\
+D． 哈姆雷特是莎士比亚的著名悲剧《哈姆雷特》中的主人公。《哈姆雷特》同《麦克白》《李尔王》和《奥赛罗》共同构成了莎士比亚的“四大悲剧”。 <br/>\
+	 答案：A <br/>\
+37、下列各句中，没有语病的一句是 <br/>\
+A．鸦片战争以来的中国近代史，对于大多数中学生是比较熟悉的，重大的历史事件都能说得一清二楚。 <br/>\
+B．为保持北京的古都风貌，在北京市旧城区改造中，新的建筑应以故宫和皇城为中心向外分七个层次逐步提高。 <br/>\
+C．初涉文坛，她的第一部处女作就是这样一部意味深长的巨著，不能不令人刮目相看。 <br/>\
+D．“神舟”五号载人飞船把我国首位航天员成功送入浩瀚的太空并安全返回，这是我国航天事业取得的又一举世瞩目的成就。 <br/>\
+ 答案：D <br/>\
+38、以下有关中国文化常识的表述，不准确的一项是 <br/>\
+A． “岁寒三友”是指竹子、松树、兰花。 <br/>\
+B． 儒家思想的创始人是孔子，道家思想的创始人是老子。 <br/>\
+C．  “五岳”是中国五大名山的总称，其中东岳为泰山，西岳为华山。 <br/>\
+D.  《四库全书》是清代官方纂修的一部大型丛书，按照经、史、子、集四部分类。 <br/>\
+	  答案：A <br/>\
+39、下面作家、朝代、作品对应不正确的一项是 <br/>\
+A.     王勃/唐代/《滕王阁序》 <br/>\
+B.     陶渊明/南朝/《桃花源记》 <br/>\
+C.     龚自珍/清代/《病梅馆记》 <br/>\
+D.     王安石/宋代/《游褒禅山记》 <br/>\
+	 答案：B <br/>\
+40、以下作家中，全是南宋作家的一组是 <br/>\
+A．欧阳修 王安石 秦观 柳永 <br/>\
+B．范仲淹 辛弃疾 苏轼 秦观 <br/>\
+C．辛弃疾 文天祥 陆游 姜夔 <br/>\
+D．欧阳修 李清照 柳永 苏洵 <br/>\
+ 答案：C <br/>\
+        ";
+    });
+</script>
+</head>
+
+<body id="_a3_id_article">
+<br />
+<br />
+<br />
+<button onclick="test_contents()">test_contents()</button>
+<br /><br />
+dfasddd
+<div class="_a3_class_html_paper">
+<div id="_a3_id_article">
+
+</div>
+
+</div>
+<br />
+<div id="ym_result_panel_test">
+
+</div>
+
+现代远程教育入学考试试题文史类（高中起点层次） <br/>\
+1、When did the book____？ <br/>\
+A、come off  <br/>\
+B、come out  <br/>\
+C、come round  <br/>\
+D、come true  <br/>\
+答案：B <br/>\
+2、You can go when the ground____. <br/>\
+A、is drying  <br/>\
+B、has dried  <br/>\
+C、dried  <br/>\
+E、dry  <br/>\
+答案：B <br/>\
+3、You may borrow the book, ____you do not lend it to anyone else. <br/>\
+A、in good condition  <br/>\
+B、on condition that  <br/>\
+C、in no condition to  <br/>\
+D、in condition  <br/>\
+答案：B <br/>\
+4、A university ____of teachers, administrators and students. <br/>\
+A、consists  <br/>\
+B、composes  <br/>\
+C、includes  <br/>\
+D.contains  <br/>\
+答案：A <br/>\
+5、I~m tired of this____ rain. <br/>\
+A、continuous  <br/>\
+B、continual  <br/>\
+C、constant  <br/>\
+D、eternal  <br/>\
+答案：B <br/>\
+6、We must arrive there____ before midnight. <br/>\
+A、at all costs  <br/>\
+B、at the cost  <br/>\
+C、at half cost  <br/>\
+D.to our cost  <br/>\
+答案：A <br/>\
+7、This is a ____war in terms of the number of men killed and wounded. <br/>\
+A、expensive  <br/>\
+B、costly  <br/>\
+C、dear  <br/>\
+D、high  <br/>\
+答案：B <br/>\
+8、If you ____only ____it once again! <br/>\
+A、can... do  <br/>\
+B、would ... do  <br/>\
+C、have ... done  <br/>\
+D.will ... do <br/>\
+ 答案：B <br/>\
+9、This is a ____suggestion. <br/>\
+A、crazy  <br/>\
+B、mad  <br/>\
+C、wild  <br/>\
+D.	fierce  <br/>\
+答案：A <br/>\
+10、The crowd stared at the giant and the dwarf as if they were____ monsters. <br/>\
+A、credulous  <br/>\
+B、incredible  <br/>\
+C、incredulous  <br/>\
+D、creditable 答案：B <br/>\
+11、I cut my finger and it became badly____. <br/>\
+A、infected  <br/>\
+B、affected  <br/>\
+C、effected  <br/>\
+D、diseased 答案：A <br/>\
+12、She is a pretty____. <br/>\
+A、animal  <br/>\
+B、beast  <br/>\
+C、creative  <br/>\
+D、creature 答案：D <br/>\
+13、Poets have____ sleep____ death. <br/>\
+A、compared ... with  <br/>\
+B、compared ... to  <br/>\
+C、compare ... to  <br/>\
+D、compare... with 答案：B <br/>\
+14、If I take this medicine twice a day, it should ____my cold. <br/>\
+A、recover  <br/>\
+B、heal  <br/>\
+C、restore  <br/>\
+D、cure 答案：D <br/>\
+15、 ____in England, Anne Bradstreet both admired and imitated several English poets. <br/>\
+A、Having born and educating  <br/>\
+B、To be born and educated  <br/>\
+C、Since born and educated  <br/>\
+D、Born and educated 答案：C <br/>\
+16、Finally she managed to get into ____with him. <br/>\
+A、contrast  <br/>\
+B、contract  <br/>\
+C、contact  <br/>\
+D、contest 答案：C <br/>\
+17、A new technique____ , the yields as a whole increased by 20 percent. <br/>\
+A、working out  <br/>\
+B、having been worked out  <br/>\
+C、having worked out  <br/>\
+D、to have been worked out 答案：B <br/>\
+18、The girl had to____ her journey because of her mother~s illness. <br/>\
+A、abandon  <br/>\
+B、desert  <br/>\
+C、leave  <br/>\
+D、quit 答案：A <br/>\
+19、____for many year, the writer suddenly became famous. <br/>\
+A、Having ignored  <br/>\
+B、To be ignored  <br/>\
+C、To have been ignored  <br/>\
+D、Having been ignored 答案：D <br/>\
+20、John has never been ____a plane. <br/>\
+A、abroad  <br/>\
+B、above  <br/>\
+C、aboard  <br/>\
+D、absorb  <br/>\
+答案：C <br/>\
+21、	下列各组词语中划线的字的读音都不相同的一项是 <br/>\
+A.     边陲    锤炼     捶打     唾手可得 <br/>\
+B.     彼此    坡地     波浪     疲惫不堪 <br/>\
+C.     颠沛    嗔怪     缜密     瞋目而视 <br/>\
+D     屹立    起讫     呓语     自古迄今 <br/>\
+答案：B <br/>\
+22、	下列词语中所标注的读音全部正确的一项是 <br/>\
+A.     攻讦（jié）  胭（yān）脂    气氛（fēn）    擢（zhuó）发难数 <br/>\
+B.     泥淖（nào）  角（jiǎo）色    福祉（zhǐ）  长歌当（dàng）哭 <br/>\
+C.     宽宥（yòu）  埋（mái）怨    水獭（lài）   不值一哂（xī） <br/>\
+D.     哽咽（yàn）  拙（zhuō）笨   癖（pì）好    毁家纾（shū）难 <br/>\
+答案：A <br/>\
+23、	下列各组词语中，没有错别字的一项是 <br/>\
+A. 睿智     丰功伟绩       湮没无闻    不费败灰之力 <br/>\
+B. 惊蛰     闻过饰非       按图索骥    事实胜于雄辩 <br/>\
+C. 涵养     挺而走险       兵荒马乱    急人自有天相 <br/>\
+D. 斡旋     喧宾夺主       强鸳之末     风马牛不相及 <br/>\
+答案：B <br/>\
+24、	下列句子中，没有错别字的一句是 <br/>\
+A.     要注意劳逸结合，有张有驰。 <br/>\
+B.     不徇私情、仗义执言的品质尤其可贵。 <br/>\
+C.     刻苦耐劳、顽强拼搏的学习精神确实可佳。 <br/>\
+D.     对于富商巨贾来说，这区区数百元简直是微忽其微，不足挂齿。 <br/>\
+答案：B <br/>\
+25、	对下列词语的解释，不正确的一项是 <br/>\
+A.     品评：品尝之后作出评价 <br/>\
+B.     鉴别：对某物的好坏真假作出评判 <br/>\
+C.     抚养：多指长辈对晚辈的养育 <br/>\
+D.     赡养：多指子女对父母在生活上物质上的帮助 <br/>\
+答案：A <br/>\
+26、	对下列词语意义的解释，正确的一组是 <br/>\
+A．信服（相信并佩服）　　　　　　信口雌黄（说大话） <br/>\
+B．本色（本来面貌）　　　　　　　舍本求末（重视细节）    <br/>\
+C．生僻（少见的，不熟悉的）    生吞活剥（凶残而贪婪） <br/>\
+D．闻名（有名） 　　　　     闻风而动（一听到消息就立刻行动） <br/>\
+答案：D <br/>\
+27、	下列句子中划线的虚词，使用不正确的一项是 <br/>\
+A．为了表示对陶渊明的崇敬，江西九江修建了陶渊明纪念馆。 <br/>\
+B．中国国家男子足球队战胜了阿曼队之后，全国各大报纸关于这场比赛都作了详细的报道。 <br/>\
+C．《纽约时报》于日前推出一组“眺望明日世界”专题文章，大胆预测了32项不出l0年就会面世的科技新产品。 <br/>\
+D．中国人民银行、财政部和教育部联合发出通知，要求四大国有银行发放教育贷款，以解决寒门学子入学难的问题。 <br/>\
+答案：B <br/>\
+28、	下列各句中成语使用不当的一句是 <br/>\
+A.素质教育的核心问题是“做人”教育，这必将对人类社会的发展起到不可磨灭的作用。 <br/>\
+B.她身着一袭绿色长裙，溶入音乐起舞，用形体语言，行云流水般勾勒出江南春光无限好的意境。 <br/>\
+ C.连续的暴雨，造成河道水位猛涨。昨天，省里来电，要求沿河各级部门严阵以待，防患于未然。 <br/>\
+ D.目前，语文教学的最大弊端是条分缕析，教师过分的讲解，不仅使学生失去了学习兴趣，而且影 <br/>\
+响了学生独立思考能力的形成。 <br/>\
+答案：D <br/>\
+29、	依次填入下列句子空缺处的成语，最恰当的一项是 <br/>\
+①这几幅画是他的早期作品，自是不能和他现在的创作          。 <br/>\
+②作者笔下宝钗和黛玉这两个人物，常常是被人          加以评比的。 <br/>\
+③文学批评中，不能把形式的模仿和内容的抄袭          。 <br/>\
+④后来列国纷纷称王，周室更不算回事，至多能和宋鲁等小国君主          罢了。 <br/>\
+ A.相提并论 等量齐观 同日而语 混为一谈 <br/>\
+ B.等量齐观 混为一谈 相提并论 同日而语 <br/>\
+ C.同日而语 相提并论 混为一谈 等量齐观 <br/>\
+ D.混为一谈 同日而语 等量齐观 相提并论 <br/>\
+	答案：C <br/>\
+30、下列各句中，没有语病的一项是 <br/>\
+A.     本次校运会共进行了65个项目的比赛，刷新了40个校纪录项目，再创历史新高。 <br/>\
+B.     汉武帝不仅在政治上采取了一系列卓有成效的改革，而且在经济上也采取了许多有利于发展生产的革新。 <br/>\
+C.     国际社会认为海洋资源的开发利用是人类走出当前人口剧增、资源枯竭、环境恶化的困境和未来发展的重要出路。 <br/>\
+D.     医疗保险改革，“既要让人看得起病，又要控制不必要医疗开支”，目的如此明确，为什么有关领导会感到方向不清呢？  <br/>\
+答案：D <br/>\
+31、下列句子中，有语病的一项是 <br/>\
+A.从外部条件上看，孩子们产生厌学情绪，是由于学校和家庭对他们施加了过大压力的因素造成的。 <br/>\
+B.校团委组织为社区服务的学生义工队，这是一种很好的培养服务意识、锻炼实践能力的教育手段。 <br/>\
+C. 在大量药品广告的影响下，一些家长期望通过使用补品来增长孩子智力，这种想法本身就是对子女教育认识的一个误区。 <br/>\
+D.古往今来，青青翠竹吸引了无数诗人和画家。竹子成为我国诗歌和绘画的传统题材，它象征了中华民族坚定顽强的精神。 <br/>\
+	答案：A <br/>\
+32、下列各句中标点符号使用正确的一项是 <br/>\
+A.     上课铃已经敲响了，可教室里还空着三、四个座位，讲台上的老师不禁皱起了眉头。 <br/>\
+B.     人言可畏吗？答：可畏，又不可畏。可畏者，舆论能形成压力；不可畏者，事实胜于雄辩。 <br/>\
+C.     北大方正的创始人王选把科技领域里的人才比喻为三类：指兔子的人，打兔子的人，捡兔子的人，他自认为是第二种人。 <br/>\
+D.     王老师经常利用节假日家访，了解孩子住在哪个房间？做作业的时候坐在什么地方？光线好不好？晚上什么时候睡觉？一日三餐吃些什么？ <br/>\
+答案：B <br/>\
+33、下列各组词语中，划线的字的读音完全相同的一组是 <br/>\
+A．觊觎    阿谀    文娱    尔虞我诈 <br/>\
+B．沉浸    尽管    荆棘    加官晋爵 <br/>\
+C．蝌蚪    瞌睡    窠臼    扭伤踝骨 <br/>\
+D．殷红    长缨    阴霾    绿草如茵 <br/>\
+答案：A <br/>\
+34、下列各组词语中，划线的字的读音都不相同的一组是 <br/>\
+A.威吓    唱和    干涸    荷枪实弹 <br/>\
+B.樊篱    斐然    莲藕    向隅而泣 <br/>\
+C.国殇    烙印    趔趄    举觞相庆 <br/>\
+D.骨骼    洽谈    悭吝    恰如其分 <br/>\
+答案：B <br/>\
+35、下列各组词语中，没有错别字的一组是 <br/>\
+A.     既使　连锁店　察颜观色　一年之计在于春 <br/>\
+B.     坐落　炒鱿鱼　青山绿水　一言既出，驷马难追 <br/>\
+C.     苍桑　下马威　渡过难关　防人之口，胜于防川 <br/>\
+D.     影碟　歌午厅　再接再励　桃李不言，下自成溪 <br/>\
+答案：B <br/>\
+36、下列各句中标点符号使用不当的一句是 <br/>\
+A.     “二拍”与“三言”不同，基本上都是个人创作。 <br/>\
+B.  “学习就怕‘认真’二字。”父亲说：“‘态度决定一切’，确实很有道理。” <br/>\
+C.  “激情“源于希腊语，原意是“上帝本色”，这里的上帝本色不是别的，是指一种持久不变的爱心。 <br/>\
+D.  “北京胡同”图片展深深吸引了观众，那小巷，那木门，那院墙，那古树，已经成了难以寻觅的影子——真可谓“梦忆深深深几许，一街一巷总关情”。 <br/>\
+答案：B <br/>\
+37、以下有关词语情感色彩的表述，不正确的一项是  <br/>\
+A. 粉墨登场：含贬义 <br/>\
+B. 美轮美奂：含褒义 <br/>\
+C. 附庸风雅：含贬义 <br/>\
+D. 耳提面命：中性，可褒可贬 <br/>\
+答案：D <br/>\
+38、下列各句中成语使用恰当的一句是 <br/>\
+A.看到他的滑稽表演，一名外国记者忍俊不禁扑哧一声笑起来。 <br/>\
+B.尽管这部影片的故事情节和演员的表演都很难让人满意，但瑕不掩瑜，它的音乐仍深得观众喜爱。 <br/>\
+C.大自然这一超级画家用出神入化的笔法，将深浅浓淡、隐显明暗搭配组合，使极光变成了五彩缤纷的万花筒。 <br/>\
+D.只见他奋笔疾书，一气呵成，不消片刻，一篇佳作便展现在大家面前。只是文不加点，难以断句，不能不说是白璧微瑕。 <br/>\
+	答案：C <br/>\
+39、以下有关词语适用对象的表述，不正确的一项是 <br/>\
+A． 抚养：用于长辈对晚辈 <br/>\
+B． 奉养：用于晚辈对长辈 <br/>\
+C． 爱护：用于上级对下级、长辈对晚辈 <br/>\
+D． 关怀：用于下对上、长对幼，也可以用于上对下、幼对长 <br/>\
+答案：D <br/>\
+40、填入下列句子横线处的词语，最恰当的一项是 <br/>\
+为学生减负，不只是学校单方面的事情，      整个社会的事情。因此必须有社会各方面力量的参与。 <br/>\
+A.     而是 <br/>\
+B.     而且是 <br/>\
+C.     所以是 <br/>\
+D.     从而是 <br/>\
+答案：B <br/>\
+1、___ , the next problem was how to make a good plan. <br/>\
+A、The decision having made  <br/>\
+B、The decision has been made  <br/>\
+C、The decision was made  <br/>\
+D、The decision having been made  <br/>\
+答案：D <br/>\
+2、A child has ____trust in its mother. <br/>\
+A、complete  <br/>\
+B、perfect  <br/>\
+C、absolute  <br/>\
+D、thorough  <br/>\
+答案：C <br/>\
+3、Social ____vary from country to country. <br/>\
+A、habits  <br/>\
+B、traditions  <br/>\
+C、customs  <br/>\
+D、manners  <br/>\
+答案：C <br/>\
+4、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. worthy                    <br/>\
+B. clothing               <br/>\
+C. clothes                   <br/>\
+D. cloth <br/>\
+答案：C <br/>\
+5、I have decided to____ my smoking. <br/>\
+A、cut in  <br/>\
+B、cut off  <br/>\
+C、cut down  <br/>\
+D、 cut across  <br/>\
+答案：C <br/>\
+6、There are____ supplies of firewood in the forest. <br/>\
+A、plentiful  <br/>\
+B、abundant  <br/>\
+C、plenty of  <br/>\
+D、many  <br/>\
+答案：B <br/>\
+7、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。   <br/>\
+A. coast        <br/>\
+ B. broadcast         <br/>\
+ C. throat          <br/>\
+ D. float <br/>\
+答案：B <br/>\
+8、He has been very ill, but he is now____. <br/>\
+A、in danger  <br/>\
+B、out of control  <br/>\
+C、out of place  <br/>\
+D、out of danger 答案：D <br/>\
+9、Mary____ what she set out to do. <br/>\
+A、finished  <br/>\
+B、achieved  <br/>\
+C、completed  <br/>\
+D、accomplished  <br/>\
+答案：D <br/>\
+10、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. ahead         <br/>\
+B. break          <br/>\
+C. pleasure        <br/>\
+ D. breath <br/>\
+答案：B <br/>\
+11、____with the size of the whole earth, the highest mountain doesn~t seem high at all. <br/>\
+A、When compared  <br/>\
+B、While comparing  <br/>\
+C、Compare  <br/>\
+D、Comparing  <br/>\
+答案：A <br/>\
+12、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. camel                        <br/>\
+ B. camera                   <br/>\
+C. advanced                     <br/>\
+ D. canal <br/>\
+答案：C <br/>\
+13、My head began to ____because of the wind. <br/>\
+A、pain  <br/>\
+B、harm  <br/>\
+C、be hurt  <br/>\
+D、ache 答案：D <br/>\
+14、The father bought him a large toy train____. <br/>\
+A、which to play with  <br/>\
+B、to play with it  <br/>\
+C、to play with  <br/>\
+D、at which to play 答案：C <br/>\
+15、在下列单词中，有一个单词的划线部分与其他单词的划线部分的读音不同，找出这个单词。 <br/>\
+A. towards                <br/>\
+B. forward               <br/>\
+C. warm                   <br/>\
+D. war答案：B <br/>\
+16、The rain will ____our plans for a picnic. <br/>\
+A、affection  <br/>\
+B、influence  <br/>\
+C、affect  <br/>\
+D、effect 答案：C <br/>\
+17、They don~t allow ____in the library, but they allow people____ in the restroom. <br/>\
+A、to smoke ... to smoke  <br/>\
+B、to smoke...smoking  <br/>\
+C、smoking ...smoking  <br/>\
+D、smoking...to smoke 答案：D <br/>\
+18、It is required that all the staff should be able to ____any emergency that might arise. <br/>\
+A、cope with  <br/>\
+B、make up  <br/>\
+C、see through  <br/>\
+D、take up 答案：A <br/>\
+19、My mother is deaf so she has to use a hearing____. <br/>\
+A、help  <br/>\
+B、machine  <br/>\
+C、aid  <br/>\
+D、assist 答案：C <br/>\
+20、Most people who travel in the course of their work are given traveling____. <br/>\
+A、income  <br/>\
+B、allowances  <br/>\
+C、wages  <br/>\
+D、pay  <br/>\
+答案：B <br/>\
+21、下列各句中，成语使用正确的一项是答案：B <br/>\
+A． 他购买彩票，连续两次中奖，真是左右逢源。 <br/>\
+B． 随着《百家讲坛》的“易中天品三国”系列节目的开播，“易中天”这个名字不胫而走。 <br/>\
+C． 高考提前到六月进行，使莘莘学子从七月流火的最炎热的日子里解脱出来，体现了党和政府对广大考生的关怀。 <br/>\
+D.  手机业近年来虽然酝酿着种种新技术的突破，但根本性的产品创新还指日可待，新产品创新的周期相对较长。  <br/>\
+22、下列各句中，成语使用不当的一项是 <br/>\
+A． 他们夫妻俩十多年来互敬互爱，真可谓举案齐眉。 <br/>\
+B． 这些伪劣药品造成的危害骇人听闻，药品市场非整顿不可。 <br/>\
+C． 古人写文章都是文不加点，所以，今天我们读起来特别吃力。 <br/>\
+D． 如果对中国人民的严正声明和强烈抗议置若罔闻，一意孤行，必将自食其果。 <br/>\
+	答案：C <br/>\
+23、下列各句中，熟语运用恰当的一项是 <br/>\
+A.     他为人不错，工作更是认真，丁是丁，卯是卯。 <br/>\
+B.    自从迷恋上网络游戏后，他便把功课抛在了脑后，掉书袋、抄作业的现象时有发生，学习明显退步。 <br/>\
+C.    本市大力推进科技成果的产业化，从而为郊区经济的发展注入了“兴奋剂”。 <br/>\
+D.    他三天两头到厂长的办公室磨洋工，希望厂里帮助他解决妻子的就业问题。 <br/>\
+	答案：A <br/>\
+24、依次填入下列句子中横线处的成语，恰当的一组是 <br/>\
+① 中国古代的心理研究          ，早在战国时期《内经》一书中，就有了心理因素在人体疾病的发生、诊断和预防中起着重要作用的系统论述。 <br/>\
+② 电视剧《孔子》虽然博得了有关专家和学者的一致好评，但终因          ，收视率不高。 <br/>\
+③ 开赛以来，他们稳扎稳打，英勇顽强，终于          ，夺取了金牌。 <br/>\
+④ 为了完成《史记》的写作，司马迁          ，倾注了毕生的精力。 <br/>\
+A． 年深月久　　曲高和寡　　一蹴而就　　皓首穷经 <br/>\
+B． 源远流长　　曲高和寡　　脱颖而出　　呕心沥血 <br/>\
+C． 源远流长　　寡不敌众　　脱颖而出　　呕心沥血 <br/>\
+D． 年深月久　　寡不敌众　　一蹴而就　　皓首穷经 <br/>\
+答案：B <br/>\
+25、下列各句中，没有语病的一句是 <br/>\
+A． 由于刻意追求苗条，滥用减肥药品，使得她的健康状况受到了极大的损害。 <br/>\
+B． 当今流行歌坛出现了一些低俗的作品，这反映了某些词作者随波逐流，媚俗竞利。 <br/>\
+C． 数码媒体艺术，大多数人还是比较陌生的；作为一种新的艺术形式，它正日益受到关注和发展。 <br/>\
+D． 我们不赞成应试教育，决不是主张取消考试，而是不赞成以应付升学考试为唯一目的来开展教育教学活动的做法。 <br/>\
+	答案：D <br/>\
+26、下列各句中，有语病的一句是 <br/>\
+A.      这个任务很艰巨，它要求承担者具有扎实的业务知识和丰富的实践经验才能胜任。 <br/>\
+B.      桥，它以巨人的步伐，飞跃江河，横渡深谷，变崎岖为平坦，化险阻为通途，用脊梁承担起人类赋予的重任。 <br/>\
+C.     “神舟六号”宇宙飞船发射成功，标志着我国航天事业又向前大大跨进了一步，炎黄子孙不能不为之骄傲自豪。 <br/>\
+D.     首届中国大学生电视节设有最受大学生欢迎的主持人、最受大学生欢迎的电视剧和最受大学生欢迎的栏目等奖项。 <br/>\
+	答案：A <br/>\
+27、依次填入下面这段话横线处的标点符号，最恰当的一项是 <br/>\
+“唉     ”作家叹道      “红尘之中，人海茫茫     要找出个不知姓名的陌生人来，这不是大海捞针吗      ” <br/>\
+ A.  ！　　：　　。　　？ <br/>\
+ B.  ！　   ：　　；          ！ <br/>\
+ C.  ！　　，　　， 　 ？ <br/>\
+ D.  ，     ，　　。　　！ <br/>\
+答案：C <br/>\
+28、下列各句中，标点符号使用正确的一句是 <br/>\
+A． 老师语重心长地对他说：“以后一定要记住这次教训，‘知之为知之，不知为不知’，不要强不知以为知”。 <br/>\
+B． “人生就是一个童话，我的人生也是一个童话”。安徒生在他创作的《真爱让我如此幸福》中，开篇就以这样一句话真实而生动地概括了自己的“童话人生”。 <br/>\
+C． 望着早已转卖他人大门紧锁的故居，我竟然有种“恐怕我将认不得房子，而房子也将认不得我了。”（梁实秋《疲鸟恋旧林，羁鸟思故栖》）的凄凉。 <br/>\
+D． 德国外长菲舍尔在纪念奥斯维辛解放60周年的联大特别会议上坦言，大屠杀给他的国家烙上了“永远无法去掉的记号”，“这种野蛮的犯罪永远成为了德国历史的一部分”。 <br/>\
+答案：D <br/>\
+29、下列句子没有歧义的一项是 <br/>\
+ A.金秋时节，这所百年名校迎来了自己的新生。 <br/>\
+ B.三个大学的主要负责人出席了这次工作动员会议。 <br/>\
+ C.今天他得去做手术，虽说不是什么大手术，也别不当回事儿。 <br/>\
+ D.营房传达室坐着的两个人，是来探亲的新兵王勇和李刚的家属。 <br/>\
+	答案：D <br/>\
+30、下列各句中表意明确、没有歧义的一项是 <br/>\
+A． 昨天我从你的车库里拿走的那件工具，没用，今天给你送回来了。 <br/>\
+B． 记得我们认识她的时候，还只是七八岁的小孩子，天真烂漫，无拘无束。 <br/>\
+C． 诚然，家庭在从小培养孩子健康心理和健全人格方面起着至关重要的作用，但社会在对青少年正确对待“自我”的宣传教育上也负有重大责任。 <br/>\
+D． 钱钟书先生的夫人杨绛在把稿酬版税捐赠给清华大学的仪式上说：“我以代表的身份在这里讲话，我一个人代表三个人：我、已去世的钱钟书先生和女儿钱瑗。” <br/>\
+	答案：C <br/>\
+31、卢梅坡的诗句“梅须逊雪三分白，雪却输梅一段香”常被人引用，借以说明 <br/>\
+A． 任何人和事物都各有缺憾 <br/>\
+B． 任何人和事物都各有长处 <br/>\
+C． 任何人和事物都各有千秋 <br/>\
+D． 对任何人、任何事物，人们都是各有所爱 <br/>\
+	答案：A <br/>\
+32、苏轼曾经说过：“书富如海，百货皆有。”既然“百货皆有”，那么 <br/>\
+A． 读书之初，必要先下一番选书的工夫。 <br/>\
+B． 读书之时，当广为涉猎以求兼容并蓄。 <br/>\
+C． 读书之后，定能有所收获甚而满载而归。 <br/>\
+D． 读书前后，应学会去粗取精、去伪存真。 <br/>\
+答案：A <br/>\
+33、依次填入下列各句横线处的词语，恰当的一组是 <br/>\
+① 仅靠道德上的自律或者单纯的宣传教育，并不一定_______，因此，加强管理并严格执法，是非常必要的。 <br/>\
+② 这支劲旅本次比赛意外失利、大爆冷门的原因至今_______不清楚，评论者大多认为与球队临时换帅、队员与教练难以沟通有关。 <br/>\
+③ 人们_______要对质量、花色进行挑选，还要追求品牌和时尚，体现个性与修养，服装业也由此成了一个色彩斑斓的时尚产业。 <br/>\
+A.     奏效　　尚　　　不但 <br/>\
+B.     奏效　　尚且　　不单 <br/>\
+C.     生效　　尚且　　不单 <br/>\
+D.     生效　　尚　　　不但 <br/>\
+	答案：A <br/>\
+34、依次填入下面这段话横线处的词语，最恰当的一项是 <br/>\
+        世上事物林林总总，天下文章万万千千，丰富_______芜杂,一口吞不下,一眼望不穿。            加以 选择_______使之简单化、条理化和本质化，_______能认识它，而与此同时，也就是对它的重新组合和再创造。_______，选择文章也是一种文化的再创造。 <br/>\
+A． 而且  只有   才能  从而才  因而 <br/>\
+B． 但是    只要   就能     因而就     所以 <br/>\
+C． 却又  只有  才能    从而才  因此 <br/>\
+D． 但是    只要     就能    因而就    因此 <br/>\
+答案：C <br/>\
+35、下面文段横线处应填的语句排列最恰当的是 <br/>\
+经过17年的研究和实验，中国新概念武器——超高速电炮将问世。据透露，            ，更有可能首先拥有这种高速动能武器。 <br/>\
+① 但进展较快  <br/>\
+② 都在研究这种武器  <br/>\
+③ 中国起步稍晚  <br/>\
+④ 美、俄加大投入  <br/>\
+⑤ 发射技术先进 <br/>\
+A． ④③②⑤①  <br/>\
+B． ④②③①⑤ <br/>\
+C． ③①④⑤②    <br/>\
+D． ③⑤④①② <br/>\
+	答案：B <br/>\
+36、下列各句中，标点符号使用不正确的一句是 <br/>\
+A． 每到放学，总有许多孩子围着老师，仰着脸，热切地邀请——“老师，今天去我家！” <br/>\
+B． 法国著名思想家伏尔泰说得好：上天赐给人两样东西──希望和梦──来减轻他的苦难。 <br/>\
+C． 两百年间，西方不同类型的文本中——其中包括游记、史志、书简、小说——都出现有关契丹、蛮子的记述。 <br/>\
+D． 思维速度大大超过言语表达的速度，因此思维时语言一般呈现为简约的、破碎的、零乱而跳跃的——它来不及形成完整的句子，也往往来不及处理语句间的逻辑联系。 <br/>\
+答案：A <br/>\
+37、分别填入下面这段话中的四组标点符号，最恰当的一组是 <br/>\
+毛主席有两句诗    “独有英雄驱虎豹，更无豪杰怕熊罴           从中我们可以感受到共产党人坚定的信念   乐观的精神。 <br/>\
+A.  :   ”     ，   ， <br/>\
+B.  ，   。   ”    、 <br/>\
+C.  ， ”    ，    ,  <br/>\
+D.  :    。   ”    、 <br/>\
+	答案：D <br/>\
+38、依次填入下面一段文字中横线处的关联词语，恰当的一组是 <br/>\
+小说家应尽可能把人物对话写得流利自然，生动活泼，    ，不能完全像实际说话，讲故事或作报告，    又决不能像日常说话那样支离破碎，    不写稿子，    应像一篇文章。 <br/>\
+A． 虽然　　却　　  即使　　也 <br/>\
+B． 尽管　　可是　　虽然　　但 <br/>\
+C． 尽管　　而且　　虽然　　但 <br/>\
+D． 虽然　　相反　　即使　　也 <br/>\
+答案：A <br/>\
+39、依次填入下面一段文字中横线处的词语，最恰当的一组是 <br/>\
+阅读优秀作品，         其语言，感受其思想，不仅可以         大自然和人生的多姿多彩，还可以激发         自然、热爱生活的感情。 <br/>\
+A.     品味    体味    珍爱 <br/>\
+B.     品味    体味    珍惜 <br/>\
+C.     品评    体验    珍爱 <br/>\
+D.     品评    体验    珍惜 <br/>\
+	答案：A <br/>\
+40、依次填入下列各句横线处的词语，最恰当的一组是 <br/>\
+① 由于书写潦草、文面混乱，老师要求他        誊写。 <br/>\
+② 这双鞋她穿着正        。 <br/>\
+③ 问题是如何产生的，        最后该如何解决，都需要调查研究。 <br/>\
+A．重新　　合适　　及 　       　 <br/>\
+B．从新　　合适　　以及 <br/>\
+C．重新　　适合　　以及          <br/>\
+D．从新　　适合　　及 <br/>\
+答案：B <br/>\
+1、____his house, we at once perceived him to be a man of taste.答案：C <br/>\
+A、As entering  <br/>\
+B、While entering  <br/>\
+C、On entering  <br/>\
+D、After entering  <br/>\
+答案：C <br/>\
+2、It snowed heavily for three days ____and we were isolated from the outside world. <br/>\
+A、in the end  <br/>\
+B、by the end  <br/>\
+C、on end  <br/>\
+D、at the end 答案：C <br/>\
+3、Go back to your home and leave me____. <br/>\
+A、lonely  <br/>\
+B、alone  <br/>\
+C、along  <br/>\
+D、almost 答案：B <br/>\
+4、The manager said that he did not want to ____any further responsibilities. <br/>\
+A、take on  <br/>\
+B、get on  <br/>\
+C、put up  <br/>\
+D、look up 答案：A <br/>\
+5、It covered a(an)____ of 147,000 square miles. <br/>\
+A、ground  <br/>\
+B、spot  <br/>\
+C、site  <br/>\
+D、area 答案：D <br/>\
+6、Do what you are told and don~t ____me. <br/>\
+A、argue with  <br/>\
+B、argue against  <br/>\
+C、argue about  <br/>\
+D、argue into 答案：A <br/>\
+7、Don~t use more words ____are needed to express an idea. <br/>\
+A、that  <br/>\
+B、than  <br/>\
+C、when  <br/>\
+D、which 答案：B <br/>\
+8、 Let me know if any difficulties____. <br/>\
+A、come  <br/>\
+B、arise  <br/>\
+C、rise  <br/>\
+D、happen 答案：B <br/>\
+9、It was several minutes before I was ____of what was happening. <br/>\
+A、know  <br/>\
+B、realize  <br/>\
+C、wear  <br/>\
+D、aware 答案：D <br/>\
+10、The animal with the biggest head____ its body is the ant. <br/>\
+A、in relation to  <br/>\
+B、in connection to  <br/>\
+C、in terms of  <br/>\
+D、in the course of 答案：A <br/>\
+11、He was walking____ along the corridor. <br/>\
+A、back up  <br/>\
+B、back down  <br/>\
+C、back and forth  <br/>\
+D、back of 答案：C <br/>\
+12、He didn~t want to go to the cinema but they begged so hard that he ____and went with them. <br/>\
+A、gave up  <br/>\
+B、gave in  <br/>\
+C、gave out  <br/>\
+D、 gave over 答案：B <br/>\
+13、He does not ____his workmates and there are often disagreements between them. <br/>\
+A、go on with  <br/>\
+B、put up with  <br/>\
+C、get along with  <br/>\
+D、keep up with 答案：C <br/>\
+14、A good ____makes a good ending. <br/>\
+A、origin  <br/>\
+B、source  <br/>\
+C、root  <br/>\
+D、beginning 答案：D <br/>\
+15、My father has lived a long life, and done enough to ____great respect in his town. <br/>\
+A、get  <br/>\
+B、achieve  <br/>\
+C、have  <br/>\
+D、win 答案：D <br/>\
+16、____the English examination, I would have gone to the concert last Sunday. <br/>\
+A、In spite of  <br/>\
+B、Because of  <br/>\
+C、But for  <br/>\
+D、As for 答案：C <br/>\
+17、You can not be ____careful with them. <br/>\
+A、too  <br/>\
+B、very  <br/>\
+C、very much  <br/>\
+D、much 答案：A <br/>\
+18、I~m writing on ____of my mother, to express her thanks for your gift. <br/>\
+A、behave  <br/>\
+B、behalf  <br/>\
+C、belief  <br/>\
+D、before 答案：B <br/>\
+19、It was hard to guess what her ____to the news would be. <br/>\
+A、impression  <br/>\
+B、reaction  <br/>\
+C、comment  <br/>\
+D、opinion 答案：B <br/>\
+20、When we had finished dinner, Mary asked the waiter for the____. <br/>\
+A、note  <br/>\
+B、cheque  <br/>\
+C、bill  <br/>\
+D、tip  <br/>\
+答案：C <br/>\
+21、依次填入下面各句横线处的词语，最恰当的一组是 <br/>\
+① 这一地区曾一度山洪       ，造成公路被毁、交通中断。 <br/>\
+② 校园流行语，各个时期都有，各类学校又各有不同，但却有一个共同的特点，那就是都不适用于正式       。 <br/>\
+③ 我国的法律明确规定，成年子女对父母有       的义务。 <br/>\
+④ 商业广告不同于公益广告，其主要目的就是为了       。 <br/>\
+A． 暴发    场所    抚养    盈利 <br/>\
+B． 爆发    场所    抚养    营利 <br/>\
+C． 爆发    场合    赡养    盈利 <br/>\
+D． 暴发    场合    赡养    营利 <br/>\
+	答案：D <br/>\
+22、依次填入下面横线处的句子，与上下文衔接得最恰当的一组是 <br/>\
+    我独坐在书斋中，忘记了尘世间一切不愉快的事情，怡然自得。以世界之广，宇宙之大，此时却仿佛只有我和我的书存在。        ，        ，        ，        。 <br/>\
+① 阳光照在玉兰肥大的绿叶子上 <br/>\
+② 连平时我喜欢听的鸟鸣声，也听而不闻了 <br/>\
+③ 窗外粼粼碧水，丝丝垂柳 <br/>\
+④ 这都是我平时最喜爱的东西，现在也都视而不见了 <br/>\
+A． ①②③④ <br/>\
+B． ①③②④ <br/>\
+C． ③①④② <br/>\
+D． ③④①② <br/>\
+	答案：C <br/>\
+23、为下面一段文字排序，使其组成一段通顺完整的语段。排序正确的一项是 <br/>\
+① 但无论是教师还是学生 <br/>\
+② 很多人都认为文言文教学最容易 <br/>\
+③ 这种对文言文教学的认识虽然有些偏颇 <br/>\
+④ 说来说去不过是一个“译”字，全文翻译完了教学也就基本结束 <br/>\
+⑤ 尽管文言文的文字深奥生涩，内容与现代生活相距很远 <br/>\
+⑥ 却也指出了教学中的关键——翻译 <br/>\
+A． ⑤①②④③⑥ <br/>\
+B． ②④①③⑥⑤ <br/>\
+C． ②③①④⑤⑥ <br/>\
+D． ⑤①⑥④②③ <br/>\
+答案：A <br/>\
+24、对下列句子的理解，不正确的一项是 <br/>\
+A． “指点江山，激扬文字，粪土当年万户侯。”“粪土”在此作动词使用，表现了诗人蔑视权贵的气度。 <br/>\
+B． “孔雀东南飞，五里一徘徊。”这两句诗用了托物起兴的手法，这种手法是《诗经》和乐府民歌常用的手法。 <br/>\
+C． “一个浑身黑色的人，站在老栓面前，眼光正像两把刀，刺得老栓缩小了一半。”这句话运用了比喻和夸张的修辞手法，表现了刽子手的凶恶和老栓的胆怯。 <br/>\
+D． “正像达尔文发现了有机界的发展规律一样，马克思发现了人类历史的发展规律。”这句话运用了类比的手法，重点在于揭示达尔文的发现具有划时代的意义。 <br/>\
+	答案：D <br/>\
+25、填入下面文字横线处的语句，与上下文衔接得最恰当的一项是 <br/>\
+   据史料介绍，唐武宗时期的名相李德裕，著有《柳次旧闻》《会昌一品集》等，他            ，但对他的一句颇富哲理的名言“正人如松柏，特立不倚；邪人如藤萝，非依附他物不能自起”却早有所闻。 <br/>\
+A． 不仅有文才，而且政声很好，我迄今未曾涉猎他的这些书 <br/>\
+B． 不仅政声很好，而且有文才，我迄今未曾涉猎他的这些书 <br/>\
+C． 不仅政声很好，而且有文才，对于他的这些书我迄今未曾涉猎 <br/>\
+D． 不仅有文才，而且政声很好，对于他的这些书我迄今未曾涉猎 <br/>\
+答案：C <br/>\
+26、以下句子在表述方面与其他三句明显不同的一项是 <br/>\
+A． 人生没有返程车票，一旦出发了，决不能返回 <br/>\
+B． 机遇不是重播节目，一旦错过了，绝不会重现 <br/>\
+C． 誓言没有反悔余地，一旦说出了，绝不能收回 <br/>\
+D． 爱心不是定期存折，一旦存入了，就不可索取本息 <br/>\
+	答案：C <br/>\
+27、以下对联中，明显存在不恰当之处的一幅是 <br/>\
+A． 爆竹声声脆 祖国日日新 <br/>\
+B． 满园春色好 处处花常开 <br/>\
+C． 祖国江山好 大地气象新 <br/>\
+D． 处处春光好 家家气象新 <br/>\
+	答案：B <br/>\
+28、依次填入下列横线上的语句，最恰当的一组是 <br/>\
+     这个时候，我喜欢登上老房子，          ，面对隐约的地平线，         ，我就会听到房子里有人走动的声音，我就会感受到幸福。幸福真的是一种难以言说的感受。 <br/>\
+① 面对温暖的炊烟，面对鳞次栉比的屋脊 <br/>\
+② 面对鳞次栉比的屋脊，面对温暖的炊烟 <br/>\
+③ 还有散布在空气里的恬淡的麦香 <br/>\
+④ 还有散布在空气里的麦香的恬淡 <br/>\
+A． ① ③ <br/>\
+B． ① ④ <br/>\
+C． ② ③ <br/>\
+D． ② ④ <br/>\
+答案：C <br/>\
+29、下列各句中，没有使用修辞方法的一项是 <br/>\
+A． 老师简洁而深刻的话语像一把钥匙，开启了他的心扉。 <br/>\
+B． 母亲一生操劳，一生付出，却从来没有任何懈怠，没有任何抱怨。 <br/>\
+C． 外语学习十分重要，它可以帮助我们打开更多的认识世界的窗口。 <br/>\
+D． 事业是人生的一座大厦，追求是支柱，奋斗是砖瓦，热情是事业成功的脚手架。 <br/>\
+	答案：B <br/>\
+30、可以接续在下面这段文字之后而且衔接得最为紧密的一项是 <br/>\
+    几百年的禁书、焚书、战乱、文字狱、封建迷信等等，使文化典籍丧失无数，惟独文学名著大多无恙，至今依然生气如故。 <br/>\
+A． 细心分析，似乎它们始终是在民间流传，已成为普通人民宝贵的精神食粮。 <br/>\
+B． 究其缘由，是因为它们始终是在民间流传，已经成为普通人民宝贵的精神食粮。 <br/>\
+C． 恐怕主要是因为它们早以成为普通人们宝贵的精神食粮，始终在民间流传。 <br/>\
+D.   推其原因，是它们已经成为普通人民的精神食粮，所以始终在民间流传。 <br/>\
+	答案：B <br/>\
+31、下列词语中注音完全正确的一组是 <br/>\
+ A.赡（zhàn）养       亲昵（nì）       拾（shè）级而上        含情脉脉（mò） <br/>\
+ B.秘（bì）鲁        古刹（chà）     鸭绿（lù）江岸        骁（xiāo）勇善战 <br/>\
+ C.颤（zhàn）栗       哄（hǒng）骗     心广体胖（pàng）     一撮（zuǒ）胡子 <br/>\
+ D.伺（cì）侯        联袂（mèi）      晕头转（zhuàn）向      果实累累（lěi） <br/>\
+	答案：B <br/>\
+32、下列划线字的读音全都不相同的一组是 <br/>\
+ A. 睥睨　裨益　纵横捭阖　俾有所悟 <br/>\
+ B. 泥淖　船棹　卓尔不群　绰绰有余 <br/>\
+ C. 逾越　觊觎　家喻户晓　瑕不掩瑜 <br/>\
+D. 儒雅　嗫嚅　耳濡目染　懦弱无能 <br/>\
+	答案：B <br/>\
+33、一副对联的上联是“荔枝龙眼木瓜 皆是岭南佳果”，以下是四个备选的下联，明显不恰当的一项是 <br/>\
+A． 丹霞南华梅关 皆为粤北名胜 <br/>\
+B． 豆汁焦圈麻团 皆为北京名吃 <br/>\
+C． 细雨水巷炊烟 皆为江南美景 <br/>\
+D．大饼馒头油条 皆是农家美味 <br/>\
+答案：D <br/>\
+34、填入以下文字中横线处的最恰当的一句是 <br/>\
+    颐和园有个匾额，题写着“山色湖光共一楼”，是说这个小小的楼阁把天地之间这个巨大空间的美好景致都吸收进来了。           说的也是这个意思。 <br/>\
+A． 杜甫《望岳》中的“会当凌绝顶，一览众山小” <br/>\
+B． 左思《三都赋》中的“八极可转于寸眸，万物可齐于一朝” <br/>\
+C． 苏轼《饮湖上初晴后雨》中的“水光潋滟晴方好，山色空蒙雨亦奇” <br/>\
+D． 王维《九月九日忆山东兄弟》中的“遥知兄弟登高处，遍插茱萸少一人” <br/>\
+	答案：B <br/>\
+35、下列各组词语中的划线字，读音全相同的一组是 <br/>\
+A.  肄业     疫情    苦心孤诣      因噎废食 <br/>\
+B.  信笺     缄默     亲密无间      草菅人命 <br/>\
+ C.  吞噬     谥号      舐犊情深     恃才傲物 <br/>\
+ D.  伎俩      觊觎      济济一堂      心有余悸 <br/>\
+答案：C <br/>\
+36、下面是协议书的一些条款。其中表达不准确、不严密的一条是 <br/>\
+A.     甲乙双方不得终止协议，否则，由终止方负责对方的全部经济损失。 <br/>\
+B.     甲方投资装修的房屋将作为不动产，在期限满时移交乙方，不包括室内设备。 <br/>\
+C.     此协议自2009年1月1日起至2012年12月31日止，有效期3年。 <br/>\
+D.  由甲方提供周转资金人民币4万元整。 <br/>\
+	答案：A <br/>\
+37、下列词语中没有错别字的一组是 <br/>\
+ A. 磊落    发祥地    熙来攘往    亡羊补牢 <br/>\
+ B. 露掐    生力军    疾言厉色    宁缺毋滥 <br/>\
+ C. 襟怀    费手脚    负芨从师    声嘶力竭 <br/>\
+ D.买帐    开场白    心心相印    理曲词穷 <br/>\
+答案：A <br/>\
+38、下面四句中，不得体的一句是 <br/>\
+A.您不按规定停车，罚款二十元。以后要注意！（交警处罚违章司机） <br/>\
+B.您老今年高寿？今年种粮的收入不错吧？（记者采访一位农村老人） <br/>\
+C.买这块表吧，华美、大气，您一戴上就像“大款”。（售货员接待顾客） <br/>\
+D.各位观众：我在福州向您现场直播八一男篮客场挑战福建男篮的比赛。（体育直播员转播比赛） <br/>\
+	答案：C <br/>\
+39、下列句子中没有错别字的是   <br/>\
+A. 季羡林考上清华大学后，最使他感到遗撼的是没能赶上清华国学研究院的开办时期。 <br/>\
+ B. 你知道吗？人体会对辘辘饥肠做出反应，先“拿”出蛋白质去燃烧热量，然后才会燃烧到脂肪。 <br/>\
+ C. 本届获奖学生在德、智、体、美等方面全面发展，尤其是在科技创新领域已展露头角。 <br/>\
+ D.加快发展的愿望不能脱离农村的实际。假如采取竭泽而鱼的政策，其结果往往适得其反。 <br/>\
+	答案：B <br/>\
+40、以下四句中，用语不够得体的一句是 <br/>\
+A． 今天是您的生日，妈妈，女儿祝您青春永驻，永远漂亮。 <br/>\
+B． 大家既然让我表演一个节目，我就献丑了，唱一首歌吧。 <br/>\
+C． 看到您老95岁高龄还这样硬朗，我们从心里高兴。祝您长命百岁！ <br/>\
+D． 一次考试失利算不了什么，胜败乃兵家常事，振作精神，胜利终归是你的。 <br/>\
+答案：C <br/>\
+1、The French pianist who had been praised very highly ____to be a great disappointment. <br/>\
+A、turned up  <br/>\
+B、turned in  <br/>\
+C、turned out  <br/>\
+D、turned down 答案：C <br/>\
+2、The river is the____ between the two countries. <br/>\
+A、boundary  <br/>\
+B、zone  <br/>\
+C、spot  <br/>\
+D、string 答案：A <br/>\
+3、The thieves planned to ____a bank. <br/>\
+A、break into  <br/>\
+B、break down  <br/>\
+C、break through  <br/>\
+D、break up 答案：A <br/>\
+4、John often attends public lectures at the University of Oxford, chiefly____ his English. <br/>\
+A、to improve  <br/>\
+B、improving  <br/>\
+C、to have improved  <br/>\
+D、improved 答案：A <br/>\
+5、At last she left her house and got to the airport, only ____the plane flying away. <br/>\
+A、having seeing  <br/>\
+B、saw  <br/>\
+C、to have seen  <br/>\
+D、to see 答案：D <br/>\
+6、The river is dangerous to____. <br/>\
+A、swim  <br/>\
+B、swim in  <br/>\
+C、swim on  <br/>\
+D、swim at 答案：B <br/>\
+7、The new power station is reported ____within 3 years. <br/>\
+A、to have completed  <br/>\
+B、to have been completed  <br/>\
+C、having been completed  <br/>\
+D、to complete 答案：B <br/>\
+8、The second book was ____by August 1952, but two years later, the end was still nowhere in sight. <br/>\
+A、completed  <br/>\
+B、to complete  <br/>\
+C、to have completed  <br/>\
+D、to have been completed  <br/>\
+答案：D <br/>\
+9、The teacher doesn~t know who is ____for the broken window. <br/>\
+A、will blame  <br/>\
+B、blame  <br/>\
+C、to blame  <br/>\
+D、to be blamed 答案：C <br/>\
+10、In fact, I~d rather leave for Shanghai____ in Xi~an. <br/>\
+A、to stay  <br/>\
+B、than staying  <br/>\
+C、than stay  <br/>\
+D、by staying 答案：C <br/>\
+11、It is wise ____that case that way. <br/>\
+A、of him to settle  <br/>\
+B、for him to settle  <br/>\
+C、of his settling  <br/>\
+D、that he settle 答案：A <br/>\
+12、“Your pictures are beautiful!“ “We ____more if we hadn~t run out of film.“ <br/>\
+A、would take  <br/>\
+B、had taken  <br/>\
+C、will have taken  <br/>\
+D、would have taken 答案：D <br/>\
+13、Had Alice been more hardworking, she____. <br/>\
+A、had not failed  <br/>\
+B、would not have failed  <br/>\
+C、would not fail  <br/>\
+D、did not fail 答案：B <br/>\
+14、I~m sorry Andy didn~t want to go to the conference. ____willing to go, we would have paid all his expenses. <br/>\
+A、Being  <br/>\
+B、He had been  <br/>\
+C、Was he  <br/>\
+D、Had he been 答案：D <br/>\
+15、If I had a bike, I ____it to you yesterday. <br/>\
+A、would have lent  <br/>\
+B、would lend  <br/>\
+C、lent  <br/>\
+D、had lent 答案：A <br/>\
+16、The traffic was very heavy; otherwise I____ here 50 minutes sooner. <br/>\
+A、would be  <br/>\
+B、should be  <br/>\
+C、had been  <br/>\
+D、would have been 答案：D <br/>\
+17、But for his courage, the battle____. <br/>\
+A、was lost  <br/>\
+B、would lose  <br/>\
+C、lose  <br/>\
+D、would have been lost 答案：D <br/>\
+18、You did tell me what to do. If only I____ your advice. <br/>\
+A、would take  <br/>\
+B、had taken  <br/>\
+C、took  <br/>\
+D、have taken 答案：B <br/>\
+19、I~d rather you ____those important documents with you. <br/>\
+A、not take  <br/>\
+B、won~t take  <br/>\
+C、don~t take  <br/>\
+D、didn~t take 答案：D <br/>\
+20、It~s time____ about the traffic problem downtown. <br/>\
+A、nothing to be done  <br/>\
+B、everything is done  <br/>\
+C、anything will be done  <br/>\
+D、something was done  <br/>\
+答案：D <br/>\
+21、以下四句中，“见”的读音与其他三处不同的一句是 <br/>\
+A． 曹刿请见（《曹刿论战》） <br/>\
+B． 昨夜见军帖，可汗大点兵（《木兰诗》） <br/>\
+C． 季路、冉有见孔子曰……（《季氏将伐颛臾》） <br/>\
+D． 天苍苍，野茫茫，风吹草低见牛羊（《敕勒歌》） <br/>\
+答案：D <br/>\
+22、下列各句中的成语，不能用句后括号中的短语替换的一句是 <br/>\
+A. 情况十分紧急，险情就是命令，排长当机立断，顾不上向连部请示，就率领战士们跳进了汹涌的江水里。（不管三七二十一） <br/>\
+B. 处长本以为问题不大，调解一下问题就解决了，谁知道这两位科长各执一词，怎么也谈不拢。（公说公有理，婆说婆有理） <br/>\
+C. 婆媳之间如果有了矛盾，可以坐下来心平气和地交换意见，总这么针锋相对、寸土不让的，对谁都没有好处。（针尖对麦芒） <br/>\
+D.本来这是件好事，但是他操之过急，只凭一厢情愿，结果事与愿违。（剃头挑子一头热） <br/>\
+答案：A <br/>\
+23、以下四句中，“之”的用法不同于其他各句的一句是 <br/>\
+A． 故兵法忌之 <br/>\
+B． 鼎足之形成矣 <br/>\
+C． 荆州之民附操者 <br/>\
+D． 且北方之人，不习水战 <br/>\
+	答案：A <br/>\
+24、以下四句中，不存在名词活用为动词这一现象的一句是 <br/>\
+A． 左右欲刃相如 <br/>\
+B． 安能屈豪杰之流 <br/>\
+C． 以故其后名之曰褒禅 <br/>\
+D． 假舟楫者，非能水也 <br/>\
+	答案：B <br/>\
+25、以下句子中，不是被动句是一句是 <br/>\
+A．羸兵为人马所蹈藉（《赤壁之战》） <br/>\
+B. 成归，闻妻言，如被冰雪（《促织》） <br/>\
+C．臣诚恐见欺于王而负赵（《廉颇蔺相如列传》） <br/>\
+D．吾不能举全吴之力、十万之众，受制于人（《赤壁之战》） <br/>\
+答案：B <br/>\
+26、以下对“小时了了，大未必佳”的翻译解说，比较准确的一句是 <br/>\
+A． 把小事情做完了就好，不必只想着做大事 <br/>\
+B． 小的东西往往是好的，大的东西往往不太好 <br/>\
+C． 小的时候聪明懂事，长大了以后却不一定出众 <br/>\
+D． 事情刚开始的时候是好事，最后的结果却未必是好事 <br/>\
+答案：C <br/>\
+27、以下文字有重复啰嗦、需要删除之处。所罗列出的四项中，不需要删除的一项是 <br/>\
+    2010-2011年度，我校将扩大招生人数。由于我校的教室本已严重不足，因此急需新建一批教室。目前，虽然我们已经多方进行筹措，但经费资金问题依然难以全额解决。用什么办法才能解决眼下的燃眉之急呢？ <br/>\
+A． 进行 <br/>\
+B． 资金 <br/>\
+C． 全额 <br/>\
+D． 眼下的 <br/>\
+	答案：C <br/>\
+28、周敦颐《爱莲说》中，用来说明君子志洁行廉、德声远播的一句是 <br/>\
+A． 出淤泥而不染，濯清涟而不妖 <br/>\
+B． 中通外直，不蔓不枝 <br/>\
+C． 香远益清，亭亭静植 <br/>\
+D.  可远观而不可亵玩焉 <br/>\
+答案：C <br/>\
+29、以下是某学生入团申请书中的文字，其中有多处表达不当，需要修改。在所罗列出的四项中，不需要修改的一项是 <br/>\
+    中国共产主义青年团是中国共产党领导下的先进组织，是党的得力助手和后备军。因此我必须争取加入共青团，请组织一定批准。入团之后，我一定遵守团章，执行团员的义务，参加团组织的工作，做一名合格的团员；如果一时未获批准，我绝不灰心，一定会继续努力，接受组织的考验。 <br/>\
+A． 我必须争取加入共青团 <br/>\
+B． 请组织一定批准 <br/>\
+C． 执行团员的义务 <br/>\
+D． 一时未获批准 <br/>\
+	答案：D <br/>\
+30、下列各句中，成语使用正确的一项是 <br/>\
+A.  这处旅游胜地的环境脏乱差到如此地步，简直令人叹为观止。 <br/>\
+B．既然目前开展这项工作的条件还不成熟，大家就不要勉为其难，以后有条件了再做也不迟。 <br/>\
+C．虽然这处悬崖比我们当初所预想的要陡峭得多，但是，大家依然摩肩接踵，奋力攀登。 <br/>\
+D．在这次打击赌博的行动中，该市几百名公安干警倾巢出动，一举端掉了十几个窝点，缴获了一大批赌具赌资。 <br/>\
+	答案：B <br/>\
+31、下列作家、作品及作品中人物对应正确的一项是 <br/>\
+A．曹禺——《雷雨》——陈白露 <br/>\
+B. 曹雪芹——《林黛玉进贾府》——王熙凤 <br/>\
+C．施耐庵——《林教头风雪山神庙》——武松 <br/>\
+D．巴尔扎克——《装在套子里的人》——别里科夫 <br/>\
+	答案：B <br/>\
+32、下列句子中，用语不得体的一项是 <br/>\
+A． 蒙您馈赠大作，本人深感荣幸，回去定当认真拜读。 <br/>\
+B． 非常感谢您的盛情邀请，我们明天上午九点一定会准时光临。 <br/>\
+C． 令尊和家父从学生时代就是好朋友，所以我们也算是世交了。 <br/>\
+D． 校长办公会提出了一系列改进服务的措施，责成后勤部门尽快落实。 <br/>\
+	答案：B <br/>\
+33、下面作家、作品等对应不正确的一项是 <br/>\
+　　A．柳宗元——唐代——永州八记 <br/>\
+  B. 罗贯中——清代——《三国演义》 <br/>\
+　　C．赵树理——《小二黑结婚》——小说 <br/>\
+　　D．惠特曼——《草叶集》——诗歌 <br/>\
+	答案：B <br/>\
+34、下文有几处用语不得体的地方需要改正，其中不需要改正的一项是 <br/>\
+    听说贵公司近日在产品研发方面陷入困境，我们非常愿意鼎力相助。如果你们需要指点，我们将不吝赐教。我们愿意与贵公司同舟共济、精诚合作。 <br/>\
+A． 鼎力相助 <br/>\
+B． 需要指点 <br/>\
+C． 不吝赐教 <br/>\
+D． 同舟共济 <br/>\
+答案：D <br/>\
+35、篇名、作者、朝代搭配错误的一项是 <br/>\
+A． 《赤壁赋》——苏轼——宋朝 <br/>\
+B． 《陋室铭》——刘禹锡——唐朝 <br/>\
+C． 《出师表》——诸葛亮——晋朝 <br/>\
+D． 《岳阳楼记》——范仲淹——宋朝 <br/>\
+答案：C <br/>\
+36、以下句子中，“若”表示“你”的一句是 <br/>\
+A． 望洋向若而叹曰……（《秋水》） <br/>\
+B． 山有小口，仿佛若有光（《桃花源记》） <br/>\
+C． 若舍郑以为东道主（《烛之武退秦师》） <br/>\
+D． 余悲之，且曰：若毒之乎？（《捕蛇者说》） <br/>\
+	答案：D <br/>\
+37、诗句、作者、朝代搭配错误的一项是 <br/>\
+A． 随风潜入夜，润物细无声——杜甫——唐朝 <br/>\
+B． 海内存知己，天涯若比邻——王勃——唐朝 <br/>\
+C． 南朝四百八十寺，多少楼台烟雨中——李白——唐朝 <br/>\
+D.   夜阑卧听风吹雨，铁马冰河入梦来——陆游——宋朝 <br/>\
+	答案：C <br/>\
+38、以下句子中，“与”用作连词、表示“和”的一句是 <br/>\
+A． 玉斗一双，欲与亚父（《鸿门宴》） <br/>\
+B． 求！无乃尔是过与（《季氏将伐颛臾》） <br/>\
+C． 陈涉少时，尝与人佣耕（《陈涉世家》） <br/>\
+D． 原庄宗之所以得天下，与其所以失之者，可以知之矣（《伶官传序》） <br/>\
+答案：D <br/>\
+39、请选择正确答案 <br/>\
+① 这伙歹徒竟敢在这样的闹市区公开作案，简直让人觉得          。 <br/>\
+② 培养一种风格、学习某种技能是需要时间的，不能          。 <br/>\
+③ 他在那样艰苦的条件下，依然          ，献身于教育事业。 <br/>\
+④ 别人都很难过，有的低着头，有的抹着泪，唯独她端坐在那里，          。 <br/>\
+     <br/>\
+ A．不可思议    操之过急    鞠躬尽瘁    神情自若 <br/>\
+ B．不可思议   一蹴而就    呕心沥血     神情自若 <br/>\
+ C．义愤填膺    操之过急    鞠躬尽瘁    无动于衷 <br/>\
+ D．义愤填膺    一蹴而就     呕心沥血    无动于衷 <br/>\
+	答案：A <br/>\
+40、词句、作者、朝代搭配错误的一项是 <br/>\
+A． 但愿人长久，千里共婵娟——苏轼——宋朝 <br/>\
+B． 稻花香里说丰年，听取蛙声一片——辛弃疾——宋朝 <br/>\
+C． 两情若是久长时，又岂在朝朝暮暮——秦观——宋朝 <br/>\
+D． 问君能有几多愁，恰似一江春水向东流——李煜——唐朝 <br/>\
+答案：D <br/>\
+1、He will soon____ his disappointment and be quite cheerful again by the afternoon. <br/>\
+A、get over  <br/>\
+B、get out of  <br/>\
+C、get away  <br/>\
+D、get through 答案：A <br/>\
+2、Robert surprised every one of us when he____ the job of office manager. <br/>\
+A、turned away  <br/>\
+B、turned back  <br/>\
+C、turned down  <br/>\
+D、turned over 答案：C <br/>\
+3、Everybody must have____ own choice. <br/>\
+A、your  <br/>\
+B、one~s  <br/>\
+C、their  <br/>\
+D、her 答案：C <br/>\
+4、If we really ____, we can get the whole house cleaned in two hours. <br/>\
+A、set out  <br/>\
+B、set off  <br/>\
+C、set down  <br/>\
+D、set to 答案：D <br/>\
+5、We criticize him____ he should make the same mistake again. <br/>\
+A、unless  <br/>\
+B、so that  <br/>\
+C、if  <br/>\
+D、lest 答案：D <br/>\
+6、____that the trade between the two countries reached its highest point. <br/>\
+A、During the 1980~s  <br/>\
+B、That it was in the 1980~s  <br/>\
+C、It was in the 1980~s  <br/>\
+D、It was the 1980~s  <br/>\
+答案：C <br/>\
+7、Do that again ____you~ll be in trouble. <br/>\
+A、and  <br/>\
+B、but  <br/>\
+C、so  <br/>\
+D、however 答案：A <br/>\
+8、___the impact of the ideas introduced to Europe by soldiers returning from the East, the West was greatly changed. <br/>\
+A、Because of  <br/>\
+B、By means of  <br/>\
+C、In addition to  <br/>\
+D、In spite of 答案：A <br/>\
+9、The new government  _____ the foreign-owned oil fields one after another. <br/>\
+A、took over  <br/>\
+B、took out  <br/>\
+C、took off  <br/>\
+D、took on  答案：A <br/>\
+10、He does nothing that____ the interests of the company. <br/>\
+A、runs for  <br/>\
+B、runs against  <br/>\
+C、runs over  <br/>\
+D、runs into  答案：B <br/>\
+11、To say that someone~s work is not good is to find fault ____it. <br/>\
+A、of  <br/>\
+B、with  <br/>\
+C、for  <br/>\
+D、on  答案：B <br/>\
+12、The airport is five miles____. <br/>\
+A、away from here  <br/>\
+B、from here away  <br/>\
+C、far from here  <br/>\
+D、far away from here  答案：A <br/>\
+13、He ____his post because he had been offered a better job. <br/>\
+A、resigned  <br/>\
+B、retired  <br/>\
+C、dismissed  <br/>\
+D、fired  答案：A <br/>\
+14、After crying so much, she had to ____before coming downstairs. <br/>\
+A、dress up  <br/>\
+B、make up  <br/>\
+C、wash up  <br/>\
+D、wind up  答案：C <br/>\
+15、He is ____in English but good at maths. <br/>\
+A、bad  <br/>\
+B、good  <br/>\
+C、weak  <br/>\
+D、strong  答案：C <br/>\
+16、I will get____ bicycle as I had before. <br/>\
+A、the same  <br/>\
+B、same  <br/>\
+C、similar  <br/>\
+D、alike  答案：A <br/>\
+17、It~s a good thing for a/an____ to explain this difficult subject <br/>\
+A、surgery  <br/>\
+B、sponsor  <br/>\
+C、specialist  <br/>\
+D、employer  答案：C <br/>\
+18、We~ll ____that difficulty before we carry out our new plan. <br/>\
+A、remove  <br/>\
+B、attack  <br/>\
+C、overcome  <br/>\
+D、finish  答案：C <br/>\
+19、I think talks are the best solution ____the trouble. <br/>\
+A、about  <br/>\
+B、in  <br/>\
+C、to  <br/>\
+D、with  答案：C <br/>\
+20、He thought he could talk Mr. Robinson____ buying some expensive items. <br/>\
+A、to  <br/>\
+B、about  <br/>\
+C、into  <br/>\
+D、on  答案：C <br/>\
+21、下列划线词语的意思与现代汉语基本相同的一项是 <br/>\
+  A． 师不必贤于弟子 <br/>\
+B． 断头置城上，颜色不少变 <br/>\
+C． 令五人保其首领以老于户牖之下 <br/>\
+D． 诸侯之所亡，与战败而亡者，其实亦百倍 <br/>\
+	 答案：A <br/>\
+22、下列有关中国古代文学常识的表述，有错误的一项是 <br/>\
+A.     我国先秦散文主要有两大类：历史散文和诸子散文。 <br/>\
+B.     《诗经》是我国最早的一部诗歌总集，以五言诗为主。 <br/>\
+C.     “骚体”又称“楚辞体”，得名于屈原的《离骚》，特点之一是多用“兮”字。 <br/>\
+D.     明代汤显祖的《牡丹亭》描写了杜丽娘和柳梦梅的爱情故事。 <br/>\
+	 答案：B <br/>\
+23、关于苏轼《赤壁赋》中哪些是通假字以及字义为何的说明，不正确的一项是 <br/>\
+A． 举酒属客：“属”是通假字，通“嘱”，在文中指劝人饮酒 <br/>\
+B． 冯虚御风：“冯”是通假字，通“凭”，乘 <br/>\
+C． 山川相缪：“缪”是通假字，通“缭”，盘绕 <br/>\
+D． 枕藉舟中：“藉”是通假字，通“籍”，上课铃 <br/>\
+	 答案：D <br/>\
+24、以下句子中，不是被动句的一句是 <br/>\
+A．君子博学而日参省乎己（《劝学》） <br/>\
+B．吾长见笑于大方之家（《秋水》） <br/>\
+C．予羁縻不得还（《〈指南录〉后序》） <br/>\
+D．不者，若属皆且为所虏（《鸿门宴》） <br/>\
+	 答案：A <br/>\
+25、下列有关中国现当代文学常识的表述，有错误的一项是 <br/>\
+A.     茅盾的代表作有长篇小说《子夜》、短篇小说《伤逝》等等。 <br/>\
+B.     钱钟书是著名的学者、作家，创作了学术著作《谈艺录》《管锥编》、长篇小说《围城》等。 <br/>\
+C.     巴金是我国现代著名的小说家、杂文家。小说《灭亡》《家》、散文集《随想录》等都是他的代表作。 <br/>\
+D.     冰心是“五四”新文学运动中涌现的著名女作家，她的《笑》《往事》《寄小读者》等作品被认为是当时具有典范意义的“美文”。 <br/>\
+	 答案：A <br/>\
+26、有关《诗经》的表述，错误的一项是 <br/>\
+A． 《诗经》是我国最早的一部诗歌总集。 <br/>\
+B． 《诗经》中所录的305篇诗歌以四言诗为主。 <br/>\
+C． 《诗经》和《大学》《中庸》《论语》《孟子》并称“五经”。 <br/>\
+D． 《诗经》中的诗歌分为风、雅、颂三个部分，其中“风”又叫“国风”。 <br/>\
+	 答案：C <br/>\
+27、下列有关外国文学常识的表述，有错误的一项是 <br/>\
+A． 于连是小说《红与黑》的主人公。 <br/>\
+B． 高尔基一生创作甚丰，小说《童年》《在人间》《我的大学》是他的自传三部曲。 <br/>\
+C． 诗集《新月集》《飞鸟集》《园丁集》是印度著名诗人泰戈尔的代表作品。他的诗歌格调清新，具有民族风格。 <br/>\
+D． 俄国作家契诃夫以擅长写短篇小说著称，也写过剧本。主要作品有短篇小说《套中人》《变色龙》等，剧本有《玩偶之家》等。 <br/>\
+	 答案：D <br/>\
+28、有关杜甫的表述，错误的一项是 <br/>\
+A． 杜甫被后人称为“诗圣”。 <br/>\
+B． 杜甫是唐代现实主义诗人的杰出代表。 <br/>\
+C． 杜甫曾经担任唐朝史官，所以被称为“诗史”。 <br/>\
+D． 杜甫诗歌以“沉郁顿挫”著称，与李白的“清新飘逸”明显不同。 <br/>\
+	 答案：C <br/>\
+29、“忧劳可以兴国，逸豫可以亡身”出自 <br/>\
+A． 荀子《劝学》 <br/>\
+B． 韩愈《师说》 <br/>\
+C． 苏洵《六国论》 <br/>\
+D． 欧阳修《伶官传序》 <br/>\
+	 答案：D <br/>\
+30、“锲而舍之，朽木不折；锲而不舍，金石可镂”出自 <br/>\
+A.     《论语》 <br/>\
+B.     《孟子》 <br/>\
+C.     《荀子?劝学》 <br/>\
+D.     　韩愈《师说》 <br/>\
+	 答案：C <br/>\
+31、“知之为知之，不知为不知，是知也”出自 <br/>\
+A． 《论语》 <br/>\
+B． 《孟子》 <br/>\
+C． 《荀子》 <br/>\
+D． 《韩非子》 <br/>\
+ 答案：A <br/>\
+32、“古来圣贤皆寂寞，惟有饮者留其名”出自 <br/>\
+A． 曹操《短歌行》 <br/>\
+B． 李白《将进酒》 <br/>\
+C． 陶潜《归园田居》 <br/>\
+D． 苏轼《水调歌头》 <br/>\
+	 答案：B <br/>\
+33、“故天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。”这段话出自 <br/>\
+A． 《论语》 <br/>\
+B． 《孟子》 <br/>\
+C． 《史记》 <br/>\
+D． 《战国策》 <br/>\
+	 答案：B <br/>\
+34、下列有关中国古代文学常识的表述，有误的一项是 <br/>\
+A.     《老子》又名《道德经》，《庄子》又名《南华经》。它们是道家思想的代表著作。 <br/>\
+B.     唐代古文运动的领导人物是韩愈、柳宗元和白居易，他们主张“文以明志”“文以明道”。 <br/>\
+C.     《兰亭集序》的作者是东晋的王羲之，他是中国古代著名的书法家。 <br/>\
+D.     元曲包括散曲和杂剧。 <br/>\
+	 答案：B <br/>\
+35、下列有关中国现代文学常识的表述，有误的一项是 <br/>\
+A． 郭沫若是我国新诗的奠基人之一，《女神》是他的浪漫主义诗歌的代表作。 <br/>\
+B． 鲁迅的《阿Q正传》向我们展现了辛亥革命时期病态的中国社会和畸形的国人面貌，希望以此“引起疗救的注意”。 <br/>\
+C． 长篇小说《青春之歌》和《围城》分别塑造了不同类型的知识分子形象，从不同侧面描写了知识分子在革命斗争中的成长过程。 <br/>\
+D． 老舍是著名的小说家、戏剧家，代表作有小说《骆驼祥子》《四世同堂》及剧本《茶馆》《龙须沟》等等。他的作品大多以北京为地域背景。 <br/>\
+	 答案：C <br/>\
+36、下列有关外国文学常识的表述，有误的一项是 <br/>\
+A． 欧洲文艺复兴时期涌现了一批成就卓著的作家，如但丁、卜伽丘和欧?亨利，等等。 <br/>\
+B． 世界名著《人间喜剧》和《战争与和平》的作者分别是巴尔扎克和托尔斯泰。 <br/>\
+C． 莫泊桑是法国作家，惠特曼是美国诗人，奥斯特洛夫斯基是前苏联作家。 <br/>\
+D． 哈姆雷特是莎士比亚的著名悲剧《哈姆雷特》中的主人公。《哈姆雷特》同《麦克白》《李尔王》和《奥赛罗》共同构成了莎士比亚的“四大悲剧”。 <br/>\
+	 答案：A <br/>\
+37、下列各句中，没有语病的一句是 <br/>\
+A．鸦片战争以来的中国近代史，对于大多数中学生是比较熟悉的，重大的历史事件都能说得一清二楚。 <br/>\
+B．为保持北京的古都风貌，在北京市旧城区改造中，新的建筑应以故宫和皇城为中心向外分七个层次逐步提高。 <br/>\
+C．初涉文坛，她的第一部处女作就是这样一部意味深长的巨著，不能不令人刮目相看。 <br/>\
+D．“神舟”五号载人飞船把我国首位航天员成功送入浩瀚的太空并安全返回，这是我国航天事业取得的又一举世瞩目的成就。 <br/>\
+ 答案：D <br/>\
+38、以下有关中国文化常识的表述，不准确的一项是 <br/>\
+A． “岁寒三友”是指竹子、松树、兰花。 <br/>\
+B． 儒家思想的创始人是孔子，道家思想的创始人是老子。 <br/>\
+C．  “五岳”是中国五大名山的总称，其中东岳为泰山，西岳为华山。 <br/>\
+D.  《四库全书》是清代官方纂修的一部大型丛书，按照经、史、子、集四部分类。 <br/>\
+	  答案：A <br/>\
+39、下面作家、朝代、作品对应不正确的一项是 <br/>\
+A.     王勃/唐代/《滕王阁序》 <br/>\
+B.     陶渊明/南朝/《桃花源记》 <br/>\
+C.     龚自珍/清代/《病梅馆记》 <br/>\
+D.     王安石/宋代/《游褒禅山记》 <br/>\
+	 答案：B <br/>\
+40、以下作家中，全是南宋作家的一组是 <br/>\
+A．欧阳修 王安石 秦观 柳永 <br/>\
+B．范仲淹 辛弃疾 苏轼 秦观 <br/>\
+C．辛弃疾 文天祥 陆游 姜夔 <br/>\
+D．欧阳修 李清照 柳永 苏洵 <br/>\
+ 答案：C <br/>\
+
+</body>
+</html>
