@@ -11,13 +11,16 @@
   }
 </style>
 <script type="text/javascript">
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
 
 function appendNode(oNode) {
   document.getElementById('imgContainer').appendChild(oNode);
 }
 
 function appendInnerHtml(html_str) {
-  document.getElementById('imgContainer').insertAdjacentHTML('beforeend', html_str);
+  document.getElementById('infoContainer').insertAdjacentHTML('beforeend', html_str);
 }
 
 function generateTuple(){
@@ -43,11 +46,23 @@ var gIndex = 0;
 function allocJavaScriptMemory() {
   //gListArray[gIndex++] = generateList(1024*1024);
   gListArray[gIndex++] = generateList(1024*10);
-  console.log("gListArray.length=" + gListArray.length);
+  let info = "gListArray.length=" + gListArray.length;
+  appendInnerHtml(info);
+  console.log(info);
 }
 
 function allocImageMemory() {
   var img_url = "../images/w.png";
+  //var img_url = "../images/mem_cmp/lizi_APNG.png";
+
+  var oimg=document.createElement('img');
+  oimg.src = img_url + "?random=" + Math.random();
+  appendNode(oimg);
+}
+
+function allocSVGMemory() {
+  //var img_url = "../images/w.png";
+  var img_url = "../images/mem_cmp/lizi_APNG.png";
 
   var oimg=document.createElement('img');
   oimg.src = img_url + "?random=" + Math.random();
@@ -126,28 +141,34 @@ function appendBigCanvas() {
 </script>
 </head>
 
-<body>
-  102
+<body onload="onLoad()">
+  <div id="idJsUa"></div>
 <br />
+<div id="infoContainer">
+</div>
 <br />
-<button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
-<br /><br />
-<button onclick="allocImageMemory()">allocImageMemory</button>
-<br /><br />
-<button onclick="allocBigImageMemory()">allocBigImageMemory</button>
-<br /><br />
-<button onclick="allocBigJsFileMemory()">allocBigJsFileMemory</button>
-<br /><br />
-<button onclick="allocKsMediaMemory()">allocKsMediaMemory</button>
-<br /><br />
-<button onclick="allocSysMediaMemory()">allocSysMediaMemory</button>
-<br /><br />
-<button onclick="appendSomeNode()">appendSomeNode</button>
-<br /><br />
-<button onclick="appendBigCanvas()">appendBigCanvas</button>
-<br /><br />
-<button onclick="removeElement()">removeElement</button>
-<br /><br />
+<div style="position: fixed; z-index: 50000;">
+  <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
+  <br /><br />
+  <button onclick="allocSVGMemory()">allocSVGMemory</button>
+  <br /><br />
+  <button onclick="allocImageMemory()">allocImageMemory</button>
+  <br /><br />
+  <button onclick="allocBigImageMemory()">allocBigImageMemory</button>
+  <br /><br />
+  <button onclick="allocBigJsFileMemory()">allocBigJsFileMemory</button>
+  <br /><br />
+  <button onclick="allocKsMediaMemory()">allocKsMediaMemory</button>
+  <br /><br />
+  <button onclick="allocSysMediaMemory()">allocSysMediaMemory</button>
+  <br /><br />
+  <button onclick="appendSomeNode()">appendSomeNode</button>
+  <br /><br />
+  <button onclick="appendBigCanvas()">appendBigCanvas</button>
+  <br /><br />
+  <button onclick="removeElement()">removeElement</button>
+  <br /><br />  
+</div>
 
 <div id="imgContainer">
 Image Container:
