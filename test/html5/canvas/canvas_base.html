@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=10.0,user-scalable=no" id="viewport">        
+        <title>
+            canvas alpha
+        </title>
+
+        <style>
+          html {
+            width: 828px;
+          }
+          #idcanvas {
+              /* width: 95%;
+              height: 500px; */
+              background-color:#FFFF0000;
+              border: 5px solid red;
+          }
+        </style>
+
+        <script>
+            window.onload = function() {
+                var c=document.getElementById("idcanvas");
+                c.width = document.body.clientWidth * 0.95;
+                c.height = c.width * 1.5;
+
+                var cxt=c.getContext("2d");
+                cxt.fillStyle="#0000FF";
+                cxt.fillRect(0,0,1200,3000);
+                cxt.fillStyle="#00FF00";
+                for (i=0; i<5; i++) {
+                    cxt.fillRect(i*50,i*100, 30, 20);
+                }
+
+                //cxt.fillRect(100, 800, 100,10);
+            
+            }
+            window.onpagehide = function() {
+                console.log("gqg3: window.onpagehide");
+            }
+
+            function dohidden() {
+                var c=document.getElementById("idcanvas");
+                //c.hidden = true;
+                var sw = document.body.clientWidth;
+                var sh = document.body.clientHeight;
+
+                
+                let contentWidth = document.body.clientWidth;
+                let scale = screen.width / contentWidth;
+
+                alert("c.width=" + c.width + "; c.height=" + c.height + "; screen.availWidth=" + screen.availWidth + "; window.innerWidth=" + window.innerWidth + ";screen.width=" + screen.width + "; contentWidth=" + contentWidth);
+
+                alert("sw="+sw+"; sh=" + sh + "; cw=" + c.width + "; ch=" + c.height + "; pixelRadio=" + window.devicePixelRatio);
+            }
+        </script>
+    </head>
+
+    <body>
+        <br/><br/><br/><br/><br/><br/>
+        <button onclick="location.reload()">reload</button>
+        <br/><br/>
+        222
+        <button onclick="dohidden()">dohidden</button>
+        <br/><br/><br/>
+        canvas:
+        <canvas id="idcanvas">
+
+        </canvas>
+    </body>
+</html>
