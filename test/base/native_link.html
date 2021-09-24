@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unload event trigger</title>
+  <script src="https://tx2.a.kwimgs.com/udata/pkg/frontend-explore/xxxvconsole.min.js"></script><script>var vConsole = new VConsole();</script>
+</head>
+<body>
+  <div>
+    <h1>window.open</h1>
+    <a onclick="openPage('kwai://profile/1689312435')">打开快手 app</a>
+  </div>
+  <div>
+    <h1>a标签</h1>
+    <a href="kwai://profile/1689312435" target="_blank">打开快手 app</a>
+  </div>
+  <div>
+    <h1>yoda bridge</h1>
+    <a onclick="openWebivew('https://www.baicu.com')">打开某个页面</a>
+  </div>
+<script type="text/javascript" src="/accessproxy_statics/wm.js"></script>
+</body>
+
+<script>
+  function openPage(url) {
+    // if (window.__yodaBridge__) {
+    //   window.__yodaBridge__.invoke('webview', 'open', JSON.stringify({ url, type: 'back' }), '');
+    // } else {
+    // }
+    window.open(url);
+  }
+  function openWebivew(url) {
+    window.__yodaBridge__.invoke('Kwai', 'loadUrlOnNewPage', JSON.stringify({ url, type: 'back' }), '');
+  }
+  window.addEventListener('beforeunload', () => {
+    console.log('==== before unload ====');
+  });
+</script>
+</html>

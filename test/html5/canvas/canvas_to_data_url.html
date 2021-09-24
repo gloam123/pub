@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas test case</title>
+</head>
+<body>
+  <div id="app">
+    <p id="progress"></p>
+    <h1>测试单张图片</h1>
+    <button class="start" data-data-url="1">调用 toDataURL</button>
+    <button class="start">未调用 toDataURL</button>
+    <h1>测试多张相同图片</h1>
+    <button class="start" data-data-url="1" data-multi-pic="1">调用 toDataURL</button>
+    <button class="start" data-multi-pic="1">未调用 toDataURL</button>
+    <h1>测试多张不同图片</h1>
+    <button class="start" data-data-url="1" data-multi-pic="1" data-dif-pic="1">调用 toDataURL</button>
+    <button class="start" data-multi-pic="1" data-dif-pic="1">未调用 toDataURL</button>
+  </div>
+<script type="text/javascript" src="/accessproxy_statics/wm.js"></script>
+</body>
+<script>
+  (function() {
+  const MAX_IMG_COUNT = 50;
+  const $progress = document.getElementById('progress');
+
+  const $btns = document.querySelectorAll('.start');
+  $btns.forEach($btn => {
+    const dataset = $btn.dataset;
+    $btn.addEventListener('click', () => {
+      startTest(dataset);
+    });
+  });
+
+  function loadImg(isRandom) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = isRandom ? `https://picsum.photos/id/${Math.floor(Math.random() * 990)}/2944/1656.jpg` : 'https://picsum.photos/id/137/2944/1656.jpg';
+      img.width = 1656;
+      img.height = 2944;
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        resolve(img);
+      }
+      img.onerror = () => {
+        reject();
+      }
+      img.src = url;
+    });
+  }
+
+  async function startTest(opt) {
+    const { dataUrl, multiPic, difPic } = opt;
+    $progress.innerText = '测试中...';
+    if (multiPic) {
+      const promiseArr = new Array(MAX_IMG_COUNT).fill().map(() => createCanvas(!!dataUrl, !!difPic));
+      await Promise.all(promiseArr).catch()
+      // for (let i = 0; i < MAX_IMG_COUNT; i++) {
+      //   $progress.innerText = `测试进度${Math.ceil(i / MAX_IMG_COUNT * 100)}%`;
+      //   await createCanvas(!!dataUrl, !!difPic);
+      // }
+    } else {
+      await createCanvas(!!dataUrl, !!difPic)
+    }
+    $progress.innerText = '测试结束';
+  }
+
+  async function createCanvas(toDataURL, isDifPic) {
+    let canvas = document.createElement('canvas');
+    canvas.width = 1656;
+    canvas.height = 2944;
+    let ctx = canvas.getContext('2d');
+    let img = await loadImg(isDifPic).catch(() => {
+      return undefined;
+    });
+    if (img) {
+      console.log('=== draw image ===');
+      ctx.drawImage(img, 0, 0);
+      transform(canvas, toDataURL);
+    }
+    img = null;
+  }
+
+  function transform(canvas, toDataURL) {
+    if (toDataURL) {
+      console.log('=== to data url ===');
+      canvas.toDataURL('image/png');
+    }
+    canvas.remove();
+    canvas.width = 0;
+    canvas.height = 0;
+    canvas = null;
+    ctx = null;
+  }
+
+  // $btn.addEventListener('click', startTest);
+})()
+</script>
+</html>
+

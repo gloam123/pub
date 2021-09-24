@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>index</title>
+
 </head>
 
 <body>
@@ -97,6 +98,14 @@
   
     displayTime();
   
+    window.onbeforeunload=function(e){     
+      //alert("window.onbeforeunload audioCtx=" + audioCtx);
+
+      //audioCtx.close();
+      audioCtx.suspend().then(function() {
+          console.log("on suspend()!!!");
+      });
+    }
   
 </script>
 </body>

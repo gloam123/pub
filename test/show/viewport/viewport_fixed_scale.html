@@ -1,0 +1,51 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=0.12, minimum-scale=0.01, maximum-scale=10.0,user-scalable=no" id="viewport">
+<script src="./viewport_common.js?a"></script>
+
+<title>index</title>
+
+<style>
+
+  body, button {
+    font-size: 160px;
+  }
+
+</style>
+<script>
+  function init_canvas() {
+    let contentWidth = document.body.offsetWidth;
+
+    var c=document.getElementById("idcanvas");
+    c.width = contentWidth * 0.98;
+    c.height = contentWidth;
+    var cxt=c.getContext("2d");
+    cxt.fillStyle="#AABB55";
+    cxt.fillRect(0, 0, c.width, c.height);
+  }
+
+  window.addEventListener("resize", function() {
+    init_canvas();
+    console.log("resize");
+  });
+
+  function onload() {
+    init_canvas();
+  }
+</script>
+
+</head>
+
+<body onload="onload()">
+  <br/><br/><br/>
+  <button onclick="location.reload()">reload</button>
+  <br/><br/>
+  fixed scale canvas:显示此网页后按手机home键，触发快照, 观察内存变化<br/>
+  <canvas id="idcanvas">
+  </canvas>
+</body>
+</html>

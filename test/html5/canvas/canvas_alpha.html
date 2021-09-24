@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.1, maximum-scale=3.0,user-scalable=no" id="viewport">        
         <title>
             canvas alpha
         </title>
@@ -11,6 +11,7 @@
                 width: 1300px;
                 height: 3300px;
                 background-color:#FFFF0000;
+                border: 3px solid red;
             }
         </style>
 
@@ -22,12 +23,14 @@
                 var cxt=c.getContext("2d");
                 cxt.fillStyle="#0000FF";
                 cxt.fillRect(0,0,1200,3000);
+/*
                 cxt.fillStyle="#00FF00";
                 for (i=0; i<10; i++) {
                     cxt.fillRect(i*50,i*200, 100,10);
                 }
 
                 cxt.fillRect(100, 800, 100,10);
+*/
             
             }
             window.onpagehide = function() {
@@ -37,15 +40,17 @@
             function dohidden() {
                 var c=document.getElementById("idcanvas");
                 c.hidden = true;
+                var cxt=c.getContext("2d");
+                cxt.
             }
         </script>
     </head>
 
     <body>
-        <br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <button onclick="location.reload()">reload</button>
         <br/><br/>
-        222
+        66
         <button onclick="dohidden()">dohidden</button>
         <br/><br/><br/>
         canvas:
