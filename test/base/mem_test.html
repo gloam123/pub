@@ -9,6 +9,10 @@
   video {
     width: 100%;
   }
+
+  .fixed_style {
+    position: fixed;
+  }
 </style>
 <script type="text/javascript">
   function onLoad() {
@@ -57,6 +61,12 @@ function allocImageMemory() {
 
   var oimg=document.createElement('img');
   oimg.src = img_url + "?random=" + Math.random();
+  oimg.className = "fixed_style";
+  let posStyle = "left:" + (Math.random() * 120) + "px" + 
+                 "; top:" + (200 + Math.random() * 200) + "px";
+  oimg.style = posStyle;
+
+
   appendNode(oimg);
 }
 
@@ -168,6 +178,14 @@ function appendBigCanvas() {
   <br /><br />
   <button onclick="removeElement()">removeElement</button>
   <br /><br />  
+  <a href="https://zhaopeng06-video.kproxy.corp.kuaishou.com/">video_decode_test.html</a>
+  <br /><br />  
+  <a href="https://ppg.m.etoote.com/doodle/o/ZaCsbxXa.html?hyId=doodle_ZaCsbxXa&initial-count=1">lottie a1</a>
+  <br /><br />  
+  <a href="https://ppg.m.etoote.com/doodle/o/ZaCsbxXa.html?hyId=doodle_ZaCsbxXa&initial-count=2">lottie a2</a>
+  <br /><br />  
+  
+
 </div>
 
 <div id="imgContainer">

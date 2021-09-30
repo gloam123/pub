@@ -26,19 +26,16 @@
 
   <div id='container'>
 
-    <video id="ovideo" autoplay="" style="width: 100%; height: 300px; object-fit: cover;"
-      poster="/img/test.jpg" playsinline="" webkit-playsinline="">
+    <video crossorigin="anonymous" poster="/img/test.jpg" id="ovideo" style="width: 100%; height: 300px; object-fit: cover;"
+       playsinline="" webkit-playsinline="">
       <source src="https://static.yximgs.com/kos/nlav10341/fe5b84bcvodcq1251246104/ededa47d5285890796588233934/f0.mp4">
     </video>
 
   </div>
 
-
-  <div id="id_top" class="video_top">
-    <img data-v-55dc0abe=""
-      src="https://static.yximgs.com/kos/nlav10341/movie/d0910079abeb841ba4f99323d28db2ac28929.jpg" class="error-cover">
-  </div>
-
+<!--
+  poster="/img/test.jpg"
+-->
   <script>
     ovideo.onerror = function (e) {
       console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
