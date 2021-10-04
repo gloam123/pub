@@ -8,6 +8,14 @@
       return false;
   }
   if (!isMobile()) {
-    alert("请手机端查看页面");
+    //alert("请手机端查看页面");
   }
+
+  setTimeout(() => {
+    let c = document.querySelector("canvas");
+    if (c) {
+      let info = document.querySelector("#info");
+      info ? info.innerHTML = "canvas size(" + c.width + "," + c.height + ")" : 0;
+    }
+  }, 1000);
 })();

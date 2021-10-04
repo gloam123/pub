@@ -1,0 +1,69 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" id="viewport">
+<script src="./viewport_common.js?abc"></script>
+
+<title>index</title>
+
+<style>
+
+  body, button {
+    font-size: 16px;
+  }
+  body {
+    margin: 0px;
+  }
+  #id_layer {
+    background-color: #AABB55;
+    will-change:transform;
+    width: 100%;
+  }
+
+  #id_layer2 {
+    opacity: 0.5;
+    top: 50px;
+    width: 300px;
+    height: 200px;
+    position: fixed;
+    background-color: red;
+  }
+</style>
+<script>
+  function init_layer() {
+    let contentWidth = document.body.offsetWidth;
+
+    var olayer=document.getElementById("id_layer");
+    olayer.style.height = "" + olayer.offsetWidth + "px";
+  }
+
+  window.addEventListener("resize", function() {
+    init_layer();
+    console.log("resize");
+  });
+
+  function onload() {
+    init_layer();
+  }
+</script>
+
+</head>
+
+<body onload="onload()">
+  <br/><br/>
+  <button onclick="location.reload()">reload</button>
+  <br/><br/>
+  <div id="info"></div>
+  <br/>
+  normal div<br/>
+  <div id="id_layer">
+
+  </div>
+  <div id="id_layer2">
+
+  </div>
+</body>
+</html>
