@@ -28,16 +28,98 @@ function enterFullScreen() {
 </head>
 
 <body>
-dddd
+cccc
 <br/><br/><br/><br/><br/><br/><br/><br/>
 aaaa
-<video id="video1" useksplayer="video" width="100%" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay">
+<video id="video1" useksplayer="video" width="100%" src="../../video/beiwa_iqiyi_05.mp4?fas" controls="controls" autoplay="autoplay">
     Your browser does not support HTML5 video.
 </video>
 <br />
 <br />
 <br />
 <br />
+<script>
+	let ovideo = document.getElementById('video1');
+	ovideo.onerror = function (e) {
+		console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
+		let s = "";
+		let err = ovideo.error;
+		console.log("gqg5: ovideo.onerror ovideo.error=" + ovideo.error);
+
+		switch (err.code) {
+			case MediaError.MEDIA_ERR_ABORTED:
+				s += "The user canceled the audio.";
+				break;
+			case MediaError.MEDIA_ERR_NETWORK:
+				s += "A network error occurred while fetching the audio.";
+				break;
+			case MediaError.MEDIA_ERR_DECODE:
+				s += "An error occurred while decoding the audio.";
+				break;
+			case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+				s += "The audio is missing or is in a format not supported by your browser.";
+				break;
+			default:
+				s += "An unknown error occurred.";
+				break;
+		}
+
+		let message = err.message;
+
+		if (message && message.length) {
+			s += " " + message;
+		}
+		console.log("gqg5: ovideo.onerror s=" + s);
+		//ovideo.src = "https://txmov2.a.yximgs.com/bs2/newWatermark/MzU4MTk4OTQ2NjA_zh_3.mp4?a=2222222";
+	}
+
+	ovideo.addEventListener("durationchange", function (e) {
+		console.log("gqg3: durationchange ovideo.duration=" + ovideo.duration);
+	});
+	ovideo.addEventListener("playing", function (e) {
+		console.log("gqg6: addEventListener　playing ovideo.duration=" + ovideo.duration);
+	});
+	ovideo.addEventListener("waiting", function (e) {
+		console.log("gqg6: addEventListener　waiting ovideo.duration=" + ovideo.duration);
+	});
+
+	ovideo.addEventListener("loadstart", function (e) {
+		console.log("gqg3: addEventListener　loadstart");
+	});
+	ovideo.addEventListener("load", function (e) {
+		console.log("gqg3: addEventListener　load....");
+	});
+	ovideo.addEventListener("ended", function (e) {
+		console.log("gqg3: ended=true");
+	});
+	ovideo.addEventListener("abended", function (e) {
+		console.log("gqg3: addEventListener abended=true");
+	});
+	ovideo.onabended = function () {
+		console.log("gqg3: onabended=true  ================================================");
+	}
+	ovideo.addEventListener("firstframe", function (e) {
+		console.log("gqg3: addEventListener firstframe=true");
+	});
+	ovideo.onfirstframe = function () {
+		console.log("gqg3: onfirstframe=true");
+	}
+
+	ovideo.onplaying = function () {
+		console.log("gqg3: ovideo.onplaying ovideo.duration=" + ovideo.duration);
+	}
+
+	function playOrPause() {
+		if (ovideo.paused) {
+			ovideo.play();
+		} else {
+			ovideo.pause();
+		}
+		console.log("gqg3: abplay=true ================================================");
+	}
+
+</script>
+<br /><br />
 
 </body>
 </html>

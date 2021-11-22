@@ -47,6 +47,11 @@ function generateList(num){
 
 var gListArray = [];
 var gIndex = 0;
+var gCount = 0;
+function addCount() {
+  gCount += 1;
+  document.getElementById("id_count").innerHTML = '' + gCount;
+}
 function allocJavaScriptMemory() {
   //gListArray[gIndex++] = generateList(1024*1024);
   gListArray[gIndex++] = generateList(1024*10);
@@ -97,17 +102,20 @@ function allocBigJsFileMemory() {
 }
 
 //const video_url = "../video/beiwa_iqiyi_05.mp4";
-const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+//const video_url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+const video_url = "https://zhaopeng06.kproxy.corp.kuaishou.com/public/h264-720-1.mp4";
 function allocKsMediaMemory() {
   let url = video_url + "?random=" + Math.random();
-  var html_str = '<video useksplayer="video" autoplay="true" autoplay="autoplay" controls="controls" src=' + url + '></video';
+  var html_str = '<video useksplayer="video" autoplay="true" autoplay="autoplay" loop="loop" controls="controls" src=' + url + '></video';
   appendInnerHtml(html_str);
+  addCount();
 }
 
 function allocSysMediaMemory() {
   let url = video_url + "?random=" + Math.random();
-  var html_str = '<video autoplay="true" autoplay="autoplay" controls="controls" src=' + url + '></video';
+  var html_str = '<video autoplay="true" autoplay="autoplay" loop="loop" controls="controls" src=' + url + '></video';
   appendInnerHtml(html_str);
+  addCount();
 }
 
 function removeElement() {
@@ -157,7 +165,7 @@ function appendBigCanvas() {
 <div id="infoContainer">
 </div>
 <br />
-<div style="position: fixed; z-index: 50000;">
+<div style="position: fixed; z-index: 50000; top:130px">
   <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
   <br /><br />
   <button onclick="allocSVGMemory()">allocSVGMemory</button>
@@ -177,6 +185,10 @@ function appendBigCanvas() {
   <button onclick="appendBigCanvas()">appendBigCanvas</button>
   <br /><br />
   <button onclick="removeElement()">removeElement</button>
+  <br /><br />  
+  <button onclick="location.reload()">reload</button>
+  <br /><br />  
+  Count:<span id="id_count"></span>
   <br /><br />  
   <a href="https://zhaopeng06-video.kproxy.corp.kuaishou.com/">video_decode_test.html</a>
   <br /><br />  
