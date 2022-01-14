@@ -5,9 +5,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>index</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+
+
+    // setTimeout(function() {
+    //   document.getElementById('idJsUa').innerHTML = navigator.userAgent + "; hahahah.......";
+    // }, 1000*38);
+  }
+  </script>
 </head>
 
-<body>
+<body onload="onLoad()">
+  <br />
+  <div id="idJsUa"></div>
+  <br /><br />
+  <button onclick="location.reload()">reload</button>
+  <br /><br />
+<br />
+File:<input name="upload_file" type="file" />
+
 <br />
 <a href="./frame">frame</a>
 <br />

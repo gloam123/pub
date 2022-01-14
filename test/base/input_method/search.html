@@ -1,0 +1,404 @@
+<html lang="zh" class="os-android" style="font-size: 50px;">
+
+<head>
+  <script>/* CRP 2020-04-29 18:28:30 */
+    !function () { var e = "pc" === g(), t = e ? "https://s.kwaixiaodian.com/rest/app/tts/user/log/common" : "https://app.kwaixiaodian.com/rest/app/grocery/s/log/ui", n = window, r = document, o = location, a = encodeURIComponent, c = r.head || r.getElementsByTagName("head")[0], i = /^(https?:\/\/)([\w-]+\.)?(static\.yximgs\.com\/)/i, s = ["ali-ec", "tx-ec", "js-ec"], u = window.__crp_state = {}; !function () { for (var e = 0; e < s.length; e++)u[s[e]] = !0 }(); var f = function () { var t = ["action=CDN_RESOURCE_PROTECTOR", "ver=" + _("lon") + "," + _("lat")]; e ? t.push("os=" + g(), "from=" + a(o.href), "appver=" + v()) : t.push("userId=" + v(), "platform=" + g(), "fullpath=" + a(o.hostname), "path=" + a(o.pathname), "fromURL=" + a(o.search)); return t.join("&") }(), p = { js: 10, css: 10, img: 100 }; function l(e) { if (function (e) { return i.test(e) }(e)) { var t = (e.match(i)[2] || "").replace(/\.$/, ""); u[t] = !1; for (var n = 0; n < s.length; n++)if (t = s[n], u[t]) return t && (t += "."), e.replace(i, "$1" + t + "$3") } } function m(e) { e.onerror = function (e) { cdnResourceProtector(e) }, e.onload = function () { e.onload = e.onerror = null, e = null, h(1) } } function h(e, t) { function r(r) { setTimeout((function () { var r; (r = n.ksLog) && r.sendCountTag && (r.sendCountTag("eshop_crp_" + e, !0), t && r.sendAction({ event: "task", action: "COUNT", tag: "eshop_crp_errurl", url: t }, !0), e || v() || n.ksBridge || r.sendCountTag("eshop_crp_env_exception", !0)) }), r) } n.ksLog ? r(100) : r(1e3) } function d(e) { if (n.performance && n.performance.getEntriesByName) { var t = performance.getEntriesByName(e); if (t && t[0]) return 0 | t[0].duration } return 0 } function g() { var e = navigator.userAgent; return /\bmobile\b/i.test(e) ? /\bandroid\b/i.test(e) ? "android" : "ios" : "pc" } function v() { return _("ud|userId") } function _(e) { var t = document.cookie.match(new RegExp("(?:" + e + ")=([^;]+)", "i")); return t && t[1] || "" } n.cdnResourceProtector = n.__crp = function (n) { try { !function (n) { var o = n.target, i = "", s = "", u = 0; o instanceof HTMLImageElement ? (u = p.img, i = o.src, (s = l(i)) && (g = s, o.src = g)) : o instanceof HTMLScriptElement ? (u = p.js, i = o.src, (s = l(i)) && function (e) { var t = r.createElement("script"); t.async = "async", t.charset = "utf-8", m(t), t.src = e, c.appendChild(t) }(s)) : o instanceof HTMLLinkElement && "stylesheet" === o.rel && (u = p.css, i = o.href, (s = l(i)) && function (e) { var t = r.createElement("link"); t.rel = "stylesheet", t.type = "text/css", t.charset = "utf-8", m(t), t.href = e, c.appendChild(t) }(s)); var g; (function (n, r) { if (!r) return; if (0 != (o = 1, c = r + 1, (Math.random() * (c - o) + o | 0) % r)) return; var o, c; var i = new Image, s = a(function (e) { return e.replace(/^(?:https?:\/\/)([^/]+)\/.+/i, "$1") }(n)), u = ["ts=" + (new Date).getTime(), "ext=" + d(n)]; !e && u.push("element=" + s, "elementName=" + a(n)), e && u.push("source=" + s, "target=" + a(n)); var p = t + "?" + f + "&" + u.join("&"); setTimeout((function () { i.src = p, i = null }), 100) })(i, u), h(0, i) }(n) } catch (e) { } }, n.cdnResourceProtector.setting = function (e) { var t, n; for (t = 0; t < e.length; t++)n = e[t], p[n[0]] = n[1] } }();</script>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=375,user-scalable=no,viewport-fit=cover">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://ali-ec.static.yximgs.com">
+  <link rel="dns-prefetch" href="https://ali-ad.static.yximgs.com">
+  <link rel="dns-prefetch" href="https://tx-ec.static.yximgs.com">
+  <link rel="dns-prefetch" href="https://tx-ad.static.yximgs.com">
+  <link rel="dns-prefetch" href="https://js-ec.static.yximgs.com">
+  <link rel="shortcut icon" href="https://js-ec.static.yximgs.com/udata/pkg/ks-merchant/seller-pc/kwai_icon.ico"
+    onerror="__crp(event)">
+  <title></title>
+  <script>// TODO
+    (function () { var ua = navigator.userAgent; var isKwai = /\bkwai\b/i.test(ua.toLowerCase()); var isAndroid = /\bAndroid\b/i.test(ua); var appver = ua.match(/Kwai\/(\d(.\d+)+)/); appver = (appver && appver[1]) || ''; function compareVersion(version1, version2) { var numbersVer1 = version1 && version1.split('.') || []; var numbersVer2 = version2 && version2.split('.') || []; var result = 0; var index = 0; while (result === 0 && index < 4) { var number1 = Number(numbersVer1[index]) || 0; var number2 = Number(numbersVer2[index]) || 0; result = number1 - number2; index++ } return result } function showGlobalBlocking() { window._blockingTodownloadKwai = function () { location.replace('https://js-ec.static.yximgs.com/udata/pkg/ks-merchant/eshop_go_update.ad1f98ab.html') }; window.Kwai && window.Kwai.showDialog(JSON.stringify({ title: '版本过低', content: '升级到快手最新版本才可继续', negativeButton: { text: '取消', colorType: 'negative', actions: [{ actionType: 'JS_CALLBACK', url: 'Kwai.exitWebView', },], }, positiveButton: { text: '立即下载', colorType: 'positive', actions: [{ actionType: 'JS_CALLBACK', url: '_blockingTodownloadKwai', },], }, })) } try { if (isAndroid && isKwai && compareVersion('6.6.6', appver) > 0) { setTimeout(function () { showGlobalBlocking() }, 500) } } catch (e) { console.log('页面执行全局脚本时出错！', e) } })();</script>
+  <script>var scale = document.documentElement.offsetWidth / window.screen.availWidth;
+    function getDeviceInfoCallback(res) {
+      if (typeof res === 'string') {
+        res = JSON.parse(res);
+      }
+      window.statusBarHeight = Math.round(
+        (res.data.statusBarHeight * scale) / window.devicePixelRatio
+      );
+    }
+    window.statusBarHeight = 22;
+    if (window.__yodaBridge__ && window.__yodaBridge__.invoke) {
+      window.__yodaBridge__.invoke('Kwai', 'getDeviceInfo', JSON.stringify({
+        callback: 'getDeviceInfoCallback',
+      }), function () { });
+    } else if (window.Kwai && window.Kwai.getDeviceInfo) {
+      window.Kwai.getDeviceInfo(
+        JSON.stringify({ callback: 'getDeviceInfoCallback' })
+      );
+    }</script>
+  <link href="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/vendor.742b9ee8.css"
+    rel="stylesheet" onerror="__crp(event)">
+  <link href="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/recommend.1e689ecf.css"
+    rel="stylesheet" onerror="__crp(event)">
+  <style type="text/css">
+    .m-modal.svelte-tikd1g.svelte-tikd1g {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .m-mask.svelte-tikd1g.svelte-tikd1g {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5)
+    }
+
+    .m-modal-container.svelte-tikd1g.svelte-tikd1g {
+      position: relative;
+      z-index: 1;
+      transform: scale(0.5);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.25, 0.7, 0, 1), opacity 0.3s cubic-bezier(0.25, 0.7, 0, 1)
+    }
+
+    .m-modal-container-visible.svelte-tikd1g.svelte-tikd1g {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .m-modal-container.svelte-tikd1g img.svelte-tikd1g {
+      border-radius: 8px
+    }
+
+    .m-modal-container.svelte-tikd1g .m-wrap.svelte-tikd1g {
+      display: inline-block;
+      font-size: 0;
+      cursor: pointer
+    }
+
+    .m-close-leftTop.svelte-tikd1g.svelte-tikd1g {
+      position: absolute;
+      top: 0;
+      left: 0
+    }
+
+    .m-close-leftTop.svelte-tikd1g .u-icon.svelte-tikd1g {
+      width: 40px;
+      height: 40px;
+      background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjVweCIgaGVpZ2h0PSIyNXB4IiB2aWV3Qm94PSIwIDAgMjUgMjUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+5YWz6ZetPC90aXRsZT4KICAgIDxnIGlkPSLop4bop4kiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSLmtojmga/op6bovr4iIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01Ny4wMDAwMDAsIC0yMjcuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSLnvJbnu4QtMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDcuNTAwMDAwLCAyMTkuNTAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZyBpZD0i5YWz6ZetIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMC4wMDAwMDAsIDguMDAwMDAwKSI+CiAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0i5qSt5ZyG5b2iIiBmaWxsLW9wYWNpdHk9IjAuNCIgZmlsbD0iIzAwMDAwMCIgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIj48L2NpcmNsZT4KICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iSWNvbiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNy41MDAwMDAsIDcuNTAwMDAwKSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMS41Ij4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTAsOC44NjM2MzYzNiBMOC42Nzg5NzcyNywwIEwwLDguODYzNjM2MzYgWiIgaWQ9IkxpbmUiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTAsOC44NjM2MzYzNiBMOC4yNjk4ODY0NSwwIEwwLDguODYzNjM2MzYgWiIgaWQ9IkxpbmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuMTM0OTQzLCA0LjQzMTgxOCkgc2NhbGUoLTEsIDEpIHRyYW5zbGF0ZSgtNC4xMzQ5NDMsIC00LjQzMTgxOCkgIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=') center no-repeat
+    }
+
+    .m-close-bottom.svelte-tikd1g.svelte-tikd1g {
+      text-align: center
+    }
+
+    .m-close-bottom.svelte-tikd1g .u-icon.svelte-tikd1g {
+      width: 50px;
+      height: 50px;
+      background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MnB4IiB2aWV3Qm94PSIwIDAgNDAgNDIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+bmRfcG9wdXBfaWNvbl9jbG9zZeWkh+S7vSAyOTwvdGl0bGU+CiAgICA8ZyBpZD0i5ZWG5a6256uvIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iUEPmtojmga/op6bovr4iIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03MDAuMDAwMDAwLCAtNjk1LjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0i57yW57uELTExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MTAuMDAwMDAwLCAyODcuNTAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZyBpZD0iaWNvbl9jbG9zZXJlZHBvY2tldCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjkwLjAwMDAwMCwgNDA4LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJpY1/mjInpkq4iIG9wYWNpdHk9IjAuNyI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJCb3VuZHMiIHg9IjAiIHk9IjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MSI+PC9yZWN0PgogICAgICAgICAgICAgICAgICAgICAgICA8ZWxsaXBzZSBpZD0iT3ZhbCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuNSIgY3g9IjIwIiBjeT0iMjAuNSIgcng9IjE0LjI1IiByeT0iMTQuNjI1Ij48L2VsbGlwc2U+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNCwyMC41IEwyNiwyMC41IE0yMCwxNC4zNSBMMjAsMjYuNjUiIGlkPSJDb21iaW5lZC1TaGFwZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAuMDAwMDAwLCAyMC41MDAwMDApIHJvdGF0ZSgtMzE1LjAwMDAwMCkgdHJhbnNsYXRlKC0yMC4wMDAwMDAsIC0yMC41MDAwMDApICI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICA8cmVjdCBpZD0iQm91bmRzIiBmaWxsPSIjRDhEOEQ4IiBvcGFjaXR5PSIwIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDEiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+') center no-repeat
+    }
+
+    .u-icon.svelte-tikd1g.svelte-tikd1g {
+      display: inline-block;
+      cursor: pointer
+    }
+  </style>
+  <link rel="stylesheet" type="text/css"
+    href="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/async-commons.888de462.css">
+  <script charset="utf-8"
+    src="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/async-commons.7a2dfc9d.chunk.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/20.3eb23ea8.css">
+  <script charset="utf-8"
+    src="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/20.f621b32a.chunk.js"></script>
+</head>
+
+<body style="font-size: 16px;">
+  <div data-v-df584dda="" id="app">
+    <div data-v-2482c41a="" data-v-df584dda="" class="cps-col page" vlog="PAGE">
+      <form data-v-2482c41a="" action="javascript:void(0);">
+        <div data-v-37e81aa8="" data-v-2482c41a="" class="es-search es-search--white is-search"
+          vlog="BUTTON_SEARCH_BAR">
+          <div data-v-37e81aa8="" class="es-search-wrapper"><input data-v-37e81aa8="" maxlength="64"
+              placeholder="输入商品、店铺、团长、活动的名称或ID" type="search" class="es-search-input"> <span data-v-37e81aa8=""
+              class="es-search-icon"><i data-v-37e81aa8="" class="es-icon-search"></i> <span data-v-37e81aa8=""
+                class="es-search-placeholder">搜索</span></span>
+            <div data-v-37e81aa8="" class="es-search-clear"><span data-v-37e81aa8="" class="es-icon-close-fill"></span>
+            </div>
+          </div>
+          <div data-v-37e81aa8="" class="es-search-cancel">
+            取消
+          </div>
+        </div>
+      </form>
+      <div data-v-2482c41a="" class="history-card">
+        <div class="cps-row justify-space-between align-center title-wrap">
+          <div class="text">历史搜索</div>
+          <div class="cps-row align-center operation"><span>删除</span> <span class="iconfont delete-btn"></span></div>
+        </div>
+        <div class="history-item-list">
+          <div class="history-item" vlog="HISTORY_SEARCH_WORD">
+            123
+          </div>
+        </div>
+        <div class="cps-row justify-space-between align-center title-wrap">
+          <div class="text">大家都在搜</div>
+          <div class="cps-row align-center operation"><span>换一批</span> <span class="iconfont renew-btn"></span></div>
+        </div>
+        <div class="history-item-list">
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD"><span>🔥</span>
+            新客专享一元购
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            手机支架
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            螺蛳粉
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            口罩
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            空气炸锅
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            大圣
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            热敷毛巾
+          </div>
+          <div class="history-item" vlog="PUBLIC_SEARCH_WORD">
+            <!---->
+            九点
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div data-v-bacf81f2="" data-v-2482c41a="" class="filter-popup">
+        <div class="sp-popup is-right is-mask-show" style="display: none;">
+          <div class="sp-popup__mask" style="display: none;"></div>
+          <div class="sp-popup__box slide-left" style="display: none;">
+            <div data-v-bacf81f2="" class="content">
+              <div data-v-bacf81f2="" class="filter-context">
+                <p data-v-bacf81f2="" class="title">券后价区间（元）</p>
+                <div data-v-bacf81f2="" class="field-list">
+                  <div data-v-bacf81f2="" class="field-contain">
+                    <div data-v-bacf81f2="" class="es-field field-item">
+                      <div class="es-cell">
+                        <div class="es-cell--content">
+                          <div class="es-cell--horizontal">
+                            <!---->
+                            <section class="es-cell--horizontal-right">
+                              <!---->
+                              <section class="es-cell--horizontal-right-content es-cell--justify-center">
+                                <section class="es-cell--right-content-wrap es-field--wrap"><span
+                                    class="es-field--input-wrap"><input type="text" inputmode="numeric"
+                                      placeholder="最低价">
+                                    <!---->
+                                  </span></section>
+                              </section>
+                              <!---->
+                            </section>
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                      </div>
+                    </div>
+                  </div>
+                  <div data-v-bacf81f2="" class="divide"></div>
+                  <div data-v-bacf81f2="" class="field-contain">
+                    <div data-v-bacf81f2="" class="es-field field-item">
+                      <div class="es-cell">
+                        <div class="es-cell--content">
+                          <div class="es-cell--horizontal">
+                            <!---->
+                            <section class="es-cell--horizontal-right">
+                              <!---->
+                              <section class="es-cell--horizontal-right-content es-cell--justify-center">
+                                <section class="es-cell--right-content-wrap es-field--wrap"><span
+                                    class="es-field--input-wrap"><input type="text" inputmode="numeric"
+                                      placeholder="最高价">
+                                    <!---->
+                                  </span></section>
+                              </section>
+                              <!---->
+                            </section>
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p data-v-bacf81f2="" class="title">佣金率区间</p>
+                <div data-v-bacf81f2="" class="field-list">
+                  <div data-v-bacf81f2="" class="field-contain">
+                    <div data-v-bacf81f2="" class="es-field field-item">
+                      <div class="es-cell">
+                        <div class="es-cell--content">
+                          <div class="es-cell--horizontal">
+                            <!---->
+                            <section class="es-cell--horizontal-right">
+                              <!---->
+                              <section class="es-cell--horizontal-right-content es-cell--justify-center">
+                                <section class="es-cell--right-content-wrap es-field--wrap"><span
+                                    class="es-field--input-wrap"><input type="text" inputmode="numeric"
+                                      placeholder="最低值">
+                                    <!---->
+                                  </span></section>
+                              </section><span class="es-cell--horizontal-right-suffix">%</span>
+                            </section>
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                      </div>
+                    </div>
+                  </div>
+                  <div data-v-bacf81f2="" class="divide"></div>
+                  <div data-v-bacf81f2="" class="field-contain">
+                    <div data-v-bacf81f2="" class="es-field field-item">
+                      <div class="es-cell">
+                        <div class="es-cell--content">
+                          <div class="es-cell--horizontal">
+                            <!---->
+                            <section class="es-cell--horizontal-right">
+                              <!---->
+                              <section class="es-cell--horizontal-right-content es-cell--justify-center">
+                                <section class="es-cell--right-content-wrap es-field--wrap"><span
+                                    class="es-field--input-wrap"><input type="text" inputmode="numeric"
+                                      placeholder="最高值">
+                                    <!---->
+                                  </span></section>
+                              </section><span class="es-cell--horizontal-right-suffix">%</span>
+                            </section>
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p data-v-bacf81f2="" class="title">全部分类</p>
+                <div data-v-bacf81f2="" class="field-category">
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    食品
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    百货
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    数码家电
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    珠宝
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    美妆个护
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    女装
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    男装
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    运动
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    鞋包
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    内衣
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    配饰
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    母婴用品
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    童装
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    宠物
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    家装家具
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    汽车用品
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    图书文娱
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    生活卡券
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    二手
+                  </div>
+                  <div data-v-bacf81f2="" class="field-category-item">
+                    其他
+                  </div>
+                </div>
+              </div>
+              <div data-v-bacf81f2="" class="filter-footer">
+                <div data-v-bacf81f2="" class="es-button es-button--default es-button--normal is-plain is-round"
+                  style="width: 135px; color: rgb(102, 102, 102); height: 40px; border: 1px solid rgb(204, 204, 204); border-radius: 20px;">
+                  <!----><label class="es-button-text">
+                    重置
+                  </label>
+                </div>
+                <div data-v-bacf81f2="" class="es-button es-button--primary es-button--normal is-round"
+                  style="width: 135px; height: 40px; border-radius: 20px;">
+                  <!----><label class="es-button-text">
+                    完成
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  
+  <script>window.__globalConfigForLog = {
+      weblogRate: 1, //  weblog 抽样比例 100%
+    };</script>
+  <script
+    src="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/chunk-vue.b9ae9f7b.chunk.js"
+    onerror="__crp(event)"></script>
+    <script
+    src="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/vendor.2aa322c1.chunk.js"
+    onerror="__crp(event)"></script>
+<!--
+  <script src="https://tx-ec.static.yximgs.com/udata/pkg/ks-merchant/kwaishop-cps-hybrid/static/recommend.02a18a42.js"
+    onerror="__crp(event)"></script>  
+-->
+    <br /><br /><br /><br />
+    <button onclick="location.reload()">reload</button>
+    <br /><br />
+</body>
+
+</html>

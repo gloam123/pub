@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=10.0,user-scalable=no" id="viewport">        
+        <title>
+            canvas alpha
+        </title>
+
+        <style>
+          #idcanvas {
+              /* width: 95%;
+              height: 500px; */
+              background-color:#FFFF0000;
+              border: 1px solid red;
+          }
+        </style>
+
+        <script>
+
+            let g_width = 1080;
+            let g_height = 1800;
+            let g_x = g_width/2;
+            let g_y = 0;
+
+            let g_ctx;
+
+            window.onload = function() {
+                var c=document.getElementById("idcanvas");
+                c.width = g_width; //document.body.clientWidth * 0.95;
+                c.height = g_height; //document.body.clientHeight;
+
+                g_ctx=c.getContext("2d");
+                //cxt.fillRect(100, 800, 100,10);
+                window.requestAnimationFrame(onDraw);
+            }
+
+            function onDraw() {
+              g_ctx.fillStyle="#0000FF";
+              g_ctx.fillRect(0,0,1200,3000);
+              g_ctx.fillStyle="#00FF00";
+
+              g_ctx.fillRect(g_x, g_y, 150, 150);
+
+              g_y += 3;
+              if (g_y > (g_height-50)) {
+                g_y = 0;
+              }
+
+
+              window.requestAnimationFrame(onDraw);
+            }
+
+            window.onpagehide = function() {
+                console.log("gqg3: window.onpagehide");
+            }
+
+            function dohidden() {
+                var c=document.getElementById("idcanvas");
+                //c.hidden = true;
+                var sw = document.body.clientWidth;
+                var sh = document.body.clientHeight;
+
+                
+                let contentWidth = document.body.clientWidth;
+                let scale = screen.width / contentWidth;
+
+                alert("c.width=" + c.width + "; c.height=" + c.height + "; screen.availWidth=" + screen.availWidth + "; window.innerWidth=" + window.innerWidth + ";screen.width=" + screen.width + "; contentWidth=" + contentWidth);
+
+                alert("sw="+sw+"; sh=" + sh + "; cw=" + c.width + "; ch=" + c.height + "; pixelRadio=" + window.devicePixelRatio);
+            }
+        </script>
+    </head>
+
+    <body>
+      canvas:
+      <canvas id="idcanvas" style="position: absolute; width: 98%; height: 98%; left: 0px; top: 0px;">
+
+      </canvas>
+
+      <div style="position: fixed;">
+        <br/><br/><br/><br/><br/><br/>
+        <button onclick="location.reload()">reload</button>
+        <br/><br/>
+        222
+        <button onclick="dohidden()">dohidden</button>
+        <br/><br/><br/>
+      </div>
+
+    </body>
+</html>

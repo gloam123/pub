@@ -1,0 +1,134 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+  <style type="text/css">
+    .video_top {
+      position: relative;
+      width: 150px;
+      height: 200px;
+      left: 180px;
+      top: -220px;
+      background: #0C0;
+      z-index: 997;
+    }
+  </style>
+  <script>
+    const load = () => {
+      console.log("load event detected!");
+      document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+    }
+    window.onload = load;
+  </script>
+</head>
+
+<body>
+
+  <div id='container'>
+
+    <video id="ovideo" useksplayer="video" autoplay="" loop
+     src="https://w1-pro.kskwai.com/kos/nlav11066/eve2022/pickNumber/zhuhuichang_inner_brand_video_1_v.mp4"
+     style="width: 100%; object-fit: cover;"></video>
+
+  </div>
+
+<!--
+  muted=""
+  controls
+  poster="/img/test.jpg"
+-->
+  <script>
+    ovideo.onerror = function (e) {
+      console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
+      let s = "";
+      let err = ovideo.error;
+      console.log("gqg5: ovideo.onerror ovideo.error=" + ovideo.error);
+
+      switch (err.code) {
+        case MediaError.MEDIA_ERR_ABORTED:
+          s += "The user canceled the audio.";
+          break;
+        case MediaError.MEDIA_ERR_NETWORK:
+          s += "A network error occurred while fetching the audio.";
+          break;
+        case MediaError.MEDIA_ERR_DECODE:
+          s += "An error occurred while decoding the audio.";
+          break;
+        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+          s += "The audio is missing or is in a format not supported by your browser.";
+          break;
+        default:
+          s += "An unknown error occurred.";
+          break;
+      }
+
+      let message = err.message;
+
+      if (message && message.length) {
+        s += " " + message;
+      }
+      console.log("gqg5: ovideo.onerror s=" + s);
+      //ovideo.src = "https://txmov2.a.yximgs.com/bs2/newWatermark/MzU4MTk4OTQ2NjA_zh_3.mp4?a=2222222";
+    }
+
+    ovideo.addEventListener("durationchange", function (e) {
+      console.log("gqg3: durationchange ovideo.duration=" + ovideo.duration);
+    });
+    ovideo.addEventListener("playing", function (e) {
+      console.log("gqg6: addEventListener　playing ovideo.duration=" + ovideo.duration);
+    });
+    ovideo.addEventListener("waiting", function (e) {
+      console.log("gqg6: addEventListener　waiting ovideo.duration=" + ovideo.duration);
+    });
+
+    ovideo.addEventListener("loadstart", function (e) {
+      console.log("gqg3: addEventListener　loadstart");
+    });
+    ovideo.addEventListener("load", function (e) {
+      console.log("gqg3: addEventListener　load....");
+    });
+    ovideo.addEventListener("ended", function (e) {
+      console.log("gqg3: ended=true");
+    });
+    ovideo.addEventListener("abended", function (e) {
+      console.log("gqg3: addEventListener abended=true");
+    });
+    ovideo.onabended = function () {
+      console.log("gqg3: onabended=true  ================================================");
+    }
+    ovideo.addEventListener("firstframe", function (e) {
+      console.log("gqg3: addEventListener firstframe=true");
+    });
+    ovideo.onfirstframe = function () {
+      console.log("gqg3: onfirstframe=true");
+    }
+
+    ovideo.onplaying = function () {
+      console.log("gqg3: ovideo.onplaying ovideo.duration=" + ovideo.duration);
+    }
+
+    function playOrPause() {
+      if (ovideo.paused) {
+        ovideo.play();
+      } else {
+        ovideo.pause();
+      }
+      console.log("gqg3: abplay=true ================================================");
+    }
+
+  </script>
+  <br /><br />
+
+  <button onclick="playOrPause()">播放或暂停</button>
+  <br /><br />
+  <button onclick="location.reload()">重新加载</button>
+  <br /><br />
+  <br /><br />
+  <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
+  <div id="idJsUa">
+    
+  </div>
+</body>
+
+</html>

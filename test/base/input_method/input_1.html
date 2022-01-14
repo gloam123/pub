@@ -2,13 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>input 1</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+
+  var s = 0;
+  function TimerConsole() {
+            console.log(s)
+            s++;
+
+            document.getElementById('tc').innerText = s;
+  }
+
+  window.setInterval("TimerConsole()",1000);
+  </script>
 </head>
 
-<body>
+<body onload="onLoad()">
+  <br />
+  <div id="idJsUa"></div>
+  <br /><br />
+  <button onclick="location.reload()">reload</button>
+  <br /><br />
 <br />
 <br />
-<br />
+22
 <input type="text" name="username" />
 <br />
 <br />
@@ -18,6 +39,11 @@
 <br />
 <br />
 <br />
+tc:
+<div id="tc">
+
+</div>
+<a target="_self" href="https://nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4&hyId=nebula_earning">nebula.kuaishou.com/nebula/task/earning?source=timer&layoutType=4&hyId=nebula_earning</a>
 <br />
 <br />
 <br />
