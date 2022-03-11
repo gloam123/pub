@@ -23,24 +23,79 @@
   </script>
   <!--
     https://w1-pro.kskwai.com/kos/nlav11066/eve2022/pickNumber/zhuhuichang_inner_brand_video_1_v.mp4
-    http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4
-    http://172.17.202.11:8080/video/beiwa_iqiyi_05.mp4
+    
   -->
 </head>
 
 <body>
 
   <div id='container'>
-
-    <video id="ovideo" useksplayer="video" controls autoplay="" src="http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4" style="width: 100%; height: 300px;"></video>
+<!--
+  <video id="ovideo" useksplayer="video" autoplay="" loop src="../../video/beiwa_iqiyi_05.mp4" style="width: 100%; object-fit: cover;"></video>
+-->
+  
   
   </div>
-<!--
-  muted=""
-  controls
-  poster="/img/test.jpg"
--->
+
+  <div style="position: fixed; z-index: 999; top: 150px; text-align:right;">
+    <button onclick="insertKsVideo()">Insert KsVideo</button>
+    <br/><br/>
+    <button onclick="attachOrDetachKsVideo()">Attach/Detach KsVideo</button>
+    <br/><br/>
+    <button onclick="callInterface()">Call Interface</button>
+    <br/><br/>
+    <button onclick="playOrPause()">播放或暂停</button>
+    <br /><br />
+    <button onclick="location.reload()">重新加载</button>
+    <br /><br />
+    <br /><br />
+    <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
+    <div id="idJsUa">
+      
+    </div>
+  </div>
+
   <script>
+
+  function appendInnerHtml(html_str) {
+    document.getElementById('container').insertAdjacentHTML('beforeend', html_str);
+  }
+
+  const video_url = "https://zhaopeng06.kproxy.corp.kuaishou.com/public/h264-720-1.mp4";
+  //const video_url = "https://zhaopeng06.xxxxxxx.kuaishou.com/public/h264-720-1.mp4";
+  function insertKsVideo() {
+    let url = video_url + "?random=" + Math.random();
+    var html_str = '<video id="ksvideo" useksplayer="video" autoplay="true" autoplay="autoplay" loop="loop" controls="controls" src=' + url + '></video';
+    appendInnerHtml(html_str);
+    gVideo = document.getElementById('ksvideo');
+    gVideo.updatelivesrc("haha updatelivesrc url000000000000000000");
+  }
+
+  var gVideo;
+  function attachOrDetachKsVideo() {
+    var ov = document.getElementById('ksvideo');
+    if (ov == gVideo) {
+      document.getElementById('container').removeChild(gVideo);
+    } else {
+      document.getElementById('container').appendChild(gVideo);
+    }
+  }
+
+  function callInterface() {
+    gVideo.updatelivesrc("callInterface 111");
+  }
+  
+  function playOrPause() {
+      if (gVideo.paused) {
+        gVideo.play();
+      } else {
+        gVideo.pause();
+      }
+      console.log("gqg3: abplay=true ================================================");
+  }
+
+  function initvideo(ovideo) {
+
     ovideo.onerror = function (e) {
       console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
       let s = "";
@@ -109,32 +164,12 @@
     ovideo.onplaying = function () {
       console.log("gqg3: ovideo.onplaying ovideo.duration=" + ovideo.duration);
     }
+  }
 
-    function playOrPause() {
-      if (ovideo.paused) {
-        console.log("gqg3: play() begin...");
-        ovideo.play();
-        console.log("gqg3: play() end");
-      } else {
-        console.log("gqg3: pause() begin...");
-        ovideo.pause();
-        console.log("gqg3: pause() ended");
-      }
-      
-    }
 
   </script>
   <br /><br />
 
-  <button onclick="playOrPause()">播放或暂停</button>
-  <br /><br />
-  <button onclick="location.reload()">重新加载</button>
-  <br /><br />
-  <br /><br />
-  <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
-  <div id="idJsUa">
-    
-  </div>
 </body>
 
 </html>

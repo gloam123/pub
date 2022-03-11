@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=10.0,user-scalable=no" id="viewport">        
+        <title>
+            canvas alpha
+        </title>
+
+        <style>
+          #idcanvas {
+              /* width: 95%;
+              height: 500px; */
+              background-color:#FFFF0000;
+              border: 1px solid red;
+          }
+        </style>
+
+        <script>
+
+            let g_width =550;
+            let g_height = 1800;
+            let g_x = g_width/2;
+            let g_y = 0;
+
+            let g_ctx;
+            let g_count = 0;
+            const MAX_COUNT = 1000;
+
+            let g_img;
+
+            window.onload = function() {
+                var c=document.getElementById("idcanvas");
+                c.width = g_width; //document.body.clientWidth * 0.95;
+                c.height = g_height; //document.body.clientHeight;
+
+                g_ctx=c.getContext("2d");
+                //cxt.fillRect(100, 800, 100,10);
+                window.requestAnimationFrame(onDraw);
+
+                g_img = document.createElement("img");
+                g_img.src = "../../images/tree.jpg";
+            }
+
+            function onDraw() {
+              updateTime();
+
+              g_ctx.fillStyle="#A0A0A0";
+              g_ctx.fillRect(0,0,1200,3000);
+              g_ctx.fillStyle="#00FF00";
+              g_ctx.drawImage(g_img, 0, 0, g_width, g_height);
+
+              g_ctx.fillRect(g_x, g_y, 150, 150);
+
+              g_y += 3;
+              if (g_y > (g_height-50)) {
+                g_y = 0;
+              }
+
+
+              if (g_count++ < MAX_COUNT) {
+                window.requestAnimationFrame(onDraw);
+              }
+            }
+
+            let lastTime = new Date().getMilliseconds();
+            let contents = "";
+            function updateTime() {
+              const currTime = new Date().getMilliseconds();
+              const delay = currTime - lastTime;
+              lastTime = currTime;
+              contents = contents + "frame delay:" + delay + "<br/>";
+              document.getElementById('id_contents').innerHTML = contents;
+            }
+
+            function stopOrStartAnimation() {
+              let btn = document.getElementById('id_start_pause');
+              if (g_count >= MAX_COUNT) {
+                g_count = 0;
+                window.requestAnimationFrame(onDraw);
+                contents = "";
+              } else {
+                g_count = MAX_COUNT;
+              }
+            }
+
+            function genCanvasBlob() {
+              let canvas = document.getElementById("idcanvas");
+              canvas.toBlob(function(blob) {
+                // var newImg = document.createElement("img"),
+                //     url = URL.createObjectURL(blob);
+
+                // newImg.onload = function() {
+                //   // no longer need to read the blob so it's revoked
+                //   URL.revokeObjectURL(url);
+                // };
+
+                // newImg.src = url;
+                url = URL.createObjectURL(blob);
+                document.getElementById('id_snapshot').src = url;
+              });
+            }
+
+            window.onpagehide = function() {
+                console.log("gqg3: window.onpagehide");
+            }
+
+            function dohidden() {
+                var c=document.getElementById("idcanvas");
+                //c.hidden = true;
+                var sw = document.body.clientWidth;
+                var sh = document.body.clientHeight;
+
+                
+                let contentWidth = document.body.clientWidth;
+                let scale = screen.width / contentWidth;
+
+                alert("c.width=" + c.width + "; c.height=" + c.height + "; screen.availWidth=" + screen.availWidth + "; window.innerWidth=" + window.innerWidth + ";screen.width=" + screen.width + "; contentWidth=" + contentWidth);
+
+                alert("sw="+sw+"; sh=" + sh + "; cw=" + c.width + "; ch=" + c.height + "; pixelRadio=" + window.devicePixelRatio);
+            }
+        </script>
+    </head>
+
+    <body>
+      canvas:
+      <canvas id="idcanvas" style="position: absolute; width: 50%; height: 98%; left: 0px; top: 0px;">
+
+      </canvas>
+
+      <div style="position: fixed;">
+        <br/><br/><br/><br/>
+        <button onclick="location.reload()">reloadPage</button>
+        <br/><br/>
+        <button id="id_start_pause" onclick="stopOrStartAnimation()">startOrPause</button>
+        <br/><br/>
+        <button id="id_gen_blob" onclick="genCanvasBlob()">genCanvasBlob</button>
+      </div>
+      <div  style="position: fixed;left: 50%; top:0px; width:50%; height: 100%; border: solid 3px #505050;">
+        <div id="id_contents" style="top: 50%; height: 50%; width: 100%; overflow: scroll;">
+          ddd
+        </div>
+        <div style="overflow: scroll; background-color: white;">
+          <img id="id_snapshot" style="width: 90%; height: 45%; border: solid 10px burlywood;">
+        </div>
+        
+      </div>
+
+    </body>
+</html>
