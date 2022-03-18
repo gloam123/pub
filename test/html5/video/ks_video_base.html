@@ -15,16 +15,25 @@
     }
   </style>
   <script>
+
+    window.addEventListener("deviceorientation", function(event) {
+    // process event.alpha, event.beta and event.gamma
+      console.log("gqg5: window.addEventListener deviceorientation");
+    }, true);
     const load = () => {
       console.log("load event detected!");
       document.getElementById('idJsUa').innerHTML = navigator.userAgent;
     }
     window.onload = load;
+
   </script>
   <!--
     https://w1-pro.kskwai.com/kos/nlav11066/eve2022/pickNumber/zhuhuichang_inner_brand_video_1_v.mp4
     http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4
     http://172.17.202.11:8080/video/beiwa_iqiyi_05.mp4
+
+    http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4
+    http://ali-uget.video.yximgs.com/mediacloud/uget/video/8U1EN4X7L1eBv5I2iGsTkTRBjiRaiNLN92Y0Ggyxlew.mp4
   -->
 </head>
 
@@ -32,7 +41,7 @@
 
   <div id='container'>
 
-    <video id="ovideo" useksplayer="video" controls autoplay="" src="http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4" style="width: 100%; height: 300px;"></video>
+    <video id="ovideo" useksplayer="video" controls autoplay="" src="http://ali-uget.video.yximgs.com/mediacloud/uget/video/8U1EN4X7L1eBv5I2iGsTkTRBjiRaiNLN92Y0Ggyxlew.mp4" style="width: 100%; height: 300px;"></video>
   
   </div>
 <!--
