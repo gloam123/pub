@@ -3,6 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
   <style type="text/css">
     .video_top {
       position: relative;
@@ -15,11 +17,41 @@
     }
   </style>
   <script>
+  // function requestDeviceOrientation(callback) {
+  //     if (window.DeviceOrientationEvent == null) {
+  //         callback(new Error("DeviceOrientation is not supported."));
+  //     } else if (DeviceOrientationEvent.requestPermission) {
+  //         DeviceOrientationEvent.requestPermission().then(function(state) {
+  //             if (state == "granted") {
+  //                 callback(null);
+  //             } else callback(new Error("Permission denied by user"));
+  //         }, function(err) {
+  //             callback(err);
+  //         });
+  //     } else { // no need for permission
+  //         callback(null);
+  //     }
+  // }
+  // function handleOrientation(event) {
+  //   var absolute = event.absolute;
+  //   var alpha    = event.alpha;
+  //   var beta     = event.beta;
+  //   var gamma    = event.gamma;
+  //   console.log("gqg5: absolute=" + absolute + "; beta=" + beta);
+  // }
+  // requestDeviceOrientation(handleOrientation);
+  // if (window.DeviceOrientationEvent) {
+  //   console.log("supported");
+  // } else {
+  //   console.log("not supported");
+  // }
 
-    window.addEventListener("deviceorientation", function(event) {
-    // process event.alpha, event.beta and event.gamma
-      console.log("gqg5: window.addEventListener deviceorientation");
-    }, true);
+  // window.addEventListener("deviceorientation", handleOrientation, true);
+
+    // window.addEventListener("deviceorientation", function(event) {
+    // // process event.alpha, event.beta and event.gamma
+    //   console.log("gqg5: window.addEventListener deviceorientation");
+    // }, true);
     const load = () => {
       console.log("load event detected!");
       document.getElementById('idJsUa').innerHTML = navigator.userAgent;
@@ -41,7 +73,7 @@
 
   <div id='container'>
 
-    <video id="ovideo" useksplayer="video" controls autoplay="" src="http://ali-uget.video.yximgs.com/mediacloud/uget/video/8U1EN4X7L1eBv5I2iGsTkTRBjiRaiNLN92Y0Ggyxlew.mp4" style="width: 100%; height: 300px;"></video>
+    <video id="ovideo" useksplayer="video" controlslist="nofullscreen" autoplay="" src="https://ali-uget.video.yximgs.com/mediacloud/uget/video/8U1EN4X7L1eBv5I2iGsTkTRBjiRaiNLN92Y0Ggyxlew.mp4" style="width: 100%; height: 300px;"></video>
   
   </div>
 <!--
@@ -132,10 +164,16 @@
       
     }
 
+    function enterFullscreen() {
+      ovideo.requestFullscreen();
+    }
+
   </script>
   <br /><br />
 
   <button onclick="playOrPause()">播放或暂停</button>
+  <br /><br />
+  <button onclick="enterFullscreen()">进入全屏</button>
   <br /><br />
   <button onclick="location.reload()">重新加载</button>
   <br /><br />
