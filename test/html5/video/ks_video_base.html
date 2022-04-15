@@ -168,6 +168,21 @@
       ovideo.requestFullscreen();
     }
 
+    function switchVideoSrc() {
+      ovideo.src = "http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4";
+      ovideo.play(); // <-- This is asynchronous!
+      ovideo.pause();
+      ovideo.src = "http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4";
+      console.log("switchVideoSrc finish!")
+      //ovideo.src = "";
+      //ovideo.src = null;
+      // ovideo.src = "about:blank"
+      // ovideo.releaseplayer();
+      // setTimeout(function() {
+      //   ovideo.src = "http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4";
+      // }, 1000*5);
+    }
+
   </script>
   <br /><br />
 
@@ -177,6 +192,7 @@
   <br /><br />
   <button onclick="location.reload()">重新加载</button>
   <br /><br />
+  <button onclick="switchVideoSrc()">更换Video src</button>
   <br /><br />
   <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
   <div id="idJsUa">
