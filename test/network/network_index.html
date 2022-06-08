@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>network index</title>
+<script>
+  navigator.connection.onchange = function(e) {
+    console.log("navigator.connection.onchange type=" + navigator.connection.type)
+  }
+</script>
 </head>
 
 <body>

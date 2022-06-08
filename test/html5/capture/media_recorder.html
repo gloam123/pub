@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>recording</title>
+  <style>
+    button {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button id="start" onclick="startRecording()">开始</button>
+  <button id="pause" onclick="pauseRecording()">暂停</button>
+  <button id="download" onclick="downloadRecording()">下载</button>
+  <button id="restart" onclick="restartRecording()">重新录制</button>
+</body>
+<script>
+  // 查看支持的格式
+  function checkSupport() {
+    const types = [
+      "video/webm",
+      "audio/webm",
+      "video/webm\;codecs=vp8",
+      "video/webm\;codecs=daala",
+      "video/webm\;codecs=h264",
+      "audio/webm\;codecs=opus",
+      "video/mpeg"
+    ];
+    return types.filter(item => MediaRecorder.isTypeSupported(item))
+  }
+
+  // 获取流
+  function getStream() {
+    return new Promise((resolve, reject) => {
+      navigator.mediaDevices.getDisplayMedia({
+        video: true,
+        audio: true
+      }).then(stream => {
+        resolve(stream)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  }
+
+  // 创建Recording、MediaRecorder实例(单例模式)
+  function Recording() {
+    this.instance = null
+    this.instanceRe = null
+    this.steam = null //当前流
+    this.blobs = [] // 存储流
+  }
+  // 获取Recording单例
+  Recording.getRecording = () => {
+    if(!this.instanceRe) {
+      this.instanceRe = new Recording()
+    }
+    return this.instanceRe
+  }
+  // 获取MediaRecorder单例
+  Recording.getMediaRecorder = (stream, options) => {
+    console.log('stream:', stream)
+    console.log('options:', options)
+    if(!this.instance) {
+      this.instance = new MediaRecorder(stream, options)
+    }
+    return this.instance
+  }
+
+  // 下载视频
+  function download(blobs, fileName) {
+    const blob = new Blob(blobs, {type: 'video/webm'})
+    const a = document.createElement('a')
+    a.style.display = 'none'
+    let url = URL.createObjectURL(blob)
+    a.href = url
+    a.download = Date.now() + fileName + '.webm'
+    document.body.appendChild(a)
+    a.click()
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    }, 100)
+  }
+
+
+  // 录制
+  async function startRecording() {
+    console.log('Recording.getRecording().blobs:', Recording.getRecording().blobs.length)
+    if (!Recording.getRecording().steam) {
+      Recording.getRecording().steam = await getStream()
+    }
+    const recordingIns = Recording.getMediaRecorder(Recording.getRecording().steam, { mimeType: "video/webm" })
+    recordingIns.start(10)
+    recordingIns.ondataavailable = function (e) {
+      if (e.data && e.data.size > 0) {
+        Recording.getRecording().blobs.push(e.data)
+        console.log('开始推流')
+      }
+    }
+    recordingIns.onstop = function (e) {
+      console.log('stop:e:暂停了', e)
+    }
+  }
+
+  // 重新录制
+  function restartRecording() {
+    Recording.getRecording().blobs = []
+    startRecording()
+  }
+  // 暂停
+  function pauseRecording() {
+    console.log('Recording.getRecording().blobs:', Recording.getRecording().blobs.length)
+    const recordingIns = Recording.getMediaRecorder()
+    recordingIns.stop && recordingIns.stop()
+  }
+
+  // 下载
+  function downloadRecording() {
+    download(Recording.getRecording().blobs, 'oh')
+  }
+</script>
+</html>
