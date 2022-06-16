@@ -5,20 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>index</title>
 <script>
-  let gcount = 0;
-  setInterval(function() {
-    gcount = gcount + 1;
-    console.log("ontimer.. gcount=" + gcount);
-  }, 1000);
+  function onload() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+
+    let oinfo = document.getElementById('idInfo');
+    oinfo.innerHTML = "WebAssembly:" + WebAssembly;
+  }
 </script>
 </head>
 
-<body>
+<body onload="onload()">
 <br />
 <br /><br />
-audio playing: ji_maomao_bgm.m4a
-<audio preload="auto" loop="loop" autoplay="autoplay" src="../../video/ji_maomao_bgm.m4a">
-</audio>
+<div id="idJsUa"></div>
+<br /><br />
+<button onclick="location.reload()">reload</button>
+<br /><br />
+infoPanel:
+<div id="idInfo">
+
+</div>
 <br /><br />
 </body>
 </html>
