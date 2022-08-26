@@ -1,0 +1,63 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/png" href="../images/HTML5_logo_480p.png">
+<title>index</title>
+<script>
+    function handlerTouch(evt){
+        log(evt);
+    }
+
+    function touchtouch(){
+        var camera = document.getElementById('mytag');
+        console.log("camera:"+camera)
+        camera.addEventListener("touchStart",handlerTouch,false);
+        camera.addEventListener("touchend",handlerTouch,false);
+        camera.addEventListener("touchcancel",handlerTouch,false);
+        camera.addEventListener("touchleave",handlerTouch,false);
+        camera.addEventListener("touchmove",handlerTouch,false);
+    }
+
+    function onLoad() {
+      document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+      touchtouch();
+    }
+  </script>
+</head>
+
+<body onload="onLoad()">
+  <br />
+  <div id="idJsUa"></div>
+  <br /><br />
+  <button onclick="location.reload()">reload</button>
+  <br /><br />
+<br />
+File:<input name="upload_file" type="file" />
+
+<br />
+
+ddddd
+<br /><br />
+<mytag id = "mytag" src="https://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4"
+       style="position:absolute;width:90%; height:200px;">
+    占位的标签
+</mytag>
+<br /><br /><br /><br /><br /><br />
+aaa
+<br /><br /><br /><br /><br /><br />
+bbb
+<br /><br /><br /><br /><br /><br />
+ccc
+<br /><br /><br /><br /><br /><br />
+ddd
+<br /><br /><br /><br /><br /><br />
+eee
+<br /><br /><br /><br /><br /><br />
+fff
+<br /><br /><br /><br /><br /><br />
+end
+</body>
+</html>
