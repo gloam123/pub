@@ -41,7 +41,21 @@
         // Do something with the device.
       })
       .catch((error) => console.error(`Something went wrong. ${error}`));
+  }
 
+  function test_nfc() {
+    alert("window.NDEFReader=" + window.NDEFReader);
+    if (window.NDEFReader) {
+      const ndef = new NDEFReader();
+      ndef.write(
+        "Hello World"
+      ).then(() => {
+        //console.log("Message written.");
+        alert("gqg: Message written");
+      }).catch(error => {
+        alert(`gqg: Write failed :-( try again: ${error}.`);
+      });
+    }
   }
   </script>
 </head>
@@ -53,6 +67,8 @@
 <button onclick="test_orientation()">test_orientation</button>
 <br /><br />
 <button onclick="test_bluetooth()">test_bluetooth</button>
+<br /><br />
+<button onclick="test_nfc()">test_nfc</button>
 <br /><br />
 222
 <br /><br />
