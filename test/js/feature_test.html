@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<title>index</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+
+  function test_orientation() {
+    alert("window.orientation=" + window.orientation);
+
+    window.addEventListener("orientationchange", (event) => {
+      alert(event);
+      alert("window.orientation=" + window.orientation);
+    });
+  }
+
+  function test_bluetooth() {
+    alert("navigator.bluetooth=" + navigator.bluetooth);
+    let options = {
+      filters: [
+        { services: ["heart_rate"] },
+        { services: [0x1802, 0x1803] },
+        { services: ["c48e6067-5295-48d3-8d5c-0395f61792b1"] },
+        { name: "ExampleName" },
+        { namePrefix: "Prefix" },
+      ],
+      optionalServices: ["battery_service"],
+    };
+
+    navigator.bluetooth
+      .requestDevice(options)
+      .then((device) => {
+        console.log(`Name: ${device.name}`);
+        // Do something with the device.
+      })
+      .catch((error) => console.error(`Something went wrong. ${error}`));
+
+  }
+  </script>
+</head>
+
+<body onload="onLoad()">
+<br /><br />
+<button onclick="location.reload()">reload</button>
+<br /><br />
+<button onclick="test_orientation()">test_orientation</button>
+<br /><br />
+<button onclick="test_bluetooth()">test_bluetooth</button>
+
+<br /><br />
+<div id="idJsUa"></div>
+<br /><br />
+</body>
+</html>

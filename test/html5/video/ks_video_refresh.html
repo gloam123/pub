@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/png" href="../../images/HTML5_logo_480p.png">
+
+<script>
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        var value = unescape(r[2]);
+		var intValue = parseInt(value);
+		return intValue;
+    }
+    return 0;
+}
+
+var count = getQueryString("count");
+document.write("<title>Title " + count + "</title>");
+
+
+var baseUrl = document.location.href;
+var pos = baseUrl.indexOf("?");
+if (pos >= 0) {
+	baseUrl = baseUrl.substring(0, pos);
+}
+baseUrl += "?"
+
+function onTimerNavigate() {
+    navigateTo(0);
+}
+
+function navigateTo(speed) {
+    if (speed <= 0) {
+        speed = getQueryString("speed");
+        if (speed <= 0) {
+            speed = default_speed;
+        }
+    }
+
+    var speedQuery = "speed=" + speed;
+	var countQuery = "&count=" + (getQueryString("count") + 1);
+	var url = baseUrl + speedQuery + countQuery;
+	window.location.href = url;
+}
+
+const speed_step = 100;
+const default_speed = 5000;
+function speedAdd() {
+    let speed = getQueryString("speed");
+    if (speed > speed_step) {
+        navigateTo(speed - speed_step)
+    }
+}
+
+function speedSub() {
+    let speed = getQueryString("speed");
+    navigateTo(speed + speed_step)
+}
+
+function onLoad() {
+    let oContent = document.getElementById('idUrl');
+    let speed = getQueryString("speed");
+    if (speed <= 0) {
+        speed = default_speed;
+    }
+    const count = getQueryString("count");
+    oContent.innerHTML = 
+        "刷新间隔(MS):" + speed + "<br/>" + 
+        "刷新次数:" + count;
+
+    setTimeout(onTimerNavigate, speed);
+}
+
+</script>
+
+<style>
+    button {
+        font-size: large;
+    }
+</style>
+
+</head>
+
+<body onload="onLoad()">
+<br/><br/>    
+自动刷新增加历史记录
+<br/><br/><br/>
+<a href="../">上一级目录</a>
+<br/><br/><br/>
+<div>
+    <button onclick="speedSub()">减速</button>
+    <button onclick="speedAdd()">加速</button>    
+</div>
+<br/><br/>
+<div id="idUrl">
+
+</div>
+<div id='container'>
+    ok222
+        
+        <video id="ovideo" useksplayer="video" controls autoplay="" src="../../video/rotate_ok.mp4" style="width: 100%; height: 300px;"></video>
+      
+      </div>
+</body>
+</html>
