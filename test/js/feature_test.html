@@ -20,6 +20,9 @@
 
   function test_bluetooth() {
     alert("navigator.bluetooth=" + navigator.bluetooth);
+    if (navigator.bluetooth) {
+      alert("Object.keys(navigator.bluetooth)=" + Object.keys(navigator.bluetooth));
+    }
     let options = {
       filters: [
         { services: ["heart_rate"] },
@@ -50,7 +53,8 @@
 <button onclick="test_orientation()">test_orientation</button>
 <br /><br />
 <button onclick="test_bluetooth()">test_bluetooth</button>
-
+<br /><br />
+222
 <br /><br />
 <div id="idJsUa"></div>
 <br /><br />
