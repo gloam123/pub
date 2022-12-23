@@ -57,6 +57,32 @@
       });
     }
   }
+
+  function test_webotp() {
+    alert("window.OTPCredential=" + window.OTPCredential);
+    alert("navigator.credentials=" + navigator.credentials);
+
+    if ('OTPCredential' in window) {
+      const input = document.querySelector('input[autocomplete="one-time-code"]');
+      if (!input) return;
+      const ac = new AbortController();
+      const form = input.closest('form');
+      if (form) {
+        form.addEventListener('submit', e => {
+          ac.abort();
+        });
+      }
+      navigator.credentials.get({
+        otp: { transport:['sms'] },
+        signal: ac.signal
+      }).then(otp => {
+        input.value = otp.code;
+        if (form) form.submit();
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+  }
   </script>
 </head>
 
@@ -70,6 +96,14 @@
 <br /><br />
 <button onclick="test_nfc()">test_nfc</button>
 <br /><br />
+<button onclick="test_webotp()">test_webotp</button>
+<br /><br />
+<form>
+  <input autocomplete="one-time-code" required/>
+  <input type="submit">
+</form>
+
+
 222
 <br /><br />
 <div id="idJsUa"></div>
