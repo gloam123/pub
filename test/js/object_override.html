@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/svg+xml" href="./images/HTML5 Logo.svg">
+<title>object override</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+
+    window.Math_ = window.Math;
+    window.Math = function() {
+
+    }
+    window.Math.abs = function(v) {
+        return window.Math_.abs(v);
+    }
+  }
+
+
+  function object_override() {
+    let v1 = Math.abs(-12);
+    console.log("v1=" + v1)
+
+  }
+
+var video;
+var assetURL = '../video/beiwa_iqiyi_05.mp4';
+// Need to be specific for Blink regarding codecs
+// ./mp4info frag_bunny.mp4 | grep Codec
+var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+
+function play_video() {
+    video = document.querySelector('video');
+    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+        var mediaSource = new MediaSource;
+        //console.log(mediaSource.readyState); // closed
+        video.src = URL.createObjectURL(mediaSource);
+        mediaSource.addEventListener('sourceopen', sourceOpen);
+    } else {
+     console.error('Unsupported MIME type or codec: ', mimeCodec);
+    }
+}
+
+function sourceOpen (_) {
+  //console.log(this.readyState); // open
+  var mediaSource = this;
+  var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+  fetchAB(assetURL, function (buf) {
+    sourceBuffer.addEventListener('updateend', function (_) {
+      //mediaSource.endOfStream();
+      video.play();
+      //console.log(mediaSource.readyState); // ended
+    });
+    sourceBuffer.appendBuffer(buf);
+  });
+};
+
+function fetchAB (url, cb) {
+  console.log(url);
+  var xhr = new XMLHttpRequest;
+  xhr.open('get', url);
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function () {
+    cb(xhr.response);
+  };
+  xhr.send();
+};
+
+
+</script>
+
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+<br /><br />
+<button onclick="location.reload()">reload</button>
+<br /><br />
+<a href="./js/object_override.html">
+  js/object_override.html
+</a>
+<br /><br />
+<button onclick="object_override()">object_override()</button>
+<br /><br />
+<button onclick="play_video()">play_video()</button>
+<br /><br />
+<video width="100%" controls></video>
+</body>
+</html>
