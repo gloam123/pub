@@ -42,7 +42,7 @@ function media_switch_src() {
 
 <body>
 <div id="id_video_container" style="background:#FC3; width:400px">
-    <video id="video1" width="300px" height="300px" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay" style="z-index:1999;  left:0px; top:100px">
+    <video id="video1" width="300px" height="300px" src="../../video/testvideos/111.mp4" controls="controls" autoplay="autoplay" style="z-index:1999;  left:0px; top:100px">
         Your browser does not support HTML5 video.
     </video>
 </div>
@@ -57,6 +57,16 @@ function media_switch_src() {
 <button onclick="media_switch_src()">media_switch_src</button>
 <br />
 <br />
+<script>
+	let ovideo = document.getElementById('video1')
+	ovideo.addEventListener("durationchange", function (e) {
+		console.log("gqg3: durationchange ovideo.duration=" + ovideo.duration);
+	});
+	addEventListener('timeupdate', (event) => {
+		console.log("gqg3: timeupdate " + event)
+	});
+
+</script>
 
 </body>
 </html>

@@ -46,6 +46,8 @@
     <br/><br/>
     <button onclick="playOrPause()">播放或暂停</button>
     <br /><br />
+    <button onclick="media_switch_src()">media_switch_src</button>
+    <br /><br />
     <button onclick="location.reload()">重新加载</button>
     <br /><br />
     <br /><br />
@@ -61,16 +63,20 @@
     document.getElementById('container').insertAdjacentHTML('beforeend', html_str);
   }
 
-  const video_url = "https://zhaopeng06.kproxy.corp.kuaishou.com/public/h264-720-1.mp4";
+
+  const init_url = "../../video/heart_636_12_28.mp4";
+  var video_url = "../../video/beiwa_iqiyi_05.mp4";
+  
   //const video_url = "https://zhaopeng06.xxxxxxx.kuaishou.com/public/h264-720-1.mp4";
   //autoplay="autoplay"
   //autoplay="true" 
   function insertKsVideo() {
-    let url = video_url + "?random=" + Math.random();
-    var html_str = '<video id="ksvideo" useksplayer="video"  loop="loop" controls="controls" src=' + url + '></video';
+    let url = init_url + "?random=" + Math.random();
+    var html_str = '<video id="ksvideo" useksplayer="video" autoplay  loop="loop" controls="controls" src=' + url + '></video';
     appendInnerHtml(html_str);
     gVideo = document.getElementById('ksvideo');
-    gVideo.muted = true;
+    initvideo(gVideo);
+    //gVideo.muted = true;
     // gVideo.updatelivesrc("haha updatelivesrc url000000000000000000");
   }
 
@@ -97,6 +103,14 @@
       console.log("gqg3: abplay=true ================================================");
   }
 
+  function media_switch_src() {
+    var tmp_url = gVideo.src;
+    gVideo.src = video_url;
+    //gVideo.currentTime = 0;
+    console.log("gqg3: switch url=" + video_url);
+    video_url = tmp_url;
+  }
+
   function initvideo(ovideo) {
 
     ovideo.onerror = function (e) {
@@ -104,32 +118,12 @@
       let s = "";
       let err = ovideo.error;
       console.log("gqg5: ovideo.onerror ovideo.error=" + ovideo.error);
-
-      switch (err.code) {
-        case MediaError.MEDIA_ERR_ABORTED:
-          s += "The user canceled the audio.";
-          break;
-        case MediaError.MEDIA_ERR_NETWORK:
-          s += "A network error occurred while fetching the audio.";
-          break;
-        case MediaError.MEDIA_ERR_DECODE:
-          s += "An error occurred while decoding the audio.";
-          break;
-        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-          s += "The audio is missing or is in a format not supported by your browser.";
-          break;
-        default:
-          s += "An unknown error occurred.";
-          break;
-      }
-
       let message = err.message;
 
       if (message && message.length) {
         s += " " + message;
       }
       console.log("gqg5: ovideo.onerror s=" + s);
-      //ovideo.src = "https://txmov2.a.yximgs.com/bs2/newWatermark/MzU4MTk4OTQ2NjA_zh_3.mp4?a=2222222";
     }
 
     ovideo.addEventListener("durationchange", function (e) {
@@ -167,8 +161,10 @@
     ovideo.onplaying = function () {
       console.log("gqg3: ovideo.onplaying ovideo.duration=" + ovideo.duration);
     }
+    ovideo.addEventListener('timeupdate', (event) => {
+		  console.log("gqg3: timeupdate currentTime=" + gVideo.currentTime + "; timeStamp=" + event.timeStamp)
+	  });
   }
-
 
   </script>
   <br /><br />
