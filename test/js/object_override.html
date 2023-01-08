@@ -26,7 +26,7 @@
   }
 
 var video;
-var assetURL = '../video/beiwa_iqiyi_05.mp4';
+var assetURL = '../video/frag_bunny.mp4';
 // Need to be specific for Blink regarding codecs
 // ./mp4info frag_bunny.mp4 | grep Codec
 var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
@@ -49,7 +49,7 @@ function sourceOpen (_) {
   var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
   fetchAB(assetURL, function (buf) {
     sourceBuffer.addEventListener('updateend', function (_) {
-      //mediaSource.endOfStream();
+      mediaSource.endOfStream();
       video.play();
       //console.log(mediaSource.readyState); // ended
     });
