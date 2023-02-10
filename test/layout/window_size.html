@@ -5,19 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
 <title>index</title>
 <script>
+
+
+
   function onload() {
-    setTimeout(function() {
-      var str = "window.innerWidth=" + window.innerWidth + "; innerHeight=" + window.innerHeight;
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+
+    var str = "onLoad: window.innerWidth=" + window.innerWidth + "; innerHeight=" + window.innerHeight + "; window.document.documentElement.clientWidth=" + window.document.documentElement.clientWidth;
+    document.getElementById('onload_info').innerHTML = str;
+    setInterval(function() {
+      var str = "Delay: window.innerWidth=" + window.innerWidth + "; innerHeight=" + window.innerHeight + "; window.document.documentElement.clientWidth=" + window.document.documentElement.clientWidth;
+      document.getElementById('delay_info').innerHTML = str;
       console.log(str);
-      alert(str);
-    }, 1000*3)
+      //alert(str);
+    }, 1000)
   }
 </script>
 </head>
 
 <body onload="onload()">
 <br />
-<a href="./autosize/text_layout.html">autosize/text_layout.html</a>
-<br /><br />
+
+<br /><br /><br/>
+<button onclick="location.reload()">reload</button>
+<br /><br/>
+<div id="onload_info"></div>
+<br/><br/>
+<div id="delay_info"></div>
+<br/><br/><br/><br/>
+<div id="idJsUa"></div>
 </body>
 </html>

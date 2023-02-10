@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/svg+xml" href="./images/HTML5 Logo.svg">
+<title>index</title>
+<script>
+
+  let gcount = 0;
+  let g_max_delay = 0;
+  function onframe() {
+    gcount++;
+    console.log("onframe gcount=" + gcount);
+    window.requestAnimationFrame(onframe);
+  }
+
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+
+    window.requestAnimationFrame(onframe);
+  }
+  </script>
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+<br /><br />
+
+<img src="../images/tree.jpg" />
+
+<br /><br />
+<button onclick="location.reload()">reload</button>
+<br /><br />
+</body>
+</html>

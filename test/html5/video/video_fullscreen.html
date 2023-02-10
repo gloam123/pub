@@ -20,12 +20,26 @@ window.addEventListener('orientationchange', function() {
     document.exitFullscreen();
   }
 }, false)
+
+function videoEnterFullscreen() {
+  document.getElementById("video1").requestFullscreen();
+}
+
+function divEnterFullscreen() {
+  document.getElementById("idJsUa").requestFullscreen();
+}
+const load = () => {
+  console.log("load event detected!");
+  document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+}
+window.onload = load;
+
 </script>
 </head>
 
 <body>
 dddd
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
 aaaa
 <video id="video1" useksplayer="video" width="100%" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay">
     Your browser does not support HTML5 video.
@@ -37,6 +51,12 @@ aaaa
 <br /><br />
 <button onclick="location.reload()">reload</button>
 <br /><br />
+<button onclick="videoEnterFullscreen()">Video进入全屏</button>
+<br /><br />
+<button onclick="divEnterFullscreen()">Div进入全屏</button>
+<br /><br />
+<div id="idJsUa" style="background-color: blue;">
+</div>
 </body>
 </html>
 
