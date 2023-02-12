@@ -15,10 +15,16 @@
     window.requestAnimationFrame(onframe);
   }
 
+  function oninterval() {
+    gcount++;
+    console.log("oninterval gcount=" + gcount);
+  }
+
   function onLoad() {
     document.getElementById('idJsUa').innerHTML = navigator.userAgent;
 
-    window.requestAnimationFrame(onframe);
+    //window.requestAnimationFrame(onframe);
+    setInterval(oninterval, 1000);
   }
   </script>
 </head>
