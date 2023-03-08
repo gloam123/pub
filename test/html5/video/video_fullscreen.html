@@ -26,7 +26,7 @@ function videoEnterFullscreen() {
 }
 
 function divEnterFullscreen() {
-  document.getElementById("idJsUa").requestFullscreen();
+  document.getElementById("vcontainer").requestFullscreen();
 }
 const load = () => {
   console.log("load event detected!");
@@ -37,13 +37,18 @@ window.onload = load;
 </script>
 </head>
 
-<body>
+<body >
 dddd
 <br/><br/><br/><br/>
 aaaa
-<video id="video1" useksplayer="video" width="100%" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay">
+<!-- <video id="video1" useksplayer="video" width="100%" src="../../video/beiwa_iqiyi_05.mp4" controls="controls" autoplay="autoplay">
     Your browser does not support HTML5 video.
+</video> -->
+<div id="vcontainer">
+<video useksplayer="video" autoplay="autoplay" controls="controls" id="parent" class="parent1" style="background-color: green;" width="100%" src="http://static.yximgs.com/udata/pkg/fe/kwai_video.a7616d99.mp4">
+  <video useksplayer="video" autoplay="autoplay" controls="controls" style="background-color: blue; position:absolute; top: 10px; visibility: visible;" id="child" class="child" width="100%" src="../../video/beiwa_iqiyi_05.mp4"></video>
 </video>
+</div>
 <br />
 <br />
 <br />
