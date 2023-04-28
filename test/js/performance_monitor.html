@@ -7,6 +7,25 @@
 <title>index</title>
 <script>
 
+var worker = new Worker('performance_worker.js'); // 创建Worker线程
+
+
+// 定时向Worker线程发送当前时间戳
+setInterval(function() {
+  worker.postMessage(new Date().getTime());
+}, 100);
+
+
+// 监听Worker线程返回的信息
+worker.onmessage = function(event) {
+  if (event.data.type === 'freeze') {
+    // 上报堆栈信息
+    console.log('JavaScript线程卡顿！');
+    console.log(event.data.stack);
+  }
+}
+
+
   let gcount = 0;
   let g_max_delay = 0;
   function onframe() {
@@ -23,10 +42,33 @@
   function onLoad() {
     document.getElementById('idJsUa').innerHTML = navigator.userAgent;
 
-    window.requestAnimationFrame(onframe);
+    //window.requestAnimationFrame(onframe);
     //setInterval(oninterval, 1000);
   }
-  </script>
+
+  const observer = new PerformanceObserver(function(list) {
+    var perfEntries = list.getEntries();
+    if (perfEntries.length > 0) {
+        for (let i = 0; i < perfEntries.length; i++) {
+            // 完整可得到的longTask信息
+            console.log('longTask', perfEntries[i]);
+            // longTask执行时长
+            console.log('longTask duration', perfEntries[i].duration);
+            // do something ...
+        }
+    }
+});
+// register observer for long task notifications
+observer.observe({entryTypes: ["longtask"]});
+
+function dosleep() {
+  a = null;
+  a.ddd;
+  //alert(KwSdk)
+}
+
+
+</script>
 </head>
 
 <body onload="onLoad()">
@@ -35,9 +77,13 @@
 <br /><br />
 
 <img src="../images/tree.jpg" />
+<img src="../images/w.png" />
 
 <br /><br />
 <button onclick="location.reload()">reload</button>
+<br /><br />
+<button onclick="dosleep()">dosleep</button>
+<br /><br />
 <br /><br />
 </body>
 </html>

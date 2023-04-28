@@ -1,0 +1,374 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>video-lag.html</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body style="min-height: 100vh; background: red;">
+  <div id="app" data-v-app=""><!----></div>
+
+  <br/><br/>
+  <button onclick="location.reload()">reload5</button>
+  <br/><br/>
+  <div id="info"></div>
+  <br/><br/>
+
+  <canvas id="mycanvas" width="100%" style="background-color: blue;"></canvas>
+</body>
+<!--
+<script src="video-lag.js"></script>
+<video src="../../video/ios_block_penhongbao.mp4"
+-->
+<script>
+const div = document.createElement('div');
+document.body.appendChild(div);
+document.body.style.minHeight = '100vh';
+changeColor('red');
+
+const logDiv = document.createElement('div');
+logDiv.innerHTML = '';
+document.body.appendChild(logDiv);
+
+function log(str) {
+    logDiv.innerHTML += str;
+    logDiv.innerHTML += "/ ";
+}
+
+//const canvas = document.createElement('canvas');
+const canvas = document.getElementById('mycanvas');
+const gl = canvas.getContext('webgl');
+let lastTime = 0;
+let maxFmp = 0;
+
+const videoTexture = gl.createTexture(); // as WebGLTexture;
+gl.bindTexture(gl.TEXTURE_2D, videoTexture);
+gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+function refresh() {
+    let currTime = new Date().getTime();
+    let fmp = currTime - lastTime;
+    if (fmp > maxFmp) {
+      maxFmp = fmp;
+    }
+    lastTime = currTime;
+    let oInfo = document.getElementById('info');
+    oInfo.innerHTML = "maxFmp:" + maxFmp + "; fmp:" + fmp;
+
+
+    div.innerHTML = 'now: ' + Date.now();
+    requestAnimationFrame(refresh);
+}
+
+//const videoUrl = 'https://cdnfile.corp.kuaishou.com/kc/files/a/world-editor/demo/lottie/mp4/penhongbao.mp4';
+//const videoUrl = '../../video/ios_block_penhongbao.mp4'
+const videoUrl = '../../video/beiwa_iqiyi_05.mp4'
+//const videoUrl = '../../video/heart_636_12_28.mp4'
+
+
+lastTime = new Date().getTime();
+refresh();
+setTimeout(async () => {
+    loadVideo(videoUrl);
+}, 1000);
+
+function toBlob(url/*: string | URL*/) {
+    return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('video/mp4');
+        xhr.onerror = function (e) {
+            reject(e);
+        };
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 400) {
+                resolve(URL.createObjectURL(xhr.response));
+            }
+        };
+        xhr.responseType = 'blob';
+        xhr.open('GET', url);
+        xhr.send();
+    });
+}
+
+
+let startWebGl = false;
+async function loadVideo(url) {
+    const video = document.createElement('video');
+    video.setAttribute('crossorigin', 'anonymous');
+    video.setAttribute('muted', 'muted');
+    video.setAttribute('preload', 'auto');
+    video.setAttribute('x-webkit-airplay', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('playsinline', '');
+
+    video.loop = true;
+    //video.loop = false;
+    video.muted = true;
+    video.poster =
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
+
+    video.addEventListener(
+        'seeked',
+        (event) => {
+            console.log('seek');
+            refreshWebGl();
+        },
+        {
+            once: true,
+        },
+    );
+
+    video.addEventListener('timeupdate', (event) => {
+      console.log('timeupdate t=' + event.target.currentTime);
+      if (event.target.currentTime > 3.0 && !startWebGl) {
+        //123456refreshWebGl();
+        startWebGl = true;
+      }
+    });
+    
+    video.addEventListener('ended', (event) => {
+      console.log('ended');
+      //refreshWebGl();
+    });
+    video.addEventListener('loadedmetadata', (event) => {
+      console.log('loadedmetadata');
+    });
+    video.addEventListener('loadeddata', (event) => {
+      console.log('loadeddata');
+    });
+
+    function refreshWebGl() {
+        render(video);
+
+        requestAnimationFrame(refreshWebGl);
+    }
+
+    video.style.cssText = 'width:100vw;';
+
+    document.body.appendChild(video);
+
+    const vUrl = (await toBlob(url)); // as string;
+    video.src = vUrl;
+    //video.src = url;
+    // video.playbackRate = 10;
+    video.play();
+
+    // refreshWebGl();
+
+}
+
+function changeColor(color) {
+    document.body.style.background = color;
+}
+
+let firstRender = true;
+
+function render(video/*: TexImageSource*/) {
+    if (!gl) return;
+    // gl.uniform1i(this.programParameters.isPa, this.premultipliedAlpha ? 1 : 0);
+    // if (!this.videoTexture) {
+    //     this.videoTexture = gl.createTexture() as WebGLTexture;
+    //     gl.bindTexture(gl.TEXTURE_2D, this.videoTexture);
+    //     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    // }
+
+    console.log('render+++++');
+    // gl.uniform1i(this.programParameters.video, 0);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, videoTexture);
+
+    const t1 = Date.now();
+
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
+
+    const d = Date.now() - t1;
+    if (firstRender) {
+      log("firstRender:" + d + '');
+      firstRender = false;
+    }
+    if (d > 2) {
+        log(d + '');
+    }
+    if (d > 1000) {
+        console.error('lag:', d);
+    }
+
+    // gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    // gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, 1, -1, -1, 1, -1]), gl.STATIC_DRAW);
+
+    // gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    // gl.enableVertexAttribArray(0);
+    // gl.drawArrays(gl.TRIANGLES, 0, 6);
+}
+</script>
+
+<style type="text/css">
+  #yddContainer {
+    display: block;
+    font-family: Microsoft YaHei;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -4px;
+    left: -4px;
+    font-size: 12px;
+    border: 1px solid
+  }
+
+  #yddTop {
+    display: block;
+    height: 22px
+  }
+
+  #yddTopBorderlr {
+    display: block;
+    position: static;
+    height: 17px;
+    padding: 2px 28px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #5079bb;
+    font-weight: bold;
+    border-style: none solid;
+    border-width: 1px
+  }
+
+  #yddTopBorderlr .ydd-sp {
+    position: absolute;
+    top: 2px;
+    height: 0;
+    overflow: hidden
+  }
+
+  .ydd-icon {
+    left: 5px;
+    width: 17px;
+    padding: 0px 0px 0px 0px;
+    padding-top: 17px;
+    background-position: -16px -44px
+  }
+
+  .ydd-close {
+    right: 5px;
+    width: 16px;
+    padding-top: 16px;
+    background-position: left -44px
+  }
+
+  #yddKeyTitle {
+    float: left;
+    text-decoration: none
+  }
+
+  #yddMiddle {
+    display: block;
+    margin-bottom: 10px
+  }
+
+  .ydd-tabs {
+    display: block;
+    margin: 5px 0;
+    padding: 0 5px;
+    height: 18px;
+    border-bottom: 1px solid
+  }
+
+  .ydd-tab {
+    display: block;
+    float: left;
+    height: 18px;
+    margin: 0 5px -1px 0;
+    padding: 0 4px;
+    line-height: 18px;
+    border: 1px solid;
+    border-bottom: none
+  }
+
+  .ydd-trans-container {
+    display: block;
+    line-height: 160%
+  }
+
+  .ydd-trans-container a {
+    text-decoration: none;
+  }
+
+  #yddBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    background-position: left -22px
+  }
+
+  .ydd-padding010 {
+    padding: 0 10px
+  }
+
+  #yddWrapper {
+    color: #252525;
+    z-index: 10001;
+    background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+  }
+
+  #yddContainer {
+    background: #fff;
+    border-color: #4b7598
+  }
+
+  #yddTopBorderlr {
+    border-color: #f0f8fc
+  }
+
+  #yddWrapper .ydd-sp {
+    background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+  }
+
+  #yddWrapper a,
+  #yddWrapper a:hover,
+  #yddWrapper a:visited {
+    color: #50799b
+  }
+
+  #yddWrapper .ydd-tabs {
+    color: #959595
+  }
+
+  .ydd-tabs,
+  .ydd-tab {
+    background: #fff;
+    border-color: #d5e7f3
+  }
+
+  #yddBottom {
+    color: #363636
+  }
+
+  #yddWrapper {
+    min-width: 250px;
+    max-width: 400px;
+  }
+</style>
+
+</html>

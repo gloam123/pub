@@ -1,0 +1,85 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/png" href="../images/HTML5_logo_480p.png">
+<title>js bridge</title>
+<script>
+  show_bridge();
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+
+  function show_bridge() {
+    let bridge_info = "no";
+
+    bridge_info = JSON.stringify({extraInfo: {
+      hasYodaBridge: window.__yodaBridge__ != undefined,
+      yodaBridgeProperties: Object.keys(window.__yodaBridge__ || {})
+    }});
+    
+    document.getElementById('idBridgeInfo').innerHTML = bridge_info;
+  }
+
+  function invoke_bridge() {
+    let bridge_info = "ok";
+
+    window.__yodaBridge__.invoke("namespace1", "command1", "params1", "callbackid1");
+
+    document.getElementById('idBridgeInfo').innerHTML = bridge_info;
+  }
+
+  function invoke_nullbridge() {
+    let bridge_info = "ok";
+
+    window.__yodaBridge__.invoke_nullbridge("namespace1", "command1", "params1", "callbackid1");
+
+    document.getElementById('idBridgeInfo').innerHTML = bridge_info;
+  }
+
+
+  function oninvoke() {
+    let bridge_info = "ok";
+
+    console.log("oninvoke 000");
+    window.__yodaBridge__.invoke("namespace1", "command1", "params1", "callbackid1");
+
+    document.getElementById('idBridgeInfo').innerHTML = bridge_info;
+  }
+  function start_invoke() {
+    setInterval(oninvoke, 10);
+  }
+
+  window.addEventListener('beforeunload', function (e) {
+    console.log("gqg3: beforeunload");
+    e.preventDefault();
+    e.returnValue = '';
+  });
+  </script>
+</head>
+
+<body onload="onLoad()">
+  <br />
+  <div id="idJsUa"></div>
+  <br /><br />
+  <button onclick="location.reload()">reload</button>
+  <br /><br /><br />
+
+<button onclick="show_bridge()">show_bridge</button>
+<br /><br /><br />
+<button onclick="invoke_bridge()">invoke_bridge</button>
+<br /><br /><br />
+<button onclick="invoke_nullbridge()">invoke_nullbridge</button>
+<br /><br /><br />
+<button onclick="start_invoke()">start_invoke</button>
+<br /><br /><br />
+
+<div id="idBridgeInfo">
+  null
+</div>
+
+<br />
+</body>
+</html>
