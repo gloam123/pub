@@ -48,6 +48,11 @@
     <br /><br />
     <button onclick="media_switch_src()">media_switch_src</button>
     <br /><br />
+    <button onclick="setAudioFocusPlayback(false)">disableAudioFocusPlayback()</button>
+    <br /><br />
+    <button onclick="setAudioFocusPlayback(true)">enableAudioFocusPlayback()</button>
+    <br /><br />
+
     <button onclick="location.reload()">重新加载</button>
     <br /><br />
     <br /><br />
@@ -64,8 +69,12 @@
   }
 
 
-  const init_url = "../../video/heart_636_12_28.mp4";
-  var video_url = "../../video/beiwa_iqiyi_05.mp4";
+  // const init_url = "../../video/heart_636_12_28.mp4";
+  // var video_url = "../../video/beiwa_iqiyi_05.mp4";
+  const init_url = "http://172.17.14.13:8080/video/heart_636_12_28.mp4";
+  var video_url = "http://172.17.14.13:8080/video/beiwa_iqiyi_05.mp4";
+
+  
   
   //const video_url = "https://zhaopeng06.xxxxxxx.kuaishou.com/public/h264-720-1.mp4";
   //autoplay="autoplay"
@@ -93,7 +102,15 @@
   function callInterface() {
     gVideo.updatelivesrc("callInterface 111");
   }
-  
+
+  function setAudioFocusPlayback(enabled) {
+    //alert(gVideo.disableAudioFocusPlayback);
+    //gVideo.disableAudioFocusPlayback(diabled);
+    //alert(gVideo.audioFocusPlayback);
+    gVideo.audioFocusPlayback = enabled;
+  }
+
+
   function playOrPause() {
       if (gVideo.paused) {
         gVideo.play();

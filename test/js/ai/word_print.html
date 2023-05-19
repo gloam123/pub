@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<title>index</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+  </script>
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+JavaScript:<br/>
+Base
+<br /><br />
+<a href="./test_promise.html">test_promise.html</a>
+<br /><br />
+
+<script>
+  // 设置页面颜色为绿色
+document.body.style.backgroundColor = "green";
+
+// 排版清洁池
+var cleanPool = document.createElement("div");
+cleanPool.innerHTML = "清洁池";
+cleanPool.style.color = "white";
+cleanPool.style.fontSize = "1000px";
+document.body.appendChild(cleanPool);
+
+// 排版消毒池
+var disinfectionPool = document.createElement("div");
+disinfectionPool.innerHTML = "消毒池";
+disinfectionPool.style.color = "white";
+disinfectionPool.style.fontSize = "1000px";
+document.body.appendChild(disinfectionPool);
+
+// 排版冲洗池
+var rinsePool = document.createElement("div");
+rinsePool.innerHTML = "冲洗池";
+rinsePool.style.color = "white";
+rinsePool.style.fontSize = "1000px";
+document.body.appendChild(rinsePool);
+
+</script>
+</body>
+</html>
