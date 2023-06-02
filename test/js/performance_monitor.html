@@ -62,8 +62,11 @@ worker.onmessage = function(event) {
 observer.observe({entryTypes: ["longtask"]});
 
 function dosleep() {
-  a = null;
-  a.ddd;
+  let s = '';
+  for (i=0; i<100000; i++) {
+    s += Math.random()
+  }
+  console.log(s);
   //alert(KwSdk)
 }
 

@@ -15,6 +15,20 @@
     //   document.getElementById('idJsUa').innerHTML = navigator.userAgent + "; hahahah.......";
     // }, 1000*38);
   }
+
+  setInterval(function() {
+    let odiv = document.getElementById("result-number");
+    if (odiv.innerText.length > 1) {
+      console.log("" + odiv.innerText);
+    }
+  }, 1000);
+
+  setInterval(function() {
+    let odiv = document.getElementById("status");
+    if (odiv.innerText.indexOf("Score:") >= 0) {
+      console.log("kwv_v8benchmark_score" + odiv.innerText);
+    }
+  }, 1000);
   </script>
 </head>
 
@@ -31,6 +45,7 @@ File:<input name="upload_file" type="file" />
 <a href="./frame">frame</a>
 <br />
 <br />
+<div id="result-number">68.9</div>
 <br />
 <a href="./frame/history_main.html">history_main22</a>
 <br />

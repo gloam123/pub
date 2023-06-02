@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tetris Game</title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="300" height="600"></canvas>
+	<script>
+		// 定义方块的颜色
+		var colors = [
+			"#000000",
+			"#FF0000",
+			"#00FF00",
+			"#0000FF",
+			"#FFFF00",
+			"#FF00FF",
+			"#00FFFF",
+			"#C0C0C0"
+		];
+
+		// 定义方块的形状
+		var shapes = [
+			// I
+			[
+				[0, 0, 0, 0],
+				[1, 1, 1, 1],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0]
+			],
+			// J
+			[
+				[1, 0, 0],
+				[1, 1, 1],
+				[0, 0, 0]
+			],
+			// L
+			[
+				[0, 0, 1],
+				[1, 1, 1],
+				[0, 0, 0]
+			],
+			// O
+			[
+				[1, 1],
+				[1, 1]
+			],
+			// S
+			[
+				[0, 1, 1],
+				[1, 1, 0],
+				[0, 0, 0]
+			],
+			// T
+			[
+				[0, 1, 0],
+				[1, 1, 1],
+				[0, 0, 0]
+			],
+			// Z
+			[
+				[1, 1, 0],
+				[0, 1, 1],
+				[0, 0, 0]
+			]
+		];
+
+		// 定义游戏区域的大小
+		var ROWS = 20;
+		var COLS = 10;
+
+		// 定义方块的大小
+		var BLOCK_SIZE = 30;
+
+		// 定义游戏区域的起始坐标
+		var startX = (300 - COLS * BLOCK_SIZE) / 2;
+		var startY = (600 - ROWS * BLOCK_SIZE) / 2;
+
+		// 定义游戏区域的背景颜色
+		var bgColor = "#FFFFFF";
+
+		// 定义当前方块的位置和形状
+		var curX = 0;
+		var curY = 0;
+		var curShape = null;
+		var curColor = null;
+
+		// 定义下一个方块的形状
+		var nextShape = null;
+
+		// 定义游戏区域的二维数组
+		var board = [];
+
+		// 定义游戏是否结束的标志
+		var gameOver = false;
+
+		// 初始化游戏区域的二维数组
+		function initBoard() {
+			for (var i = 0; i < ROWS; i++) {
+				board[i] = [];
+				for (var j = 0; j < COLS; j++) {
+					board[i][j] = 0;
+				}
+			}
+		}
+
+		// 随机生成一个方块的形状和颜色
+		function newShape() {
+			var index = Math.floor(Math.random() * shapes.length);
+			curShape = shapes[index];
+			curColor = colors[index + 1];
+			curX = Math.floor((COLS - curShape[0].length) / 2);
+			curY = 0;
+		}
+
+		// 绘制游戏区域
+		function drawBoard() {
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+
+			// 绘制背景
+			ctx.fillStyle = bgColor;
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+			// 绘制方块
+			for (var i = 0; i < ROWS; i++) {
+				for (var j = 0; j < COLS; j++) {
+					if (board[i][j] != 0) {
+						ctx.fillStyle = colors[board[i][j]];
+						ctx.fillRect(startX + j * BLOCK_SIZE, startY + i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+					}
+				}
+			}
+
+			// 绘制当前方块
+			if (curShape != null) {
+				for (var i = 0; i < curShape.length; i++) {
+					for (var j = 0; j < curShape[i].length; j++) {
+						if (curShape[i][j] != 0) {
+							ctx.fillStyle = curColor;
+							ctx.fillRect(startX + (curX + j) * BLOCK_SIZE, startY + (curY + i) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+						}
+					}
+				}
+			}
+
+			// 绘制下一个方块
+			if (nextShape != null) {
+				var nextCanvas = document.createElement("canvas");
+				nextCanvas.width = 4 * BLOCK_SIZE;
+				nextCanvas.height = 4 * BLOCK_SIZE;
+				var nextCtx = nextCanvas.getContext("2d");
+				for (var i = 0; i < nextShape.length; i++) {
+					for (var j = 0; j < nextShape[i].length; j++) {
+						if (nextShape[i][j] != 0) {
+							nextCtx.fillStyle = colors[nextShape[i][j]];
+							nextCtx.fillRect(j * BLOCK_SIZE, i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+						}
+					}
+				}
+				ctx.drawImage(nextCanvas, startX + COLS * BLOCK_SIZE + 20, startY + 2 * BLOCK_SIZE);
+			}
+
+			// 绘制游戏结束的提示
+			if (gameOver) {
+				ctx.fillStyle = "#000000";
+				ctx.font = "bold 48px Arial";
+				ctx.textAlign = "center";
+				ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+			}
+		}
+
+		// 判断当前方块是否可以移动到指定位置
+		function canMoveTo(x, y, shape) {
+			for (var i = 0; i < shape.length; i++) {
+				for (var j = 0; j < shape[i].length; j++) {
+					if (shape[i][j] != 0) {
+						var newX = x + j;
+						var newY = y + i;
+						if (newX < 0 || newX >= COLS || newY < 0 || newY >= ROWS || board[newY][newX] != 0) {
+							return false;
+						}
+					}
+				}
+			}
+			return true;
+		}
+
+		// 将当前方块放到游戏区域中
+		function placeCurShape() {
+			for (var i = 0; i < curShape.length; i++) {
+				for (var j = 0; j < curShape[i].length; j++) {
+					if (curShape[i][j] != 0) {
+						board[curY + i][curX + j] = colors.indexOf(curColor);
+					}
+				}
+			}
+		}
+
+		// 消除满行的方块
+		function clearFullRows() {
+			for (var i = ROWS - 1; i >= 0; i--) {
+				var full = true;
+				for (var j = 0; j < COLS; j++) {
+					if (board[i][j] == 0) {
+						full = false;
+						break;
+					}
+				}
+				if (full) {
+					for (var k = i; k > 0; k--) {
+						for (var j = 0; j < COLS; j++) {
+							board[k][j] = board[k - 1][j];
+						}
+					}
+					for (var j = 0; j < COLS; j++) {
+						board[0][j] = 0;
+					}
+					i++;
+				}
+			}
+		}
+
+		// 判断游戏是否结束
+		function checkGameOver() {
+			for (var j = 0; j < COLS; j++) {
+				if (board[0][j] != 0) {
+					gameOver = true;
+					break;
+				}
+			}
+		}
+
+		// 开始游戏
+		function startGame() {
+			initBoard();
+			newShape();
+			drawBoard();
+			setInterval(function() {
+				if (canMoveTo(curX, curY + 1, curShape)) {
+					curY++;
+					drawBoard();
+				} else {
+					placeCurShape();
+					clearFullRows();
+					checkGameOver();
+					newShape();
+					drawBoard();
+				}
+			}, 500);
+		}
+
+		// 初始化游戏
+		window.onload = function() {
+			startGame();
+		};
+	</script>
+</body>
+</html>

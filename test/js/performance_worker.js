@@ -4,7 +4,7 @@ var lastUpdateTime = new Date().getTime(); // 记录上次更新时间
 // 监听主线程发送的信息
 self.onmessage = function(event) {
   var currentTime = event.data;
-  if (currentTime - lastUpdateTime > 500) {
+  if (currentTime - lastUpdateTime > 150) {
     reportData();
     // 时间差大于500毫秒，认为卡顿了
     var stack = getStackTrace(); // 获取主线程的堆栈信息
