@@ -87,11 +87,15 @@
 -->
   <script>
     ovideo.onerror = function (e) {
+      let err = ovideo.error;
+      console.log("gqg5: ovideo.onerror err.code=" + err.code + "; err.message=" + err.message);
+
+
+      //console.log("gqg5: ovideo.onerror err.code=" + err.code + "; err.message=" + err.message + "; ovideo.error=" + ovideo.error);
+
+
       console.log("gqg5: ovideo.onerror 000000000000000000000000000000");
       let s = "";
-      let err = ovideo.error;
-      console.log("gqg5: ovideo.onerror ovideo.error=" + ovideo.error);
-
       switch (err.code) {
         case MediaError.MEDIA_ERR_ABORTED:
           s += "The user canceled the audio.";

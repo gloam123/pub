@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<title>index</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+
+  function docopy() {
+    document.execCommand('copy');
+  }
+  </script>
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+JavaScript:<br/>
+Base
+<br /><br />
+<button onclick="docopy()">exec copy command</button>
+<br /><br />
+<div>Iframe:</div>
+<iframe style="width: 100%; border: solid 1px red;" src="./iframe_exec_command.html"></iframe>
+
+<br /><br />
+<div>TextArea:</div>
+<textarea></textarea>
+
+
+</body>
+</html>
