@@ -1,0 +1,87 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>renderer crash</title>
+<style>
+  body {
+    padding-top: 5px;
+  }
+  video {
+    width: 100%;
+  }
+
+  .fixed_style {
+    position: fixed;
+  }
+  button {
+    font-size: large;
+  }
+  .log_anima {
+    width: 60px;
+    height: 60px;
+  }
+</style>
+<script type="text/javascript">
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = "UserAgent:" + navigator.userAgent;
+  }
+
+  function updateBridgeInfo(info, color) {
+    let oInfo = document.getElementById("bridge_info");
+    oInfo.innerHTML = info;
+    if (color) {
+      oInfo.style.color = color;
+    }
+  }
+
+
+  var gCallCount = 1;
+  function callJavaBridge() {
+    try {
+      let result = JSBridge1.helloJava("from javascript: call count=" + gCallCount++);
+      updateBridgeInfo(result, '#6d6');
+    } catch (err) {
+      updateBridgeInfo(err, '#d66');
+    }
+  }
+
+  function insertFrame() {
+    frameContainer.innerHTML = '<iframe src="http://172.22.128.52:8080/base/frame/frame_host.html/"></iframe>'
+
+  }
+
+  function removeFrame() {
+    frameContainer.innerHTML = "iframe removed!"
+  }
+
+</script>
+</head>
+
+<body onload="onLoad()">
+  <img  class="log_anima" style="float: right;" src="../images/snail.gif" />
+  <div id="idJsUa"></div>
+<br /><br />
+<b>Call JavaBridge result:</b>
+<span id="bridge_info">
+</span>
+<br />
+
+<br /><br /><br />
+<button onclick="callJavaBridge()">Call JavaBridge</button>
+
+
+<br /><br /><br /><br /><br /><br />
+<button onclick="location.reload()">reload</button>
+
+<div style="height: 3600px;">
+
+</div>
+page end
+
+<br />
+</body>
+</html>
+

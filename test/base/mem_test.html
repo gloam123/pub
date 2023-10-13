@@ -52,8 +52,39 @@ function addCount() {
   gCount += 1;
   document.getElementById("id_count").innerHTML = '' + gCount;
 }
+
+
+function generateTupleMem(){
+  var tuple = [];
+
+  for(i=0;i<3;i++){
+    tuple.push(Math.floor(Math.random() * 300));
+  }
+  return '(' + tuple[0] + ',' + tuple[1] + ',' + tuple[2] + ')';
+}
+
+
+function allocBigMemory(num){
+  var arr = [];
+  for(i=0;i<num;i++){
+    var tuple = [];
+    for(i=0;i<3;i++){
+      tuple.push(Math.random() * 300000);
+    }
+    arr.push('(' + tuple[0] + ',' + tuple[1] + ',' + tuple[2] + ')');
+    // arr.push('(' + Math.random() * 300000 + ',' + Math.random() * 300000 + ',' + Math.random() * 300000 + ')');
+  }
+  return arr;
+}
+var gCrashArray = [];
+var gCrashIndex = 0;
+function tryTriggerCrash() {
+  gCrashArray[gCrashIndex++] = allocBigMemory(1024);
+  console.log("gListArray.length=" + gCrashArray.length);
+}
+
+
 function allocJavaScriptMemory() {
-  //gListArray[gIndex++] = generateList(1024*1024);
   gListArray[gIndex++] = generateList(1024*10);
   let info = "gListArray.length=" + gListArray.length;
   appendInnerHtml(info);
@@ -169,6 +200,8 @@ function appendBigCanvas() {
 </div>
 <br />
 <div style="position: fixed; z-index: 50000; top:130px">
+  <button onclick="tryTriggerCrash()">tryTriggerCrash</button>
+  <br /><br />
   <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
   <br /><br />
   <button onclick="allocSVGMemory()">allocSVGMemory</button>
