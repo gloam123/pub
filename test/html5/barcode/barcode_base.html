@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<link rel="icon" type="image/svg+xml" href="./images/HTML5 Logo.svg">
+<title>index</title>
+<style>
+  body {
+    user-select: none
+  }
+</style>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+  function setInfo(str) {
+    document.getElementById('info').innerText = str;
+  }
+
+  function barcode() {
+    infostr = "default";
+    if (!("BarcodeDetector" in window)) {
+      infostr = "Barcode Detector is not supported by this browser 111";
+      console.log(infostr);
+    } else {
+      infostr = "Barcode Detector supported!"
+      console.log(infostr);
+
+      // // create new detector
+      // const barcodeDetector = new BarcodeDetector({
+      //   formats: ["code_39", "codabar", "ean_13"],
+      // });
+    }
+    setInfo(infostr);
+  }
+
+  function createbarcode() {
+    const barcodeDetector = new BarcodeDetector({
+      formats: ["code_39", "codabar", "ean_13"],
+    });
+  }
+</script>
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+<br /><br />
+<button onclick="location.reload()">reload</button>
+<br /><br />
+<button onclick="barcode()">barcode</button>
+<br /><br />
+<button onclick="createbarcode()">createbarcode</button>
+<br /><br />
+<div id="info">
+
+</div>
+</body>
+</html>
