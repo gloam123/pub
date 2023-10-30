@@ -69,7 +69,7 @@
   var gCallCount = 1;
   function callJavaBridge() {
     try {
-      let result = JSBridge1.helloJava("from javascript: call count=" + gCallCount++);
+      let result = JavaBridge.helloJava("from javascript: call count=" + gCallCount++);
       updateBridgeInfo(result, '#6d6');
     } catch (err) {
       updateBridgeInfo(err, '#d66');

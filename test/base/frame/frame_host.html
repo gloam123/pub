@@ -78,7 +78,10 @@
 
   function insertFrame() {
     frameContainer.innerHTML = "<iframe src='./iframe_bridge.html' width='100%' height='100%'></iframe>"
-
+  }
+  var giframe;
+  function insertUnliveFrame() {
+    giframe = document.createElement('iframe');
   }
 
   function removeFrame() {
@@ -105,7 +108,8 @@
 
   <br /><br />
   <button onclick="insertFrame(this)">Insert frame</button>
-
+  <br /><br />
+  <button onclick="insertUnliveFrame(this)">insertUnliveFrame</button>
   <br /><br />
   <button id="removeFrame" onclick="removeFrame(this)">Remove frame</button>
   

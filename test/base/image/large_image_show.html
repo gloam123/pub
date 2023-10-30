@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.3, maximum-scale=5.0, user-scalable=true">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=0.3, minimum-scale=0.3, maximum-scale=5.0, user-scalable=true"> -->
+<title>image base</title>
+<!--
+  复现方式: 
+  1. 通过background-size: contain;样式.
+  2. 通过background: url("https://ali.static.yximgs.com/udata/pkg/doodle_static/upload/b5b32ea49547645717db17bfc300b9a4.png") left top / contain
+-->
+<style>
+  .bgdiv {
+    width: 100%;
+    height: 629.227vw;
+    background-color: aqua;
+    background: url(../../images/big_828x5216.png);
+    background-size: contain;
+  }
+</style>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+</script>
+</head>
+
+<body onload="onLoad()">
+  <div id="idJsUa">dd</div>
+<br />
+<br />
+<!-- size: 19mb
+<img src="../../images/baidu_image_max_19m.jpg" /> -->
+<button style="font-size: 32px;" onclick="location.reload()">reload</button>
+<br /><br />
+big_828x5216
+<div class="bgimg">
+</div>
+<br/><br/><br/>
+big_828x5216
+<div class="bgdiv">
+</div>
+div end
+</body>
+</html>
