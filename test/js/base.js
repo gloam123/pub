@@ -1,2 +1,2 @@
-alert("bbb==============bbbb");
 console.log("aaaa============")
+alert("bbb==============bbbb");

@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>memroy test</title>
+<style>
+  .bgdiv {
+    width: 100%;
+    height: 329.227vw;
+    opacity: 0.7;
+    background: url(../../images__/big_828x5216.png);
+    background-size: contain;
+    position: absolute;
+  }
+  .fixed_style {
+    position: fixed;
+  }
+</style>
+<script type="text/javascript">
+
+function appendNode(oNode) {
+  document.getElementById('idContainer').appendChild(oNode);
+}
+
+function appendInnerHtml(html_str) {
+  document.getElementById('idContainer').insertAdjacentHTML('beforeend', html_str);
+}
+
+function removeElement() {
+  var oContainer = document.getElementById('idContainer');
+  var oFirstChild = oContainer.children[0];
+  //oFirstChild.src = "";
+  oContainer.removeChild(oFirstChild)
+}
+
+function appendTextNode() {
+  var odiv = document.createElement('div');
+  odiv.innerHTML = "text" +Math.random();
+  appendNode(odiv);
+}
+
+function appendSomeNode() {
+  for (i=0; i<1024; i++) {
+    appendTextNode();
+  }
+}
+
+function createBitmapUrl(width, height, color) {
+  // 创建一个新的canvas元素
+  var canvas = document.createElement('canvas');
+
+  // 设置canvas的尺寸
+  canvas.width = width; //500;
+  canvas.height = height; //500;
+
+  // 获取绘图上下文
+  var context = canvas.getContext('2d');
+
+  // 设置填充颜色为红色
+  context.fillStyle = color;
+
+  // 绘制一个红色的矩形填充整个canvas
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL();
+}
+
+function randomColor() {
+  return "#" + Number((Math.random()*16).toFixed(0)).toString(16) + 
+  Number((Math.random()*16).toFixed(0)).toString(16) + 
+  Number((Math.random()*16).toFixed(0)).toString(16);
+
+}
+
+function addImages() {
+  for (i=0; i<1; i++) {
+    var odiv=document.createElement('div');
+    odiv.className = "bgdiv";
+    let posStyle = "left:" + i*3 + "px" + 
+                  "; top:" + (200 + i * 2) + "px";
+    odiv.style = posStyle;
+    const bitmapUrl = createBitmapUrl(1000+i, 1600+i, randomColor());
+    odiv.style.backgroundImage = 'url(' +  bitmapUrl + ')';
+    appendNode(odiv);
+  }
+}
+
+
+let g_start = false;
+function startTimer() {
+  if (g_start) {
+    return;
+  }
+  addImages();
+  g_start = true;
+  setInterval(function() {
+    removeElement();
+    addImages();
+    console.log("ontimer");
+  }, 3000)
+}
+
+function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+}
+
+</script>
+</head>
+
+<body onload="onLoad()">
+  <div id="idJsUa"></div>
+<br />
+<div style="float: right;">
+  <button onclick="addImages()">addImages</button>
+  <button onclick="startTimer()">startTimer</button>
+</div>
+
+<div id="idContainer">
+</div>
+<br /><br />
+<div id="idbgdiv" class="bgdiv">bgdiv</div>
+<br /><br />
+ends.
+</body>
+</html>

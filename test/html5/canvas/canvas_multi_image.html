@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>multi image</title>
+  </head>
+<body>
+<p>
+  <button id="addBig">增加大图数量</button>
+  <button id="subtractBig">减少大图数量</button>
+  <span id="bigCount">0</span>
+</p>
+  
+<p>
+  <button id="addSmall">增加小图数量</button>
+  <button id="subtractSmall">减少小图数量</button>
+  <span id="smallCount">0</span>
+</p>
+  
+  <canvas id="myCanvas" style="border:1px solid #d3d3d3;">
+  Your browser does not support the HTML5 canvas tag.
+  </canvas>
+
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  
+  // 设置canvas宽度为窗口宽度
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 120;
+  
+  // 初始化图像数组和最大图像数量
+  const imageMaxSize = 4000; //1000;
+  const imageMinSize = 3000; //500;
+  var bigImages = [];
+  var smallImages = [];
+  var maxBigImages = 50;
+  var maxSmallImages = 100; //200;
+  const intervalTime = 17;
+  
+  function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);  // 清除画布
+  
+      for (var i = 0; i < bigImages.length; i++) {
+          drawImage(bigImages[i]);
+      }
+  
+      for (var i = 0; i < smallImages.length; i++) {
+          drawImage(smallImages[i]);
+      }
+  
+      document.getElementById('bigCount').innerText = '当前大图数量: ' + bigImages.length;
+      document.getElementById('smallCount').innerText = '当前小图数量: ' + smallImages.length;
+  
+      requestAnimationFrame(draw);
+  }
+  
+  document.getElementById('addBig').addEventListener('click', function() {
+      maxBigImages += 10;
+  });
+  
+  document.getElementById('subtractBig').addEventListener('click', function() {
+      if (maxBigImages >= 10) {
+          maxBigImages -= 10;
+      }
+  });
+  
+  document.getElementById('addSmall').addEventListener('click', function() {
+      maxSmallImages += 10;
+  });
+  
+  document.getElementById('subtractSmall').addEventListener('click', function() {
+      if (maxSmallImages >= 10) {
+          maxSmallImages -= 10;
+      }
+  });
+  
+  setInterval(function() {
+      // 移除最早的图片
+      while (bigImages.length > 0 && bigImages.length >= maxBigImages) {
+          bigImages.shift();
+      }
+  
+      while (smallImages.length > 0 && smallImages.length >= maxSmallImages) {
+          smallImages.shift();
+      }
+  
+      // 添加新的图片
+      addImage(true); // 添加大图片
+      addImage(false); // 添加小图片
+  }, intervalTime);
+  
+  function addImage(isBig) {
+      // 创建新的随机颜色图片
+      const imgWidth = isBig ? Math.random() * (imageMaxSize - imageMinSize) + imageMinSize : Math.random() * 9 + 1;
+      const imgHeight = isBig ? Math.random() * (imageMaxSize - imageMinSize) + imageMinSize : Math.random() * 9 + 1;
+      var maxImgDimension = Math.max(imgWidth, imgHeight);
+      var colorCanvas = document.createElement('canvas');
+      colorCanvas.width = imgWidth;
+      colorCanvas.height = imgHeight;
+      var colorCtx = colorCanvas.getContext('2d');
+      colorCtx.fillStyle = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';  // 随机颜色
+      colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
+      var colorImg = new Image();
+      colorImg.src = colorCanvas.toDataURL();
+
+
+      const maxScale = window.innerWidth * 0.5 / maxImgDimension;
+      const minScale = window.innerWidth * 0.2 / maxImgDimension;
+      const scale = isBig ? Math.random() * (maxScale - minScale) + minScale : 1;
+      const dscale = isBig ? (maxScale - minScale) * 0.01 : -0.01;
+  
+      // 添加新的图片
+      (isBig ? bigImages : smallImages).push({
+          img: colorImg,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          dx: Math.random() * 4 - 2,
+          dy: Math.random() * 4 - 2,
+          maxScale: isBig ? maxScale : 2,
+          minScale: isBig ? minScale : 0.5,
+          scale: scale,
+          dscale: dscale
+      });
+  }
+  function drawImage(imgObj) {
+    ctx.save();
+    ctx.translate(imgObj.x, imgObj.y);
+    ctx.scale(imgObj.scale, imgObj.scale);
+    ctx.drawImage(imgObj.img, 0, 0, imgObj.img.width, imgObj.img.height);
+    ctx.restore();
+
+    // 更新位置和大小
+    imgObj.x += imgObj.dx;
+    imgObj.y += imgObj.dy;
+    imgObj.scale += imgObj.dscale;
+
+    // 边界检测
+    const imgWidth = imgObj.img.width * imgObj.scale;
+    const imgHeight = imgObj.img.height * imgObj.scale;
+    const sideSize = 15;
+    if ((imgObj.x + imgWidth) < sideSize || imgObj.x > canvas.width - sideSize) {
+        imgObj.dx = -imgObj.dx;
+    }
+    if (imgObj.y + imgHeight < sideSize || imgObj.y > canvas.height - sideSize) {
+        imgObj.dy = -imgObj.dy;
+    }
+
+    // 缩放边界检测
+    // if (imgObj.scale < 0.5 || imgObj.scale > 2) {
+    //     imgObj.dscale = -imgObj.dscale;
+    // }
+    if (imgObj.scale < imgObj.minScale || imgObj.scale > imgObj.maxScale) {
+        imgObj.dscale = -imgObj.dscale;
+    }
+  }
+
+draw();
+addImage(true); // 添加大图片
+</script>
+
+</body>
+</html>

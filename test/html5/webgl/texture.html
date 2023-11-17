@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<title>memroy test</title>
+<style>
+  video {
+    width: 100%;
+  }
+
+  .fixed_style {
+    position: fixed;
+  }
+</style>
+<script type="text/javascript">
+
+function appendNode(oNode) {
+  document.getElementById('imgContainer').appendChild(oNode);
+}
+
+function appendInnerHtml(html_str) {
+  document.getElementById('infoContainer').insertAdjacentHTML('beforeend', html_str);
+}
+
+
+function allocImageMemory() {
+  var img_url = "../images/w.png";
+  //var img_url = "../images/mem_cmp/lizi_APNG.png";
+
+  var oimg=document.createElement('img');
+  oimg.src = img_url + "?random=" + Math.random();
+  oimg.className = "fixed_style";
+  let posStyle = "left:" + (Math.random() * 120) + "px" + 
+                 "; top:" + (200 + Math.random() * 200) + "px";
+  oimg.style = posStyle;
+
+
+  appendNode(oimg);
+}
+
+function removeElement() {
+  var oContainer = document.getElementById('imgContainer');
+  var oFirstChild = oContainer.children[0];
+  oFirstChild.src = "";
+  oContainer.removeChild(oFirstChild)
+}
+
+function appendTextNode() {
+  var odiv = document.createElement('div');
+  odiv.innerHTML = "text" +Math.random();
+  appendNode(odiv);
+}
+
+function appendSomeNode() {
+  for (i=0; i<1024; i++) {
+    appendTextNode();
+  }
+}
+
+function drawcanvas() {
+  var canvas = document.getElementById('yourCanvasElement');
+var gl = canvas.getContext('webgl');
+
+// 创建纹理
+var texture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, texture);
+
+// 设置纹理参数
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+// 上传纹理数据
+var level = 0;
+var internalFormat = gl.RGBA;
+var width = 1;
+var height = 1;
+var border = 0;
+var srcFormat = gl.RGBA;
+var srcType = gl.UNSIGNED_BYTE;
+var pixel = new Uint8Array([0, 0, 255, 255]);  // 一个蓝色的像素
+gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, width, height, border, srcFormat, srcType, pixel);
+
+}
+
+function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+    drawcanvas();
+}
+
+</script>
+</head>
+
+<body onload="onLoad()">
+  <div id="idJsUa"></div>
+<br />
+<div id="infoContainer">
+</div>
+<br />
+<div style="position: fixed; z-index: 50000; top:130px">
+  <button onclick="tryTriggerCrash()">tryTriggerCrash</button>
+  <br /><br />
+  <button onclick="allocJavaScriptMemory()">allocJavaScriptMemory</button>
+  <br /><br />
+  <button onclick="allocSVGMemory()">allocSVGMemory</button>
+
+</div>
+
+<canvas id="yourCanvasElement" width="100%" style="background-color: aquamarine;"></canvas>
+<div id="imgContainer">
+Image Container:
+</div>
+<br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+ends.
+</body>
+</html>
