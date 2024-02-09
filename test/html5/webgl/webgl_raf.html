@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function onLoad() {
+          document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+        }
+      </script>
+</head>
+<body onload="onLoad()">
+    <br />
+    a
+    <div id="idJsUa"></div>
+    <br /><br />
+    <button onclick="location.reload()">reload</button>
+    <br /><br />
+    <canvas id="threeRef" class="three-canvas"></canvas>
+    <script>
+        const threeCanvas = document.getElementById('threeRef');
+        function raf() {
+            console.log(navigator.userAgent);
+            window.requestAnimationFrame(raf)
+        }
+
+        raf()
+
+        const gl = threeCanvas.getContext("webgl") || threeCanvas.getContext("experimental-webgl");
+        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const color = [Math.random(), Math.random(), Math.random()];
+        gl.clearColor(color[0], color[1], color[2], 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+    </script>
+</body>
+</html>

@@ -11,8 +11,17 @@
       margin: 10px;
     }
   </style>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+</script>
 </head>
-<body>
+<body onload="onLoad()">
+  <br />
+<div id="idJsUa"></div>
+<button onclick="location.reload()">reload()</button>
+<br /><br />
   <button id="start" onclick="startRecording()">开始</button>
   <button id="pause" onclick="pauseRecording()">暂停</button>
   <button id="download" onclick="downloadRecording()">下载</button>

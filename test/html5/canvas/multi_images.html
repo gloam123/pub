@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>multi image</title>
+    <style>
+      #container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .image-item {
+        position: absolute;
+        margin: 10px;
+        transition: all 2s ease-in-out;
+      }
+    </style>
+  </head>
+<body>
+<p>
+  <button id="addBig">增加大图数量</button>
+  <button id="subtractBig">减少大图数量</button>
+  <span id="bigCount">0</span>
+</p>
+  
+<p>
+  <button id="addSmall">增加小图数量</button>
+  <button id="subtractSmall">减少小图数量</button>
+  <span id="smallCount">0</span>
+</p>
+
+  <div id="container"></div>
+<script>
+  
+  // 初始化图像数组和最大图像数量
+  const imageMaxSize = 3000; //4000; //1000;
+  const imageMinSize = 50; //3000; //500;
+  var bigImages = [];
+  var smallImages = [];
+  var maxBigImages = 50;
+  var maxSmallImages = 100; //200;
+  const addImgInterval = 300;
+  const moveInterval = 17;
+
+  let maxImages = 100;
+  const imagesArray = [];
+
+  
+  document.getElementById('addBig').addEventListener('click', function() {
+      maxBigImages += 10;
+  });
+  
+  document.getElementById('subtractBig').addEventListener('click', function() {
+      if (maxBigImages >= 10) {
+          maxBigImages -= 10;
+      }
+  });
+  
+  document.getElementById('addSmall').addEventListener('click', function() {
+      maxSmallImages += 10;
+  });
+  
+  document.getElementById('subtractSmall').addEventListener('click', function() {
+      if (maxSmallImages >= 10) {
+          maxSmallImages -= 10;
+      }
+  });
+
+  function addImage() {
+    const imgWidth = Math.random() * (imageMaxSize - imageMinSize) + imageMinSize;
+    const imgHeight = Math.random() * (imageMaxSize - imageMinSize) + imageMinSize;
+
+    if (imagesArray.length >= maxBigImages) {
+      const imageToRemove = imagesArray.shift();
+      document.getElementById("container").removeChild(imageToRemove);
+    }
+    
+    const newImage = document.createElement("img");
+    let img_url = "https://source.unsplash.com/random/" + Math.floor(imgWidth) + "*" + Math.floor(imgHeight);
+    newImage.src = img_url; //'https://www.your-image-source.com/tianjin.jpg'; // 更改为实际天津图片源链接
+    newImage.className = 'image-item';
+    
+    let randomTop = Math.random() * window.innerHeight - (window.innerHeight/2);
+    let randomLeft = Math.random() * window.innerWidth - (window.innerWidth/2);
+    
+    newImage.style.top = `${randomTop}px`;
+    newImage.style.left = `${randomLeft}px`;
+
+    document.getElementById("container").appendChild(newImage);
+    imagesArray.push(newImage);
+  }
+
+  setInterval(addImage, addImgInterval);
+  
+  function moveImage() {
+    imagesArray.forEach(image => {
+      let randomTop = Math.random() * window.innerHeight - (window.innerHeight/2);
+      let randomLeft = Math.random() * window.innerWidth - (window.innerWidth/2);
+      
+      image.style.top = `${randomTop}px`;
+      image.style.left = `${randomLeft}px`;
+    });
+  }
+
+  // 每隔一段时间（如1秒）移动所有图片
+  setInterval(moveImage, moveInterval);
+
+
+  // function addImage(isBig) {
+  //     // 创建新的随机颜色图片
+  //     const imgWidth = isBig ? Math.random() * (imageMaxSize - imageMinSize) + imageMinSize : Math.random() * 9 + 1;
+  //     const imgHeight = isBig ? Math.random() * (imageMaxSize - imageMinSize) + imageMinSize : Math.random() * 9 + 1;
+  //     var maxImgDimension = Math.max(imgWidth, imgHeight);
+  //     // var colorCanvas = document.createElement('canvas');
+  //     // colorCanvas.width = imgWidth;
+  //     // colorCanvas.height = imgHeight;
+  //     // var colorCtx = colorCanvas.getContext('2d');
+  //     // colorCtx.fillStyle = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';  // 随机颜色
+  //     // colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
+      
+  //     //"https://picsum.photos/200/300";
+  //     //https://via.placeholder.com/350x150
+  //     //https://source.unsplash.com/random/800x600
+  //     //let img_url = "https://picsum.photos/" + Math.floor(imgWidth) + "/" + Math.floor(imgHeight);
+  //     //let img_url = "https://via.placeholder.com/" + Math.floor(imgWidth) + "*" + Math.floor(imgHeight);
+  //     let img_url = "https://source.unsplash.com/random/" + Math.floor(imgWidth) + "*" + Math.floor(imgHeight);
+  //     var colorImg = new Image();
+  //     colorImg.src = img_url; //colorCanvas.toDataURL();
+
+
+
+  //     const maxScale = window.innerWidth * 0.5 / maxImgDimension;
+  //     const minScale = window.innerWidth * 0.2 / maxImgDimension;
+  //     const scale = isBig ? Math.random() * (maxScale - minScale) + minScale : 1;
+  //     const dscale = isBig ? (maxScale - minScale) * 0.01 : -0.01;
+  
+  //     // 添加新的图片
+  //     (isBig ? bigImages : smallImages).push({
+  //         img: colorImg,
+  //         x: Math.random() * canvas.width,
+  //         y: Math.random() * canvas.height,
+  //         dx: Math.random() * 4 - 2,
+  //         dy: Math.random() * 4 - 2,
+  //         maxScale: isBig ? maxScale : 2,
+  //         minScale: isBig ? minScale : 0.5,
+  //         scale: scale,
+  //         dscale: dscale
+  //     });
+  // }
+</script>
+
+</body>
+</html>

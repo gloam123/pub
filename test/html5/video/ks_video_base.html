@@ -190,6 +190,14 @@
       //   ovideo.src = "http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4";
       // }, 1000*5);
     }
+
+
+    function setFullscreenExtra() {
+      let extra = document.getElementById('idextra').value;
+      console.log("ovideo.fullscreenExtra=" + ovideo.fullscreenExtra + "; extra=" + extra);
+      ovideo.fullscreenExtra = extra;
+    }
+
   </script>
   <br /><br />
 
@@ -200,6 +208,9 @@
   <button onclick="location.reload()">重新加载</button>
   <br /><br />
   <button onclick="switchVideoSrc()">更换Video src</button>
+  <br /><br />
+  <textarea id="idextra"></textarea>
+  <button onclick="setFullscreenExtra()">setFullscreenExtra()</button>
   <br /><br />
   <a href="http://yimingapp.cn/test">yimingapp.cn/test</a>
   <div id="idJsUa" style="background-color: blue;">
