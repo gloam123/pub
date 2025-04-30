@@ -1,3 +1,4 @@
 /test/big_file
 *.apk
 
+.DS_Store
