@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport">
+<title>rewritesetTimeout</title>
+<script>
+  function onLoad() {
+    document.getElementById('idJsUa').innerHTML = navigator.userAgent;
+  }
+
+
+  var gcnt = 0;
+  class Lb {
+  constructor() {
+    console.log('-----+++-----');
+    this.rewritesetTimeout();
+  }
+  rewritesetTimeout() {
+      var e = setTimeout,
+      t = this;
+      console.log("rewritesetTimeout");
+      setTimeout = function() {
+          gcnt += 1;
+          console.log("setTimeout gcnt=" + gcnt);
+          var o = arguments[0];
+          return arguments[0] = function() {
+              console.log("setTimeout111 gcnt=" + gcnt);
+              o.apply(this, arguments)
+          },
+          e.apply(this, arguments)
+      }
+    }
+  }
+  let w = new Lb();
+  console.log(w);
+
+  function doCheck() {
+    setTimeout(function() {
+      console.log("kkkkk");
+    }, 1000);
+  }
+
+  </script>
+</head>
+
+<body onload="onLoad()">
+<br />
+<div id="idJsUa"></div>
+JavaScript:<br/>
+Base
+<br /><br />
+<button onclick="doCheck()">doCheck()</button>
+
+<br /><br />
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!--
+  see: https://issues.chromium.org/issues/40057622
+-->
+
+<script>
+function main() {
+    class C {
+        m() {
+            super.prototype
+        }
+    }
+    function f() {}
+    C.prototype.__proto__ = f
+
+    let c = new C()
+    c.x0 = 1
+    c.x1 = 1
+    c.x2 = 1
+    c.x3 = 1
+    c.x4 = 0x42424242 / 2
+
+    f.prototype
+    c.m()
+}
+for (let i = 0; i < 0x100; ++i) {
+    main()
+}
+
+  // import('data:text/javascript,export function xxx(){}').then((m1) => {
+  //   let utTmp = new Uint32Array(2);
+  // utTmp[0] = 0x12345678;
+  // utTmp[1] = 0x12345679;
+  // let flTmp = new Float64Array(utTmp.buffer);
+  
+  //   let ret = {"module":flTmp[0]};
+  //   function a(){
+  
+  //   if(triger){
+  //     return Proxy;
+  //   }else{
+  //     return ret;
+  //   }
+  // }
+  
+  // oo = 1.1;
+  
+  // class c extends a{
+  //   constructor(){
+  //     super();
+  //     oo = super.xxx;
+  //   }
+  // }
+  // triger = false;
+  // c.prototype.__proto__ = m1;
+  // //alert(5);
+  //   for(let i = 0;i < 20;i++){
+  //     //print(i);
+  //     new c();
+  //   }
+  //   alert(oo);
+  // })
+  
+  
+  // b = Array.prototype.concat;
+  // b = b.bind([]);
+  </script>
