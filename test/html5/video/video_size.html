@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可调节大小的视频播放器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        #video-player {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: #0056b3;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            border: none;
+        }
+
+        .value-display {
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .preset-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            background: #0056b3;
+        }
+
+        .info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .preset-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>可调节大小的视频播放器</h1>
+        
+        <div class="video-container">
+            <video id="video-player" controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                您的浏览器不支持视频标签。
+            </video>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="width-slider">视频宽度:</label>
+                <div class="slider-container">
+                    <input type="range" id="width-slider" class="slider" min="200" max="1000" value="640">
+                    <span id="width-value" class="value-display">640px</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="height-slider">视频高度:</label>
+                <div class="slider-container">
+                    <input type="range" id="height-slider" class="slider" min="150" max="600" value="360">
+                    <span id="height-value" class="value-display">360px</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>预设尺寸:</label>
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="setVideoSize(320, 640)">(320×640)</button>
+                    <button class="preset-btn" onclick="setVideoSize(320, 900)">(320×900)</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>存储管理:</label>
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="clearStoredSize()" style="background: #dc3545;">清除已保存的尺寸</button>
+                    <button class="preset-btn" onclick="showStorageInfo()" style="background: #28a745;">查看当前存储</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="info">
+            <strong>使用说明:</strong>
+            <ul>
+                <li>使用滑块调节视频的宽度和高度</li>
+                <li>点击预设按钮快速设置常用尺寸</li>
+                <li>视频会保持比例并平滑过渡到新尺寸</li>
+                <li>支持所有现代浏览器的HTML5视频格式</li>
+                <li><strong>🔄 自动保存:</strong> 调整的尺寸会自动保存到本地存储</li>
+                <li><strong>📱 记忆功能:</strong> 下次打开网页时会自动恢复上次的尺寸设置</li>
+                <li><strong>🗑️ 清除存储:</strong> 可以清除已保存的尺寸设置，恢复默认值</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video-player');
+        const widthSlider = document.getElementById('width-slider');
+        const heightSlider = document.getElementById('height-slider');
+        const widthValue = document.getElementById('width-value');
+        const heightValue = document.getElementById('height-value');
+
+        // 本地存储键名
+        const STORAGE_KEY = 'video-player-size';
+
+        // 从本地存储加载尺寸设置
+        function loadSizeFromStorage() {
+            try {
+                const savedSize = localStorage.getItem(STORAGE_KEY);
+                if (savedSize) {
+                    const { width, height } = JSON.parse(savedSize);
+                    if (width && height) {
+                        widthSlider.value = width;
+                        heightSlider.value = height;
+                        console.log('已从本地存储恢复视频尺寸:', width + 'x' + height);
+                        return true;
+                    }
+                }
+            } catch (error) {
+                console.warn('读取本地存储失败:', error);
+            }
+            return false;
+        }
+
+        // 保存尺寸设置到本地存储
+        function saveSizeToStorage(width, height) {
+            try {
+                const sizeData = { width: parseInt(width), height: parseInt(height) };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(sizeData));
+                console.log('已保存视频尺寸到本地存储:', width + 'x' + height);
+            } catch (error) {
+                console.warn('保存到本地存储失败:', error);
+            }
+        }
+
+        // 更新视频尺寸
+        function updateVideoSize() {
+            const width = widthSlider.value;
+            const height = heightSlider.value;
+            
+            video.style.width = width + 'px';
+            video.style.height = height + 'px';
+            
+            widthValue.textContent = width + 'px';
+            heightValue.textContent = height + 'px';
+
+            // 保存到本地存储
+            saveSizeToStorage(width, height);
+        }
+
+        // 设置特定尺寸
+        function setVideoSize(width, height) {
+            widthSlider.value = width;
+            heightSlider.value = height;
+            updateVideoSize();
+        }
+
+        // 监听滑块变化
+        widthSlider.addEventListener('input', updateVideoSize);
+        heightSlider.addEventListener('input', updateVideoSize);
+
+        // 初始化 - 先尝试从本地存储加载，如果没有则使用默认值
+        function initializeVideoSize() {
+            const loaded = loadSizeFromStorage();
+            if (!loaded) {
+                console.log('使用默认视频尺寸: 640x360');
+            }
+            updateVideoSize();
+        }
+
+        // 清除本地存储的尺寸设置
+        function clearStoredSize() {
+            try {
+                localStorage.removeItem(STORAGE_KEY);
+                alert('已清除保存的视频尺寸设置！\n下次打开将使用默认尺寸 (640×360)');
+                console.log('已清除本地存储的视频尺寸设置');
+                
+                // 重置为默认尺寸
+                setVideoSize(640, 360);
+            } catch (error) {
+                console.warn('清除本地存储失败:', error);
+                alert('清除存储失败，请检查浏览器设置');
+            }
+        }
+
+        // 显示当前存储信息
+        function showStorageInfo() {
+            try {
+                const savedSize = localStorage.getItem(STORAGE_KEY);
+                if (savedSize) {
+                    const { width, height } = JSON.parse(savedSize);
+                    alert(`当前保存的视频尺寸:\n宽度: ${width}px\n高度: ${height}px\n\n每次调整尺寸时会自动保存到本地存储`);
+                } else {
+                    alert('当前没有保存的视频尺寸设置\n\n调整视频尺寸后会自动保存');
+                }
+            } catch (error) {
+                console.warn('读取存储信息失败:', error);
+                alert('无法读取存储信息，请检查浏览器设置');
+            }
+        }
+
+        // 页面加载完成后初始化
+        initializeVideoSize();
+
+        // 响应式处理
+        function handleResize() {
+            const containerWidth = document.querySelector('.container').offsetWidth - 40;
+            const currentWidth = parseInt(widthSlider.value);
+            
+            if (currentWidth > containerWidth) {
+                const ratio = parseInt(heightSlider.value) / currentWidth;
+                setVideoSize(containerWidth, Math.round(containerWidth * ratio));
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        
+        // 页面加载完成后检查尺寸
+        window.addEventListener('load', handleResize);
+    </script>
+</body>
+</html>

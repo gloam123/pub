@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Object-Fit 属性测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .video-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .video-description {
+            color: #666;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 200px;
+            border: 3px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        .fill { object-fit: fill; }
+        .contain { object-fit: contain; }
+        .cover { object-fit: cover; }
+        .none { object-fit: none; }
+        .scale-down { object-fit: scale-down; }
+
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .controls h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #555;
+            min-width: 120px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            min-width: 200px;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .value-display {
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #333;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .info-panel {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .info-panel h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .info-panel ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-panel li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-panel li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Video Object-Fit 属性测试</h1>
+        <p class="description">
+            这个页面演示了CSS的object-fit属性在video元素上的不同效果。<br>
+            object-fit属性控制替换元素（如video、img）的内容如何适应其容器。
+        </p>
+
+        <div class="controls">
+            <h3>🎛️ 容器尺寸控制</h3>
+            <div class="control-group">
+                <label for="width">容器宽度:</label>
+                <input type="range" id="width" min="200" max="400" value="300">
+                <span class="value-display" id="widthValue">300px</span>
+            </div>
+            <div class="control-group">
+                <label for="height">容器高度:</label>
+                <input type="range" id="height" min="150" max="300" value="200">
+                <span class="value-display" id="heightValue">200px</span>
+            </div>
+        </div>
+
+        <div class="video-grid" id="videoGrid">
+            <div class="video-item">
+                <h3 class="video-title">fill (默认)</h3>
+                <p class="video-description">拉伸视频以完全填充容器，可能改变宽高比</p>
+                <div class="video-container">
+                    <video class="fill" controls muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <h3 class="video-title">contain</h3>
+                <p class="video-description">保持宽高比，完整显示视频，可能有空白区域</p>
+                <div class="video-container">
+                    <video class="contain" controls muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <h3 class="video-title">cover</h3>
+                <p class="video-description">保持宽高比，填充整个容器，可能裁剪视频</p>
+                <div class="video-container">
+                    <video class="cover" controls muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <h3 class="video-title">none</h3>
+                <p class="video-description">保持原始尺寸，不进行缩放</p>
+                <div class="video-container">
+                    <video class="none" controls muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <h3 class="video-title">scale-down</h3>
+                <p class="video-description">相当于none或contain中较小的那个</p>
+                <div class="video-container">
+                    <video class="scale-down" controls muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        您的浏览器不支持视频标签。
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>📚 Object-Fit 属性说明</h3>
+            <ul>
+                <li><strong>fill:</strong> 默认值，拉伸内容以填充整个容器，可能改变宽高比</li>
+                <li><strong>contain:</strong> 保持宽高比，缩放内容以完全适应容器</li>
+                <li><strong>cover:</strong> 保持宽高比，缩放内容以填充容器，可能裁剪部分内容</li>
+                <li><strong>none:</strong> 保持内容的原始尺寸</li>
+                <li><strong>scale-down:</strong> 内容的尺寸就像指定了none或contain，取较小的那个</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 容器尺寸控制
+        const widthSlider = document.getElementById('width');
+        const heightSlider = document.getElementById('height');
+        const widthValue = document.getElementById('widthValue');
+        const heightValue = document.getElementById('heightValue');
+        const videoContainers = document.querySelectorAll('.video-container');
+
+        function updateContainerSize() {
+            const width = widthSlider.value + 'px';
+            const height = heightSlider.value + 'px';
+            
+            widthValue.textContent = width;
+            heightValue.textContent = height;
+            
+            videoContainers.forEach(container => {
+                container.style.width = width;
+                container.style.height = height;
+            });
+        }
+
+        widthSlider.addEventListener('input', updateContainerSize);
+        heightSlider.addEventListener('input', updateContainerSize);
+
+        // 初始化
+        updateContainerSize();
+
+        // 自动播放视频（静音）
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('loadeddata', function() {
+                    // 延迟播放以确保视频加载完成
+                    setTimeout(() => {
+                        video.play().catch(e => {
+                            console.log('自动播放失败:', e);
+                        });
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
