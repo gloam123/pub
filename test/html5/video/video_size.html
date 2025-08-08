@@ -165,16 +165,16 @@
             <div class="control-group">
                 <label for="width-slider">视频宽度:</label>
                 <div class="slider-container">
-                    <input type="range" id="width-slider" class="slider" min="200" max="1000" value="640">
-                    <span id="width-value" class="value-display">640px</span>
+                    <input type="range" id="width-slider" class="slider" min="200" max="1000" value="320">
+                    <span id="width-value" class="value-display">320px</span>
                 </div>
             </div>
 
             <div class="control-group">
                 <label for="height-slider">视频高度:</label>
                 <div class="slider-container">
-                    <input type="range" id="height-slider" class="slider" min="150" max="600" value="360">
-                    <span id="height-value" class="value-display">360px</span>
+                    <input type="range" id="height-slider" class="slider" min="150" max="800" value="640">
+                    <span id="height-value" class="value-display">640px</span>
                 </div>
             </div>
 
@@ -279,7 +279,7 @@
         function initializeVideoSize() {
             const loaded = loadSizeFromStorage();
             if (!loaded) {
-                console.log('使用默认视频尺寸: 640x360');
+                console.log('使用默认视频尺寸: 320x640');
             }
             updateVideoSize();
         }
@@ -288,11 +288,11 @@
         function clearStoredSize() {
             try {
                 localStorage.removeItem(STORAGE_KEY);
-                alert('已清除保存的视频尺寸设置！\n下次打开将使用默认尺寸 (640×360)');
+                alert('已清除保存的视频尺寸设置！\n下次打开将使用默认尺寸 (320×640)');
                 console.log('已清除本地存储的视频尺寸设置');
                 
                 // 重置为默认尺寸
-                setVideoSize(640, 360);
+                setVideoSize(320, 640);
             } catch (error) {
                 console.warn('清除本地存储失败:', error);
                 alert('清除存储失败，请检查浏览器设置');
