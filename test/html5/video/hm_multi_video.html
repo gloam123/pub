@@ -23,12 +23,20 @@
             margin-bottom: 30px;
         }
         
+        .control-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
         .btn {
             background-color: #007bff;
             color: white;
             border: none;
             padding: 10px 20px;
-            margin: 0 10px;
+            margin: 0;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
@@ -138,18 +146,173 @@
             margin-bottom: 10px;
             color: #333;
         }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-size: 16px;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-container label {
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .status-board {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .status-scroll-container {
+            height: 120px;
+            overflow-y: auto;
+            position: relative;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .status-content {
+            line-height: 1.6;
+        }
+        
+        .status-scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .status-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+        
+        .status-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+        
+        .status-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .status-item {
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 5px;
+            border-left: 3px solid #ffd700;
+            font-size: 14px;
+        }
+        
+        .status-item.playing {
+            border-left-color: #28a745;
+            background: rgba(40,167,69,0.2);
+        }
+        
+        .status-item.paused {
+            border-left-color: #ffc107;
+            background: rgba(255,193,7,0.2);
+        }
+        
+        .status-item.ended {
+            border-left-color: #dc3545;
+            background: rgba(220,53,69,0.2);
+        }
+        
+        .status-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>多视频播放器测试页面</h1>
-        <p>支持添加/删除视频，自定义播放控制和进度显示</p>
     </div>
     
     <div class="controls">
-        <button class="btn" onclick="addVideo()">添加视频</button>
-        <button class="btn danger" onclick="removeAllVideos()">删除所有视频</button>
-        <button class="btn" onclick="document.location.reload()">刷新页面</button>
+        <div class="control-row">
+            <button class="btn" onclick="addVideo(true)">添加视频</button>
+            <div class="checkbox-container">
+                <input type="checkbox" id="liveCheckbox" checked>
+                <label for="liveCheckbox">直播</label>
+            </div>
+            <button class="btn danger" onclick="removeAllVideos()">删除所有视频</button>
+        </div>
+        <div class="control-row">
+            <button class="btn" onclick="document.location.reload()">刷新页面</button>
+        </div>
+    </div>
+    
+    <div class="status-board">
+        <div class="status-title">📺 视频状态监控看板</div>
+        <div class="status-scroll-container">
+            <div class="status-content" id="statusContent">
+                <div class="status-item">系统初始化完成，等待添加视频...</div>
+            </div>
+        </div>
+        <div class="status-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalVideos">0</div>
+                <div class="stat-label">总视频数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="playingVideos">0</div>
+                <div class="stat-label">播放中</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="pausedVideos">0</div>
+                <div class="stat-label">暂停中</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="liveVideos">0</div>
+                <div class="stat-label">直播数</div>
+            </div>
+        </div>
     </div>
     
     <div id="videoContainer" class="video-container">
@@ -158,16 +321,24 @@
 
     <script>
         let videoCounter = 0;
+        let statusMessages = [];
+        let maxStatusMessages = 20;
         
         // 示例视频URL列表（你可以替换为实际的视频链接）
         const sampleVideos = [
+            'http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4',
             'https://www.w3schools.com/html/mov_bbb.mp4',
-            'https://sample-videos.com/video321/mp4/480/big_buck_bunny_480p_30mb.mp4',
-            'http://ali-uget.video.yximgs.com/mediacloud/uget/video/xPUX_pn0gLvcoSyZzDmsPoWqMCCCw8Jc0XjbdhUMjHE.mp4'
+            'https://sample-videos.com/video321/mp4/480/big_buck_bunny_480p_30mb.mp4'
         ];
+
+        const livesrc1 = '{"adaptationSet":{"gopDuration":1,"representation":[{"bitrate":1200,"defaultSelect":true,"enableAdaptive":true,"hidden":false,"id":0,"level":30,"name":"高清","qualityType":"STANDARD","shortName":"高清","url":"http://ali-adaptive.pull.yximgs.com/gifshow/l4cw6MchdsM.flv?auth_key=1711420415-0-0-3733a353fa9b746316be7bb81c1f3138&oidc=watchmen&sidc=203562&ss=s20"}]},"autoDefaultSelect":false,"businessType":0,"cdnFeature":[],"hideAuto":true,"mHost":"ali-adaptive.pull.yximgs.com","freeTrafficCdn":false,"mIsTransformed":false,"mManifestType":"FLV","type":"dynamic","version":"2.0"}';
+        const livesrc = '{"adaptationSet":{"gopDuration":2000,"representation":[{"bitrate":2000,"defaultSelect":true,"enableAdaptive":true,"hidden":false,"id":0,"level":50,"name":"超清","qualityType":"HIGH","shortName":"超清","url":"http://mp-dev2.test.gifshow.com/ljz/flv/test_hd2000.flv"},{"bitrate":6000,"defaultSelect":false,"enableAdaptive":false,"hidden":false,"id":1,"level":130,"name":"蓝光 6M","qualityType":"BLUE_RAY","shortName":"6M","url":"http://mp-dev2.test.gifshow.com/ljz/flv/test.flv"}]},"autoDefaultSelect":true,"businessType":1,"cdnFeature":[],"hideAuto":false,"mHost":"ali-adaptive.pull.yximgs.com","freeTrafficCdn":false,"mIsTransformed":false,"mManifestType":"FLV","type":"dynamic","version":"2.0"}';
         
-        // 页面加载时添加默认视频
+        // 页面加载时初始化
         window.addEventListener('DOMContentLoaded', function() {
+            addStatusMessage('多视频播放器系统启动', 'info');
+            addStatusMessage('状态监控看板已激活', 'playing');
+            updateStats();
             addVideo(true); // 第一个视频自动播放
         });
         
@@ -175,16 +346,26 @@
             videoCounter++;
             const container = document.getElementById('videoContainer');
             
-            // 随机选择一个示例视频
-            const videoUrl = sampleVideos[Math.floor(Math.random() * sampleVideos.length)];
+            // 检查是否选中了直播复选框
+            const isLive = document.getElementById('liveCheckbox').checked;
+            
+            // 按顺序选择示例视频，如果超出数组长度则循环使用
+            const videoUrl = sampleVideos[(videoCounter - 1) % sampleVideos.length];
             
             const videoItem = document.createElement('div');
             videoItem.className = 'video-item';
             videoItem.id = `video-item-${videoCounter}`;
             
+            // 根据是否直播决定video标签的属性
+            const livesrcAttr = isLive ? `livesrc='${livesrc}'` : '';
+            const videoTitle = isLive ? `直播 #${videoCounter}` : `视频 #${videoCounter}`;
+            
+            // 添加状态消息
+            addStatusMessage(`${isLive ? '直播' : '视频'} #${videoCounter} 已创建,autoplay(${autoplay ? 'true' : 'false'})`, 'info');
+            
             videoItem.innerHTML = `
-                <div class="video-title">视频 #${videoCounter}</div>
-                <video id="video-${videoCounter}" ${autoplay ? 'autoplay' : ''} muted>
+                <div class="video-title">${videoTitle}</div>
+                <video useksplayer="video" starttime="0" endtime="0" nodeId="nodeid${videoCounter}" id="video-${videoCounter}" ${autoplay ? 'autoplay' : ''} ${livesrcAttr}>
                     <source src="${videoUrl}" type="video/mp4">
                     <p>您的浏览器不支持视频播放。</p>
                 </video>
@@ -220,30 +401,48 @@
             // 监听视频加载完成
             video.addEventListener('loadedmetadata', function() {
                 updateProgress(videoCounter);
+                addStatusMessage(`${videoTitle} loadedmetadata`, 'info');
             });
             
             // 监听视频播放状态变化
             video.addEventListener('play', function() {
                 playBtn.textContent = '暂停';
                 playBtn.classList.add('playing');
+                addStatusMessage(`${videoTitle} 开始播放`, 'playing');
             });
             
             video.addEventListener('pause', function() {
                 playBtn.textContent = '播放';
                 playBtn.classList.remove('playing');
+                addStatusMessage(`${videoTitle} 已暂停`, 'paused');
             });
             
             // 监听视频结束
             video.addEventListener('ended', function() {
-                playBtn.textContent = '播放';
-                playBtn.classList.remove('playing');
+                addStatusMessage(`${videoTitle} 播放完成，自动重播`, 'ended');
+                // 自动从头播放
+                video.currentTime = 0;
+                //video.play();
+            });
+            
+            // 监听视频加载事件
+            video.addEventListener('loadstart', function() {
+                addStatusMessage(`${videoTitle} 开始加载`, 'info');
+            });
+            
+            video.addEventListener('canplay', function() {
+                addStatusMessage(`${videoTitle} 可以播放`, 'info');
+            });
+            
+            video.addEventListener('error', function() {
+                addStatusMessage(`${videoTitle} 加载失败`, 'ended');
             });
         }
         
         function togglePlay(videoId) {
             const video = document.getElementById(`video-${videoId}`);
             const playBtn = document.querySelector(`#video-item-${videoId} .play-btn`);
-            
+
             if (video.paused) {
                 video.play();
             } else {
@@ -288,14 +487,84 @@
         function removeVideo(videoId) {
             const videoItem = document.getElementById(`video-item-${videoId}`);
             if (videoItem) {
+                const videoTitle = videoItem.querySelector('.video-title').textContent;
                 videoItem.remove();
+                addStatusMessage(`${videoTitle} 已删除`, 'ended');
             }
         }
         
         function removeAllVideos() {
             const container = document.getElementById('videoContainer');
             container.innerHTML = '';
+            videoCounter = 0;
+            addStatusMessage('所有视频已清除', 'ended');
+            updateStats();
         }
+        
+        // 状态看板管理函数
+        function addStatusMessage(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const statusMessage = {
+                message: `[${timestamp}] ${message}`,
+                type: type,
+                id: Date.now()
+            };
+            
+            statusMessages.unshift(statusMessage);
+            
+            // 限制消息数量
+            if (statusMessages.length > maxStatusMessages) {
+                statusMessages = statusMessages.slice(0, maxStatusMessages);
+            }
+            
+            updateStatusDisplay();
+        }
+        
+        function updateStatusDisplay() {
+            const statusContent = document.getElementById('statusContent');
+            statusContent.innerHTML = statusMessages.map(msg => 
+                `<div class="status-item ${msg.type}">${msg.message}</div>`
+            ).join('');
+        }
+        
+        function updateStats() {
+            const totalVideos = document.querySelectorAll('video').length;
+            const playingVideos = document.querySelectorAll('video:not([paused])').length;
+            const pausedVideos = document.querySelectorAll('video[paused]').length;
+            const liveVideos = document.querySelectorAll('video[livesrc]').length;
+            
+            document.getElementById('totalVideos').textContent = totalVideos;
+            document.getElementById('playingVideos').textContent = playingVideos;
+            document.getElementById('pausedVideos').textContent = pausedVideos;
+            document.getElementById('liveVideos').textContent = liveVideos;
+        }
+        
+        function getVideoStats() {
+            const videos = document.querySelectorAll('video');
+            let playing = 0, paused = 0, live = 0;
+            
+            videos.forEach(video => {
+                if (!video.paused && !video.ended) {
+                    playing++;
+                } else if (video.paused) {
+                    paused++;
+                }
+                if (video.hasAttribute('livesrc')) {
+                    live++;
+                }
+            });
+            
+            return { total: videos.length, playing, paused, live };
+        }
+        
+        // 定期更新统计信息
+        setInterval(() => {
+            const stats = getVideoStats();
+            document.getElementById('totalVideos').textContent = stats.total;
+            document.getElementById('playingVideos').textContent = stats.playing;
+            document.getElementById('pausedVideos').textContent = stats.paused;
+            document.getElementById('liveVideos').textContent = stats.live;
+        }, 1000);
     </script>
 </body>
 </html>
