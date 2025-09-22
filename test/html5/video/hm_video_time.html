@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放完成后重新播放进度条测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .video-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        video {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .controls {
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .info-panel {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        
+        .info-item {
+            margin: 5px 0;
+            font-family: monospace;
+        }
+        
+        .log-panel {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-item {
+            margin: 2px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        .test-description {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* 示例：尝试针对不同浏览器设置控制条样式，但并非所有浏览器都支持通过CSS阻止自动隐藏 */
+        video::-webkit-media-controls {
+            opacity: 1 !important; /* 尝试让控制条始终不透明 */
+            display: flex !important;
+        }
+        video::media-controls {
+            opacity: 1 !important; /* 尝试让控制条始终不透明 */
+            display: flex !important;
+        }
+        video::-moz-media-controls {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Video loop属性不能循环播放问题复现</h4>
+
+        <div class="video-container">
+            <video id="testVideo" controls loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+        
+        <div class="controls">
+            <button id="playBtn">播放</button>
+            <button id="pauseBtn">暂停</button>
+            <button id="replayBtn">重新播放</button>
+            <button id="resetBtn">重置进度</button>
+            <button onclick="location.reload()">刷新页面</button>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-item">当前时间: <span id="currentTime">0</span> 秒</div>
+            <div class="info-item">总时长: <span id="duration">0</span> 秒</div>
+            <div class="info-item">播放进度: <span id="progress">0</span>%</div>
+            <div class="info-item">播放状态: <span id="playState">未开始</span></div>
+            <div class="info-item">是否结束: <span id="ended">否</span></div>
+        </div>
+        
+        <div class="log-panel" id="logPanel">
+            <div class="log-item">日志记录开始...</div>
+        </div>
+
+                
+        <div id="idUa" class="test-description">
+        </div>
+        <script>
+            document.getElementById('idUa').innerHTML = navigator.userAgent;
+        </script>
+    
+    </div>
+
+    <script>
+        const video = document.getElementById('testVideo');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const replayBtn = document.getElementById('replayBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const clearLogBtn = document.getElementById('clearLogBtn');
+        const logPanel = document.getElementById('logPanel');
+        let seeking = false;
+        let seekTime = 0;
+        
+        let wasEnded = false;
+        
+        // 日志记录函数
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item';
+            logItem.textContent = `[${timestamp}] ${message}`;
+            logPanel.appendChild(logItem);
+            logPanel.scrollTop = logPanel.scrollHeight;
+            console.log(`[Video Test] ${message}`);
+        }
+        
+        // 更新信息显示
+        function updateInfo() {
+            document.getElementById('currentTime').textContent = video.currentTime.toFixed(2);
+            document.getElementById('duration').textContent = video.duration ? video.duration.toFixed(2) : '0';
+            document.getElementById('progress').textContent = video.duration ? 
+                ((video.currentTime / video.duration) * 100).toFixed(2) : '0';
+            document.getElementById('ended').textContent = video.ended ? '是' : '否';
+        }
+        
+        // 视频事件监听
+        video.addEventListener('loadedmetadata', () => {
+            log('loadedmetadata: 视频元数据加载完成，时长: ' + video.duration.toFixed(2) + '秒');
+            updateInfo();
+        });
+        
+        video.addEventListener('play', () => {
+            log('play: 视频开始播放');
+            document.getElementById('playState').textContent = '播放中';
+            updateInfo();
+        });
+        
+        video.addEventListener('pause', () => {
+            log('pause: 视频暂停');
+            document.getElementById('playState').textContent = '已暂停';
+            updateInfo();
+        });
+        
+        video.addEventListener('ended', () => {
+            log('ended: 视频播放结束');
+            document.getElementById('playState').textContent = '播放结束';
+            wasEnded = true;
+            //video.currentTime = 0;
+            updateInfo();
+            // setTimeout(() => {
+            //     video.currentTime = 0;
+            // })
+            
+            // 检查播放结束时的进度条状态
+            setTimeout(() => {
+                log(`播放结束时 - currentTime: ${video.currentTime}, 进度条位置: ${((video.currentTime / video.duration) * 100).toFixed(2)}%`);
+            }, 100);
+        });
+        
+        video.addEventListener('timeupdate', () => {
+            if (seeking) {
+                log(`timeupdate: ${video.currentTime.toFixed(2)}秒`);
+                // setTimeout(() => {
+                //     if (video.currentTime != seekTime) {
+                //         video.currentTime = seekTime;
+                //         seeking = false;
+                //         video.play();
+                //     }
+                //     log(`timeupdate 2: ${video.currentTime.toFixed(2)}秒`);
+                // });
+            }
+            updateInfo();
+        });
+
+        video.addEventListener('seeking', () => {
+            seeking = true;
+            seekTime = video.currentTime;
+            log(`seeking: ${video.currentTime.toFixed(2)}秒`);
+            updateInfo();
+        });
+        
+        video.addEventListener('seeked', () => {
+            log(`seeked: ${video.currentTime.toFixed(2)}秒`);
+            updateInfo();
+            seeking = false;
+        });
+        
+        // 按钮事件
+        playBtn.addEventListener('click', () => {
+            video.play();
+            log('点击播放按钮');
+        });
+        
+        pauseBtn.addEventListener('click', () => {
+            video.pause();
+            log('点击暂停按钮');
+        });
+        
+        replayBtn.addEventListener('click', () => {
+            log('=== 开始重新播放测试 ===');
+            log(`重播前 - currentTime: ${video.currentTime}, ended: ${video.ended}`);
+            
+            // 重置视频到开始位置
+            video.currentTime = 0;
+            
+            setTimeout(() => {
+                log(`重置后 - currentTime: ${video.currentTime}, ended: ${video.ended}`);
+                
+                // 检查进度条是否重置
+                const progressAfterReset = video.duration ? ((video.currentTime / video.duration) * 100) : 0;
+                log(`重置后进度条位置: ${progressAfterReset.toFixed(2)}%`);
+                
+                if (progressAfterReset < 1) {
+                    log('✅ 进度条正确重置到开始位置');
+                } else {
+                    log('❌ 进度条未正确重置，仍显示: ' + progressAfterReset.toFixed(2) + '%');
+                }
+                
+                // 开始播放
+                video.play();
+                wasEnded = false;
+                updateInfo();
+            }, 100);
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            video.currentTime = 0;
+            log('手动重置视频进度到开始位置');
+            updateInfo();
+        });
+        
+        // 初始化
+        log('页面加载完成，等待视频加载...');
+        updateInfo();
+    </script>
+</body>
+</html>

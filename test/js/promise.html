@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise 学习指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 5px solid #4ecdc4;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+
+        .demo-area {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .output {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            min-height: 50px;
+            font-family: monospace;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .pending { background: #fef3c7; color: #92400e; }
+        .fulfilled { background: #d1fae5; color: #065f46; }
+        .rejected { background: #fee2e2; color: #991b1b; }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Promise 学习指南</h1>
+            <p>掌握JavaScript异步编程的核心概念</p>
+        </div>
+
+        <div class="content">
+            <!-- Promise基础概念 -->
+            <div class="section">
+                <h2>📚 什么是Promise？</h2>
+                <p>Promise是JavaScript中处理异步操作的一种方式，它代表了一个异步操作的最终完成或失败。Promise有三种状态：</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><span class="status pending">Pending</span> - 初始状态，既不是成功，也不是失败</li>
+                    <li><span class="status fulfilled">Fulfilled</span> - 操作成功完成</li>
+                    <li><span class="status rejected">Rejected</span> - 操作失败</li>
+                </ul>
+            </div>
+
+            <!-- 基础语法 -->
+            <div class="section">
+                <h2>🔧 基础语法</h2>
+                <div class="code-block">
+const promise = new Promise((resolve, reject) => {
+    // 异步操作
+    if (/* 操作成功 */) {
+        resolve(value); // 成功时调用
+    } else {
+        reject(error);  // 失败时调用
+    }
+});
+
+promise
+    .then(result => {
+        // 处理成功结果
+    })
+    .catch(error => {
+        // 处理错误
+    })
+    .finally(() => {
+        // 无论成功失败都会执行
+    });
+                </div>
+            </div>
+
+            <!-- 交互式演示1：基础Promise -->
+            <div class="section">
+                <h2>🎮 演示1：基础Promise操作</h2>
+                <div class="demo-area">
+                    <button class="btn" onclick="createSuccessPromise()">创建成功的Promise</button>
+                    <button class="btn" onclick="createFailPromise()">创建失败的Promise</button>
+                    <button class="btn" onclick="createRandomPromise()">随机Promise</button>
+                    <div class="output" id="basicOutput">点击按钮查看Promise执行结果...</div>
+                </div>
+            </div>
+
+            <!-- 交互式演示2：Promise链 -->
+            <div class="section">
+                <h2>🔗 演示2：Promise链式调用</h2>
+                <div class="demo-area">
+                    <button class="btn" onclick="demonstrateChaining()">演示链式调用</button>
+                    <button class="btn" onclick="demonstrateErrorHandling()">演示错误处理</button>
+                    <div class="output" id="chainOutput">点击按钮查看链式调用结果...</div>
+                </div>
+            </div>
+
+            <!-- 交互式演示3：Promise.all和Promise.race -->
+            <div class="section">
+                <h2>⚡ 演示3：Promise.all 和 Promise.race</h2>
+                <div class="demo-area">
+                    <button class="btn" onclick="demonstratePromiseAll()">Promise.all 演示</button>
+                    <button class="btn" onclick="demonstratePromiseRace()">Promise.race 演示</button>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="output" id="multipleOutput">点击按钮查看多Promise操作结果...</div>
+                </div>
+            </div>
+
+            <!-- 实际应用示例 -->
+            <div class="section">
+                <h2>🌐 演示4：实际应用 - 模拟API调用</h2>
+                <div class="demo-area">
+                    <button class="btn" onclick="simulateApiCall()">模拟获取用户数据</button>
+                    <button class="btn" onclick="simulateMultipleApiCalls()">模拟多个API调用</button>
+                    <div class="output" id="apiOutput">点击按钮模拟API调用...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        async function mywait(ms)  {
+            const p = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({ message: '🎉 Promise执行成功！' });
+                }, ms);
+            });
+            return p;
+        }
+
+
+
+        async function f1() {
+            console.log('111');
+            await mywait(1000);
+            console.log('222');
+        }
+
+        f1().then(() => {
+            console.log('333');
+        });
+
+        // 基础Promise演示
+        function createSuccessPromise() {
+            const output = document.getElementById('basicOutput');
+            output.innerHTML = '<span class="status pending">执行中...</span>';
+            
+            const promise = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve('🎉 Promise执行成功！');
+                }, 1000);
+            });
+
+            promise.then(result => {
+                output.innerHTML = `<span class="status fulfilled">成功</span> ${result}`;
+            });
+        }
+
+        function createFailPromise() {
+            const output = document.getElementById('basicOutput');
+            output.innerHTML = '<span class="status pending">执行中...</span>';
+            
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    reject(new Error('❌ Promise执行失败！'));
+                }, 1000);
+            });
+
+            promise.catch(error => {
+                output.innerHTML = `<span class="status rejected">失败</span> ${error.message}`;
+            });
+        }
+
+        function createRandomPromise() {
+            const output = document.getElementById('basicOutput');
+            output.innerHTML = '<span class="status pending">执行中...</span>';
+            
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (Math.random() > 0.5) {
+                        resolve('🎲 随机成功！');
+                    } else {
+                        reject(new Error('🎲 随机失败！'));
+                    }
+                }, 1000);
+            });
+
+            promise
+                .then(result => {
+                    output.innerHTML = `<span class="status fulfilled">成功</span> ${result}`;
+                })
+                .catch(error => {
+                    output.innerHTML = `<span class="status rejected">失败</span> ${error.message}`;
+                });
+        }
+
+        // Promise链式调用演示
+        function demonstrateChaining() {
+            const output = document.getElementById('chainOutput');
+            output.innerHTML = '<span class="status pending">开始链式调用...</span>';
+            
+            Promise.resolve(1)
+                .then(value => {
+                    output.innerHTML += `<br>步骤1: ${value}`;
+                    return value * 2;
+                })
+                .then(value => {
+                    output.innerHTML += `<br>步骤2: ${value}`;
+                    return value * 3;
+                })
+                .then(value => {
+                    output.innerHTML += `<br>步骤3: ${value}`;
+                    output.innerHTML += `<br><span class="status fulfilled">链式调用完成！最终结果: ${value}</span>`;
+                });
+        }
+
+        function demonstrateErrorHandling() {
+            const output = document.getElementById('chainOutput');
+            output.innerHTML = '<span class="status pending">测试错误处理...</span>';
+            
+            Promise.resolve(10)
+                .then(value => {
+                    output.innerHTML += `<br>步骤1: ${value}`;
+                    return value * 2;
+                })
+                .then(value => {
+                    output.innerHTML += `<br>步骤2: ${value}`;
+                    throw new Error('模拟错误');
+                })
+                .then(value => {
+                    output.innerHTML += `<br>这行不会执行`;
+                })
+                .catch(error => {
+                    output.innerHTML += `<br><span class="status rejected">捕获错误: ${error.message}</span>`;
+                })
+                .finally(() => {
+                    output.innerHTML += `<br><span class="status">finally块总是执行</span>`;
+                });
+        }
+
+        // Promise.all和Promise.race演示
+        function demonstratePromiseAll() {
+            const output = document.getElementById('multipleOutput');
+            const progressFill = document.getElementById('progressFill');
+            
+            output.innerHTML = '<span class="status pending">等待所有Promise完成...</span>';
+            progressFill.style.width = '0%';
+            
+            const promises = [
+                createDelayedPromise('任务1', 1000),
+                createDelayedPromise('任务2', 1500),
+                createDelayedPromise('任务3', 2000)
+            ];
+            
+            let completed = 0;
+            promises.forEach(promise => {
+                promise.then(() => {
+                    completed++;
+                    progressFill.style.width = `${(completed / promises.length) * 100}%`;
+                });
+            });
+            
+            Promise.all(promises)
+                .then(results => {
+                    output.innerHTML = `<span class="status fulfilled">所有任务完成</span><br>${results.join('<br>')}`;
+                });
+        }
+
+        function demonstratePromiseRace() {
+            const output = document.getElementById('multipleOutput');
+            output.innerHTML = '<span class="status pending">竞速中，等待第一个完成...</span>';
+            
+            const promises = [
+                createDelayedPromise('快速任务', 800),
+                createDelayedPromise('中速任务', 1200),
+                createDelayedPromise('慢速任务', 2000)
+            ];
+            
+            Promise.race(promises)
+                .then(result => {
+                    output.innerHTML = `<span class="status fulfilled">第一个完成</span><br>${result}`;
+                });
+        }
+
+        function createDelayedPromise(name, delay) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(`✅ ${name} 完成 (${delay}ms)`);
+                }, delay);
+            });
+        }
+
+        // 模拟API调用
+        function simulateApiCall() {
+            const output = document.getElementById('apiOutput');
+            output.innerHTML = '<span class="status pending">正在获取用户数据...</span>';
+            
+            fetchUserData(123)
+                .then(user => {
+                    output.innerHTML = `<span class="status fulfilled">用户数据获取成功</span><br>
+                        姓名: ${user.name}<br>
+                        邮箱: ${user.email}<br>
+                        ID: ${user.id}`;
+                })
+                .catch(error => {
+                    output.innerHTML = `<span class="status rejected">获取失败</span><br>${error.message}`;
+                });
+        }
+
+        function simulateMultipleApiCalls() {
+            const output = document.getElementById('apiOutput');
+            output.innerHTML = '<span class="status pending">正在获取多个用户数据...</span>';
+            
+            const userIds = [1, 2, 3];
+            const promises = userIds.map(id => fetchUserData(id));
+            
+            Promise.all(promises)
+                .then(users => {
+                    let html = '<span class="status fulfilled">所有用户数据获取成功</span><br>';
+                    users.forEach(user => {
+                        html += `用户${user.id}: ${user.name} (${user.email})<br>`;
+                    });
+                    output.innerHTML = html;
+                })
+                .catch(error => {
+                    output.innerHTML = `<span class="status rejected">获取失败</span><br>${error.message}`;
+                });
+        }
+
+        function fetchUserData(userId) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (Math.random() > 0.1) { // 90%成功率
+                        resolve({
+                            id: userId,
+                            name: `用户${userId}`,
+                            email: `user${userId}@example.com`
+                        });
+                    } else {
+                        reject(new Error(`用户${userId}不存在`));
+                    }
+                }, Math.random() * 1000 + 500);
+            });
+        }
+    </script>
+</body>
+</html>
