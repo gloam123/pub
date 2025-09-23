@@ -119,10 +119,18 @@
 </head>
 <body>
     <div class="container">
-        <h4>Video loop属性不能循环播放问题复现</h4>
+        <h4>Video loop属性循环播放无法重置video.currentTime问题</h4>
+        <div class="test-description">
+            1. 视频播放完成后调用:NativeMediaPlayerHandler.handleEnded();<br>
+            2. Web内核触发H5 video seeking事件.<br>
+            3. 端侧收到web内核的 NativeMediaPlayerBridge.seek(0)回调, 然后调用内核的handleSeeking().<br>
+            4. Web内核触发H5 video timeupdate事件, 此时video.currentTime是视频的总时长.<br>
+            5. Web内核触发H5 video seeked事件, 此时video.currentTime仍然是总时长(从handleEnded到此时未调用过handleTimeUpdate()).<br>
+            6. 端侧重新调用从头开始播放视频,不断触发handleTimeUpdate(time)更新时间戳, 但video.currentTime仍然是总时长.
+        </div>
 
         <div class="video-container">
-            <video id="testVideo" controls loop>
+            <video id="testVideo" useksplayer="video" controls loop>
                 <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                 <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
