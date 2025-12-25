@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAudio Muted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .video-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        video {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .controls {
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .info-panel {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        
+        .info-item {
+            margin: 5px 0;
+            font-family: monospace;
+        }
+        
+        .log-panel {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-item {
+            margin: 2px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        .test-description {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* 示例：尝试针对不同浏览器设置控制条样式，但并非所有浏览器都支持通过CSS阻止自动隐藏 */
+        video::-webkit-media-controls {
+            opacity: 1 !important; /* 尝试让控制条始终不透明 */
+            display: flex !important;
+        }
+        video::media-controls {
+            opacity: 1 !important; /* 尝试让控制条始终不透明 */
+            display: flex !important;
+        }
+        video::-moz-media-controls {
+            opacity: 1 !important;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            max-width: 600px;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 15px auto;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 20px;
+            color: #333;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 0 2px white;
+        }
+
+        .progress-label {
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Video loop属性不能循环播放问题复现</h4>
+
+        <div class="video-container">
+            <video no_useksplayer="video" autoplay id="testVideo" controls muted loop src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
+                <!-- <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。 -->
+            </video>
+        </div>
+
+        <div class="progress-label">WebAudio:</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="audioProgressBar">
+                <div class="progress-text" id="audioProgressText">0%</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="playPauseBtn">播放</button>
+            <button onclick="location.reload()">刷新页面</button>
+            <button id="playAudioBtn">添加音频(WebAudio)</button>
+            <button id="removeAudioBtn">移除WebAudio实例</button>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-item">总时长: <span id="duration">0</span> 秒</div>
+            <div class="info-item">播放状态: <span id="playState">未开始</span></div>
+        </div>
+        
+        <div class="log-panel" id="logPanel">
+            <div class="log-item">日志记录开始...</div>
+        </div>
+
+                
+        <div id="idUa" class="test-description">
+        </div>
+        <script>
+            document.getElementById('idUa').innerHTML = navigator.userAgent;
+        </script>
+    
+    </div>
+
+    <script>
+        const video = document.getElementById('testVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const logPanel = document.getElementById('logPanel');
+        let seeking = false;
+        let seekTime = 0;
+        
+        let wasEnded = false;
+        
+        // 日志记录函数
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item';
+            logItem.textContent = `[${timestamp}] ${message}`;
+            logPanel.appendChild(logItem);
+            logPanel.scrollTop = logPanel.scrollHeight;
+            console.log(`[Video Test] ${message}`);
+        }
+        
+        // 更新信息显示
+        function updateInfo() {
+            document.getElementById('duration').textContent = video.duration ? video.duration.toFixed(2) : '0';
+        }
+
+        video.addEventListener('play', () => {
+            log('play: 视频开始播放');
+            document.getElementById('playState').textContent = '播放中';
+            playPauseBtn.textContent = '暂停';
+            updateInfo();
+        });
+        
+        video.addEventListener('pause', () => {
+            log('pause: 视频暂停');
+            document.getElementById('playState').textContent = '已暂停';
+            playPauseBtn.textContent = '播放';
+            updateInfo();
+        });
+        
+        video.addEventListener('error', function(event) {
+            updateInfo();
+            log(`onerror: ${event}`);
+            log(`onerror error: ${event.target.error}`);
+            log(`onerror error.code: ${event.target.error.code}`);
+            log(`onerror error.message: ${event.target.error.message}`);
+        });
+        
+        // 播放/暂停按钮事件
+        playPauseBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                log('点击播放按钮');
+            } else {
+                video.pause();
+                log('点击暂停按钮');
+            }
+        });
+
+        // 初始化
+        log('页面加载完成，等待视频加载...');
+        updateInfo();
+
+        // WebAudio 播放音频
+        const playAudioBtn = document.getElementById('playAudioBtn');
+        const removeAudioBtn = document.getElementById('removeAudioBtn');
+        let audioContext = null;
+        let audioBuffer = null;
+        let audioSource = null;
+        let gainNode = null;
+        let audioIndex = 0; // 音频编号计数器
+        let progressInterval = null; // 进度更新定时器
+        let audioStartTime = 0; // 音频开始播放时间
+
+        playAudioBtn.addEventListener('click', async () => {
+            try {
+                log('开始加载音频文件...');
+                
+                // 创建 AudioContext
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    log('AudioContext 创建成功');
+                    
+                    // 创建增益节点用于控制音量
+                    gainNode = audioContext.createGain();
+                    gainNode.gain.value = 0.5; // 设置默认音量为 0.5
+                    gainNode.connect(audioContext.destination);
+                    log('音量节点创建成功，默认音量: 0.5');
+                }
+
+                // 如果已经有音频在播放，先停止
+                if (audioSource) {
+                    audioSource.stop();
+                    audioSource = null;
+                    log('停止之前的音频播放');
+                }
+
+                // 加载音频文件
+                if (!audioBuffer) {
+                    const response = await fetch('../../video/new_year.mp3');
+                    const arrayBuffer = await response.arrayBuffer();
+                    audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                    log('音频文件加载并解码成功');
+                }
+
+                // 创建音频源节点
+                audioSource = audioContext.createBufferSource();
+                audioSource.buffer = audioBuffer;
+                audioSource.connect(gainNode); // 连接到增益节点而不是直接连接到 destination
+                
+                // 增加音频编号
+                audioIndex++;
+                log(`添加音频 #${audioIndex}`);
+                
+                // 记录开始时间
+                audioStartTime = audioContext.currentTime;
+                
+                // 播放音频
+                audioSource.start(0);
+                log('WebAudio 开始播放音频');
+
+                // 清除之前的进度更新定时器
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                }
+
+                // 启动进度更新定时器
+                progressInterval = setInterval(() => {
+                    if (audioSource && audioBuffer) {
+                        const elapsed = audioContext.currentTime - audioStartTime;
+                        const duration = audioBuffer.duration;
+                        const progress = Math.min((elapsed / duration) * 100, 100);
+                        const progressText = progress.toFixed(1) + '%';
+                        
+                        // 更新进度条
+                        document.getElementById('audioProgressBar').style.width = progress + '%';
+                        document.getElementById('audioProgressText').textContent = progressText;
+                    }
+                }, 100); // 每100ms更新一次进度
+
+                // 播放结束事件
+                audioSource.onended = () => {
+                    log('WebAudio 音频播放结束');
+                    audioSource = null;
+                    if (progressInterval) {
+                        clearInterval(progressInterval);
+                        progressInterval = null;
+                    }
+                    // 更新进度条和文本为100%
+                    document.getElementById('audioProgressBar').style.width = '100%';
+                    document.getElementById('audioProgressText').textContent = '100%';
+                };
+
+            } catch (error) {
+                log('WebAudio 播放失败: ' + error.message);
+                console.error('WebAudio Error:', error);
+            }
+        });
+
+        // 移除 WebAudio 实例
+        removeAudioBtn.addEventListener('click', () => {
+            try {
+                // 停止正在播放的音频
+                if (audioSource) {
+                    audioSource.stop();
+                    audioSource.disconnect();
+                    audioSource = null;
+                    log('停止音频播放');
+                }
+
+                // 清除进度更新定时器
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                    progressInterval = null;
+                }
+
+                // 断开增益节点连接
+                if (gainNode) {
+                    gainNode.disconnect();
+                    gainNode = null;
+                    log('断开增益节点');
+                }
+
+                // 关闭 AudioContext
+                if (audioContext) {
+                    audioContext.close();
+                    audioContext = null;
+                    log('AudioContext 已关闭');
+                }
+
+                // 清除音频缓冲区
+                audioBuffer = null;
+                
+                // 重置显示
+                document.getElementById('audioProgressBar').style.width = '0%';
+                document.getElementById('audioProgressText').textContent = '0%';
+                
+                log('WebAudio 实例已完全移除');
+
+            } catch (error) {
+                log('移除 WebAudio 实例失败: ' + error.message);
+                console.error('Remove WebAudio Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
