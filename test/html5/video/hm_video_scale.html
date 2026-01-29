@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=0">
+
+    <title>Video updateRect</title>
+</head>
+
+<body>
+    <div style="width: 100%; 
+                height: 126px; 
+                position: fixed;
+                background-color: #764ba2;">
+    </div>
+
+    <div style="height: 200px;">
+        Placeholder...
+    </div>
+
+    <div style="display:flex;">
+        <video nodeid="ks-video-1769607710997-516517-1"
+            useksplayer="video" 
+            autoplay="" 
+            muted=""
+            ks-object-fit="contain"
+            style="width: 100%; 
+                    height: 100%; 
+                    object-fit: contain;">
+            <source src="../../video/timestamp_30s.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div style="height: 1000px; font-size: 20px;">
+        Placeholder...
+    </div>
+
+    <!-- 悬浮刷新按钮 -->
+    <button id="refreshButton" onclick="location.reload()">🔄</button>
+    
+    <style>
+        /* 悬浮刷新按钮样式 */
+        #refreshButton {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #refreshButton:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #refreshButton:active {
+            transform: scale(0.95) rotate(180deg);
+        }
+    </style>
+</body>
+
+</html>
