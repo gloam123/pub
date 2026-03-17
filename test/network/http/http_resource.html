@@ -6,9 +6,115 @@
 <link rel="icon" type="image/svg+xml" href="./images/HTML5 Logo.svg">
 <title>index</title>
 <style>
-  /* body {
-    user-select: none
-  } */
+  body {
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    /* user-select: none */
+  }
+  
+  /* 移动端适配样式 */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed;
+    overflow-x: auto;
+  }
+  
+  /* URL列自动换行 */
+  td:nth-child(2), th:nth-child(2) {
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* 序号列 */
+  td:nth-child(1), th:nth-child(1) {
+    width: 8%;
+    min-width: 40px;
+  }
+  
+  /* URL列 */
+  td:nth-child(2), th:nth-child(2) {
+    width: 30%;
+  }
+  
+  /* HTTPS列 */
+  td:nth-child(3), th:nth-child(3) {
+    width: 15%;
+    min-width: 80px;
+  }
+  
+  /* 显示列 */
+  td:nth-child(4), th:nth-child(4) {
+    width: 47%;
+  }
+  
+  /* 图片自适应 */
+  td img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+  
+  /* 链接样式 */
+  a {
+    color: #0066cc;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 移动端响应式 */
+  @media screen and (max-width: 768px) {
+    body {
+      padding: 5px;
+    }
+    
+    table {
+      font-size: 12px;
+    }
+    
+    td, th {
+      padding: 5px !important;
+    }
+    
+    /* 移动端列宽调整 */
+    td:nth-child(1), th:nth-child(1) {
+      width: 10%;
+    }
+    
+    td:nth-child(2), th:nth-child(2) {
+      width: 25%;
+    }
+    
+    td:nth-child(3), th:nth-child(3) {
+      width: 15%;
+      font-size: 11px;
+    }
+    
+    td:nth-child(4), th:nth-child(4) {
+      width: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: 18px;
+    }
+    
+    table {
+      font-size: 11px;
+    }
+    
+    button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+  }
 </style>
 <script>
   function onLoad() {
@@ -25,30 +131,57 @@
 <button onclick="location.reload()">reload</button>
 <br /><br />
 
+<h2>图片资源列表</h2>
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>序号</th>
+      <th>图片URL</th>
+      <th>是否有HTTPS部署</th>
+      <th>显示</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><a href="http://p4.a.yximgs.com/uhead/AB/2018/04/21/16/BMjAxODA0MjExNjQ5MDBfNzQ0OTUwODY1XzFfaGQzNDVfNjI5_s.jpg" target="_blank">http://p4.a.yximgs.com/uhead/AB/2018/04/21/16/BMjAxODA0MjExNjQ5MDBfNzQ0OTUwODY1XzFfaGQzNDVfNjI5_s.jpg</a></td>
+      <td style="background-color: #d4edda; color: #155724;">✅ 是</td>
+      <td><img src="http://p4.a.yximgs.com/uhead/AB/2018/04/21/16/BMjAxODA0MjExNjQ5MDBfNzQ0OTUwODY1XzFfaGQzNDVfNjI5_s.jpg" alt="图片1" /></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><a href="http://172.22.114.62:8080/images/chrome720.jpg" target="_blank">http://172.22.114.62:8080/images/chrome720.jpg</a></td>
+      <td style="background-color: #f8d7da; color: #721c24;">❌ 否（内网IP）</td>
+      <td><img src="http://172.22.114.62:8080/images/chrome720.jpg" alt="图片2" /></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><a href="http://http.badssl.com/icons/favicon-red.ico" target="_blank">http://http.badssl.com/icons/favicon-red.ico</a></td>
+      <td style="background-color: #f8d7da; color: #721c24;">❌ 否</td>
+      <td><img src="http://http.badssl.com/icons/favicon-red.ico" alt="图片3" /></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><a href="http://www.thelegacy.de/favicon.ico" target="_blank">http://www.thelegacy.de/favicon.ico</a></td>
+      <td style="background-color: #f8d7da; color: #721c24;">❌ 否</td>
+      <td><img src="http://www.thelegacy.de/favicon.ico" alt="图片4" /></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><a href="http://neverssl.com/favicon.ico" target="_blank">http://neverssl.com/favicon.ico</a></td>
+      <td style="background-color: #f8d7da; color: #721c24;">❌ 否（故意）</td>
+      <td><img src="http://neverssl.com/favicon.ico" alt="图片5" /></td>
+    </tr>
+  </tbody>
+</table>
 
-是否可以看到下图:http://p4.a.yximgs.com/uhead/AB/2018/04/21/16/BMjAxODA0MjExNjQ5MDBfNzQ0OTUwODY1XzFfaGQzNDVfNjI5_s.jpg
-<img src="http://p4.a.yximgs.com/uhead/AB/2018/04/21/16/BMjAxODA0MjExNjQ5MDBfNzQ0OTUwODY1XzFfaGQzNDVfNjI5_s.jpg" alt="图片加载" />
-
-
-<br/><br/><br/>
-<br/><br/><br/>
-是否可以看到下图:http://172.22.114.62:8080/images/chrome720.jpg
-<img src="http://172.22.114.62:8080/images/chrome720.jpg">
-
-<br/><br/><br/>
-<br/><br/><br/>
-是否可以看到下图:http://http.badssl.com/icons/favicon-red.ico 
-<img src="http://http.badssl.com/icons/favicon-red.ico">
-
-
-<br/><br/><br/>
-是否可以看到下图:http://www.thelegacy.de/favicon.ico ?
-<img src="http://www.thelegacy.de/favicon.ico">
-
-
-<br/><br/><br/>
-是否可以看到下图:http://neverssl.com/favicon.ico ?
-<img src="http://neverssl.com/favicon.ico">
+<br /><br />
+<p><strong>说明：</strong></p>
+<ul>
+  <li>共5张图片，其中3张支持HTTPS，2张不支持</li>
+  <li>图片2不支持HTTPS因为是内网IP地址</li>
+  <li>图片5（neverssl.com）故意不提供HTTPS服务，用于测试场景</li>
+</ul>
 
 
 
